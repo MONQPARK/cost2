@@ -405,7 +405,7 @@ function renderItems() {
       <td class="align-center">${unitHtml}</td>
       <td><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
       <td><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
-      <td class="align-right font-weight-bold">${fmtNum(item.qty * item.price)}</td>
+      <td class="align-right font-weight-bold" id="row-total-${item.id}">${fmtNum(item.qty * item.price)}</td>
       <td><input type="text" class="text-input" value="${item.note}" placeholder="비고" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
     `;
     tbody.appendChild(row);
@@ -423,7 +423,11 @@ function updateItem(id, field, val) {
   let value = val;
   if(field === 'qty' || field === 'price') value = Number(val) || 0;
   itemsState[currentCat][id][field] = value;
-  if(field === 'qty' || field === 'price') recalcTotals();
+  if(field === 'qty' || field === 'price') {
+    const item = itemsState[currentCat][id];
+    document.getElementById('row-total-' + id).innerText = fmtNum(item.qty * item.price);
+    recalcTotals();
+  }
   else renderItems();
 }
 
