@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>견적서 자동생성기</title>
+  <!-- Google Fonts Noto Sans KR -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- SheetJS CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #1a3a6b;
+      --secondary: #0d0d2b;
+      --bg-color: #f4f7f6;
+      --border-color: #e2e8f0;
+      --text-main: #1e293b;
+      --text-light: #64748b;
+      --success: #10b981;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-main); font-size: 14px; }
+    
+    /* App Layout */
+    .app-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px 20px; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+    .header h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
+    
+    /* Tabs */
+    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+    .tab-btn { padding: 10px 20px; border: none; background: white; cursor: pointer; font-weight: 500; font-size: 15px; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s; }
+    .tab-btn.active { background: var(--primary); color: white; }
+    
+    .tab-content { display: none; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 500px; }
+    .tab-content.active { display: block; }
+    
+    /* Info Tab */
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .info-section h2 { font-size: 16px; margin-bottom: 15px; color: var(--primary); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; }
+    .form-group { margin-bottom: 12px; display: flex; align-items: center; }
+    .form-group label { width: 120px; font-weight: 500; color: var(--text-light); }
+    .form-group input { flex: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; outline: none; }
+    .form-group input:focus { border-color: var(--primary); }
+    .save-btn { width: 100%; padding: 10px; background: var(--success); color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    
+    /* Items Tab */
+    .cat-selector { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
+    .cat-btn { padding: 8px 15px; border: 1px solid var(--border-color); background: white; border-radius: 20px; cursor: pointer; font-weight: 500; white-space: nowrap; transition: 0.2s; }
+    .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    
+    .items-table { width: 100%; border-collapse: collapse; }
+    .items-table th, .items-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
+    .items-table th { background: #f8fafc; font-weight: 500; color: var(--text-light); }
+    .section-row { background: #f1f5f9; font-weight: bold; }
+    .section-row td { padding: 8px 10px; }
+    .item-row.inactive { opacity: 0.5; }
+    .num-input { width: 80px; padding: 5px; text-align: right; border: 1px solid var(--border-color); border-radius: 4px; }
+    .price-input { width: 100px; padding: 5px; text-align: right; border: 1px solid var(--border-color); border-radius: 4px; }
+    .text-input { width: 100%; padding: 5px; border: 1px solid var(--border-color); border-radius: 4px; }
+    .text-input[readonly] { background: transparent; border: none; padding: 0; outline: none; cursor: default;}
+    .desc-text { font-size: 11px; color: #94a3b8; display: block; margin-top: 2px; }
+    
+    .add-row-btn { margin-top: 15px; padding: 8px 15px; background: white; border: 1px dashed var(--primary); color: var(--primary); border-radius: 4px; cursor: pointer; width: 100%; font-weight: 500; }
+    
+    .summary-bar { margin-top: 20px; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid var(--border-color); }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; }
+    .summary-row.total { font-weight: bold; font-size: 18px; color: var(--primary); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+    
+    /* Preview Tab */
+    .preview-actions { display: flex; justify-content: space-between; margin-bottom: 20px; align-items: center; }
+    .theme-selector select { padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); outline: none; }
+    .export-btns button { padding: 8px 15px; margin-left: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; }
+    .btn-pdf { background: #e11d48; }
+    .btn-excel { background: #16a34a; }
+    
+    /* Document Preview Wrapper */
+    .preview-wrapper { overflow-x: auto; background: #e2e8f0; padding: 30px; border-radius: 8px; }
+    #preview-doc { width: 210mm; min-height: 297mm; background: white; margin: 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 40px; box-sizing: border-box; }
+    
+    /* ---------------- Print Theme CSS ---------------- */
+    #preview-doc.theme-classic { font-family: 'Noto Sans KR', sans-serif; color: #333; }
+    .theme-classic .doc-header { border-bottom: 3px solid #1a3a6b; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .theme-classic .doc-title { font-size: 28px; font-weight: 800; color: #1a3a6b; }
+    .theme-classic .doc-info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px; }
+    .theme-classic .doc-info-table th { background: #f0f4f8; border: 1px solid #ccc; padding: 5px; width: 80px; text-align: center; }
+    .theme-classic .doc-info-table td { border: 1px solid #ccc; padding: 5px; }
+    .theme-classic .doc-total { background: #f0f4f8; padding: 15px; margin-bottom: 20px; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid #1a3a6b; }
+    .theme-classic .doc-items { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; }
+    .theme-classic .doc-items th { background: #1a3a6b; color: white; border: 1px solid #1a3a6b; padding: 8px; }
+    .theme-classic .doc-items td { border: 1px solid #ccc; padding: 8px; }
+    .theme-classic .doc-items .sec-row { background: #e2e8f0; font-weight: bold; }
+    .theme-classic .doc-footer { margin-top: 30px; font-size: 11px; color: #666; }
+    
+    #preview-doc.theme-modern { font-family: 'Noto Sans KR', sans-serif; color: #111; }
+    .theme-modern .doc-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+    .theme-modern .doc-title { font-size: 32px; font-weight: 900; color: #0d0d2b; letter-spacing: -1px; }
+    .theme-modern .doc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; font-size: 13px; }
+    .theme-modern .info-box { background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #0d0d2b; }
+    .theme-modern .doc-total { display: flex; justify-content: space-between; align-items: center; background: #0d0d2b; color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
+    .theme-modern .doc-total .amount { font-size: 24px; font-weight: bold; }
+    .theme-modern .doc-items { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .theme-modern .doc-items th { border-bottom: 2px solid #0d0d2b; padding: 10px; text-align: left; color: #64748b; font-weight: normal; }
+    .theme-modern .doc-items td { border-bottom: 1px solid #e2e8f0; padding: 12px 10px; }
+    .theme-modern .doc-items .sec-row { font-weight: bold; color: #0d0d2b; background: #f8fafc; }
+    .theme-modern .doc-footer { margin-top: 30px; font-size: 12px; border-top: 1px solid #e2e8f0; padding-top: 10px; }
+
+    #preview-doc.theme-minimal { font-family: 'Noto Sans KR', sans-serif; color: #000; }
+    .theme-minimal .doc-header { margin-bottom: 40px; text-align: right; }
+    .theme-minimal .doc-title { font-size: 24px; font-weight: 300; letter-spacing: 5px; border-bottom: 1px solid #000; padding-bottom: 10px; display: inline-block; margin-bottom: 20px; }
+    .theme-minimal .doc-info-grid { display: flex; justify-content: space-between; margin-bottom: 40px; font-size: 12px; line-height: 1.8; }
+    .theme-minimal .doc-total { border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 15px 0; font-size: 20px; text-align: right; margin-bottom: 40px; }
+    .theme-minimal .doc-items { width: 100%; border-collapse: collapse; font-size: 11px; }
+    .theme-minimal .doc-items th { border-bottom: 1px solid #000; padding: 8px 0; text-align: left; }
+    .theme-minimal .doc-items td { padding: 8px 0; }
+    .theme-minimal .doc-items .sec-row { font-weight: bold; margin-top: 10px; }
+    .theme-minimal .doc-footer { margin-top: 40px; font-size: 10px; color: #999; }
+
+    .align-right { text-align: right !important; }
+    .align-center { text-align: center !important; }
+
+    /* Print Styles */
+    @media print {
+      body * { visibility: hidden; }
+      .app-container { padding: 0; margin: 0; }
+      #preview-doc, #preview-doc * { visibility: visible; }
+      #preview-doc { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; border: none; }
+      @page { size: A4 portrait; margin: 15mm; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <div class="header">
+    <h1>견적서 자동생성기</h1>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('info')">① 기본 정보</button>
+    <button class="tab-btn" onclick="switchTab('items')">② 견적 항목</button>
+    <button class="tab-btn" onclick="switchTab('preview')">③ 미리보기 / 출력</button>
+  </div>
+
+  <!-- Tab 1: Info -->
+  <div id="tab-info" class="tab-content active">
+    <div class="info-grid">
+      <div class="info-section">
+        <h2>공급자 정보 (내 회사)</h2>
+        <div class="form-group"><label>회사명</label><input type="text" id="s_company"></div>
+        <div class="form-group"><label>대표이사</label><input type="text" id="s_ceo"></div>
+        <div class="form-group"><label>사업자번호</label><input type="text" id="s_biz_no"></div>
+        <div class="form-group"><label>주소</label><input type="text" id="s_address"></div>
+        <div class="form-group"><label>담당자명</label><input type="text" id="s_manager"></div>
+        <div class="form-group"><label>연락처</label><input type="text" id="s_tel"></div>
+        <div class="form-group"><label>이메일</label><input type="text" id="s_email"></div>
+      </div>
+      <div class="info-section">
+        <h2>공급받는자 / 프로젝트 정보</h2>
+        <div class="form-group"><label>클라이언트 회사명</label><input type="text" id="c_company"></div>
+        <div class="form-group"><label>담당자</label><input type="text" id="c_manager"></div>
+        <div class="form-group"><label>연락처</label><input type="text" id="c_tel"></div>
+        <div style="height: 20px;"></div>
+        <div class="form-group"><label>프로젝트명</label><input type="text" id="p_title"></div>
+        <div class="form-group"><label>견적번호</label><input type="text" id="p_no"></div>
+        <div class="form-group"><label>견적일자</label><input type="date" id="p_date"></div>
+        <div class="form-group"><label>유효기간</label><input type="text" id="p_valid" placeholder="제출일로부터 30일"></div>
+        <div class="form-group"><label>특이사항</label><input type="text" id="p_note"></div>
+      </div>
+    </div>
+    <button class="save-btn" onclick="saveInfo()">저장하기 (이후 자동 불러옴)</button>
+  </div>
+
+  <!-- Tab 2: Items -->
+  <div id="tab-items" class="tab-content">
+    <div class="cat-selector" id="cat-selector"></div>
+    
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th width="50">선택</th>
+          <th width="200">항목명</th>
+          <th width="80">단위</th>
+          <th width="100">수량</th>
+          <th width="120">단가(원)</th>
+          <th width="150">금액(원)</th>
+          <th width="150">비고</th>
+        </tr>
+      </thead>
+      <tbody id="items-tbody">
+        <!-- Rendered dynamically -->
+      </tbody>
+    </table>
+    
+    <button class="add-row-btn" onclick="addCustomRow()">+ 직접 입력 항목 추가</button>
+    
+    <div class="summary-bar">
+      <div class="summary-row"><span>공급가액:</span> <span id="sum-net">0</span>원</div>
+      <div class="summary-row"><span>부가세 (10%):</span> <span id="sum-vat">0</span>원</div>
+      <div class="summary-row total"><span>총 청구금액:</span> <span id="sum-total">0</span>원</div>
+    </div>
+  </div>
+
+  <!-- Tab 3: Preview -->
+  <div id="tab-preview" class="tab-content">
+    <div class="preview-actions">
+      <div class="theme-selector">
+        <label>디자인 테마: </label>
+        <select id="theme-select" onchange="selectDesign(this.value)">
+          <option value="classic">Classic (기본, 블루)</option>
+          <option value="modern">Modern (모던, 네이비)</option>
+          <option value="minimal">Minimal (미니멀, 흑백)</option>
+        </select>
+      </div>
+      <div class="export-btns">
+        <button class="btn-excel" onclick="exportExcel()">Excel 다운로드</button>
+        <button class="btn-pdf" onclick="exportPDF()">PDF / 인쇄</button>
+      </div>
+    </div>
+    <div class="preview-wrapper">
+      <div id="preview-doc" class="theme-classic">
+        <!-- Preview Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// --- 1. 데이터 ---
+const QUOTE_DATA = {
+  production: {
+    label: '프로덕션 견적서',
+    sections: [
+      { id: 'pre', name: 'Pre-production (기획/준비)', items: [
+        { id: 'pre_pd', name: '연출료 (감독)', unit: '건', avg: 5000000, desc: '메인 감독 연출비' },
+        { id: 'pre_ad', name: '조감독', unit: '명/일', avg: 500000, desc: '조감독 인건비' },
+        { id: 'pre_plan', name: '기획/구성료', unit: '건', avg: 2000000, desc: '기획안, 스토리보드 제작' },
+      ]},
+      { id: 'shoot', name: 'Production (촬영/제작)', items: [
+        { id: 'sh_dop', name: '촬영감독', unit: '명/일', avg: 1500000, desc: '메인 촬영감독' },
+        { id: 'sh_cam', name: '촬영장비대여', unit: '식', avg: 1000000, desc: '카메라 및 렌즈 세트' },
+        { id: 'sh_light', name: '조명팀', unit: '팀/일', avg: 2500000, desc: '조명감독 및 장비 일체' },
+        { id: 'sh_art', name: '미술/세트', unit: '식', avg: 3000000, desc: '스튜디오 세팅, 소품' },
+        { id: 'sh_model', name: '출연료', unit: '명', avg: 2000000, desc: '메인 모델 (A급 제외)' },
+      ]}
+    ]
+  },
+  postproduction: {
+    label: '포스트프로덕션 견적서',
+    sections: [
+      { id: 'post_edit', name: 'Editing (편집)', items: [
+        { id: 'pe_offline', name: '가편집 (Offline)', unit: '건', avg: 1000000, desc: '컷 편집' },
+        { id: 'pe_online', name: '종합편집 (Online)', unit: '건', avg: 1500000, desc: '색보정, 2D 모션' },
+        { id: 'pe_cg', name: '3D/CG', unit: '건', avg: 3000000, desc: '3D 모델링 및 렌더링' },
+      ]},
+      { id: 'post_sound', name: 'Sound (음향)', items: [
+        { id: 'ps_bgm', name: 'BGM 라이선스', unit: '곡', avg: 500000, desc: '상업용 라이브러리 음원' },
+        { id: 'ps_mix', name: '사운드 믹싱', unit: '건', avg: 1000000, desc: '효과음, 더빙 믹싱' },
+        { id: 'ps_vo', name: '성우 녹음', unit: '건', avg: 800000, desc: 'A급 성우 1인 기준' },
+      ]}
+    ]
+  },
+  media: {
+    label: '미디어 매체 견적서',
+    sections: [
+      { id: 'md_digital', name: 'Digital Media (디지털/SNS)', items: [
+        { id: 'md_yt', name: 'YouTube Ads', unit: '월', avg: 10000000, desc: '트루뷰/범퍼애드 매체비' },
+        { id: 'md_meta', name: 'Meta (IG/FB)', unit: '월', avg: 5000000, desc: '스폰서드 광고 매체비' },
+      ]},
+      { id: 'md_fee', name: 'Agency Fee (대행수수료)', items: [
+        { id: 'md_fee1', name: '매체 대행 수수료', unit: '식', avg: 0, desc: '매체비의 10~15%' },
+      ]}
+    ]
+  },
+  btl: {
+    label: 'BTL/이벤트 견적서',
+    sections: [
+      { id: 'bt_event', name: '이벤트/프로모션', items: [
+        { id: 'bt_space', name: '공간 대관료', unit: '일', avg: 3000000, desc: '팝업스토어/행사장 대관' },
+        { id: 'bt_staff', name: '운영 인력', unit: '명/일', avg: 150000, desc: '현장 스태프' },
+        { id: 'bt_goods', name: '판촉물 제작', unit: '건', avg: 2000000, desc: '굿즈/경품' },
+      ]}
+    ]
+  },
+  imc: {
+    label: 'IMC 캠페인 견적서',
+    sections: [
+      { id: 'im_plan', name: '캠페인 기획/운영', items: [
+        { id: 'im_fee', name: '캠페인 총괄 기획비', unit: '식', avg: 10000000, desc: '전체 캠페인 전략 수립' },
+        { id: 'im_pm', name: 'PM 운영비', unit: '월', avg: 3000000, desc: '전담 프로젝트 매니저' },
+      ]}
+    ]
+  }
+};
+
+let currentCat = 'production';
+let itemsState = {}; // { catKey: { itemId: { checked, qty, price, note, name, unit, isCustom, sectionId, sectionName } } }
+
+// --- 2. 초기화 및 유틸 ---
+function gv(id) { return document.getElementById(id).value || ''; }
+function sv(id, val) { document.getElementById(id).value = val; }
+function fmt(n) { return '₩' + n.toLocaleString(); }
+function fmtNum(n) { return n.toLocaleString(); }
+
+function init() {
+  // 카테고리 렌더링
+  const catDiv = document.getElementById('cat-selector');
+  for(let key in QUOTE_DATA) {
+    let btn = document.createElement('button');
+    btn.className = 'cat-btn' + (key === currentCat ? ' active' : '');
+    btn.innerText = QUOTE_DATA[key].label;
+    btn.onclick = () => selectCat(key);
+    catDiv.appendChild(btn);
+  }
+  
+  loadInfo();
+  selectCat(currentCat);
+  
+  // 오늘 날짜 기본 세팅
+  if(!gv('p_date')) {
+    document.getElementById('p_date').valueAsDate = new Date();
+  }
+}
+
+function loadInfo() {
+  const infoStr = localStorage.getItem('quote_info');
+  if(infoStr) {
+    const info = JSON.parse(infoStr);
+    for(let k in info) { if(document.getElementById(k)) sv(k, info[k]); }
+  }
+}
+
+function saveInfo() {
+  const ids = ['s_company','s_ceo','s_biz_no','s_address','s_manager','s_tel','s_email',
+               'c_company','c_manager','c_tel','p_title','p_no','p_date','p_valid','p_note'];
+  const info = {};
+  ids.forEach(id => info[id] = gv(id));
+  localStorage.setItem('quote_info', JSON.stringify(info));
+  alert('정보가 저장되었습니다.');
+}
+
+// --- 3. 항목 로직 ---
+function selectCat(cat) {
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    b.classList.remove('active');
+    if(b.innerText === QUOTE_DATA[cat].label) b.classList.add('active');
+  });
+  currentCat = cat;
+  
+  if(!itemsState[cat]) initItems(cat);
+  renderItems();
+}
+
+function initItems(cat) {
+  itemsState[cat] = {};
+  QUOTE_DATA[cat].sections.forEach(sec => {
+    sec.items.forEach(item => {
+      itemsState[cat][item.id] = {
+        checked: false, qty: 1, price: item.avg, note: '',
+        name: item.name, unit: item.unit, desc: item.desc,
+        sectionId: sec.id, sectionName: sec.name, isCustom: false
+      };
+    });
+  });
+}
+
+function renderItems() {
+  const tbody = document.getElementById('items-tbody');
+  tbody.innerHTML = '';
+  
+  const state = itemsState[currentCat];
+  // 섹션별로 렌더링
+  let currentSection = '';
+  
+  const itemsArray = Object.entries(state).map(([id, obj]) => ({id, ...obj}));
+  
+  // 좀 더 예쁘게 섹션순 정렬을 위해
+  const sections = QUOTE_DATA[currentCat].sections.map(s => s.id);
+  itemsArray.sort((a,b) => sections.indexOf(a.sectionId) - sections.indexOf(b.sectionId));
+
+  itemsArray.forEach(item => {
+    if(item.sectionId !== currentSection) {
+      currentSection = item.sectionId;
+      tbody.innerHTML += `<tr class="section-row"><td colspan="7">${item.sectionName}</td></tr>`;
+    }
+    
+    const row = document.createElement('tr');
+    row.className = 'item-row' + (item.checked ? '' : ' inactive');
+    
+    let nameHtml = item.isCustom 
+      ? `<input type="text" class="text-input" value="${item.name}" onchange="updateItem('${item.id}', 'name', this.value)">`
+      : `<input type="text" class="text-input" readonly value="${item.name}"><span class="desc-text">${item.desc||''}</span>`;
+      
+    let unitHtml = item.isCustom
+      ? `<input type="text" class="text-input" value="${item.unit}" onchange="updateItem('${item.id}', 'unit', this.value)">`
+      : item.unit;
+
+    row.innerHTML = `
+      <td class="align-center"><input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
+      <td>${nameHtml}</td>
+      <td class="align-center">${unitHtml}</td>
+      <td><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
+      <td><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
+      <td class="align-right font-weight-bold">${fmtNum(item.qty * item.price)}</td>
+      <td><input type="text" class="text-input" value="${item.note}" placeholder="비고" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
+    `;
+    tbody.appendChild(row);
+  });
+  
+  recalcTotals();
+}
+
+function toggleItem(id, checked) {
+  itemsState[currentCat][id].checked = checked;
+  renderItems();
+}
+
+function updateItem(id, field, val) {
+  let value = val;
+  if(field === 'qty' || field === 'price') value = Number(val) || 0;
+  itemsState[currentCat][id][field] = value;
+  if(field === 'qty' || field === 'price') recalcTotals();
+  else renderItems();
+}
+
+let customIdx = 1;
+function addCustomRow() {
+  const catData = QUOTE_DATA[currentCat];
+  const lastSection = catData.sections[catData.sections.length-1];
+  if(!lastSection) return;
+  
+  const id = `custom_${Date.now()}_${customIdx++}`;
+  itemsState[currentCat][id] = {
+    checked: true, qty: 1, price: 0, note: '',
+    name: '직접 입력 항목', unit: '식', desc: '',
+    sectionId: lastSection.id, sectionName: lastSection.name, isCustom: true
+  };
+  renderItems();
+}
+
+function recalcTotals() {
+  let net = 0;
+  for(let id in itemsState[currentCat]) {
+    let it = itemsState[currentCat][id];
+    if(it.checked) net += (it.qty * it.price);
+  }
+  let vat = Math.floor(net * 0.1);
+  let total = net + vat;
+  
+  document.getElementById('sum-net').innerText = fmtNum(net);
+  document.getElementById('sum-vat').innerText = fmtNum(vat);
+  document.getElementById('sum-total').innerText = fmtNum(total);
+}
+
+// --- 4. 미리보기 및 렌더링 ---
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  
+  event.target.classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+  
+  if(tabId === 'preview') renderPreview();
+}
+
+function selectDesign(theme) {
+  document.getElementById('preview-doc').className = 'theme-' + theme;
+  renderPreview();
+}
+
+function renderPreview() {
+  const doc = document.getElementById('preview-doc');
+  const theme = document.getElementById('theme-select').value;
+  
+  // 데이터 수집
+  let net = 0;
+  const activeItems = [];
+  for(let id in itemsState[currentCat]) {
+    let it = itemsState[currentCat][id];
+    if(it.checked) {
+      activeItems.push(it);
+      net += (it.qty * it.price);
+    }
+  }
+  let vat = Math.floor(net * 0.1);
+  let total = net + vat;
+  
+  let html = '';
+  
+  if(theme === 'classic') {
+    html = `
+      <div class="doc-header">
+        <div class="doc-title">견 적 서</div>
+      </div>
+      <table class="doc-info-table">
+        <tr>
+          <th rowspan="4">공급자</th>
+          <td>등록번호: ${gv('s_biz_no')}</td>
+          <th rowspan="4">공급<br>받는자</th>
+          <td>상호: ${gv('c_company')}</td>
+        </tr>
+        <tr>
+          <td>상호: ${gv('s_company')} / 대표: ${gv('s_ceo')}</td>
+          <td>담당자: ${gv('c_manager')}</td>
+        </tr>
+        <tr>
+          <td>주소: ${gv('s_address')}</td>
+          <td>연락처: ${gv('c_tel')}</td>
+        </tr>
+        <tr>
+          <td>담당: ${gv('s_manager')} / 연락처: ${gv('s_tel')}</td>
+          <td>프로젝트: ${gv('p_title')}</td>
+        </tr>
+      </table>
+      <div class="doc-total">
+        총 청구금액 (VAT 포함): ${fmt(total)}
+      </div>
+    `;
+  } else if(theme === 'modern') {
+    html = `
+      <div class="doc-header">
+        <div class="doc-title">ESTIMATE</div>
+        <div style="text-align:right">
+          <div>No. ${gv('p_no')}</div>
+          <div>Date. ${gv('p_date')}</div>
+        </div>
+      </div>
+      <div class="doc-info-grid">
+        <div class="info-box">
+          <strong>TO. ${gv('c_company')}</strong><br>
+          담당자: ${gv('c_manager')}<br>
+          연락처: ${gv('c_tel')}<br>
+          프로젝트: ${gv('p_title')}
+        </div>
+        <div class="info-box">
+          <strong>FROM. ${gv('s_company')}</strong><br>
+          대표자: ${gv('s_ceo')} | 등록번호: ${gv('s_biz_no')}<br>
+          주소: ${gv('s_address')}<br>
+          담당: ${gv('s_manager')} | ${gv('s_tel')}
+        </div>
+      </div>
+      <div class="doc-total">
+        <span>Grand Total (VAT Included)</span>
+        <span class="amount">${fmt(total)}</span>
+      </div>
+    `;
+  } else if(theme === 'minimal') {
+    html = `
+      <div class="doc-header">
+        <div class="doc-title">QUOTATION</div>
+        <div>${gv('p_date')} | ${gv('p_no')}</div>
+      </div>
+      <div class="doc-info-grid">
+        <div>
+          <strong style="font-size:14px">${gv('c_company')} 귀하</strong><br>
+          Project: ${gv('p_title')}<br>
+          Attn: ${gv('c_manager')}
+        </div>
+        <div style="text-align:right">
+          <strong>${gv('s_company')}</strong><br>
+          ${gv('s_ceo')} | ${gv('s_biz_no')}<br>
+          ${gv('s_address')}<br>
+          ${gv('s_manager')} | ${gv('s_email')}
+        </div>
+      </div>
+      <div class="doc-total">
+        Total: ${fmt(total)} <span style="font-size:12px">(VAT Inc.)</span>
+      </div>
+    `;
+  }
+
+  // Items Table (공통)
+  html += `
+    <table class="doc-items">
+      <thead>
+        <tr>
+          <th>항목 (Item)</th>
+          <th width="10%">수량</th>
+          <th width="10%">단위</th>
+          <th width="15%" class="align-right">단가 (원)</th>
+          <th width="15%" class="align-right">금액 (원)</th>
+          <th width="15%">비고</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  
+  let currentSection = '';
+  activeItems.forEach(it => {
+    if(it.sectionId !== currentSection) {
+      currentSection = it.sectionId;
+      html += `<tr class="sec-row"><td colspan="6">${it.sectionName}</td></tr>`;
+    }
+    html += `
+      <tr>
+        <td>${it.name}</td>
+        <td class="align-center">${it.qty}</td>
+        <td class="align-center">${it.unit}</td>
+        <td class="align-right">${fmtNum(it.price)}</td>
+        <td class="align-right">${fmtNum(it.qty * it.price)}</td>
+        <td>${it.note}</td>
+      </tr>
+    `;
+  });
+  
+  html += `
+      </tbody>
+      <tfoot style="font-weight:bold; background:#f8fafc; border-top: 2px solid #cbd5e1;">
+        <tr><td colspan="4" class="align-right" style="padding:10px;">공급가액</td><td class="align-right" style="padding:10px;">${fmtNum(net)}</td><td></td></tr>
+        <tr><td colspan="4" class="align-right" style="padding:10px;">부가가치세 (10%)</td><td class="align-right" style="padding:10px;">${fmtNum(vat)}</td><td></td></tr>
+        <tr><td colspan="4" class="align-right" style="padding:10px;">총 청구금액</td><td class="align-right" style="padding:10px;">${fmtNum(total)}</td><td></td></tr>
+      </tfoot>
+    </table>
+    
+    <div class="doc-footer">
+      * 본 견적서는 제출일로부터 ${gv('p_valid') || '30일'}간 유효합니다.<br>
+      * ${gv('p_note')}
+    </div>
+  `;
+  
+  doc.innerHTML = html;
+}
+
+// --- 5. Export 기능 ---
+function exportPDF() {
+  // 인쇄 전 데이터 최신화
+  renderPreview();
+  window.print();
+}
+
+function exportExcel() {
+  if(typeof XLSX === 'undefined') {
+    alert('Excel 라이브러리를 불러오지 못했습니다.');
+    return;
+  }
+  
+  const ws_data = [];
+  
+  // 헤더 정보
+  ws_data.push(['견적서']);
+  ws_data.push([]);
+  ws_data.push(['공급자', gv('s_company'), '', '공급받는자', gv('c_company')]);
+  ws_data.push(['사업자번호', gv('s_biz_no'), '', '프로젝트', gv('p_title')]);
+  ws_data.push(['대표자', gv('s_ceo'), '', '담당자', gv('c_manager')]);
+  ws_data.push(['견적일자', gv('p_date'), '', '연락처', gv('c_tel')]);
+  ws_data.push([]);
+  
+  // 컬럼 헤더
+  ws_data.push(['구분(섹션)', '항목명', '수량', '단위', '단가(원)', '금액(원)', '비고']);
+  
+  let net = 0;
+  const activeItems = [];
+  for(let id in itemsState[currentCat]) {
+    let it = itemsState[currentCat][id];
+    if(it.checked) {
+      ws_data.push([it.sectionName, it.name, it.qty, it.unit, it.price, it.qty*it.price, it.note]);
+      net += (it.qty * it.price);
+    }
+  }
+  
+  let vat = Math.floor(net * 0.1);
+  let total = net + vat;
+  
+  ws_data.push([]);
+  ws_data.push(['', '', '', '', '공급가액', net]);
+  ws_data.push(['', '', '', '', '부가세', vat]);
+  ws_data.push(['', '', '', '', '합계', total]);
+  
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "견적서");
+  
+  let filename = `견적서_${gv('c_company')}_${gv('p_title')||'산출물'}.xlsx`;
+  XLSX.writeFile(wb, filename);
+}
+
+// 시작
+window.onload = init;
+</script>
+
+</body>
+</html>
