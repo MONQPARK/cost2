@@ -4,128 +4,182 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>견적서 자동생성기</title>
-  <!-- Google Fonts Noto Sans KR -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <!-- SheetJS CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  
+  <!-- Pretendard Font -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  
+  <!-- ExcelJS & FileSaver -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.3.0/exceljs.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
   <style>
     :root {
-      --primary: #1a3a6b;
-      --secondary: #0d0d2b;
-      --bg-color: #f4f7f6;
-      --border-color: #e2e8f0;
+      /* Modern Color Palette */
+      --primary: #2563eb;       /* Tailwind blue-600 */
+      --primary-hover: #1d4ed8; /* Tailwind blue-700 */
+      --secondary: #0f172a;     /* Tailwind slate-900 */
+      --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      --surface: rgba(255, 255, 255, 0.95);
+      --border-color: rgba(203, 213, 225, 0.8);
       --text-main: #1e293b;
       --text-light: #64748b;
       --success: #10b981;
+      --success-hover: #059669;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      
+      --radius: 12px;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-main); font-size: 14px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+    body { background: var(--bg-gradient); color: var(--text-main); font-size: 14.5px; min-height: 100vh; padding: 20px 0; }
     
-    /* App Layout */
-    .app-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 15px 20px; background: white; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    .header h1 { font-size: 20px; font-weight: 700; color: var(--primary); }
+    /* App Layout & Glassmorphism */
+    .app-container { 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 30px; 
+      background: var(--surface); 
+      backdrop-filter: blur(10px); 
+      box-shadow: var(--shadow); 
+      border-radius: var(--radius); 
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color); }
+    .header h1 { font-size: 24px; font-weight: 800; color: var(--secondary); letter-spacing: -0.5px; }
+    .header h1 span { color: var(--primary); }
     
     /* Tabs */
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-    .tab-btn { padding: 10px 20px; border: none; background: white; cursor: pointer; font-weight: 500; font-size: 15px; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); transition: all 0.2s; }
-    .tab-btn.active { background: var(--primary); color: white; }
+    .tabs { display: flex; gap: 12px; margin-bottom: 25px; }
+    .tab-btn { 
+      padding: 12px 24px; 
+      border: 1px solid var(--border-color); 
+      background: rgba(255, 255, 255, 0.7); 
+      cursor: pointer; 
+      font-weight: 600; 
+      font-size: 15px; 
+      border-radius: 8px; 
+      color: var(--text-light);
+      transition: var(--transition); 
+    }
+    .tab-btn:hover { background: white; color: var(--primary); border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1); }
+    .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); transform: translateY(-2px); }
     
-    .tab-content { display: none; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); min-height: 500px; }
+    .tab-content { display: none; animation: fadeIn 0.4s ease-out; }
     .tab-content.active { display: block; }
     
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
     /* Info Tab */
-    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-    .info-section h2 { font-size: 16px; margin-bottom: 15px; color: var(--primary); border-bottom: 2px solid var(--border-color); padding-bottom: 5px; }
-    .form-group { margin-bottom: 12px; display: flex; align-items: center; }
-    .form-group label { width: 120px; font-weight: 500; color: var(--text-light); }
-    .form-group input { flex: 1; padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; outline: none; }
-    .form-group input:focus { border-color: var(--primary); }
-    .save-btn { width: 100%; padding: 10px; background: var(--success); color: white; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .info-section h2 { font-size: 18px; margin-bottom: 20px; color: var(--secondary); font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 8px; display: inline-block; }
+    .form-group { margin-bottom: 15px; display: flex; align-items: center; }
+    .form-group label { width: 130px; font-weight: 600; color: var(--text-light); }
+    .form-group input { flex: 1; padding: 10px 15px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: var(--transition); background: #f8fafc; }
+    .form-group input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
+    .save-btn { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; transition: var(--transition); }
+    .save-btn:hover { background: #1e293b; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2); transform: translateY(-2px); }
     
     /* Items Tab */
-    .cat-selector { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 5px; }
-    .cat-btn { padding: 8px 15px; border: 1px solid var(--border-color); background: white; border-radius: 20px; cursor: pointer; font-weight: 500; white-space: nowrap; transition: 0.2s; }
-    .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .cat-selector { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: thin; }
+    .cat-btn { padding: 8px 18px; border: 1px solid var(--border-color); background: white; border-radius: 20px; cursor: pointer; font-weight: 600; color: var(--text-light); white-space: nowrap; transition: var(--transition); }
+    .cat-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .cat-btn.active { background: var(--secondary); color: white; border-color: var(--secondary); }
     
-    .items-table { width: 100%; border-collapse: collapse; }
-    .items-table th, .items-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
-    .items-table th { background: #f8fafc; font-weight: 500; color: var(--text-light); }
-    .section-row { background: #f1f5f9; font-weight: bold; }
-    .section-row td { padding: 8px 10px; }
-    .item-row.inactive { opacity: 0.5; }
-    .num-input { width: 80px; padding: 5px; text-align: right; border: 1px solid var(--border-color); border-radius: 4px; }
-    .price-input { width: 100px; padding: 5px; text-align: right; border: 1px solid var(--border-color); border-radius: 4px; }
-    .text-input { width: 100%; padding: 5px; border: 1px solid var(--border-color); border-radius: 4px; }
-    .text-input[readonly] { background: transparent; border: none; padding: 0; outline: none; cursor: default;}
-    .desc-text { font-size: 11px; color: #94a3b8; display: block; margin-top: 2px; }
+    .items-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 10px; }
+    .items-table th, .items-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
+    .items-table th { background: #f8fafc; font-weight: 600; color: var(--secondary); text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; }
+    .items-table th:first-child { border-top-left-radius: 8px; }
+    .items-table th:last-child { border-top-right-radius: 8px; }
+    .section-row { background: #e2e8f0; font-weight: 700; color: var(--secondary); }
+    .section-row td { padding: 10px 15px; }
+    .item-row { transition: var(--transition); }
+    .item-row:hover { background: #f1f5f9; }
+    .item-row.inactive { opacity: 0.4; }
     
-    .add-row-btn { margin-top: 15px; padding: 8px 15px; background: white; border: 1px dashed var(--primary); color: var(--primary); border-radius: 4px; cursor: pointer; width: 100%; font-weight: 500; }
+    .num-input, .price-input, .text-input { padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: var(--transition); }
+    .num-input { width: 80px; text-align: right; }
+    .price-input { width: 110px; text-align: right; }
+    .text-input { width: 100%; }
+    .num-input:focus, .price-input:focus, .text-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
+    .text-input[readonly] { background: transparent; border: none; padding: 0; font-weight: 500; color: var(--text-main); }
+    .desc-text { font-size: 12px; color: #94a3b8; display: block; margin-top: 4px; }
     
-    .summary-bar { margin-top: 20px; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid var(--border-color); }
-    .summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 15px; }
-    .summary-row.total { font-weight: bold; font-size: 18px; color: var(--primary); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border-color); }
+    .add-row-btn { margin-top: 15px; padding: 12px 15px; background: rgba(37, 99, 235, 0.05); border: 1px dashed var(--primary); color: var(--primary); border-radius: 8px; cursor: pointer; width: 100%; font-weight: 600; transition: var(--transition); }
+    .add-row-btn:hover { background: rgba(37, 99, 235, 0.1); }
+    
+    .summary-bar { margin-top: 30px; background: linear-gradient(to right, #f8fafc, #f1f5f9); padding: 20px; border-radius: var(--radius); border: 1px solid var(--border-color); box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+    .summary-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; color: var(--text-light); }
+    .summary-row.total { font-weight: 800; font-size: 22px; color: var(--primary); margin-top: 15px; padding-top: 15px; border-top: 2px dashed var(--border-color); }
     
     /* Preview Tab */
-    .preview-actions { display: flex; justify-content: space-between; margin-bottom: 20px; align-items: center; }
-    .theme-selector select { padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); outline: none; }
-    .export-btns button { padding: 8px 15px; margin-left: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; color: white; }
-    .btn-pdf { background: #e11d48; }
-    .btn-excel { background: #16a34a; }
+    .preview-actions { display: flex; justify-content: space-between; margin-bottom: 25px; align-items: center; background: #f8fafc; padding: 15px 20px; border-radius: 8px; border: 1px solid var(--border-color); }
+    .theme-selector label { font-weight: 600; margin-right: 10px; color: var(--secondary); }
+    .theme-selector select { padding: 8px 12px; border-radius: 6px; border: 1px solid var(--border-color); outline: none; font-family: 'Pretendard'; font-weight: 500; cursor: pointer; }
+    
+    .export-btns button { padding: 10px 20px; margin-left: 10px; border: none; border-radius: 6px; cursor: pointer; font-weight: 700; color: white; transition: var(--transition); display: inline-flex; align-items: center; gap: 6px; }
+    .btn-pdf { background: var(--danger); }
+    .btn-pdf:hover { background: var(--danger-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2); }
+    .btn-excel { background: var(--success); }
+    .btn-excel:hover { background: var(--success-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
     
     /* Document Preview Wrapper */
-    .preview-wrapper { overflow-x: auto; background: #e2e8f0; padding: 30px; border-radius: 8px; }
-    #preview-doc { width: 210mm; min-height: 297mm; background: white; margin: 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 40px; box-sizing: border-box; }
+    .preview-wrapper { overflow-x: auto; background: #cbd5e1; padding: 40px; border-radius: 12px; display: flex; justify-content: center; }
+    #preview-doc { width: 210mm; min-height: 297mm; background: white; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); padding: 50px; box-sizing: border-box; }
     
     /* ---------------- Print Theme CSS ---------------- */
-    #preview-doc.theme-classic { font-family: 'Noto Sans KR', sans-serif; color: #333; }
-    .theme-classic .doc-header { border-bottom: 3px solid #1a3a6b; padding-bottom: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
-    .theme-classic .doc-title { font-size: 28px; font-weight: 800; color: #1a3a6b; }
-    .theme-classic .doc-info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12px; }
-    .theme-classic .doc-info-table th { background: #f0f4f8; border: 1px solid #ccc; padding: 5px; width: 80px; text-align: center; }
-    .theme-classic .doc-info-table td { border: 1px solid #ccc; padding: 5px; }
-    .theme-classic .doc-total { background: #f0f4f8; padding: 15px; margin-bottom: 20px; text-align: center; font-size: 18px; font-weight: bold; border: 1px solid #1a3a6b; }
-    .theme-classic .doc-items { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; }
-    .theme-classic .doc-items th { background: #1a3a6b; color: white; border: 1px solid #1a3a6b; padding: 8px; }
-    .theme-classic .doc-items td { border: 1px solid #ccc; padding: 8px; }
-    .theme-classic .doc-items .sec-row { background: #e2e8f0; font-weight: bold; }
-    .theme-classic .doc-footer { margin-top: 30px; font-size: 11px; color: #666; }
+    #preview-doc.theme-classic { font-family: 'Pretendard', sans-serif; color: #333; }
+    .theme-classic .doc-header { border-bottom: 4px solid var(--primary); padding-bottom: 10px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-end; }
+    .theme-classic .doc-title { font-size: 32px; font-weight: 900; color: var(--primary); letter-spacing: 2px; }
+    .theme-classic .doc-info-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 13px; }
+    .theme-classic .doc-info-table th { background: #f0f4f8; border: 1px solid #cbd5e1; padding: 8px; width: 90px; text-align: center; color: var(--primary); font-weight: 700; }
+    .theme-classic .doc-info-table td { border: 1px solid #cbd5e1; padding: 8px 12px; }
+    .theme-classic .doc-total { background: #f0f4f8; padding: 18px; margin-bottom: 25px; text-align: center; font-size: 20px; font-weight: 800; border: 2px solid var(--primary); color: var(--primary); }
+    .theme-classic .doc-items { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 30px; }
+    .theme-classic .doc-items th { background: var(--primary); color: white; border: 1px solid var(--primary); padding: 10px; font-weight: 600; }
+    .theme-classic .doc-items td { border: 1px solid #cbd5e1; padding: 10px; }
+    .theme-classic .doc-items .sec-row { background: #e2e8f0; font-weight: 800; color: var(--secondary); }
+    .theme-classic .doc-footer { margin-top: 40px; font-size: 12px; color: #64748b; line-height: 1.6; }
     
-    #preview-doc.theme-modern { font-family: 'Noto Sans KR', sans-serif; color: #111; }
-    .theme-modern .doc-header { display: flex; justify-content: space-between; margin-bottom: 30px; }
-    .theme-modern .doc-title { font-size: 32px; font-weight: 900; color: #0d0d2b; letter-spacing: -1px; }
-    .theme-modern .doc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; font-size: 13px; }
-    .theme-modern .info-box { background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid #0d0d2b; }
-    .theme-modern .doc-total { display: flex; justify-content: space-between; align-items: center; background: #0d0d2b; color: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; }
-    .theme-modern .doc-total .amount { font-size: 24px; font-weight: bold; }
-    .theme-modern .doc-items { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .theme-modern .doc-items th { border-bottom: 2px solid #0d0d2b; padding: 10px; text-align: left; color: #64748b; font-weight: normal; }
-    .theme-modern .doc-items td { border-bottom: 1px solid #e2e8f0; padding: 12px 10px; }
-    .theme-modern .doc-items .sec-row { font-weight: bold; color: #0d0d2b; background: #f8fafc; }
-    .theme-modern .doc-footer { margin-top: 30px; font-size: 12px; border-top: 1px solid #e2e8f0; padding-top: 10px; }
+    #preview-doc.theme-modern { font-family: 'Pretendard', sans-serif; color: #1e293b; }
+    .theme-modern .doc-header { display: flex; justify-content: space-between; margin-bottom: 40px; }
+    .theme-modern .doc-title { font-size: 36px; font-weight: 900; color: var(--secondary); letter-spacing: -1px; }
+    .theme-modern .doc-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; font-size: 13px; }
+    .theme-modern .info-box { background: #f8fafc; padding: 20px; border-radius: 12px; border-left: 5px solid var(--primary); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .theme-modern .doc-total { display: flex; justify-content: space-between; align-items: center; background: var(--secondary); color: white; padding: 25px; border-radius: 12px; margin-bottom: 35px; box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3); }
+    .theme-modern .doc-total .amount { font-size: 28px; font-weight: 800; color: #38bdf8; }
+    .theme-modern .doc-items { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .theme-modern .doc-items th { border-bottom: 2px solid var(--border-color); padding: 12px 10px; text-align: left; color: var(--text-light); font-weight: 700; text-transform: uppercase; font-size: 12px; }
+    .theme-modern .doc-items td { border-bottom: 1px solid var(--border-color); padding: 14px 10px; }
+    .theme-modern .doc-items .sec-row { font-weight: 800; color: var(--primary); background: #f0f9ff; }
+    .theme-modern .doc-footer { margin-top: 40px; font-size: 12px; border-top: 2px solid var(--border-color); padding-top: 20px; color: var(--text-light); }
 
-    #preview-doc.theme-minimal { font-family: 'Noto Sans KR', sans-serif; color: #000; }
-    .theme-minimal .doc-header { margin-bottom: 40px; text-align: right; }
-    .theme-minimal .doc-title { font-size: 24px; font-weight: 300; letter-spacing: 5px; border-bottom: 1px solid #000; padding-bottom: 10px; display: inline-block; margin-bottom: 20px; }
-    .theme-minimal .doc-info-grid { display: flex; justify-content: space-between; margin-bottom: 40px; font-size: 12px; line-height: 1.8; }
-    .theme-minimal .doc-total { border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 15px 0; font-size: 20px; text-align: right; margin-bottom: 40px; }
-    .theme-minimal .doc-items { width: 100%; border-collapse: collapse; font-size: 11px; }
-    .theme-minimal .doc-items th { border-bottom: 1px solid #000; padding: 8px 0; text-align: left; }
-    .theme-minimal .doc-items td { padding: 8px 0; }
-    .theme-minimal .doc-items .sec-row { font-weight: bold; margin-top: 10px; }
-    .theme-minimal .doc-footer { margin-top: 40px; font-size: 10px; color: #999; }
+    #preview-doc.theme-minimal { font-family: 'Pretendard', sans-serif; color: #000; }
+    .theme-minimal .doc-header { margin-bottom: 50px; text-align: right; }
+    .theme-minimal .doc-title { font-size: 28px; font-weight: 300; letter-spacing: 8px; border-bottom: 1px solid #000; padding-bottom: 15px; display: inline-block; margin-bottom: 25px; }
+    .theme-minimal .doc-info-grid { display: flex; justify-content: space-between; margin-bottom: 50px; font-size: 13px; line-height: 2; }
+    .theme-minimal .doc-total { border-top: 3px solid #000; border-bottom: 3px solid #000; padding: 20px 0; font-size: 22px; text-align: right; margin-bottom: 50px; font-weight: 600; }
+    .theme-minimal .doc-items { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .theme-minimal .doc-items th { border-bottom: 2px solid #000; padding: 10px 0; text-align: left; font-weight: 600; }
+    .theme-minimal .doc-items td { border-bottom: 1px solid #eee; padding: 12px 0; }
+    .theme-minimal .doc-items .sec-row { font-weight: 700; background: #fafafa; }
+    .theme-minimal .doc-footer { margin-top: 50px; font-size: 11px; color: #999; }
 
     .align-right { text-align: right !important; }
     .align-center { text-align: center !important; }
+    .font-weight-bold { font-weight: 700 !important; }
 
+    /* Wages Tab */
+    .wages-section { margin-bottom: 40px; background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
+    .wages-section h3 { margin-bottom: 15px; color: var(--secondary); font-size: 18px; display: flex; align-items: center; gap: 8px; }
+    
     /* Print Styles */
     @media print {
       body * { visibility: hidden; }
-      .app-container { padding: 0; margin: 0; }
+      .app-container { padding: 0; margin: 0; border: none; box-shadow: none; background: none; }
       #preview-doc, #preview-doc * { visibility: visible; }
       #preview-doc { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; border: none; }
       @page { size: A4 portrait; margin: 15mm; }
@@ -136,13 +190,14 @@
 
 <div class="app-container">
   <div class="header">
-    <h1>견적서 자동생성기</h1>
+    <h1><span>견적서</span> 자동생성기</h1>
   </div>
 
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('info')">① 기본 정보</button>
     <button class="tab-btn" onclick="switchTab('items')">② 견적 항목</button>
     <button class="tab-btn" onclick="switchTab('preview')">③ 미리보기 / 출력</button>
+    <button class="tab-btn" onclick="switchTab('wages')">④ 노임단가표 (참고)</button>
   </div>
 
   <!-- Tab 1: Info -->
@@ -171,7 +226,7 @@
         <div class="form-group"><label>특이사항</label><input type="text" id="p_note"></div>
       </div>
     </div>
-    <button class="save-btn" onclick="saveInfo()">저장하기 (이후 자동 불러옴)</button>
+    <button class="save-btn" onclick="saveInfo()">💾 정보 저장하기 (이후 자동 불러옴)</button>
   </div>
 
   <!-- Tab 2: Items -->
@@ -181,13 +236,13 @@
     <table class="items-table">
       <thead>
         <tr>
-          <th width="50">선택</th>
+          <th width="50" class="align-center">선택</th>
           <th width="200">항목명</th>
-          <th width="80">단위</th>
-          <th width="100">수량</th>
-          <th width="120">참고단가</th>
-          <th width="120">단가(원)</th>
-          <th width="150">금액(원)</th>
+          <th width="80" class="align-center">단위</th>
+          <th width="90" class="align-right">수량</th>
+          <th width="120" class="align-right">참고단가</th>
+          <th width="130" class="align-right">단가(원)</th>
+          <th width="150" class="align-right">금액(원)</th>
           <th width="150">비고</th>
         </tr>
       </thead>
@@ -211,20 +266,71 @@
       <div class="theme-selector">
         <label>디자인 테마: </label>
         <select id="theme-select" onchange="selectDesign(this.value)">
-          <option value="classic">Classic (기본, 블루)</option>
-          <option value="modern">Modern (모던, 네이비)</option>
-          <option value="minimal">Minimal (미니멀, 흑백)</option>
+          <option value="classic">Classic (블루, 기본양식)</option>
+          <option value="modern">Modern (네이비, 트렌디)</option>
+          <option value="minimal">Minimal (흑백, 심플)</option>
         </select>
       </div>
       <div class="export-btns">
-        <button class="btn-excel" onclick="exportExcel()">Excel 다운로드</button>
-        <button class="btn-pdf" onclick="exportPDF()">PDF / 인쇄</button>
+        <button class="btn-excel" onclick="exportExcel()">📊 Excel 다운로드</button>
+        <button class="btn-pdf" onclick="exportPDF()">🖨️ PDF / 인쇄</button>
       </div>
     </div>
     <div class="preview-wrapper">
       <div id="preview-doc" class="theme-classic">
         <!-- Preview Rendered dynamically -->
       </div>
+    </div>
+  </div>
+
+  <!-- Tab 4: Wages Reference -->
+  <div id="tab-wages" class="tab-content">
+    <p class="desc-text" style="font-size:14px; margin-bottom:25px; color:var(--primary);">
+      💡 아래 단가는 견적 작성 시 참고할 수 있는 2024년 기준 평균/가이드라인 데이터입니다. 
+      실제 계약은 프로젝트 규모, 경력, 업무 난이도에 따라 협의하여 조정해야 합니다.
+    </p>
+
+    <div class="wages-section">
+      <h3>💻 2024년 적용 소프트웨어 기술자 평균임금 (KOSA 공식)</h3>
+      <table class="items-table">
+        <thead>
+          <tr><th>직무명</th><th class="align-right">월 평균임금</th><th class="align-right">일 평균임금</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>IT 아키텍트</td><td class="align-right">11,154,670 원</td><td class="align-right">527,100 원</td></tr>
+          <tr><td>업무분석가</td><td class="align-right">11,123,010 원</td><td class="align-right">525,600 원</td></tr>
+          <tr><td>IT 마케터</td><td class="align-right">10,090,000 원</td><td class="align-right">477,000 원</td></tr>
+          <tr><td>정보보안전문가</td><td class="align-right">9,480,000 원</td><td class="align-right">448,000 원</td></tr>
+          <tr><td>IT PM</td><td class="align-right">9,520,380 원</td><td class="align-right">449,800 원</td></tr>
+          <tr><td>응용 SW 개발자</td><td class="align-right">7,125,580 원</td><td class="align-right">336,700 원</td></tr>
+          <tr><td>UI/UX 기획 및 개발자</td><td class="align-right">6,591,240 원</td><td class="align-right">311,400 원</td></tr>
+          <tr><td>시스템 SW 개발자</td><td class="align-right">5,820,110 원</td><td class="align-right">275,000 원</td></tr>
+        </tbody>
+      </table>
+      <span class="desc-text">* 출처: 한국소프트웨어산업협회(SW기술자 임금실태조사 결과) - 2024년도 기준</span>
+    </div>
+
+    <div class="wages-section">
+      <h3>🎥 2024년 영상/광고 제작 기본 단가 (업계 평균 가이드라인)</h3>
+      <table class="items-table">
+        <thead>
+          <tr><th>구분</th><th>항목</th><th class="align-right">평균 단가 (일/건)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>기획/연출</td><td>메인 감독 연출료</td><td class="align-right">5,000,000 원 ~ (규모별 상이)</td></tr>
+          <tr><td>기획/연출</td><td>기획안 및 스토리보드 제작</td><td class="align-right">2,000,000 원</td></tr>
+          <tr><td>기획/연출</td><td>조감독 인건비</td><td class="align-right">500,000 원 (일)</td></tr>
+          <tr><td>촬영</td><td>메인 촬영감독 (DOP)</td><td class="align-right">1,500,000 원 (일)</td></tr>
+          <tr><td>촬영</td><td>촬영 장비 및 렌즈 대여</td><td class="align-right">1,000,000 원 (일)</td></tr>
+          <tr><td>촬영</td><td>조명팀 및 장비 세트</td><td class="align-right">2,500,000 원 (일)</td></tr>
+          <tr><td>미술/세팅</td><td>미술감독 및 스튜디오 세팅</td><td class="align-right">3,000,000 원 (건)</td></tr>
+          <tr><td>후반작업</td><td>가편집 (Offline)</td><td class="align-right">1,000,000 원 (건)</td></tr>
+          <tr><td>후반작업</td><td>종합편집 (Online, 색보정 등)</td><td class="align-right">1,500,000 원 (건)</td></tr>
+          <tr><td>후반작업</td><td>사운드 믹싱 / BGM</td><td class="align-right">1,000,000 원 (건)</td></tr>
+          <tr><td>기타 인력</td><td>현장 진행 요원 / 스태프</td><td class="align-right">150,000 원 (일)</td></tr>
+        </tbody>
+      </table>
+      <span class="desc-text">* 출처: 방송/광고/영화 제작 업계 통용 표준 가이드라인 요약 (법정 고시 단가 아님)</span>
     </div>
   </div>
 
@@ -308,7 +414,6 @@ function fmt(n) { return '₩' + n.toLocaleString(); }
 function fmtNum(n) { return n.toLocaleString(); }
 
 function init() {
-  // 카테고리 렌더링
   const catDiv = document.getElementById('cat-selector');
   for(let key in QUOTE_DATA) {
     let btn = document.createElement('button');
@@ -321,7 +426,6 @@ function init() {
   loadInfo();
   selectCat(currentCat);
   
-  // 오늘 날짜 기본 세팅
   if(!gv('p_date')) {
     document.getElementById('p_date').valueAsDate = new Date();
   }
@@ -372,14 +476,10 @@ function initItems(cat) {
 function renderItems() {
   const tbody = document.getElementById('items-tbody');
   tbody.innerHTML = '';
-  
   const state = itemsState[currentCat];
-  // 섹션별로 렌더링
   let currentSection = '';
   
   const itemsArray = Object.entries(state).map(([id, obj]) => ({id, ...obj}));
-  
-  // 좀 더 예쁘게 섹션순 정렬을 위해
   const sections = QUOTE_DATA[currentCat].sections.map(s => s.id);
   itemsArray.sort((a,b) => sections.indexOf(a.sectionId) - sections.indexOf(b.sectionId));
 
@@ -397,25 +497,24 @@ function renderItems() {
       : `<input type="text" class="text-input" readonly value="${item.name}"><span class="desc-text">${item.desc||''}</span>`;
       
     let unitHtml = item.isCustom
-      ? `<input type="text" class="text-input" value="${item.unit}" onchange="updateItem('${item.id}', 'unit', this.value)">`
+      ? `<input type="text" class="text-input" value="${item.unit}" onchange="updateItem('${item.id}', 'unit', this.value)" style="text-align:center;">`
       : item.unit;
 
-    // 참고단가 (평균) - isCustom이면 없음
     let refPriceHtml = '';
     let avg = 0;
     if(!item.isCustom) {
       QUOTE_DATA[currentCat].sections.forEach(s => s.items.forEach(i => { if(i.id === item.id) avg = i.avg; }));
-      refPriceHtml = `<span style="font-size:12px; color:#94a3b8; letter-spacing:-0.5px;">${fmtNum(avg)}</span>`;
+      refPriceHtml = `<span style="font-size:12px; color:var(--text-light); letter-spacing:-0.5px;">평균 ${fmtNum(avg)}</span>`;
     }
 
     row.innerHTML = `
-      <td class="align-center"><input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
+      <td class="align-center"><input type="checkbox" style="transform:scale(1.2)" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
       <td>${nameHtml}</td>
       <td class="align-center">${unitHtml}</td>
       <td><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
       <td class="align-right">${refPriceHtml}</td>
       <td><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
-      <td class="align-right font-weight-bold" id="row-total-${item.id}">${fmtNum(item.qty * item.price)}</td>
+      <td class="align-right font-weight-bold" id="row-total-${item.id}" style="color:var(--primary);">${fmtNum(item.qty * item.price)}</td>
       <td><input type="text" class="text-input" value="${item.note}" placeholder="비고" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
     `;
     tbody.appendChild(row);
@@ -472,7 +571,7 @@ function recalcTotals() {
   document.getElementById('sum-total').innerText = fmtNum(total);
 }
 
-// --- 4. 미리보기 및 렌더링 ---
+// --- 4. 탭 이동 및 미리보기 ---
 function switchTab(tabId) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
@@ -544,19 +643,19 @@ function renderPreview() {
       <div class="doc-header">
         <div class="doc-title">ESTIMATE</div>
         <div style="text-align:right">
-          <div>No. ${gv('p_no')}</div>
-          <div>Date. ${gv('p_date')}</div>
+          <div style="font-weight:600">No. ${gv('p_no')}</div>
+          <div style="color:var(--text-light)">Date. ${gv('p_date')}</div>
         </div>
       </div>
       <div class="doc-info-grid">
         <div class="info-box">
-          <strong>TO. ${gv('c_company')}</strong><br>
+          <strong style="font-size:15px; color:var(--secondary)">TO. ${gv('c_company')}</strong><br><br>
           담당자: ${gv('c_manager')}<br>
           연락처: ${gv('c_tel')}<br>
           프로젝트: ${gv('p_title')}
         </div>
         <div class="info-box">
-          <strong>FROM. ${gv('s_company')}</strong><br>
+          <strong style="font-size:15px; color:var(--secondary)">FROM. ${gv('s_company')}</strong><br><br>
           대표자: ${gv('s_ceo')} | 등록번호: ${gv('s_biz_no')}<br>
           주소: ${gv('s_address')}<br>
           담당: ${gv('s_manager')} | ${gv('s_tel')}
@@ -571,11 +670,11 @@ function renderPreview() {
     html = `
       <div class="doc-header">
         <div class="doc-title">QUOTATION</div>
-        <div>${gv('p_date')} | ${gv('p_no')}</div>
+        <div style="color:#666">${gv('p_date')} | ${gv('p_no')}</div>
       </div>
       <div class="doc-info-grid">
         <div>
-          <strong style="font-size:14px">${gv('c_company')} 귀하</strong><br>
+          <strong style="font-size:15px; border-bottom:1px solid #000; padding-bottom:5px; display:inline-block; margin-bottom:10px;">${gv('c_company')} 귀하</strong><br>
           Project: ${gv('p_title')}<br>
           Attn: ${gv('c_manager')}
         </div>
@@ -587,7 +686,7 @@ function renderPreview() {
         </div>
       </div>
       <div class="doc-total">
-        Total: ${fmt(total)} <span style="font-size:12px">(VAT Inc.)</span>
+        Total: ${fmt(total)} <span style="font-size:12px; font-weight:normal; color:#666">(VAT Inc.)</span>
       </div>
     `;
   }
@@ -598,8 +697,8 @@ function renderPreview() {
       <thead>
         <tr>
           <th>항목 (Item)</th>
-          <th width="10%">수량</th>
-          <th width="10%">단위</th>
+          <th width="10%" class="align-center">수량</th>
+          <th width="10%" class="align-center">단위</th>
           <th width="15%" class="align-right">단가 (원)</th>
           <th width="15%" class="align-right">금액 (원)</th>
           <th width="15%">비고</th>
@@ -622,8 +721,8 @@ function renderPreview() {
         <td class="align-center">${it.qty}</td>
         <td class="align-center">${it.unit}</td>
         <td class="align-right">${fmtNum(it.price)}</td>
-        <td class="align-right">${fmtNum(it.qty * it.price)}</td>
-        <td>${it.note}</td>
+        <td class="align-right font-weight-bold">${fmtNum(it.qty * it.price)}</td>
+        <td style="color:#64748b; font-size:11px;">${it.note}</td>
       </tr>
     `;
   });
@@ -631,9 +730,9 @@ function renderPreview() {
   html += `
       </tbody>
       <tfoot style="font-weight:bold; background:#f8fafc; border-top: 2px solid #cbd5e1;">
-        <tr><td colspan="4" class="align-right" style="padding:10px;">공급가액</td><td class="align-right" style="padding:10px;">${fmtNum(net)}</td><td></td></tr>
-        <tr><td colspan="4" class="align-right" style="padding:10px;">부가가치세 (10%)</td><td class="align-right" style="padding:10px;">${fmtNum(vat)}</td><td></td></tr>
-        <tr><td colspan="4" class="align-right" style="padding:10px;">총 청구금액</td><td class="align-right" style="padding:10px;">${fmtNum(total)}</td><td></td></tr>
+        <tr><td colspan="4" class="align-right" style="padding:12px 10px;">공급가액</td><td class="align-right" style="padding:12px 10px;">${fmtNum(net)}</td><td></td></tr>
+        <tr><td colspan="4" class="align-right" style="padding:12px 10px;">부가가치세 (10%)</td><td class="align-right" style="padding:12px 10px;">${fmtNum(vat)}</td><td></td></tr>
+        <tr><td colspan="4" class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">총 청구금액</td><td class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">${fmtNum(total)}</td><td></td></tr>
       </tfoot>
     </table>
     
@@ -648,58 +747,160 @@ function renderPreview() {
 
 // --- 5. Export 기능 ---
 function exportPDF() {
-  // 인쇄 전 데이터 최신화
   renderPreview();
   window.print();
 }
 
-function exportExcel() {
-  if(typeof XLSX === 'undefined') {
-    alert('Excel 라이브러리를 불러오지 못했습니다.');
+async function exportExcel() {
+  if(typeof ExcelJS === 'undefined') {
+    alert('ExcelJS 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해주세요.');
     return;
   }
   
-  const ws_data = [];
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet('견적서', {
+    pageSetup: { paperSize: 9, orientation: 'portrait' }
+  });
+
+  // 컬럼 너비 설정
+  ws.columns = [
+    { width: 30 }, // A: 항목명/섹션
+    { width: 10 }, // B: 수량/정보
+    { width: 10 }, // C: 단위/정보
+    { width: 20 }, // D: 단가/정보
+    { width: 25 }, // E: 금액
+    { width: 25 }, // F: 비고
+  ];
+
+  // 스타일 헬퍼
+  const borderAll = {
+    top: {style:'thin', color:{argb:'FFCBD5E1'}},
+    left: {style:'thin', color:{argb:'FFCBD5E1'}},
+    bottom: {style:'thin', color:{argb:'FFCBD5E1'}},
+    right: {style:'thin', color:{argb:'FFCBD5E1'}}
+  };
+  const borderThick = {
+    top: {style:'medium', color:{argb:'FF0F172A'}},
+    left: {style:'thin', color:{argb:'FFCBD5E1'}},
+    bottom: {style:'medium', color:{argb:'FF0F172A'}},
+    right: {style:'thin', color:{argb:'FFCBD5E1'}}
+  };
+  const fillHeader = { type: 'pattern', pattern:'solid', fgColor:{argb:'FF2563EB'} }; // Primary Blue
+  const fillSub = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF8FAFC'} };
+  const fillSec = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFE2E8F0'} };
   
-  // 헤더 정보
-  ws_data.push(['견적서']);
-  ws_data.push([]);
-  ws_data.push(['공급자', gv('s_company'), '', '공급받는자', gv('c_company')]);
-  ws_data.push(['사업자번호', gv('s_biz_no'), '', '프로젝트', gv('p_title')]);
-  ws_data.push(['대표자', gv('s_ceo'), '', '담당자', gv('c_manager')]);
-  ws_data.push(['견적일자', gv('p_date'), '', '연락처', gv('c_tel')]);
-  ws_data.push([]);
+  // 1. 타이틀
+  ws.mergeCells('A1:F2');
+  const title = ws.getCell('A1');
+  title.value = '견 적 서';
+  title.font = { name: 'Malgun Gothic', size: 24, bold: true, color: {argb:'FF0F172A'} };
+  title.alignment = { vertical: 'middle', horizontal: 'center' };
+
+  // 2. 기본 정보
+  ws.addRow([]); // 빈줄
   
-  // 컬럼 헤더
-  ws_data.push(['구분(섹션)', '항목명', '수량', '단위', '단가(원)', '금액(원)', '비고']);
+  const infoRow1 = ws.addRow(['공급자', `상호: ${gv('s_company')} / 대표: ${gv('s_ceo')}`, '', '공급받는자', `상호: ${gv('c_company')}`, '']);
+  const infoRow2 = ws.addRow(['', `등록번호: ${gv('s_biz_no')}`, '', '', `담당자: ${gv('c_manager')}`, '']);
+  const infoRow3 = ws.addRow(['', `주소: ${gv('s_address')}`, '', '', `연락처: ${gv('c_tel')}`, '']);
+  const infoRow4 = ws.addRow(['', `담당: ${gv('s_manager')} / ${gv('s_tel')}`, '', '', `프로젝트: ${gv('p_title')}`, '']);
+  const infoRow5 = ws.addRow(['', `이메일: ${gv('s_email')}`, '', '', `견적일자: ${gv('p_date')}`, '']);
   
+  // 병합 및 스타일링
+  ws.mergeCells('A4:A8');
+  ws.mergeCells('B4:C4'); ws.mergeCells('B5:C5'); ws.mergeCells('B6:C6'); ws.mergeCells('B7:C7'); ws.mergeCells('B8:C8');
+  ws.mergeCells('D4:D8');
+  ws.mergeCells('E4:F4'); ws.mergeCells('E5:F5'); ws.mergeCells('E6:F6'); ws.mergeCells('E7:F7'); ws.mergeCells('E8:F8');
+  
+  ws.getCell('A4').fill = fillSub;
+  ws.getCell('A4').alignment = { vertical: 'middle', horizontal: 'center' };
+  ws.getCell('A4').font = { bold: true };
+  ws.getCell('D4').fill = fillSub;
+  ws.getCell('D4').alignment = { vertical: 'middle', horizontal: 'center' };
+  ws.getCell('D4').font = { bold: true };
+
+  for(let i=4; i<=8; i++) {
+    ws.getRow(i).eachCell({ includeEmpty: true }, cell => {
+      cell.border = borderAll;
+      cell.font = cell.font || { name: 'Malgun Gothic', size: 10 };
+      if(!cell.alignment) cell.alignment = { vertical: 'middle' };
+    });
+  }
+
+  ws.addRow([]); // 빈줄
+  
+  // 3. 테이블 헤더
+  const th = ws.addRow(['항목 (Item)', '수량', '단위', '단가 (원)', '금액 (원)', '비고']);
+  th.eachCell(c => {
+    c.fill = fillHeader;
+    c.font = { name: 'Malgun Gothic', size: 11, bold: true, color: {argb:'FFFFFFFF'} };
+    c.alignment = { vertical: 'middle', horizontal: 'center' };
+    c.border = borderThick;
+  });
+
+  // 4. 아이템 데이터
   let net = 0;
   const activeItems = [];
   for(let cat in itemsState) {
     for(let id in itemsState[cat]) {
-      let it = itemsState[cat][id];
-      if(it.checked) {
-        let catLabel = QUOTE_DATA[cat].label;
-        ws_data.push([`[${catLabel}] ${it.sectionName}`, it.name, it.qty, it.unit, it.price, it.qty*it.price, it.note]);
-        net += (it.qty * it.price);
+      if(itemsState[cat][id].checked) {
+        let it = itemsState[cat][id];
+        it.catLabel = QUOTE_DATA[cat].label;
+        activeItems.push(it);
       }
     }
   }
-  
+
+  let currentSection = '';
+  let currentCatLabel = '';
+  activeItems.forEach(it => {
+    if(it.sectionId !== currentSection || it.catLabel !== currentCatLabel) {
+      currentSection = it.sectionId;
+      currentCatLabel = it.catLabel;
+      let secRow = ws.addRow([`[${it.catLabel}] ${it.sectionName}`, '', '', '', '', '']);
+      ws.mergeCells(`A${secRow.number}:F${secRow.number}`);
+      secRow.getCell(1).fill = fillSec;
+      secRow.getCell(1).font = { name: 'Malgun Gothic', bold: true, color: {argb:'FF0F172A'} };
+      secRow.getCell(1).border = borderAll;
+      secRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'left' };
+    }
+    
+    let amt = it.qty * it.price;
+    net += amt;
+    let row = ws.addRow([it.name, it.qty, it.unit, it.price, amt, it.note]);
+    
+    row.eachCell({ includeEmpty: true }, (c, colNum) => {
+      c.border = borderAll;
+      c.font = { name: 'Malgun Gothic', size: 10 };
+      if(colNum === 2 || colNum === 3) c.alignment = { horizontal: 'center' };
+      if(colNum === 4 || colNum === 5) {
+        c.numFmt = '#,##0';
+        c.alignment = { horizontal: 'right' };
+      }
+    });
+  });
+
+  // 5. 합계
   let vat = Math.floor(net * 0.1);
   let total = net + vat;
   
-  ws_data.push([]);
-  ws_data.push(['', '', '', '', '공급가액', net]);
-  ws_data.push(['', '', '', '', '부가세', vat]);
-  ws_data.push(['', '', '', '', '합계', total]);
+  let tRow1 = ws.addRow(['공급가액', '', '', '', net, '']);
+  let tRow2 = ws.addRow(['부가가치세 (10%)', '', '', '', vat, '']);
+  let tRow3 = ws.addRow(['총 청구금액', '', '', '', total, '']);
   
-  const ws = XLSX.utils.aoa_to_sheet(ws_data);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "견적서");
-  
-  let filename = `견적서_${gv('c_company')}_${gv('p_title')||'산출물'}.xlsx`;
-  XLSX.writeFile(wb, filename);
+  [tRow1, tRow2, tRow3].forEach((r, idx) => {
+    ws.mergeCells(`A${r.number}:D${r.number}`);
+    r.getCell(1).alignment = { horizontal: 'right', vertical: 'middle' };
+    r.getCell(1).font = { name: 'Malgun Gothic', bold: true };
+    r.getCell(5).numFmt = '#,##0';
+    r.getCell(5).font = { name: 'Malgun Gothic', bold: true, size: idx===2 ? 14 : 11 };
+    r.getCell(5).fill = fillSub;
+    if(idx === 2) r.getCell(5).font.color = {argb:'FF2563EB'};
+    r.eachCell({ includeEmpty: false }, c => c.border = borderAll);
+  });
+
+  // 다운로드 트리거
+  const buf = await wb.xlsx.writeBuffer();
+  saveAs(new Blob([buf]), `견적서_${gv('c_company')}_${gv('p_title')||'산출물'}.xlsx`);
 }
 
 // 시작
