@@ -185,6 +185,7 @@
           <th width="200">항목명</th>
           <th width="80">단위</th>
           <th width="100">수량</th>
+          <th width="120">참고단가</th>
           <th width="120">단가(원)</th>
           <th width="150">금액(원)</th>
           <th width="150">비고</th>
@@ -385,7 +386,7 @@ function renderItems() {
   itemsArray.forEach(item => {
     if(item.sectionId !== currentSection) {
       currentSection = item.sectionId;
-      tbody.innerHTML += `<tr class="section-row"><td colspan="7">${item.sectionName}</td></tr>`;
+      tbody.innerHTML += `<tr class="section-row"><td colspan="8">${item.sectionName}</td></tr>`;
     }
     
     const row = document.createElement('tr');
@@ -399,11 +400,20 @@ function renderItems() {
       ? `<input type="text" class="text-input" value="${item.unit}" onchange="updateItem('${item.id}', 'unit', this.value)">`
       : item.unit;
 
+    // 참고단가 (평균) - isCustom이면 없음
+    let refPriceHtml = '';
+    let avg = 0;
+    if(!item.isCustom) {
+      QUOTE_DATA[currentCat].sections.forEach(s => s.items.forEach(i => { if(i.id === item.id) avg = i.avg; }));
+      refPriceHtml = `<span style="font-size:12px; color:#94a3b8; letter-spacing:-0.5px;">${fmtNum(avg)}</span>`;
+    }
+
     row.innerHTML = `
       <td class="align-center"><input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
       <td>${nameHtml}</td>
       <td class="align-center">${unitHtml}</td>
       <td><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
+      <td class="align-right">${refPriceHtml}</td>
       <td><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
       <td class="align-right font-weight-bold" id="row-total-${item.id}">${fmtNum(item.qty * item.price)}</td>
       <td><input type="text" class="text-input" value="${item.note}" placeholder="비고" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
@@ -448,9 +458,11 @@ function addCustomRow() {
 
 function recalcTotals() {
   let net = 0;
-  for(let id in itemsState[currentCat]) {
-    let it = itemsState[currentCat][id];
-    if(it.checked) net += (it.qty * it.price);
+  for(let cat in itemsState) {
+    for(let id in itemsState[cat]) {
+      let it = itemsState[cat][id];
+      if(it.checked) net += (it.qty * it.price);
+    }
   }
   let vat = Math.floor(net * 0.1);
   let total = net + vat;
@@ -483,11 +495,14 @@ function renderPreview() {
   // 데이터 수집
   let net = 0;
   const activeItems = [];
-  for(let id in itemsState[currentCat]) {
-    let it = itemsState[currentCat][id];
-    if(it.checked) {
-      activeItems.push(it);
-      net += (it.qty * it.price);
+  for(let cat in itemsState) {
+    for(let id in itemsState[cat]) {
+      let it = itemsState[cat][id];
+      if(it.checked) {
+        it.catLabel = QUOTE_DATA[cat].label;
+        activeItems.push(it);
+        net += (it.qty * it.price);
+      }
     }
   }
   let vat = Math.floor(net * 0.1);
@@ -594,10 +609,12 @@ function renderPreview() {
   `;
   
   let currentSection = '';
+  let currentCatLabel = '';
   activeItems.forEach(it => {
-    if(it.sectionId !== currentSection) {
+    if(it.sectionId !== currentSection || it.catLabel !== currentCatLabel) {
       currentSection = it.sectionId;
-      html += `<tr class="sec-row"><td colspan="6">${it.sectionName}</td></tr>`;
+      currentCatLabel = it.catLabel;
+      html += `<tr class="sec-row"><td colspan="6">[${it.catLabel}] ${it.sectionName}</td></tr>`;
     }
     html += `
       <tr>
@@ -658,11 +675,14 @@ function exportExcel() {
   
   let net = 0;
   const activeItems = [];
-  for(let id in itemsState[currentCat]) {
-    let it = itemsState[currentCat][id];
-    if(it.checked) {
-      ws_data.push([it.sectionName, it.name, it.qty, it.unit, it.price, it.qty*it.price, it.note]);
-      net += (it.qty * it.price);
+  for(let cat in itemsState) {
+    for(let id in itemsState[cat]) {
+      let it = itemsState[cat][id];
+      if(it.checked) {
+        let catLabel = QUOTE_DATA[cat].label;
+        ws_data.push([`[${catLabel}] ${it.sectionName}`, it.name, it.qty, it.unit, it.price, it.qty*it.price, it.note]);
+        net += (it.qty * it.price);
+      }
     }
   }
   
