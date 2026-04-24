@@ -162,6 +162,86 @@
     /* Wages Tab */
     .wages-section { margin-bottom: 40px; background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
     .wages-section h3 { margin-bottom: 15px; color: var(--secondary); font-size: 18px; display: flex; align-items: center; gap: 8px; }
+
+    /* =========================================================
+       News Tab (⑤ 마케팅 트렌드)
+       ========================================================= */
+    .news-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .news-header h2 { font-size: 20px; font-weight: 800; color: var(--secondary); }
+    .news-header h2 span { color: var(--primary); }
+    .news-search-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .news-search-bar input {
+      padding: 10px 16px; border: 1px solid var(--border-color);
+      border-radius: 25px; outline: none; font-size: 14px;
+      background: #f8fafc; width: 220px; transition: var(--transition);
+    }
+    .news-search-bar input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); width: 260px; }
+    .news-filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .news-filter-btn {
+      padding: 7px 16px; border: 1px solid var(--border-color);
+      border-radius: 20px; cursor: pointer; font-size: 13px;
+      font-weight: 600; color: var(--text-light); background: white;
+      transition: var(--transition);
+    }
+    .news-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .news-filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    
+    .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    
+    .news-card {
+      background: white; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border-color); transition: var(--transition);
+      display: flex; flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.2); }
+    .news-card-thumb {
+      width: 100%; height: 180px; object-fit: cover;
+      background: linear-gradient(135deg, #e0f2fe, #bfdbfe);
+      display: flex; align-items: center; justify-content: center;
+      color: #93c5fd; font-size: 40px;
+    }
+    .news-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .news-card-thumb.no-img { min-height: 120px; }
+    .news-card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+    .news-card-source {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 8px;
+    }
+    .source-mobiinside { color: #7c3aed; background: #ede9fe; padding: 3px 8px; border-radius: 10px; }
+    .source-madtimes { color: #0284c7; background: #e0f2fe; padding: 3px 8px; border-radius: 10px; }
+    .source-default { color: var(--primary); background: #eff6ff; padding: 3px 8px; border-radius: 10px; }
+    .news-card-title {
+      font-size: 15px; font-weight: 700; color: var(--secondary);
+      line-height: 1.5; margin-bottom: 12px; flex: 1;
+      display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .news-card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+    .news-card-date { font-size: 12px; color: var(--text-light); }
+    .news-card-link {
+      font-size: 12px; font-weight: 700; color: var(--primary);
+      text-decoration: none; padding: 5px 12px; border: 1px solid var(--primary);
+      border-radius: 20px; transition: var(--transition);
+    }
+    .news-card-link:hover { background: var(--primary); color: white; }
+    
+    .news-load-more {
+      margin-top: 30px; width: 100%; padding: 14px;
+      background: rgba(37,99,235,0.05); border: 1px dashed var(--primary);
+      color: var(--primary); border-radius: 10px; cursor: pointer;
+      font-size: 15px; font-weight: 700; transition: var(--transition);
+    }
+    .news-load-more:hover { background: rgba(37,99,235,0.1); }
+    .news-load-more:disabled { opacity: 0.4; cursor: not-allowed; }
+    
+    .news-empty {
+      text-align: center; padding: 60px 20px; color: var(--text-light);
+      background: #f8fafc; border-radius: 12px; border: 1px dashed var(--border-color);
+    }
+    .news-empty .empty-icon { font-size: 48px; margin-bottom: 12px; }
+    .news-stats { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
+    .news-stats strong { color: var(--primary); }
     
     /* =========================================================
        Mobile Responsive Styles (Screen Only)
@@ -230,6 +310,12 @@
       
       .wages-section { padding: 15px; }
       .wages-section h3 { font-size: 16px; }
+      
+      /* News Tab Mobile */
+      .news-header { flex-direction: column; align-items: flex-start; }
+      .news-search-bar input { width: 100%; }
+      .news-search-bar input:focus { width: 100%; }
+      .news-grid { grid-template-columns: 1fr; }
     }
 
     /* Print Styles: 강제로 A4 비율 유지 (모바일에서 인쇄 시에도 깨지지 않도록) */
@@ -264,6 +350,7 @@
     <button class="tab-btn" onclick="switchTab('items')">② 견적 항목</button>
     <button class="tab-btn" onclick="switchTab('preview')">③ 미리보기 / 출력</button>
     <button class="tab-btn" onclick="switchTab('wages')">④ 노임단가표 (참고)</button>
+    <button class="tab-btn" onclick="switchTab('news')">⑤ 마케팅 트렌드</button>
   </div>
 
   <!-- Tab 1: Info -->
@@ -404,6 +491,26 @@
       </div>
       <span class="desc-text">* 출처: 방송/광고/영화 제작 업계 통용 표준 가이드라인 요약 (법정 고시 단가 아님)</span>
     </div>
+  </div>
+
+  <!-- Tab 5: Marketing News -->
+  <div id="tab-news" class="tab-content">
+    <div class="news-header">
+      <h2>📰 <span>마케팅</span> 트렌드 뉴스</h2>
+      <div class="news-search-bar">
+        <input type="text" id="news-search" placeholder="🔍 기사 검색..." oninput="filterNews()">
+      </div>
+    </div>
+    <div class="news-filter-btns" id="news-filter-btns">
+      <button class="news-filter-btn active" onclick="setNewsFilter('all', this)">전체</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('MobiInside', this)">모비인사이드</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('MadTimes', this)">매드타임스</button>
+    </div>
+    <p class="news-stats" id="news-stats" style="margin-top:14px;"></p>
+    <div class="news-grid" id="news-grid">
+      <div class="news-empty"><div class="empty-icon">📡</div><p>뉴스를 불러오는 중...</p></div>
+    </div>
+    <button class="news-load-more" id="news-load-more" onclick="loadMoreNews()" style="display:none">더 보기</button>
   </div>
 
 </div>
@@ -659,6 +766,114 @@ function switchTab(tabId) {
   document.getElementById('tab-' + tabId).classList.add('active');
   
   if(tabId === 'preview') renderPreview();
+  if(tabId === 'news' && !newsLoaded) loadNews();
+}
+
+// --- 5-1. 뉴스 탭 로직 ---
+let allNews = [];
+let filteredNews = [];
+let newsPage = 1;
+const NEWS_PER_PAGE = 12;
+let newsLoaded = false;
+let activeNewsFilter = 'all';
+
+async function loadNews() {
+  const grid = document.getElementById('news-grid');
+  try {
+    // GitHub Pages / Vercel 환경 모두 호환
+    const res = await fetch('./data/news.json');
+    if (!res.ok) throw new Error('news.json 로드 실패: ' + res.status);
+    allNews = await res.json();
+    newsLoaded = true;
+    filteredNews = [...allNews];
+    newsPage = 1;
+    renderNewsGrid(true);
+  } catch(e) {
+    grid.innerHTML = `<div class="news-empty"><div class="empty-icon">😢</div><p>뉴스를 불러올 수 없습니다.<br><small>${e.message}</small></p></div>`;
+    console.error('뉴스 로드 오류:', e);
+  }
+}
+
+function setNewsFilter(source, btn) {
+  activeNewsFilter = source;
+  document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterNews();
+}
+
+function filterNews() {
+  const query = (document.getElementById('news-search').value || '').trim().toLowerCase();
+  filteredNews = allNews.filter(a => {
+    const matchSource = activeNewsFilter === 'all' || a.source === activeNewsFilter;
+    const matchQuery = !query || a.title.toLowerCase().includes(query);
+    return matchSource && matchQuery;
+  });
+  newsPage = 1;
+  renderNewsGrid(true);
+}
+
+function loadMoreNews() {
+  newsPage++;
+  renderNewsGrid(false);
+}
+
+function renderNewsGrid(reset) {
+  const grid = document.getElementById('news-grid');
+  const loadMoreBtn = document.getElementById('news-load-more');
+  const statsEl = document.getElementById('news-stats');
+  
+  const pageItems = filteredNews.slice(0, newsPage * NEWS_PER_PAGE);
+  
+  statsEl.innerHTML = `총 <strong>${filteredNews.length}</strong>건의 기사`;
+  
+  if (filteredNews.length === 0) {
+    grid.innerHTML = `<div class="news-empty"><div class="empty-icon">🔍</div><p>검색 결과가 없습니다.</p></div>`;
+    loadMoreBtn.style.display = 'none';
+    return;
+  }
+  
+  if (reset) grid.innerHTML = '';
+  
+  const startIdx = reset ? 0 : (newsPage - 1) * NEWS_PER_PAGE;
+  const endIdx = newsPage * NEWS_PER_PAGE;
+  const itemsToRender = filteredNews.slice(startIdx, endIdx);
+  
+  itemsToRender.forEach(article => {
+    const card = document.createElement('div');
+    card.className = 'news-card';
+    
+    const sourceKey = (article.source || '').toLowerCase().replace(/\s/g, '');
+    let sourceClass = 'source-default';
+    if(sourceKey.includes('mobiinside')) sourceClass = 'source-mobiinside';
+    else if(sourceKey.includes('madtimes')) sourceClass = 'source-madtimes';
+    
+    const date = article.date ? new Date(article.date).toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric'}) : '';
+    
+    const thumbHtml = article.thumbnail
+      ? `<div class="news-card-thumb"><img src="${article.thumbnail}" alt="썸네일" loading="lazy" onerror="this.parentNode.classList.add('no-img'); this.remove(); this.parentNode.innerHTML='📰';"></div>`
+      : `<div class="news-card-thumb no-img">📰</div>`;
+    
+    card.innerHTML = `
+      ${thumbHtml}
+      <div class="news-card-body">
+        <span class="news-card-source ${sourceClass}">${article.source || '뉴스'}</span>
+        <div class="news-card-title">${article.title}</div>
+        <div class="news-card-footer">
+          <span class="news-card-date">📅 ${date}</span>
+          <a href="${article.link}" target="_blank" rel="noopener" class="news-card-link">읽기 →</a>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  
+  // 더보기 버튼 표시 여부
+  if (filteredNews.length > newsPage * NEWS_PER_PAGE) {
+    loadMoreBtn.style.display = 'block';
+    loadMoreBtn.disabled = false;
+  } else {
+    loadMoreBtn.style.display = 'none';
+  }
 }
 
 function selectDesign(theme) {
