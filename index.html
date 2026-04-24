@@ -14,10 +14,9 @@
 
   <style>
     :root {
-      /* Modern Color Palette */
-      --primary: #2563eb;       /* Tailwind blue-600 */
-      --primary-hover: #1d4ed8; /* Tailwind blue-700 */
-      --secondary: #0f172a;     /* Tailwind slate-900 */
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary: #0f172a;
       --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       --surface: rgba(255, 255, 255, 0.95);
       --border-color: rgba(203, 213, 225, 0.8);
@@ -36,15 +35,10 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
     body { background: var(--bg-gradient); color: var(--text-main); font-size: 14.5px; min-height: 100vh; padding: 20px 0; }
     
-    /* App Layout & Glassmorphism */
     .app-container { 
-      max-width: 1200px; 
-      margin: 0 auto; 
-      padding: 30px; 
-      background: var(--surface); 
-      backdrop-filter: blur(10px); 
-      box-shadow: var(--shadow); 
-      border-radius: var(--radius); 
+      max-width: 1200px; margin: 0 auto; padding: 30px; 
+      background: var(--surface); backdrop-filter: blur(10px); 
+      box-shadow: var(--shadow); border-radius: var(--radius); 
       border: 1px solid rgba(255, 255, 255, 0.5);
     }
     
@@ -52,18 +46,12 @@
     .header h1 { font-size: 24px; font-weight: 800; color: var(--secondary); letter-spacing: -0.5px; }
     .header h1 span { color: var(--primary); }
     
-    /* Tabs */
     .tabs { display: flex; gap: 12px; margin-bottom: 25px; }
     .tab-btn { 
-      padding: 12px 24px; 
-      border: 1px solid var(--border-color); 
-      background: rgba(255, 255, 255, 0.7); 
-      cursor: pointer; 
-      font-weight: 600; 
-      font-size: 15px; 
-      border-radius: 8px; 
-      color: var(--text-light);
-      transition: var(--transition); 
+      padding: 12px 24px; border: 1px solid var(--border-color); 
+      background: rgba(255, 255, 255, 0.7); cursor: pointer; 
+      font-weight: 600; font-size: 15px; border-radius: 8px; 
+      color: var(--text-light); transition: var(--transition); 
     }
     .tab-btn:hover { background: white; color: var(--primary); border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1); }
     .tab-btn.active { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); transform: translateY(-2px); }
@@ -89,6 +77,7 @@
     .cat-btn:hover { border-color: var(--primary); color: var(--primary); }
     .cat-btn.active { background: var(--secondary); color: white; border-color: var(--secondary); }
     
+    .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .items-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-bottom: 10px; }
     .items-table th, .items-table td { padding: 12px 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
     .items-table th { background: #f8fafc; font-weight: 600; color: var(--secondary); text-transform: uppercase; font-size: 13px; letter-spacing: 0.5px; }
@@ -100,10 +89,9 @@
     .item-row:hover { background: #f1f5f9; }
     .item-row.inactive { opacity: 0.4; }
     
-    .num-input, .price-input, .text-input { padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: var(--transition); }
-    .num-input { width: 80px; text-align: right; }
-    .price-input { width: 110px; text-align: right; }
-    .text-input { width: 100%; }
+    .num-input, .price-input, .text-input { padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 6px; outline: none; transition: var(--transition); width: 100%; }
+    .num-input { max-width: 80px; text-align: right; }
+    .price-input { max-width: 110px; text-align: right; }
     .num-input:focus, .price-input:focus, .text-input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1); }
     .text-input[readonly] { background: transparent; border: none; padding: 0; font-weight: 500; color: var(--text-main); }
     .desc-text { font-size: 12px; color: #94a3b8; display: block; margin-top: 4px; }
@@ -126,7 +114,6 @@
     .btn-excel { background: var(--success); }
     .btn-excel:hover { background: var(--success-hover); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
     
-    /* Document Preview Wrapper */
     .preview-wrapper { overflow-x: auto; background: #cbd5e1; padding: 40px; border-radius: 12px; display: flex; justify-content: center; }
     #preview-doc { width: 210mm; min-height: 297mm; background: white; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); padding: 50px; box-sizing: border-box; }
     
@@ -176,35 +163,91 @@
     .wages-section { margin-bottom: 40px; background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
     .wages-section h3 { margin-bottom: 15px; color: var(--secondary); font-size: 18px; display: flex; align-items: center; gap: 8px; }
     
-    /* Mobile Responsive Styles (Galaxy S24 Ultra & General Mobile) */
-    @media (max-width: 768px) {
+    /* =========================================================
+       Mobile Responsive Styles (Screen Only)
+       가로 스와이프를 없애고 모바일 카드 형태 레이아웃 적용
+       ========================================================= */
+    @media screen and (max-width: 768px) {
       .app-container { padding: 15px; border-radius: 0; border: none; box-shadow: none; }
       .header h1 { font-size: 20px; }
       .tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; -webkit-overflow-scrolling: touch; }
       .tab-btn { flex: 0 0 auto; padding: 10px 15px; font-size: 14px; }
-      .info-grid { grid-template-columns: 1fr; gap: 25px; }
+      
+      .info-grid { grid-template-columns: 1fr; gap: 20px; }
       .form-group { flex-direction: column; align-items: flex-start; margin-bottom: 12px; }
       .form-group label { width: 100%; margin-bottom: 6px; font-size: 13px; }
-      .table-responsive { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 10px; border-radius: 8px; border: 1px solid var(--border-color); }
-      .items-table { min-width: 800px; margin-bottom: 0; }
-      .items-table th:first-child, .items-table th:last-child { border-radius: 0; }
+      
+      /* Card Layout for Input Tables (No horizontal scroll) */
+      .table-responsive { width: 100%; overflow: visible; border: none; }
+      .items-table, .items-table tbody, .items-table tr, .items-table td { display: block; width: 100%; }
+      .items-table thead { display: none; }
+      .items-table tr { margin-bottom: 15px; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+      .items-table td { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f1f5f9; text-align: right !important; }
+      .items-table td:last-child { border-bottom: none; }
+      .items-table td::before { content: attr(data-label); font-weight: 600; color: var(--text-light); text-align: left; margin-right: 15px; flex-shrink: 0; }
+      .items-table td input[type="text"] { text-align: right; }
+      .items-table td input.num-input, .items-table td input.price-input { text-align: right; }
+      
+      .section-row { background: var(--secondary); color: white; padding: 12px 15px !important; margin-bottom: 15px; }
+      .section-row td { border: none; padding: 0 !important; font-size: 15px; text-align: left !important; display: block; }
+      .section-row td::before { content: none; }
+      
       .summary-row { font-size: 14px; }
       .summary-row.total { font-size: 18px; }
+      
       .preview-actions { flex-direction: column; align-items: stretch; gap: 15px; }
       .theme-selector { display: flex; flex-direction: column; gap: 8px; }
       .export-btns { display: flex; flex-direction: column; gap: 10px; }
       .export-btns button { margin-left: 0; width: 100%; justify-content: center; }
-      .preview-wrapper { padding: 15px; }
+      
+      /* Mobile Preview Document (Card Layout for preview to avoid horizontal scroll) */
+      .preview-wrapper { padding: 10px; background: transparent; }
+      #preview-doc { width: 100%; min-height: auto; padding: 20px 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-radius: 8px; }
+      
+      /* Header & Info grids inside preview */
+      .doc-info-grid { grid-template-columns: 1fr; gap: 15px; }
+      .doc-info-table, .doc-info-table tbody, .doc-info-table tr, .doc-info-table th, .doc-info-table td { display: block; width: 100%; }
+      .doc-info-table th { text-align: left; background: #e2e8f0; }
+      .theme-classic .doc-title, .theme-modern .doc-title, .theme-minimal .doc-title { font-size: 24px; }
+      .theme-modern .doc-total, .theme-classic .doc-total, .theme-minimal .doc-total { flex-direction: column; align-items: flex-start; gap: 10px; padding: 15px; }
+      
+      /* Transform Doc Items to Cards */
+      .doc-items, .doc-items tbody, .doc-items tr, .doc-items td { display: block; width: 100%; }
+      .doc-items thead { display: none; }
+      .doc-items tr { margin-bottom: 12px; border: 1px solid var(--border-color); padding: 10px; border-radius: 6px; }
+      .doc-items td { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #f1f5f9; text-align: right !important; }
+      .doc-items td::before { content: attr(data-label); font-weight: bold; color: #64748b; margin-right: 15px; flex-shrink: 0; }
+      .doc-items td:last-child { border-bottom: none; }
+      .doc-items .sec-row { background: #f1f5f9; border: none; padding: 10px; }
+      .doc-items .sec-row td { display: block; text-align: left !important; font-weight: bold; padding: 0 !important; border: none; }
+      .doc-items .sec-row td::before { content: none; }
+      
+      .doc-items tfoot, .doc-items tfoot tr, .doc-items tfoot td { display: block; width: 100%; border: none; }
+      .doc-items tfoot tr { border: none; margin-bottom: 5px; padding: 0; }
+      .doc-items tfoot td { display: flex; justify-content: space-between; padding: 8px 0 !important; align-items: center; border-bottom: 1px solid #f1f5f9; }
+      .doc-items tfoot td::before { content: attr(data-label); font-weight: bold; color: var(--secondary); text-align: left; }
+      .hide-mobile { display: none !important; }
+      
       .wages-section { padding: 15px; }
       .wages-section h3 { font-size: 16px; }
     }
 
-    /* Print Styles */
+    /* Print Styles: 강제로 A4 비율 유지 (모바일에서 인쇄 시에도 깨지지 않도록) */
     @media print {
       body * { visibility: hidden; }
       .app-container { padding: 0; margin: 0; border: none; box-shadow: none; background: none; }
       #preview-doc, #preview-doc * { visibility: visible; }
-      #preview-doc { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; box-shadow: none; border: none; }
+      #preview-doc { position: absolute; left: 0; top: 0; width: 210mm !important; min-height: 297mm; margin: 0; padding: 0; box-shadow: none; border: none; display: block; }
+      
+      /* Print should override mobile blocks if triggered on mobile */
+      .doc-items, .doc-items tbody, .doc-items tr, .doc-items td, .doc-info-table, .doc-info-table tbody, .doc-info-table tr, .doc-info-table th, .doc-info-table td { display: table-cell; width: auto; }
+      .doc-items { display: table; width: 100%; }
+      .doc-items thead { display: table-header-group; }
+      .doc-items tr { display: table-row; margin: 0; border: none; padding: 0; }
+      .doc-items td::before { content: none; }
+      .doc-items tfoot { display: table-footer-group; }
+      .hide-mobile { display: table-cell !important; }
+      
       @page { size: A4 portrait; margin: 15mm; }
     }
   </style>
@@ -323,14 +366,14 @@
             <tr><th>직무명</th><th class="align-right">월 평균임금</th><th class="align-right">일 평균임금</th></tr>
           </thead>
           <tbody>
-            <tr><td>IT 아키텍트</td><td class="align-right">11,154,670 원</td><td class="align-right">527,100 원</td></tr>
-            <tr><td>업무분석가</td><td class="align-right">11,123,010 원</td><td class="align-right">525,600 원</td></tr>
-            <tr><td>IT 마케터</td><td class="align-right">10,090,000 원</td><td class="align-right">477,000 원</td></tr>
-            <tr><td>정보보안전문가</td><td class="align-right">9,480,000 원</td><td class="align-right">448,000 원</td></tr>
-            <tr><td>IT PM</td><td class="align-right">9,520,380 원</td><td class="align-right">449,800 원</td></tr>
-            <tr><td>응용 SW 개발자</td><td class="align-right">7,125,580 원</td><td class="align-right">336,700 원</td></tr>
-            <tr><td>UI/UX 기획 및 개발자</td><td class="align-right">6,591,240 원</td><td class="align-right">311,400 원</td></tr>
-            <tr><td>시스템 SW 개발자</td><td class="align-right">5,820,110 원</td><td class="align-right">275,000 원</td></tr>
+            <tr><td data-label="직무명">IT 아키텍트</td><td data-label="월 평균임금" class="align-right">11,154,670 원</td><td data-label="일 평균임금" class="align-right">527,100 원</td></tr>
+            <tr><td data-label="직무명">업무분석가</td><td data-label="월 평균임금" class="align-right">11,123,010 원</td><td data-label="일 평균임금" class="align-right">525,600 원</td></tr>
+            <tr><td data-label="직무명">IT 마케터</td><td data-label="월 평균임금" class="align-right">10,090,000 원</td><td data-label="일 평균임금" class="align-right">477,000 원</td></tr>
+            <tr><td data-label="직무명">정보보안전문가</td><td data-label="월 평균임금" class="align-right">9,480,000 원</td><td data-label="일 평균임금" class="align-right">448,000 원</td></tr>
+            <tr><td data-label="직무명">IT PM</td><td data-label="월 평균임금" class="align-right">9,520,380 원</td><td data-label="일 평균임금" class="align-right">449,800 원</td></tr>
+            <tr><td data-label="직무명">응용 SW 개발자</td><td data-label="월 평균임금" class="align-right">7,125,580 원</td><td data-label="일 평균임금" class="align-right">336,700 원</td></tr>
+            <tr><td data-label="직무명">UI/UX 기획/개발자</td><td data-label="월 평균임금" class="align-right">6,591,240 원</td><td data-label="일 평균임금" class="align-right">311,400 원</td></tr>
+            <tr><td data-label="직무명">시스템 SW 개발자</td><td data-label="월 평균임금" class="align-right">5,820,110 원</td><td data-label="일 평균임금" class="align-right">275,000 원</td></tr>
           </tbody>
         </table>
       </div>
@@ -345,17 +388,17 @@
             <tr><th>구분</th><th>항목</th><th class="align-right">평균 단가 (일/건)</th></tr>
           </thead>
           <tbody>
-            <tr><td>기획/연출</td><td>메인 감독 연출료</td><td class="align-right">5,000,000 원 ~ (규모별 상이)</td></tr>
-            <tr><td>기획/연출</td><td>기획안 및 스토리보드 제작</td><td class="align-right">2,000,000 원</td></tr>
-            <tr><td>기획/연출</td><td>조감독 인건비</td><td class="align-right">500,000 원 (일)</td></tr>
-            <tr><td>촬영</td><td>메인 촬영감독 (DOP)</td><td class="align-right">1,500,000 원 (일)</td></tr>
-            <tr><td>촬영</td><td>촬영 장비 및 렌즈 대여</td><td class="align-right">1,000,000 원 (일)</td></tr>
-            <tr><td>촬영</td><td>조명팀 및 장비 세트</td><td class="align-right">2,500,000 원 (일)</td></tr>
-            <tr><td>미술/세팅</td><td>미술감독 및 스튜디오 세팅</td><td class="align-right">3,000,000 원 (건)</td></tr>
-            <tr><td>후반작업</td><td>가편집 (Offline)</td><td class="align-right">1,000,000 원 (건)</td></tr>
-            <tr><td>후반작업</td><td>종합편집 (Online, 색보정 등)</td><td class="align-right">1,500,000 원 (건)</td></tr>
-            <tr><td>후반작업</td><td>사운드 믹싱 / BGM</td><td class="align-right">1,000,000 원 (건)</td></tr>
-            <tr><td>기타 인력</td><td>현장 진행 요원 / 스태프</td><td class="align-right">150,000 원 (일)</td></tr>
+            <tr><td data-label="구분">기획/연출</td><td data-label="항목">메인 감독 연출료</td><td data-label="평균 단가" class="align-right">5,000,000 원 ~ (규모별 상이)</td></tr>
+            <tr><td data-label="구분">기획/연출</td><td data-label="항목">기획안/스토리보드 제작</td><td data-label="평균 단가" class="align-right">2,000,000 원</td></tr>
+            <tr><td data-label="구분">기획/연출</td><td data-label="항목">조감독 인건비</td><td data-label="평균 단가" class="align-right">500,000 원 (일)</td></tr>
+            <tr><td data-label="구분">촬영</td><td data-label="항목">메인 촬영감독 (DOP)</td><td data-label="평균 단가" class="align-right">1,500,000 원 (일)</td></tr>
+            <tr><td data-label="구분">촬영</td><td data-label="항목">촬영 장비 및 렌즈 대여</td><td data-label="평균 단가" class="align-right">1,000,000 원 (일)</td></tr>
+            <tr><td data-label="구분">촬영</td><td data-label="항목">조명팀 및 장비 세트</td><td data-label="평균 단가" class="align-right">2,500,000 원 (일)</td></tr>
+            <tr><td data-label="구분">미술/세팅</td><td data-label="항목">미술감독 및 스튜디오 세팅</td><td data-label="평균 단가" class="align-right">3,000,000 원 (건)</td></tr>
+            <tr><td data-label="구분">후반작업</td><td data-label="항목">가편집 (Offline)</td><td data-label="평균 단가" class="align-right">1,000,000 원 (건)</td></tr>
+            <tr><td data-label="구분">후반작업</td><td data-label="항목">종합편집 (Online, 색보정)</td><td data-label="평균 단가" class="align-right">1,500,000 원 (건)</td></tr>
+            <tr><td data-label="구분">후반작업</td><td data-label="항목">사운드 믹싱 / BGM</td><td data-label="평균 단가" class="align-right">1,000,000 원 (건)</td></tr>
+            <tr><td data-label="구분">기타 인력</td><td data-label="항목">현장 진행 요원 / 스태프</td><td data-label="평균 단가" class="align-right">150,000 원 (일)</td></tr>
           </tbody>
         </table>
       </div>
@@ -434,7 +477,7 @@ const QUOTE_DATA = {
 };
 
 let currentCat = 'production';
-let itemsState = {}; // { catKey: { itemId: { checked, qty, price, note, name, unit, isCustom, sectionId, sectionName } } }
+let itemsState = {}; 
 
 // --- 2. 초기화 및 유틸 ---
 function gv(id) { return document.getElementById(id).value || ''; }
@@ -475,6 +518,13 @@ function saveInfo() {
   ids.forEach(id => info[id] = gv(id));
   localStorage.setItem('quote_info', JSON.stringify(info));
   alert('정보가 저장되었습니다.');
+}
+
+function checkInApp() {
+  const ua = navigator.userAgent.toLowerCase();
+  if(/kakaotalk|instagram|facebook|inapp|line/.test(ua)) {
+    alert("⚠️ 앱 내 브라우저(카카오톡 등)에서는 파일 다운로드 및 인쇄가 차단될 수 있습니다. 정상적인 작동을 위해 우측 하단/상단 메뉴에서 [다른 브라우저로 열기(Safari, Chrome)]를 선택해주세요.");
+  }
 }
 
 // --- 3. 항목 로직 ---
@@ -537,14 +587,14 @@ function renderItems() {
     }
 
     row.innerHTML = `
-      <td class="align-center"><input type="checkbox" style="transform:scale(1.2)" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
-      <td>${nameHtml}</td>
-      <td class="align-center">${unitHtml}</td>
-      <td><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
-      <td class="align-right">${refPriceHtml}</td>
-      <td><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
-      <td class="align-right font-weight-bold" id="row-total-${item.id}" style="color:var(--primary);">${fmtNum(item.qty * item.price)}</td>
-      <td><input type="text" class="text-input" value="${item.note}" placeholder="비고" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
+      <td data-label="선택" class="align-center"><input type="checkbox" style="transform:scale(1.3)" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
+      <td data-label="항목명">${nameHtml}</td>
+      <td data-label="단위" class="align-center">${unitHtml}</td>
+      <td data-label="수량"><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
+      <td data-label="참고단가" class="align-right">${refPriceHtml}</td>
+      <td data-label="단가(원)"><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
+      <td data-label="금액(원)" class="align-right font-weight-bold" id="row-total-${item.id}" style="color:var(--primary);">${fmtNum(item.qty * item.price)}</td>
+      <td data-label="비고"><input type="text" class="text-input" value="${item.note}" placeholder="비고입력" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
     `;
     tbody.appendChild(row);
   });
@@ -746,12 +796,12 @@ function renderPreview() {
     }
     html += `
       <tr>
-        <td>${it.name}</td>
-        <td class="align-center">${it.qty}</td>
-        <td class="align-center">${it.unit}</td>
-        <td class="align-right">${fmtNum(it.price)}</td>
-        <td class="align-right font-weight-bold">${fmtNum(it.qty * it.price)}</td>
-        <td style="color:#64748b; font-size:11px;">${it.note}</td>
+        <td data-label="항목명">${it.name}</td>
+        <td data-label="수량" class="align-center">${it.qty}</td>
+        <td data-label="단위" class="align-center">${it.unit}</td>
+        <td data-label="단가 (원)" class="align-right">${fmtNum(it.price)}</td>
+        <td data-label="금액 (원)" class="align-right font-weight-bold">${fmtNum(it.qty * it.price)}</td>
+        <td data-label="비고" style="color:#64748b; font-size:11px;">${it.note}</td>
       </tr>
     `;
   });
@@ -759,9 +809,21 @@ function renderPreview() {
   html += `
       </tbody>
       <tfoot style="font-weight:bold; background:#f8fafc; border-top: 2px solid #cbd5e1;">
-        <tr><td colspan="4" class="align-right" style="padding:12px 10px;">공급가액</td><td class="align-right" style="padding:12px 10px;">${fmtNum(net)}</td><td></td></tr>
-        <tr><td colspan="4" class="align-right" style="padding:12px 10px;">부가가치세 (10%)</td><td class="align-right" style="padding:12px 10px;">${fmtNum(vat)}</td><td></td></tr>
-        <tr><td colspan="4" class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">총 청구금액</td><td class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">${fmtNum(total)}</td><td></td></tr>
+        <tr>
+          <td colspan="4" class="hide-mobile align-right" style="padding:12px 10px;">공급가액</td>
+          <td data-label="공급가액" class="align-right" style="padding:12px 10px;">${fmtNum(net)}</td>
+          <td class="hide-mobile"></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="hide-mobile align-right" style="padding:12px 10px;">부가가치세 (10%)</td>
+          <td data-label="부가가치세 (10%)" class="align-right" style="padding:12px 10px;">${fmtNum(vat)}</td>
+          <td class="hide-mobile"></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="hide-mobile align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">총 청구금액</td>
+          <td data-label="총 청구금액" class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">${fmtNum(total)}</td>
+          <td class="hide-mobile"></td>
+        </tr>
       </tfoot>
     </table>
     
@@ -776,11 +838,13 @@ function renderPreview() {
 
 // --- 5. Export 기능 ---
 function exportPDF() {
+  checkInApp();
   renderPreview();
   window.print();
 }
 
 async function exportExcel() {
+  checkInApp();
   if(typeof ExcelJS === 'undefined') {
     alert('ExcelJS 라이브러리를 불러오지 못했습니다. 인터넷 연결을 확인해주세요.');
     return;
