@@ -14,8 +14,8 @@
 
   <style>
     :root {
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
+      --primary: #e84648;
+      --primary-hover: #c93b3d;
       --secondary: #0f172a;
       --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
       --surface: rgba(255, 255, 255, 0.95);
@@ -197,9 +197,9 @@
     .news-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.2); }
     .news-card-thumb {
       width: 100%; height: 180px; object-fit: cover;
-      background: linear-gradient(135deg, #e0f2fe, #bfdbfe);
+      background: linear-gradient(135deg, #e0f2fe, #fca5a5);
       display: flex; align-items: center; justify-content: center;
-      color: #93c5fd; font-size: 40px;
+      color: #f87171; font-size: 40px;
     }
     .news-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .news-card-thumb.no-img { min-height: 120px; }
@@ -247,8 +247,8 @@
     .news-update-banner {
       display: flex; align-items: center; gap: 10px;
       background: linear-gradient(135deg, #eff6ff, #dbeafe);
-      border: 1px solid #bfdbfe; border-radius: 10px;
-      padding: 10px 16px; margin-bottom: 20px; font-size: 13px; color: #1d4ed8;
+      border: 1px solid #fca5a5; border-radius: 10px;
+      padding: 10px 16px; margin-bottom: 20px; font-size: 13px; color: var(--primary-hover);
     }
     .news-update-banner .pulse {
       width: 8px; height: 8px; background: #22c55e; border-radius: 50%;
@@ -366,7 +366,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 12px;
       text-align: center;
     }
-    .splash-card:hover { border-color: #2563eb; background: #eff6ff; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(37,99,235,0.15); }
+    .splash-card:hover { border-color: var(--primary); background: #eff6ff; transform: translateY(-4px); box-shadow: 0 12px 32px rgba(37,99,235,0.15); }
     .splash-card:nth-child(2):hover { border-color: #7c3aed; background: #f5f3ff; box-shadow: 0 12px 32px rgba(124,58,237,0.15); }
     .splash-card-icon { font-size: 40px; }
     .splash-card h3 { font-size: 18px; font-weight: 800; color: #0f172a; }
@@ -400,7 +400,7 @@
     .salary-sub-txt { font-size:11px; color:var(--text-light); margin-top:2px; }
     .salary-bar-wrap { margin-top:10px; }
     .salary-bar { height:7px; background:#e2e8f0; border-radius:4px; overflow:hidden; }
-    .salary-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--primary),#60a5fa); transition:width 0.7s cubic-bezier(.4,0,.2,1); }
+    .salary-bar-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,var(--primary),#ef4444); transition:width 0.7s cubic-bezier(.4,0,.2,1); }
     .salary-note { font-size:12px; color:var(--text-light); margin-top:16px; padding:12px 16px; background:#f8fafc; border-radius:8px; border-left:3px solid var(--primary); }
 
     /* ===== STAT CARDS (Tab 6) ===== */
@@ -434,7 +434,7 @@
     .keyword-name { font-size:12px; font-weight:600; flex:1; }
     .keyword-pct { font-size:11px; color:var(--text-light); }
     .kw-bar { height:4px; background:#f1f5f9; border-radius:2px; overflow:hidden; width:50px; }
-    .kw-bar-fill { height:100%; background:linear-gradient(90deg,var(--primary),#60a5fa); border-radius:2px; }
+    .kw-bar-fill { height:100%; background:linear-gradient(90deg,var(--primary),#ef4444); border-radius:2px; }
 
     /* Print Styles: 강제로 A4 비율 유지 (모바일에서 인쇄 시에도 깨지지 않도록) */
     @media print {
@@ -593,7 +593,7 @@
   <div id="splash-logo">
     <img src="./assets/monq-logo.png" alt="MONQ" onerror="this.style.display='none'; document.getElementById('splash-brand-text').style.display='block'">
     <div id="splash-brand-text" style="display:none; font-size:52px; font-weight:900; color:#C0202E; letter-spacing:-2px;">몽규</div>
-    <div class="splash-brand">MONQ Park · 광고&amp;마케팅 솔루션</div>
+    <div class="splash-brand" style="color:var(--primary); font-size:16px;">MONQ VISION</div>
   </div>
   <div id="splash-select">
     <h2>무엇을 도와드릴까요?</h2>
@@ -941,7 +941,7 @@
     <div class="stats-grid">
 
       <!-- 1. 총 광고비 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#eff6ff">💰</div>
         <div class="stat-card-label">2025년 국내 총 광고비</div>
         <div class="stat-card-value">14.2조</div>
@@ -949,22 +949,22 @@
         <span class="stat-trend up">▲ +3.1% YoY</span>
         <div class="mini-bar-chart" style="margin-top:14px">
           <div style="font-size:11px;color:var(--text-light);margin-bottom:8px">연도별 추이 (조원)</div>
-          <div class="mini-bar-row"><span class="mini-bar-name">2022</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:80%;background:#bfdbfe"></div></div><span class="mini-bar-val">12.6</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">2023</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:85%;background:#93c5fd"></div></div><span class="mini-bar-val">13.0</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">2024</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:90%;background:#60a5fa"></div></div><span class="mini-bar-val">13.8</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">2022</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:80%;background:#fca5a5"></div></div><span class="mini-bar-val">12.6</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">2023</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:85%;background:#f87171"></div></div><span class="mini-bar-val">13.0</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">2024</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:90%;background:#ef4444"></div></div><span class="mini-bar-val">13.8</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">2025</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%;background:var(--primary)"></div></div><span class="mini-bar-val">14.2</span></div>
         </div>
       </div>
 
       <!-- 2. 매체별 점유율 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://adstat.kobaco.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#f0fdf4">📺</div>
         <div class="stat-card-label">2025년 매체별 광고비 점유율</div>
         <div class="stat-card-value">52.8%</div>
         <div class="stat-card-sub">디지털 광고 점유율 (역대 최고)</div>
         <span class="stat-trend up">▲ 디지털 지속 성장</span>
         <div class="mini-bar-chart">
-          <div class="mini-bar-row"><span class="mini-bar-name">디지털</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%;background:#2563eb"></div></div><span class="mini-bar-val">52.8%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">디지털</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%;background:var(--primary)"></div></div><span class="mini-bar-val">52.8%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">방송</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:39%;background:#7c3aed"></div></div><span class="mini-bar-val">20.4%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">OOH</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:15%;background:#0891b2"></div></div><span class="mini-bar-val">7.8%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">인쇄</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:10%;background:#64748b"></div></div><span class="mini-bar-val">5.2%</span></div>
@@ -973,7 +973,7 @@
       </div>
 
       <!-- 3. 디지털 플랫폼별 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.nasmedia.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#fef3c7">🌐</div>
         <div class="stat-card-label">디지털 광고 플랫폼별 점유율</div>
         <div class="stat-card-value">37.2%</div>
@@ -983,13 +983,13 @@
           <div class="mini-bar-row"><span class="mini-bar-name">구글/YT</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%;background:#ef4444"></div></div><span class="mini-bar-val">37.2%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">네이버</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:65%;background:#22c55e"></div></div><span class="mini-bar-val">24.1%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">카카오</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:37%;background:#f59e0b"></div></div><span class="mini-bar-val">13.8%</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">메타</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:33%;background:#3b82f6"></div></div><span class="mini-bar-val">12.4%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">메타</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:33%;background:#ef4444"></div></div><span class="mini-bar-val">12.4%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">기타</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:34%;background:#94a3b8"></div></div><span class="mini-bar-val">12.5%</span></div>
         </div>
       </div>
 
       <!-- 4. 크리에이터 마케팅 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.incross.com/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#fdf2f8">🎬</div>
         <div class="stat-card-label">크리에이터(인플루언서) 마케팅 시장</div>
         <div class="stat-card-value">4,500억</div>
@@ -1005,22 +1005,22 @@
       </div>
 
       <!-- 5. AI 마케팅 도입 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.opensurvey.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#f0f9ff">🤖</div>
         <div class="stat-card-label">AI 마케팅 도입 현황 (마케터 설문)</div>
         <div class="stat-card-value">76%</div>
         <div class="stat-card-sub">도입 중 또는 검토 중 (2026)</div>
         <span class="stat-trend up">▲ 전년 대비 +18%p</span>
         <div class="mini-bar-chart">
-          <div class="mini-bar-row"><span class="mini-bar-name">적극 활용</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:42%;background:#2563eb"></div></div><span class="mini-bar-val">32%</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">일부 활용</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:58%;background:#60a5fa"></div></div><span class="mini-bar-val">44%</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">검토 중</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:20%;background:#bfdbfe"></div></div><span class="mini-bar-val">15%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">적극 활용</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:42%;background:var(--primary)"></div></div><span class="mini-bar-val">32%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">일부 활용</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:58%;background:#ef4444"></div></div><span class="mini-bar-val">44%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">검토 중</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:20%;background:#fca5a5"></div></div><span class="mini-bar-val">15%</span></div>
           <div class="mini-bar-row"><span class="mini-bar-name">미도입</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:12%;background:#e2e8f0"></div></div><span class="mini-bar-val">9%</span></div>
         </div>
       </div>
 
       <!-- 6. 브랜드 vs 퍼포먼스 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.cheil.com/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#fff7ed">🎯</div>
         <div class="stat-card-label">광고 예산 배분: 브랜드 vs 퍼포먼스</div>
         <div class="stat-card-value">61%</div>
@@ -1029,7 +1029,7 @@
         <div style="margin-top:14px">
           <div style="display:flex;height:18px;border-radius:9px;overflow:hidden;gap:2px">
             <div style="width:39%;background:#0f172a;border-radius:9px 0 0 9px;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700">브랜드 39%</div>
-            <div style="width:61%;background:#2563eb;border-radius:0 9px 9px 0;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700">퍼포먼스 61%</div>
+            <div style="width:61%;background:var(--primary);border-radius:0 9px 9px 0;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:700">퍼포먼스 61%</div>
           </div>
           <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:var(--text-light)">
             <span>📌 브랜드 광고: 인지도/호감도 구축</span>
@@ -1041,7 +1041,7 @@
       </div>
 
       <!-- 7. 모바일 광고 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#f0fdfa">📱</div>
         <div class="stat-card-label">모바일 광고 비중 (디지털 내)</div>
         <div class="stat-card-value">74.3%</div>
@@ -1049,21 +1049,21 @@
         <span class="stat-trend up">▲ +2.1%p YoY</span>
         <div style="margin-top:14px;background:#f1f5f9;border-radius:10px;padding:12px">
           <div style="font-size:11px;color:var(--text-light);margin-bottom:8px">디바이스별 비중</div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:10px;height:10px;background:#2563eb;border-radius:2px"></div><span style="font-size:12px;flex:1">모바일</span><strong style="font-size:12px">74.3%</strong></div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:10px;height:10px;background:var(--primary);border-radius:2px"></div><span style="font-size:12px;flex:1">모바일</span><strong style="font-size:12px">74.3%</strong></div>
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="width:10px;height:10px;background:#94a3b8;border-radius:2px"></div><span style="font-size:12px;flex:1">PC/데스크톱</span><strong style="font-size:12px">22.1%</strong></div>
           <div style="display:flex;align-items:center;gap:8px"><div style="width:10px;height:10px;background:#e2e8f0;border-radius:2px"></div><span style="font-size:12px;flex:1">태블릿</span><strong style="font-size:12px">3.6%</strong></div>
         </div>
       </div>
 
       <!-- 8. 광고 노출 횟수 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#fef9c3">👁</div>
         <div class="stat-card-label">소비자 하루 평균 광고 접촉 횟수</div>
         <div class="stat-card-value">6,800회</div>
         <div class="stat-card-sub">온/오프라인 통합 (추정)</div>
         <span class="stat-trend neutral">닐슨코리아 추산</span>
         <div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div style="background:#eff6ff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:900;color:#2563eb">3,200</div><div style="font-size:10px;color:var(--text-light)">모바일</div></div>
+          <div style="background:#eff6ff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:900;color:var(--primary)">3,200</div><div style="font-size:10px;color:var(--text-light)">모바일</div></div>
           <div style="background:#f0fdf4;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:900;color:#059669">1,800</div><div style="font-size:10px;color:var(--text-light)">TV/OOH</div></div>
           <div style="background:#fef3c7;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:900;color:#d97706">1,100</div><div style="font-size:10px;color:var(--text-light)">PC 온라인</div></div>
           <div style="background:#f1f5f9;border-radius:8px;padding:10px;text-align:center"><div style="font-size:16px;font-weight:900;color:#64748b">700</div><div style="font-size:10px;color:var(--text-light)">인쇄/기타</div></div>
@@ -1071,7 +1071,7 @@
       </div>
 
       <!-- 9. 마케터 관심 키워드 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#ede9fe">🔥</div>
         <div class="stat-card-label">2026 마케터 최대 관심 키워드 TOP 7</div>
         <div class="stat-card-value">#AI 마케팅</div>
@@ -1088,7 +1088,7 @@
       </div>
 
       <!-- 10. 광고업계 종사자 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#ecfdf5">👥</div>
         <div class="stat-card-label">광고업계 종사자 현황 (2025)</div>
         <div class="stat-card-value">약 61만명</div>
@@ -1103,7 +1103,7 @@
       </div>
 
       <!-- 11. 광고 효과 측정 지표 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#fff1f2">📈</div>
         <div class="stat-card-label">광고 효과 측정 지표 우선순위 (2026)</div>
         <div class="stat-card-value">전환율 1위</div>
@@ -1118,17 +1118,17 @@
       </div>
 
       <!-- 12. 영상 광고 완료율 -->
-      <div class="stat-card">
+      <div class="stat-card" style="cursor:pointer;" onclick="window.open('https://www.ad.co.kr/', '_blank')" title="클릭하여 원문/출처 보기">
         <div class="stat-card-icon" style="background:#f0f9ff">▶️</div>
         <div class="stat-card-label">영상 광고 평균 조회 완료율 (길이별)</div>
         <div class="stat-card-value">6초 = 82%</div>
         <div class="stat-card-sub">길이가 길수록 완료율 급감</div>
         <span class="stat-trend neutral">유튜브/메타 평균</span>
         <div class="mini-bar-chart">
-          <div class="mini-bar-row"><span class="mini-bar-name">6초 범퍼</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%;background:#2563eb"></div></div><span class="mini-bar-val">82%</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">15초</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:78%;background:#3b82f6"></div></div><span class="mini-bar-val">64%</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">30초</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:52%;background:#60a5fa"></div></div><span class="mini-bar-val">43%</span></div>
-          <div class="mini-bar-row"><span class="mini-bar-name">60초+</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:34%;background:#bfdbfe"></div></div><span class="mini-bar-val">28%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">6초 범퍼</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:100%;background:var(--primary)"></div></div><span class="mini-bar-val">82%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">15초</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:78%;background:#ef4444"></div></div><span class="mini-bar-val">64%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">30초</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:52%;background:#ef4444"></div></div><span class="mini-bar-val">43%</span></div>
+          <div class="mini-bar-row"><span class="mini-bar-name">60초+</span><div class="mini-bar-track"><div class="mini-bar-fill" style="width:34%;background:#fca5a5"></div></div><span class="mini-bar-val">28%</span></div>
         </div>
         <div style="margin-top:10px;font-size:11px;color:var(--text-light);padding:8px;background:#eff6ff;border-radius:6px">
           💡 15초 이하 단편 광고가 완료율·CPM 효율 모두 우수
@@ -1399,7 +1399,7 @@ function renderItems() {
   
   const addGroupRow = document.createElement('tr');
   addGroupRow.innerHTML = `<td colspan="8" style="text-align:center; padding:30px 0; border:none;">
-    <button onclick="addCustomSection()" style="padding:12px 30px; font-size:15px; font-weight:800; border:2px dashed #3b82f6; border-radius:10px; background:#eff6ff; cursor:pointer; color:#2563eb; transition:all 0.2s;">+ 새로운 상위 그룹(주제) 추가</button>
+    <button onclick="addCustomSection()" style="padding:12px 30px; font-size:15px; font-weight:800; border:2px dashed #ef4444; border-radius:10px; background:#eff6ff; cursor:pointer; color:var(--primary); transition:all 0.2s;">+ 새로운 상위 그룹(주제) 추가</button>
   </td>`;
   tbody.appendChild(addGroupRow);
 
