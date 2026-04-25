@@ -1181,7 +1181,12 @@ async function loadNews() {
     // GitHub Pages / Vercel 환경 모두 호환
     const res = await fetch('./data/news.json');
     if (!res.ok) throw new Error('news.json 로드 실패: ' + res.status);
-    allNews = await res.json();
+    const raw = await res.json();
+    // 썸네일 있는 기사 먼저, 그 다음 날짜 내림차순
+    allNews = raw.sort((a, b) => {
+      if (!!a.thumbnail === !!b.thumbnail) return new Date(b.date) - new Date(a.date);
+      return a.thumbnail ? -1 : 1;
+    });
     newsLoaded = true;
     filteredNews = [...allNews];
     newsPage = 1;
