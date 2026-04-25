@@ -243,6 +243,31 @@
     .news-stats { font-size: 13px; color: var(--text-light); margin-bottom: 20px; }
     .news-stats strong { color: var(--primary); }
     
+    /* 12시간 업데이트 배너 */
+    .news-update-banner {
+      display: flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border: 1px solid #bfdbfe; border-radius: 10px;
+      padding: 10px 16px; margin-bottom: 20px; font-size: 13px; color: #1d4ed8;
+    }
+    .news-update-banner .pulse {
+      width: 8px; height: 8px; background: #22c55e; border-radius: 50%;
+      flex-shrink: 0; animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    
+    /* 카테고리 배지 색상 */
+    .cat-badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 10px; margin-bottom: 8px; }
+    .cat-ai      { color: #7c3aed; background: #ede9fe; }
+    .cat-digital { color: #0284c7; background: #e0f2fe; }
+    .cat-ad      { color: #d97706; background: #fef3c7; }
+    .cat-brand   { color: #059669; background: #d1fae5; }
+    .cat-media   { color: #dc2626; background: #fee2e2; }
+    .cat-trend   { color: #64748b; background: #f1f5f9; }
+    
     /* =========================================================
        Mobile Responsive Styles (Screen Only)
        가로 스와이프를 없애고 모바일 카드 형태 레이아웃 적용
@@ -501,10 +526,18 @@
         <input type="text" id="news-search" placeholder="🔍 기사 검색..." oninput="filterNews()">
       </div>
     </div>
+    <div class="news-update-banner">
+      <div class="pulse"></div>
+      <span>모비인사이드 · 매드타임스 · 브랜드브리프 · 미디어오늘 기사를 <strong>12시간마다 자동 업데이트</strong>합니다.</span>
+    </div>
     <div class="news-filter-btns" id="news-filter-btns">
-      <button class="news-filter-btn active" onclick="setNewsFilter('all', this)">전체</button>
-      <button class="news-filter-btn" onclick="setNewsFilter('MobiInside', this)">모비인사이드</button>
-      <button class="news-filter-btn" onclick="setNewsFilter('MadTimes', this)">매드타임스</button>
+      <button class="news-filter-btn active" onclick="setNewsFilter('all', this)">🗂 전체</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('ai', this)">🤖 AI/데이터</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('digital', this)">📱 디지털/SNS</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('ad', this)">🎯 광고/캠페인</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('brand', this)">🏷 브랜드/PR</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('media', this)">📺 미디어/플랫폼</button>
+      <button class="news-filter-btn" onclick="setNewsFilter('trend', this)">📈 업계동향</button>
     </div>
     <p class="news-stats" id="news-stats" style="margin-top:14px;"></p>
     <div class="news-grid" id="news-grid">
@@ -777,6 +810,25 @@ const NEWS_PER_PAGE = 12;
 let newsLoaded = false;
 let activeNewsFilter = 'all';
 
+const CAT_INFO = {
+  ai:      { label: '🤖 AI/데이터',     cls: 'cat-ai' },
+  digital: { label: '📱 디지털/SNS',    cls: 'cat-digital' },
+  ad:      { label: '🎯 광고/캠페인',   cls: 'cat-ad' },
+  brand:   { label: '🏷 브랜드/PR',     cls: 'cat-brand' },
+  media:   { label: '📺 미디어/플랫폼', cls: 'cat-media' },
+  trend:   { label: '📈 업계동향',      cls: 'cat-trend' },
+};
+
+function categorizeArticle(title) {
+  const t = (title || '').toLowerCase();
+  if (/ai|인공지능|챗gpt|gpt|머신러닝|딥러닝|자동화|빅데이터|알고리즘|llm|생성형|에이전트/.test(t)) return 'ai';
+  if (/sns|소셜|유튜브|인스타|틱톡|메타|페이스북|릴스|숏폼|크리에이터|인플루언서/.test(t)) return 'digital';
+  if (/광고제|어워즈|캠페인|크리에이티브|cf |광고 영상|광고 캠페인|필름|광고대행|이노션|제일기획|대홍기획|이노레드/.test(t)) return 'ad';
+  if (/브랜드|리브랜딩|런칭|pr |홍보|스폰서|파트너십|앰배서더|협찬|모델/.test(t)) return 'brand';
+  if (/미디어|방송|플랫폼|ott|넷플릭스|네이버|카카오|구글|매체|신문/.test(t)) return 'media';
+  return 'trend';
+}
+
 async function loadNews() {
   const grid = document.getElementById('news-grid');
   try {
@@ -794,8 +846,8 @@ async function loadNews() {
   }
 }
 
-function setNewsFilter(source, btn) {
-  activeNewsFilter = source;
+function setNewsFilter(cat, btn) {
+  activeNewsFilter = cat;
   document.querySelectorAll('.news-filter-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   filterNews();
@@ -804,9 +856,10 @@ function setNewsFilter(source, btn) {
 function filterNews() {
   const query = (document.getElementById('news-search').value || '').trim().toLowerCase();
   filteredNews = allNews.filter(a => {
-    const matchSource = activeNewsFilter === 'all' || a.source === activeNewsFilter;
+    const articleCat = a.category || categorizeArticle(a.title);
+    const matchCat = activeNewsFilter === 'all' || articleCat === activeNewsFilter;
     const matchQuery = !query || a.title.toLowerCase().includes(query);
-    return matchSource && matchQuery;
+    return matchCat && matchQuery;
   });
   newsPage = 1;
   renderNewsGrid(true);
@@ -842,10 +895,8 @@ function renderNewsGrid(reset) {
     const card = document.createElement('div');
     card.className = 'news-card';
     
-    const sourceKey = (article.source || '').toLowerCase().replace(/\s/g, '');
-    let sourceClass = 'source-default';
-    if(sourceKey.includes('mobiinside')) sourceClass = 'source-mobiinside';
-    else if(sourceKey.includes('madtimes')) sourceClass = 'source-madtimes';
+    const articleCat = article.category || categorizeArticle(article.title);
+    const catInfo = CAT_INFO[articleCat] || CAT_INFO.trend;
     
     const date = article.date ? new Date(article.date).toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric'}) : '';
     
@@ -856,7 +907,10 @@ function renderNewsGrid(reset) {
     card.innerHTML = `
       ${thumbHtml}
       <div class="news-card-body">
-        <span class="news-card-source ${sourceClass}">${article.source || '뉴스'}</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
+          <span class="cat-badge ${catInfo.cls}">${catInfo.label}</span>
+          <span class="news-card-source source-default">${article.source || '뉴스'}</span>
+        </div>
         <div class="news-card-title">${article.title}</div>
         <div class="news-card-footer">
           <span class="news-card-date">📅 ${date}</span>
