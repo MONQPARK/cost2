@@ -141,98 +141,98 @@ const companyData = [
   },
   {
     "name": "써치엠",
-    "url": "",
+    "url": "http://www.searchm.co.kr/",
     "address": "서울특별시 강남구 논현로 319, 3층,4층(역삼동, 정유빌딩)",
     "lat": 37.4937842,
     "lng": 127.0398782
   },
   {
     "name": "엠코퍼레이션",
-    "url": "",
+    "url": "https://mcorpor.com/",
     "address": "서울특별시 강남구 논현로 503, 12층(역삼동, 송촌빌딩)",
     "lat": 37.5012836,
     "lng": 127.0365599
   },
   {
     "name": "비욘드마케팅그룹",
-    "url": "",
+    "url": "https://beyondmarketing.co.kr/",
     "address": "서울특별시 강남구 논현로 651 대한법무사회관 1, 5,6층",
     "lat": null,
     "lng": null
   },
   {
     "name": "스파클인터렉티브",
-    "url": "",
+    "url": "https://www.sparkleinteractive.co.kr/",
     "address": "서울특별시 강남구 논현로 746, 4층(논현동, 석호빌딩)",
     "lat": 37.5097162,
     "lng": 127.0327616
   },
   {
     "name": "크로스미디어",
-    "url": "",
+    "url": "https://crossmedia.naver.com/",
     "address": "서울특별시 강남구 논현로 86길 27 (역삼동 718-33, 크로스타워)",
     "lat": null,
     "lng": null
   },
   {
     "name": "케이티나스미디어",
-    "url": "",
+    "url": "https://www.nasmedia.co.kr/",
     "address": "서울특별시 강남구 도곡로1길 14, 3층 4층, 5층(역삼동, 삼일프라자오피스텔)",
     "lat": 37.4910371,
     "lng": 127.0323941
   },
   {
     "name": "디티에스아이",
-    "url": "",
+    "url": "https://www.dtsi.co.kr/",
     "address": "서울특별시 강남구 도산대로 318, SB타워 6층",
     "lat": 37.5219491,
     "lng": 127.0363271
   },
   {
     "name": "아티스트유나이티드",
-    "url": "",
+    "url": "https://www.artistcompany.co.kr/",
     "address": "서울특별시 강남구 도산대로 430, 3층(청담동)",
     "lat": 37.5234514,
     "lng": 127.0430007
   },
   {
     "name": "씨더블유",
-    "url": "",
+    "url": "https://cwl.co.kr/",
     "address": "서울특별시 강남구 도산대로16길 13-20, 지하 1층(논현동, 청구빌딩)",
     "lat": 37.5169306,
     "lng": 127.0251199
   },
   {
     "name": "지엔앰퍼포먼스",
-    "url": "",
+    "url": "http://gnmpm.com/",
     "address": "서울특별시 강남구 봉은사로 114, 2층(역삼동,반디빌딩)",
     "lat": 37.5047273,
     "lng": 127.0261092
   },
   {
     "name": "더에스엠씨",
-    "url": "",
+    "url": "https://thesmc.co.kr/",
     "address": "서울특별시 강남구 봉은사로 49길 22, 더에스엠씨빌딩 2층(논현동)",
     "lat": null,
     "lng": null
   },
   {
     "name": "에이전시더블유",
-    "url": "",
+    "url": "https://zenless.hoyoverse.com/ko-kr/news",
     "address": "서울특별시 강남구 봉은사로 49길 7 대양빌딩 2층",
     "lat": null,
     "lng": null
   },
   {
     "name": "엘리케이트",
-    "url": "",
+    "url": "https://www.mbest.co.kr/",
     "address": "서울특별시 강남구 봉은사로26길 22-12, 102호(역삼동, 파티오하우스)",
     "lat": 37.5064498,
     "lng": 127.0330983
   },
   {
     "name": "애니포인트미디어",
-    "url": "",
+    "url": "https://www.anypointmedia.com/",
     "address": "서울특별시 강남구 삼성동 테헤란로87길 21, 6층",
     "lat": 37.5086166,
     "lng": 127.0589795
@@ -575,98 +575,98 @@ const companyData = [
   },
   {
     "name": "투겟",
-    "url": "",
+    "url": "https://toget.team/",
     "address": "서울특별시 구로구 디지털로26길 43, 제12층 제엘 1201호(구로동)",
     "lat": 37.4811383,
     "lng": 126.8943511
   },
   {
     "name": "애디플",
-    "url": "",
+    "url": "https://www.adeeple.com/",
     "address": "서울특별시 구로구 디지털로30길 31, 1407호(구로동, 코오롱디지털타워빌란트Ⅱ)",
     "lat": 37.482565,
     "lng": 126.89589
   },
   {
     "name": "가치브라더",
-    "url": "",
+    "url": "https://withbrother.co.kr/",
     "address": "서울특별시 구로구 디지털로31길 19, 404호(구로동, 에이스테크노타워II)",
     "lat": 37.4860453,
     "lng": 126.8922462
   },
   {
     "name": "이인벤션",
-    "url": "",
+    "url": "https://einvention.co.kr/page/main.php",
     "address": "서울특별시 구로구 디지털로31길 38-21, 10층 1009호 (이엔씨벤처드림타워3차)",
     "lat": 37.4860453,
     "lng": 126.8922462
   },
   {
     "name": "드림인사이트",
-    "url": "",
+    "url": "https://bydream.co.kr/",
     "address": "서울특별시 구로구 디지털로33길 12, 우림이비지센터2차 14층",
     "lat": 37.4865498,
     "lng": 126.8961124
   },
   {
     "name": "이엠넷",
-    "url": "",
+    "url": "http://www.emnet.co.kr/",
     "address": "서울특별시 구로구 디지털로34길 27 대륭포스트타워 3차 14층",
     "lat": null,
     "lng": null
   },
   {
     "name": "휴먼미디어그룹",
-    "url": "",
+    "url": "https://humanmedia.kr/",
     "address": "서울특별시 금천구 가산동 60-11외 1필지 스타밸리 8층 810호",
     "lat": null,
     "lng": null
   },
   {
     "name": "위플랫폼",
-    "url": "",
+    "url": "https://www.wepublic.com/",
     "address": "서울특별시 금천구 가산디지털1로 165, 가산비즈니스센터 601호",
     "lat": 37.4802371,
     "lng": 126.8810169
   },
   {
     "name": "스마일코리아",
-    "url": "",
+    "url": "https://www.smilekoreacorp.com/",
     "address": "서울특별시 금천구 가산디지털1로 168, B동 9층 907, 908, 909호(가산동, 우림라이온스밸리)",
     "lat": 37.4808373,
     "lng": 126.8821596
   },
   {
     "name": "디뉴먼트",
-    "url": "",
+    "url": "http://www.dinewment.com/",
     "address": "서울특별시 금천구 가산디지털2로 108, 502호, 907호(가산동, 뉴티캐 슬)",
     "lat": 37.4779012,
     "lng": 126.8806736
   },
   {
     "name": "유디엠",
-    "url": "",
+    "url": "https://udm.kr/",
     "address": "서울특별시 금천구 가산디지털2로 135, 1동 16층(가산동,가산어반워크)",
     "lat": 37.4800445,
     "lng": 126.8780146
   },
   {
     "name": "미래아이엔씨",
-    "url": "",
+    "url": "https://toup.net/aboutUs/aboutUs.php",
     "address": "서울특별시 금천구 가산디지털2로 144, 13층(가산동, 현대테라타워 가산디케이)",
     "lat": 37.4809746,
     "lng": 126.8793067
   },
   {
     "name": "아인스미디어",
-    "url": "",
+    "url": "http://www.einsmedia.co.kr/",
     "address": "서울특별시 금천구 가산디지털2로 144, 19층(가산동, 현대테라타워 가산디케이)",
     "lat": 37.4809746,
     "lng": 126.8793067
   },
   {
     "name": "어센드미디어",
-    "url": "",
+    "url": "https://ascendmedia.co.kr/",
     "address": "서울특별시 금천구 가산디지털2로 144, 807호~813호(가산동, 디케이타워)",
     "lat": 37.4809746,
     "lng": 126.8793067
