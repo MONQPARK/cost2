@@ -132,7 +132,7 @@ const SocialApp = {
       
       this.renderInsight(this.state.insight);
     } catch(e) {
-      document.getElementById('tab-social-insight').innerHTML = \`<div style="text-align:center; padding:50px; color:var(--danger);">오류 발생: \${e.message}</div>\`;
+      document.getElementById('tab-social-insight').innerHTML = `<div style="text-align:center; padding:50px; color:var(--danger);">오류 발생: ${e.message}</div>`;
     }
   },
 
@@ -144,36 +144,36 @@ const SocialApp = {
     }
     
     let personasHtml = insight.personas.map(p => 
-      \`<li><strong>\${p.name}</strong> (\${p.age}, \${p.job}) - \${p.motivation}</li>\`
+      `<li><strong>${p.name}</strong> (${p.age}, ${p.job}) - ${p.motivation}</li>`
     ).join('');
     
     let channelHtml = Object.entries(insight.channel_mix || {}).map(([k,v]) => 
-      \`<div style="display:flex; justify-content:space-between;"><span>\${k}</span><strong>\${v}%</strong></div>\`
+      `<div style="display:flex; justify-content:space-between;"><span>${k}</span><strong>${v}%</strong></div>`
     ).join('');
 
-    container.innerHTML = \`
+    container.innerHTML = `
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
         <div class="card">
           <h3 style="margin-bottom:10px;">🏷 브랜드 한 줄 정의</h3>
-          <p style="font-size:16px; font-weight:bold; color:var(--primary);">"\${insight.tagline}"</p>
+          <p style="font-size:16px; font-weight:bold; color:var(--primary);">"${insight.tagline}"</p>
         </div>
         <div class="card">
           <h3 style="margin-bottom:10px;">🎯 페르소나</h3>
-          <ul style="padding-left:20px; line-height:1.6;">\${personasHtml}</ul>
+          <ul style="padding-left:20px; line-height:1.6;">${personasHtml}</ul>
         </div>
         <div class="card">
           <h3 style="margin-bottom:10px;">🎨 톤 & 매너 키워드</h3>
           <div style="display:flex; gap:10px;">
-            \${insight.tone_keywords.map(k => \`<span style="background:var(--bg-gradient); padding:4px 10px; border-radius:4px; font-weight:bold;">#\${k}</span>\`).join('')}
+            ${insight.tone_keywords.map(k => `<span style="background:var(--bg-gradient); padding:4px 10px; border-radius:4px; font-weight:bold;">#${k}</span>`).join('')}
           </div>
         </div>
         <div class="card">
           <h3 style="margin-bottom:10px;">📡 추천 채널·비율</h3>
-          \${channelHtml}
+          ${channelHtml}
         </div>
       </div>
       <button class="btn" style="width:100%; padding:15px; font-size:18px;" onclick="SocialApp.startContent()">✨ 콘텐츠 기획 시작</button>
-    \`;
+    `;
   },
 
   async startContent() {
@@ -219,7 +219,7 @@ const SocialApp = {
       this.renderSchedule(this.state.contents);
       
     } catch(e) {
-      document.getElementById('content-grid').innerHTML = \`<div style="text-align:center; padding:50px; color:var(--danger); grid-column:1/-1;">오류 발생: \${e.message}</div>\`;
+      document.getElementById('content-grid').innerHTML = `<div style="text-align:center; padding:50px; color:var(--danger); grid-column:1/-1;">오류 발생: ${e.message}</div>`;
     }
   },
 
@@ -232,25 +232,25 @@ const SocialApp = {
     
     grid.innerHTML = contents.map(c => {
       const dateStr = new Date(c.scheduled_at).toLocaleString('ko-KR', { month:'short', day:'numeric', weekday:'short', hour:'2-digit', minute:'2-digit' });
-      return \`
+      return `
         <div class="card" style="border-left:4px solid var(--primary); display:flex; flex-direction:column;">
           <div style="font-size:12px; color:var(--text-light); margin-bottom:10px;">
-            <strong>\${c.channel}</strong> · \${c.format} · \${dateStr}
+            <strong>${c.channel}</strong> · ${c.format} · ${dateStr}
           </div>
-          <h4 style="margin-bottom:10px; color:var(--secondary);">\${c.core_message}</h4>
-          <div style="background:#f8fafc; padding:10px; border-radius:6px; font-size:13px; line-height:1.5; white-space:pre-wrap; margin-bottom:10px; flex-grow:1;">\${c.copy}</div>
+          <h4 style="margin-bottom:10px; color:var(--secondary);">${c.core_message}</h4>
+          <div style="background:#f8fafc; padding:10px; border-radius:6px; font-size:13px; line-height:1.5; white-space:pre-wrap; margin-bottom:10px; flex-grow:1;">${c.copy}</div>
           <div style="margin-bottom:10px;">
-            <span style="font-size:12px; color:#3b82f6;">\${(c.hashtags||[]).join(' ')}</span>
+            <span style="font-size:12px; color:#3b82f6;">${(c.hashtags||[]).join(' ')}</span>
           </div>
           <div style="font-size:12px; background:#f1f5f9; padding:8px; border-radius:4px; margin-bottom:15px; color:#475569;">
-            🎨 <strong>이미지 제안:</strong> \${c.image_prompt}
+            🎨 <strong>이미지 제안:</strong> ${c.image_prompt}
           </div>
           <div style="display:flex; justify-content:flex-end; gap:5px; border-top:1px solid #e2e8f0; padding-top:10px;">
-            <button class="btn" style="padding:4px 8px; font-size:11px; background:white; color:var(--text-main); border:1px solid #cbd5e1;" onclick="SocialApp.regenerateCard('\${c.id}')">🔄 재생성</button>
-            <button class="btn" style="padding:4px 8px; font-size:11px; background:white; color:var(--danger); border:1px solid #cbd5e1;" onclick="SocialApp.deleteCard('\${c.id}')">🗑 삭제</button>
+            <button class="btn" style="padding:4px 8px; font-size:11px; background:white; color:var(--text-main); border:1px solid #cbd5e1;" onclick="SocialApp.regenerateCard('${c.id}')">🔄 재생성</button>
+            <button class="btn" style="padding:4px 8px; font-size:11px; background:white; color:var(--danger); border:1px solid #cbd5e1;" onclick="SocialApp.deleteCard('${c.id}')">🗑 삭제</button>
           </div>
         </div>
-      \`;
+      `;
     }).join('');
   },
 
@@ -311,14 +311,14 @@ const SocialApp = {
       const dateStr = d.toLocaleDateString('ko-KR', {month:'short', day:'numeric', weekday:'short'});
       const timeStr = d.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit', hour12:false});
       const color = colors[c.channel] || 'var(--primary)';
-      return \`
-        <div style="display:flex; align-items:center; padding:10px 15px; background:white; border:1px solid #e2e8f0; border-radius:6px; border-left:4px solid \${color};">
-          <div style="width:120px; font-weight:bold; color:var(--secondary);">\${dateStr} \${timeStr}</div>
-          <div style="width:100px; font-size:12px; color:white; background:\${color}; text-align:center; padding:3px 0; border-radius:12px; margin-right:15px;">\${c.channel}</div>
-          <div style="flex-grow:1; font-size:14px;">\${c.core_message}</div>
-          <div style="font-size:12px; color:var(--text-light);">\${c.format}</div>
+      return `
+        <div style="display:flex; align-items:center; padding:10px 15px; background:white; border:1px solid #e2e8f0; border-radius:6px; border-left:4px solid ${color};">
+          <div style="width:120px; font-weight:bold; color:var(--secondary);">${dateStr} ${timeStr}</div>
+          <div style="width:100px; font-size:12px; color:white; background:${color}; text-align:center; padding:3px 0; border-radius:12px; margin-right:15px;">${c.channel}</div>
+          <div style="flex-grow:1; font-size:14px;">${c.core_message}</div>
+          <div style="font-size:12px; color:var(--text-light);">${c.format}</div>
         </div>
-      \`;
+      `;
     }).join('') + '</div>';
   },
   

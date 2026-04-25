@@ -1433,21 +1433,6 @@ function switchMode(mode) {
   if (mode === 'quote') switchTab('info', 'quote', document.querySelector('#tabs-quote button'));
   else if (mode === 'info') switchTab('stats', 'info', document.querySelector('#tabs-info button'));
   else if (mode === 'social') switchTab('social-input', 'social', document.querySelector('#tabs-social button'));
-});
-  
-  const cont = document.getElementById('tab-content');
-  for (let ch of cont.children) {
-    if(ch.classList.contains('tab-pane')) ch.style.display = 'none';
-  }
-
-  const actBtn = document.getElementById('mode-btn-' + mode);
-  if(actBtn) actBtn.classList.add('active');
-  const actTabs = document.getElementById('tabs-' + mode);
-  if(actTabs) actTabs.style.display = 'flex';
-  
-  if (mode === 'quote') switchTab('info', 'quote', document.querySelector('#tabs-quote button'));
-  else if (mode === 'info') switchTab('stats', 'info', document.querySelector('#tabs-info button'));
-  else if (mode === 'social') switchTab('social-input', 'social', document.querySelector('#tabs-social button'));
 }
 
 function switchTab(tabId, mode, btnEl) {

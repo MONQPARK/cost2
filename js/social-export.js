@@ -22,7 +22,7 @@ const SocialExport = {
     dlAnchorElem.setAttribute("href", dataStr);
     
     const dateStr = new Date().toISOString().slice(0,10).replace(/-/g, '');
-    dlAnchorElem.setAttribute("download", \`social_brief_\${dateStr}.json\`);
+    dlAnchorElem.setAttribute("download", `social_brief_${dateStr}.json`);
     dlAnchorElem.click();
   },
 
@@ -97,7 +97,7 @@ const SocialExport = {
     
     const buffer = await wb.xlsx.writeBuffer();
     const dateStr = new Date().toISOString().slice(0,10).replace(/-/g, '');
-    saveAs(new Blob([buffer]), \`social_brief_\${state.input.company}_\${dateStr}.xlsx\`);
+    saveAs(new Blob([buffer]), `social_brief_${state.input.company}_${dateStr}.xlsx`);
   },
 
   importJson(event) {
@@ -152,13 +152,13 @@ const SocialExport = {
     
     Object.entries(counts).forEach(([channel, count]) => {
       window.quoteStates[targetCat][0].items.push({
-        name: \`\${channel} 콘텐츠 제작 (\${count}편)\`,
+        name: `${channel} 콘텐츠 제작 (${count}편)`,
         unit: '식', count: 1, cost: 500000,
         custom: true
       });
     });
     
-    alert(\`견적서 항목에 \${Object.keys(counts).length}개의 소셜 콘텐츠 항목이 추가되었습니다!\n견적서 모드에서 확인하세요.\`);
+    alert(`견적서 항목에 ${Object.keys(counts).length}개의 소셜 콘텐츠 항목이 추가되었습니다!\n견적서 모드에서 확인하세요.`);
   }
 };
 
