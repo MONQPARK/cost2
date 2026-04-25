@@ -500,6 +500,88 @@
       .doc-items th, .doc-items td, .doc-table th, .doc-table td { padding: 8px 5px !important; font-size: 11px; }
       .hide-mobile { display: none !important; }
     }
+
+/* Map App Container */
+.map-app-container {
+  display: flex;
+  height: 600px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+  margin-top: 15px;
+}
+.map-sidebar {
+  width: 320px;
+  background: #f8fafc;
+  border-right: 1px solid #cbd5e1;
+  display: flex;
+  flex-direction: column;
+}
+.map-search-box {
+  padding: 15px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid #cbd5e1;
+}
+.map-search-box input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.map-search-box button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0 15px;
+  cursor: pointer;
+}
+.map-stats {
+  padding: 10px 15px;
+  font-size: 13px;
+  color: #64748b;
+  border-bottom: 1px solid #cbd5e1;
+}
+.map-stats strong { color: var(--primary); }
+.map-company-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.map-company-card {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.map-company-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.map-company-card h4 {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #334155;
+}
+.map-company-card p {
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+.map-main-area {
+  flex: 1;
+  position: relative;
+}
 </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -533,7 +615,7 @@
 
 <div class="app-container">
   <div class="header">
-    <h1><span>견적서</span> 자동생성기</h1>
+    <h1><span>MONQ</span> VISION</h1>
   </div>
 
   <!-- 모드 스위처 -->
@@ -2008,8 +2090,8 @@ window.mapInitialized = false;
 let globalLeafletMap = null;
 let allMapMarkers = [];
 
-const extraAgencies = [{"name": "TBWA 코리아", "url": "https://www.tbwa.co.kr", "address": "서울 강남구 도산대로 217", "lat": 37.5218, "lng": 127.0345}, {"name": "오리콤 (ORICOM)", "url": "https://www.oricom.com", "address": "서울 종로구 우정국로 26", "lat": 37.5714, "lng": 126.9831}, {"name": "레오버넷 (Leo Burnett)", "url": "https://www.leoburnett.co.kr", "address": "서울 중구 남대문로 84", "lat": 37.5645, "lng": 126.9824}, {"name": "차이커뮤니케이션", "url": "http://www.chai.co.kr", "address": "서울 강남구 논현로 606", "lat": 37.5085, "lng": 127.0336}, {"name": "펜타클 (Pentacle)", "url": "https://pentacle.co.kr", "address": "서울 강남구 테헤란로 501", "lat": 37.5081, "lng": 127.0567}, {"name": "맥캔에릭슨", "url": "https://www.mccann.com", "address": "서울 중구 소월로 10", "lat": 37.5567, "lng": 126.9749}, {"name": "애드쿠아인터렉티브", "url": "https://www.adqua.co.kr", "address": "서울 강남구 도산대로 221", "lat": 37.5215, "lng": 127.035}, {"name": "나스미디어", "url": "https://www.nasmedia.co.kr", "address": "서울 강남구 테헤란로 423", "lat": 37.5056, "lng": 127.0496}, {"name": "메조미디어", "url": "https://www.mezzomedia.co.kr", "address": "서울 서초구 반포대로 144", "lat": 37.4912, "lng": 127.0076}, {"name": "인크로스", "url": "https://www.incross.com", "address": "서울 관악구 남부순환로 1926", "lat": 37.4764, "lng": 126.968}, {"name": "와이더플래닛", "url": "https://www.widerplanet.com", "address": "서울 서초구 서초대로 398", "lat": 37.4965, "lng": 127.0261}, {"name": "다트미디어", "url": "https://www.dartmedia.co.kr", "address": "서울 강남구 테헤란로 504", "lat": 37.5076, "lng": 127.0578}, {"name": "메가존 (Megazone)", "url": "https://www.megazone.com", "address": "서울 강남구 역삼로 166", "lat": 37.495, "lng": 127.0378}, {"name": "엣지랭크", "url": "https://edgerank.co.kr", "address": "서울 서초구 신반포로45길 18", "lat": 37.5113, "lng": 127.0189}, {"name": "FSN (퓨쳐스트림네트웍스)", "url": "https://www.fsn.co.kr", "address": "서울 강남구 학동로 343", "lat": 37.5169, "lng": 127.0405}, {"name": "아이디엇 (Ideot)", "url": "https://ideot.co.kr", "address": "서울 강남구 테헤란로 152", "lat": 37.5, "lng": 127.036}, {"name": "더워터멜론", "url": "https://thewatermelon.com", "address": "서울 중구 남대문로 9길 40", "lat": 37.567, "lng": 126.982}, {"name": "BAT (비에이티)", "url": "https://batcrew.co.kr", "address": "서울 강남구 도산대로 138", "lat": 37.5185, "lng": 127.025}, {"name": "스튜디오좋", "url": "https://studiozot.com", "address": "서울 마포구 와우산로 29길 48", "lat": 37.555, "lng": 126.93}, {"name": "돌고래유괴단", "url": "https://dolphiners.com", "address": "서울 강남구 논현로 150길 21", "lat": 37.52, "lng": 127.03}, {"name": "디마이너스원", "url": "https://dminusone.co.kr", "address": "서울 성동구 뚝섬로 1나길 5", "lat": 37.54, "lng": 127.045}, {"name": "오버맨 (Overman)", "url": "https://overman.kr", "address": "서울 강남구 선릉로 806", "lat": 37.525, "lng": 127.04}, {"name": "이노레드 (INNORED)", "url": "https://innored.co.kr", "address": "서울 강남구 테헤란로 411", "lat": 37.505, "lng": 127.05}, {"name": "뉴얼리 (Newly)", "url": "https://newly.kr", "address": "서울 성동구 왕십리로 115", "lat": 37.545, "lng": 127.045}, {"name": "엔자임헬스", "url": "https://enzaim.co.kr", "address": "서울 중구 세종대로 136", "lat": 37.568, "lng": 126.978}, {"name": "마콘컴퍼니", "url": "https://maconcorp.com", "address": "서울 강남구 역삼로 204", "lat": 37.498, "lng": 127.04}, {"name": "퍼틸레인", "url": "https://fertilerain.com", "address": "서울 서초구 방배천로 2길 15", "lat": 37.48, "lng": 126.985}, {"name": "마더브레인", "url": "https://motherbrain.co.kr", "address": "서울 강남구 봉은사로 114", "lat": 37.504, "lng": 127.027}, {"name": "애드맥스", "url": "https://admax.kr", "address": "서울 구로구 디지털로 306", "lat": 37.482, "lng": 126.896}, {"name": "코마스인터렉티브", "url": "https://comas.co.kr", "address": "서울 마포구 성암로 189", "lat": 37.58, "lng": 126.89}, {"name": "대홍기획 디지털", "url": "https://www.daehong.com", "address": "서울 중구 통일로 10", "lat": 37.556, "lng": 126.973}, {"name": "이노션 디지털", "url": "https://www.innocean.com", "address": "서울 강남구 강남대로 308", "lat": 37.491, "lng": 127.03}, {"name": "제일기획 디지털", "url": "https://www.cheil.com", "address": "서울 용산구 이태원로 222", "lat": 37.537, "lng": 127.0}, {"name": "HS Ad 디지털", "url": "https://www.hsad.co.kr", "address": "서울 마포구 마포대로 155", "lat": 37.546, "lng": 126.953}, {"name": "SM C&C 디지털", "url": "https://www.smcnc.com", "address": "서울 성동구 왕십리로 83-21", "lat": 37.542, "lng": 127.043}, {"name": "미디컴 (Medicomm)", "url": "https://medicompr.co.kr", "address": "서울 중구 칠패로 36", "lat": 37.558, "lng": 126.97}, {"name": "피알원 (PRONE)", "url": "https://prone.co.kr", "address": "서울 서대문구 충정로 53", "lat": 37.565, "lng": 126.965}, {"name": "KPR", "url": "https://kpr.co.kr", "address": "서울 중구 퇴계로 173", "lat": 37.561, "lng": 126.993}, {"name": "프레인글로벌", "url": "https://prain.com", "address": "서울 중구 남대문로 9길 24", "lat": 37.567, "lng": 126.98}, {"name": "마코어뮤즈먼트", "url": "https://maco.kr", "address": "서울 서초구 서초대로 396", "lat": 37.496, "lng": 127.026}, {"name": "시너지힐앤놀튼", "url": "https://hkstrategies.co.kr", "address": "서울 강남구 영동대로 511", "lat": 37.512, "lng": 127.058}, {"name": "웨버샌드윅 코리아", "url": "https://webershandwick.co.kr", "address": "서울 중구 세종대로 136", "lat": 37.568, "lng": 126.978}, {"name": "플레시먼힐러드 코리아", "url": "https://fleishmanhillard.co.kr", "address": "서울 중구 다동길 43", "lat": 37.568, "lng": 126.981}, {"name": "버슨마스텔러 코리아", "url": "https://bcw-global.com", "address": "서울 종로구 율곡로 88", "lat": 37.576, "lng": 126.987}, {"name": "에델만 코리아", "url": "https://edelman.kr", "address": "서울 중구 을지로 100", "lat": 37.566, "lng": 126.988}, {"name": "마크로밀엠브레인", "url": "https://embrain.com", "address": "서울 강남구 강남대로 318", "lat": 37.492, "lng": 127.031}, {"name": "닐슨코리아", "url": "https://nielsen.com", "address": "서울 중구 소월로 2", "lat": 37.556, "lng": 126.975}, {"name": "칸타코리아", "url": "https://kantar.com", "address": "서울 영등포구 여의대로 108", "lat": 37.526, "lng": 126.928}, {"name": "갤럽코리아", "url": "https://gallup.co.kr", "address": "서울 종로구 사직로 8", "lat": 37.575, "lng": 126.968}, {"name": "마인드쉐어", "url": "https://mindshareworld.com", "address": "서울 강남구 테헤란로 134", "lat": 37.498, "lng": 127.034}];
-const fullAgencyData = agencyData.concat(extraAgencies);
+// fullAgencyData will be populated dynamically from data.js + extraAgencies
+let mapItems = [];
 
 function initAgencyMap() {
   window.mapInitialized = true;
@@ -2024,17 +2106,78 @@ function initAgencyMap() {
 }
 
 function buildMap() {
+  const extraAgencies = [
+    {"name": "TBWA 코리아", "url": "https://www.tbwa.co.kr", "address": "서울 강남구 도산대로 217", "lat": 37.5218, "lng": 127.0345},
+    {"name": "오리콤 (ORICOM)", "url": "https://www.oricom.com", "address": "서울 종로구 우정국로 26", "lat": 37.5714, "lng": 126.9831},
+    {"name": "레오버넷 (Leo Burnett)", "url": "https://www.leoburnett.co.kr", "address": "서울 중구 남대문로 84", "lat": 37.5645, "lng": 126.9824},
+    {"name": "차이커뮤니케이션", "url": "http://www.chai.co.kr", "address": "서울 강남구 논현로 606", "lat": 37.5085, "lng": 127.0336},
+    {"name": "펜타클 (Pentacle)", "url": "https://pentacle.co.kr", "address": "서울 강남구 테헤란로 501", "lat": 37.5081, "lng": 127.0567},
+    {"name": "맥캔에릭슨", "url": "https://www.mccann.com", "address": "서울 중구 소월로 10", "lat": 37.5567, "lng": 126.9749},
+    {"name": "애드쿠아인터렉티브", "url": "https://www.adqua.co.kr", "address": "서울 강남구 도산대로 221", "lat": 37.5215, "lng": 127.035},
+    {"name": "나스미디어", "url": "https://www.nasmedia.co.kr", "address": "서울 강남구 테헤란로 423", "lat": 37.5056, "lng": 127.0496},
+    {"name": "메조미디어", "url": "https://www.mezzomedia.co.kr", "address": "서울 서초구 반포대로 144", "lat": 37.4912, "lng": 127.0076},
+    {"name": "인크로스", "url": "https://www.incross.com", "address": "서울 관악구 남부순환로 1926", "lat": 37.4764, "lng": 126.968},
+    {"name": "와이더플래닛", "url": "https://www.widerplanet.com", "address": "서울 서초구 서초대로 398", "lat": 37.4965, "lng": 127.0261},
+    {"name": "다트미디어", "url": "https://www.dartmedia.co.kr", "address": "서울 강남구 테헤란로 504", "lat": 37.5076, "lng": 127.0578},
+    {"name": "메가존 (Megazone)", "url": "https://www.megazone.com", "address": "서울 강남구 역삼로 166", "lat": 37.495, "lng": 127.0378},
+    {"name": "엣지랭크", "url": "https://edgerank.co.kr", "address": "서울 서초구 신반포로45길 18", "lat": 37.5113, "lng": 127.0189},
+    {"name": "FSN (퓨쳐스트림네트웍스)", "url": "https://www.fsn.co.kr", "address": "서울 강남구 학동로 343", "lat": 37.5169, "lng": 127.0405},
+    {"name": "아이디엇 (Ideot)", "url": "https://ideot.co.kr", "address": "서울 강남구 테헤란로 152", "lat": 37.5, "lng": 127.036},
+    {"name": "더워터멜론", "url": "https://thewatermelon.com", "address": "서울 중구 남대문로 9길 40", "lat": 37.567, "lng": 126.982},
+    {"name": "BAT (비에이티)", "url": "https://batcrew.co.kr", "address": "서울 강남구 도산대로 138", "lat": 37.5185, "lng": 127.025},
+    {"name": "스튜디오좋", "url": "https://studiozot.com", "address": "서울 마포구 와우산로 29길 48", "lat": 37.555, "lng": 126.93},
+    {"name": "돌고래유괴단", "url": "https://dolphiners.com", "address": "서울 강남구 논현로 150길 21", "lat": 37.52, "lng": 127.03},
+    {"name": "디마이너스원", "url": "https://dminusone.co.kr", "address": "서울 성동구 뚝섬로 1나길 5", "lat": 37.54, "lng": 127.045},
+    {"name": "오버맨 (Overman)", "url": "https://overman.kr", "address": "서울 강남구 선릉로 806", "lat": 37.525, "lng": 127.04},
+    {"name": "이노레드 (INNORED)", "url": "https://innored.co.kr", "address": "서울 강남구 테헤란로 411", "lat": 37.505, "lng": 127.05},
+    {"name": "뉴얼리 (Newly)", "url": "https://newly.kr", "address": "서울 성동구 왕십리로 115", "lat": 37.545, "lng": 127.045},
+    {"name": "엔자임헬스", "url": "https://enzaim.co.kr", "address": "서울 중구 세종대로 136", "lat": 37.568, "lng": 126.978},
+    {"name": "마콘컴퍼니", "url": "https://maconcorp.com", "address": "서울 강남구 역삼로 204", "lat": 37.498, "lng": 127.04},
+    {"name": "퍼틸레인", "url": "https://fertilerain.com", "address": "서울 서초구 방배천로 2길 15", "lat": 37.48, "lng": 126.985},
+    {"name": "마더브레인", "url": "https://motherbrain.co.kr", "address": "서울 강남구 봉은사로 114", "lat": 37.504, "lng": 127.027},
+    {"name": "애드맥스", "url": "https://admax.kr", "address": "서울 구로구 디지털로 306", "lat": 37.482, "lng": 126.896},
+    {"name": "코마스인터렉티브", "url": "https://comas.co.kr", "address": "서울 마포구 성암로 189", "lat": 37.58, "lng": 126.89},
+    {"name": "대홍기획 디지털", "url": "https://www.daehong.com", "address": "서울 중구 통일로 10", "lat": 37.556, "lng": 126.973},
+    {"name": "이노션 디지털", "url": "https://www.innocean.com", "address": "서울 강남구 강남대로 308", "lat": 37.491, "lng": 127.03},
+    {"name": "제일기획 디지털", "url": "https://www.cheil.com", "address": "서울 용산구 이태원로 222", "lat": 37.537, "lng": 127.0},
+    {"name": "HS Ad 디지털", "url": "https://www.hsad.co.kr", "address": "서울 마포구 마포대로 155", "lat": 37.546, "lng": 126.953},
+    {"name": "SM C&C 디지털", "url": "https://www.smcnc.com", "address": "서울 성동구 왕십리로 83-21", "lat": 37.542, "lng": 127.043},
+    {"name": "미디컴 (Medicomm)", "url": "https://medicompr.co.kr", "address": "서울 중구 칠패로 36", "lat": 37.558, "lng": 126.97},
+    {"name": "피알원 (PRONE)", "url": "https://prone.co.kr", "address": "서울 서대문구 충정로 53", "lat": 37.565, "lng": 126.965},
+    {"name": "KPR", "url": "https://kpr.co.kr", "address": "서울 중구 퇴계로 173", "lat": 37.561, "lng": 126.993},
+    {"name": "프레인글로벌", "url": "https://prain.com", "address": "서울 중구 남대문로 9길 24", "lat": 37.567, "lng": 126.98},
+    {"name": "마코어뮤즈먼트", "url": "https://maco.kr", "address": "서울 서초구 서초대로 396", "lat": 37.496, "lng": 127.026},
+    {"name": "시너지힐앤놀튼", "url": "https://hkstrategies.co.kr", "address": "서울 강남구 영동대로 511", "lat": 37.512, "lng": 127.058},
+    {"name": "웨버샌드윅 코리아", "url": "https://webershandwick.co.kr", "address": "서울 중구 세종대로 136", "lat": 37.568, "lng": 126.978},
+    {"name": "플레시먼힐러드 코리아", "url": "https://fleishmanhillard.co.kr", "address": "서울 중구 다동길 43", "lat": 37.568, "lng": 126.981},
+    {"name": "버슨마스텔러 코리아", "url": "https://bcw-global.com", "address": "서울 종로구 율곡로 88", "lat": 37.576, "lng": 126.987},
+    {"name": "에델만 코리아", "url": "https://edelman.kr", "address": "서울 중구 을지로 100", "lat": 37.566, "lng": 126.988},
+    {"name": "마크로밀엠브레인", "url": "https://embrain.com", "address": "서울 강남구 강남대로 318", "lat": 37.492, "lng": 127.031},
+    {"name": "닐슨코리아", "url": "https://nielsen.com", "address": "서울 중구 소월로 2", "lat": 37.556, "lng": 126.975},
+    {"name": "칸타코리아", "url": "https://kantar.com", "address": "서울 영등포구 여의대로 108", "lat": 37.526, "lng": 126.928},
+    {"name": "갤럽코리아", "url": "https://gallup.co.kr", "address": "서울 종로구 사직로 8", "lat": 37.575, "lng": 126.968},
+    {"name": "마인드쉐어", "url": "https://mindshareworld.com", "address": "서울 강남구 테헤란로 134", "lat": 37.498, "lng": 127.034}
+  ];
+
+  let baseData = [];
+  if (typeof companyData !== 'undefined') {
+    baseData = companyData;
+  }
+  mapItems = baseData.concat(extraAgencies);
+
   globalLeafletMap = L.map('agency-map').setView([37.5665, 126.9780], 12);
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
   }).addTo(globalLeafletMap);
 
-  fullAgencyData.forEach(agency => {
+  allMapMarkers = [];
+
+  mapItems.forEach((agency, idx) => {
     if(agency.lat && agency.lng) {
       const iconHtml = `<div style="
           background-color: var(--primary);
-          width: 16px;
-          height: 16px;
+          width: 14px;
+          height: 14px;
           border-radius: 50%;
           border: 2px solid #fff;
           box-shadow: 0 0 5px rgba(0,0,0, 0.4);
@@ -2043,13 +2186,13 @@ function buildMap() {
       const customIcon = L.divIcon({
           className: 'custom-div-icon',
           html: iconHtml,
-          iconSize: [16, 16],
-          iconAnchor: [8, 8]
+          iconSize: [14, 14],
+          iconAnchor: [7, 7]
       });
 
       let popupContent = `
-        <div style="font-family:'Pretendard'; padding:5px;">
-          <h4 style="margin:0 0 8px 0; color:var(--primary);">${agency.name}</h4>
+        <div style="font-family:'Pretendard', sans-serif; padding:5px;">
+          <h4 style="margin:0 0 8px 0; color:var(--primary); font-size:15px;">${agency.name}</h4>
           <p style="margin:0 0 10px 0; font-size:12px; color:#555;">${agency.address}</p>
       `;
       if(agency.url) {
@@ -2060,23 +2203,77 @@ function buildMap() {
       const marker = L.marker([agency.lat, agency.lng], { icon: customIcon }).addTo(globalLeafletMap)
        .bindPopup(popupContent);
        
-      allMapMarkers.push({ name: agency.name, marker: marker });
+      allMapMarkers.push({ idx: idx, name: agency.name, address: agency.address, marker: marker });
     }
+  });
+
+  renderSidebarList(mapItems);
+}
+
+function renderSidebarList(list) {
+  const container = document.getElementById('mapCompanyList');
+  document.getElementById('mapTotalCount').innerText = list.length;
+  container.innerHTML = '';
+  
+  if (list.length === 0) {
+    container.innerHTML = '<div style="color:#64748b; font-size:13px; text-align:center; padding:20px;">검색 결과가 없습니다.</div>';
+    return;
+  }
+
+  list.forEach(agency => {
+    // find the marker object if it exists
+    const markerObj = allMapMarkers.find(m => m.name === agency.name);
+    
+    const card = document.createElement('div');
+    card.className = 'map-company-card';
+    card.innerHTML = `
+      <h4>${agency.name}</h4>
+      <p>${agency.address}</p>
+    `;
+    card.onclick = () => {
+      if(markerObj) {
+        globalLeafletMap.setView(markerObj.marker.getLatLng(), 15);
+        markerObj.marker.openPopup();
+      }
+    };
+    container.appendChild(card);
   });
 }
 
-function searchAgency() {
-  const query = document.getElementById('map-search').value.trim().toLowerCase();
-  if(!query) return;
+function searchAgencyMap() {
+  const query = document.getElementById('mapSearchInput').value.trim().toLowerCase();
+  if(!query) {
+    renderSidebarList(mapItems);
+    return;
+  }
   
-  const found = allMapMarkers.find(m => m.name.toLowerCase().includes(query));
-  if(found) {
-    globalLeafletMap.setView(found.marker.getLatLng(), 15);
-    found.marker.openPopup();
-  } else {
-    alert("검색된 대행사가 없습니다.");
+  const filtered = mapItems.filter(agency => 
+    agency.name.toLowerCase().includes(query) || 
+    (agency.address && agency.address.toLowerCase().includes(query))
+  );
+  
+  renderSidebarList(filtered);
+  
+  // also open popup for the first matched marker
+  if (filtered.length > 0) {
+    const firstObj = allMapMarkers.find(m => m.name === filtered[0].name);
+    if(firstObj) {
+      globalLeafletMap.setView(firstObj.marker.getLatLng(), 14);
+      firstObj.marker.openPopup();
+    }
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const mapInput = document.getElementById('mapSearchInput');
+  if(mapInput) {
+    mapInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        searchAgencyMap();
+      }
+    });
+  }
+});
 
 let isEditMode = false;
 function toggleEditMode() {
@@ -2102,7 +2299,7 @@ function toggleEditMode() {
     });
   }
 }
-
 </script>
+  <script src="data.js"></script>
 </body>
 </html>
