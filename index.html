@@ -742,7 +742,7 @@
           <button class="salary-stage-btn" onclick="setSalaryStage(1,this)">주니어 (3-5년)</button>
           <button class="salary-stage-btn" onclick="setSalaryStage(2,this)">미드 (6-9년)</button>
           <button class="salary-stage-btn" onclick="setSalaryStage(3,this)">시니어 (10년+)</button>
-          <button class="salary-stage-btn" onclick="setSalaryStage(4,this)">팀장/부장급</button>
+          <button class="salary-stage-btn" onclick="setSalaryStage(4,this)">임원급</button>
         </div>
         <div class="salary-unit-toggle">
           <button class="salary-unit-btn active" id="unit-annual" onclick="setSalaryUnit('annual',this)">연봉</button>
@@ -1271,7 +1271,7 @@ function switchTab(tabId, mode) {
 
 // --- 5-0. 연봉 위젯 (100인 이하 광고대행사 기준 중간값) ---
 const SALARY_DATA = {
-  stages: ['신입 (0-2년)', '주니어 (3-5년)', '미드 (6-9년)', '시니어 (10년+)', '팀장/부장급'],
+  stages: ['신입 (0-2년)', '주니어 (3-5년)', '미드 (6-9년)', '시니어 (10년+)', '임원급'],
   industries: [
     { name: '🎯 AE / 광고기획', vals: [2600, 3400, 4800, 6200, 8000] },
     { name: '✏️ 카피라이터', vals: [2500, 3200, 4500, 6000, 7800] },
