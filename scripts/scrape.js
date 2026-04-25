@@ -7,16 +7,26 @@ const DATA_FILE = path.join(__dirname, '../data/news.json');
 const MAX_AGE_DAYS = 90;
 
 function extractImage(item) {
-  if (item.enclosure && item.enclosure[0] && item.enclosure[0].$) {
-    return item.enclosure[0].$.url;
+  // 1) media:thumbnail
+  if (item['media:thumbnail'] && item['media:thumbnail'][0] && item['media:thumbnail'][0].$) {
+    return item['media:thumbnail'][0].$.url;
   }
+  // 2) enclosure
+  if (item.enclosure && item.enclosure[0] && item.enclosure[0].$) {
+    const u = item.enclosure[0].$.url;
+    if (u && /\.(jpg|jpeg|png|webp|gif)/i.test(u)) return u;
+  }
+  // 3) media:content
   if (item['media:content'] && item['media:content'][0] && item['media:content'][0].$) {
     return item['media:content'][0].$.url;
   }
-  const htmlContent = (item['content:encoded'] ? item['content:encoded'][0] : '') ||
-                      (item.description ? item.description[0] : '');
-  const imgMatch = htmlContent.match(/<img[^>]+src="([^">]+)"/);
-  if (imgMatch && imgMatch[1]) return imgMatch[1];
+  // 4) content:encoded or description (parse img src)
+  const html = (item['content:encoded'] ? item['content:encoded'][0] : '') ||
+               (item.description ? item.description[0] : '');
+  if (html) {
+    const m = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+    if (m && m[1] && !/gif/i.test(m[1])) return m[1];
+  }
   return null;
 }
 
