@@ -454,7 +454,54 @@
       
       @page { size: A4 portrait; margin: 15mm; }
     }
-  </style>
+  
+    /* --- Standard Theme (Monq Official) --- */
+    #preview-doc.theme-standard { font-family: 'Pretendard', sans-serif; color: #333; }
+    .theme-standard .doc-header { margin-bottom: 40px; }
+    .theme-standard .top-address { font-size: 11px; color: #666; margin-bottom: 2px; }
+    .theme-standard .top-contact { font-size: 11px; color: #999; margin-bottom: 30px; }
+    .theme-standard .doc-title-box { margin-bottom: 30px; }
+    .theme-standard .doc-title { font-size: 28px; font-weight: 800; color: #e84648; letter-spacing: -0.5px; }
+    .theme-standard .doc-subtitle { font-size: 24px; font-weight: 800; color: #e84648; }
+    
+    .theme-standard .doc-info-grid { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 13px; line-height: 1.6; }
+    .theme-standard .client-box { font-weight: 700; font-size: 16px; margin-bottom: 5px; border-bottom: 2px solid #333; display: inline-block; padding-bottom: 5px; }
+    .theme-standard .total-box { margin-bottom: 30px; display: flex; font-size: 16px; font-weight: 800; }
+    .theme-standard .total-box .label { width: 100px; color: #666; }
+    .theme-standard .total-box .amount { font-size: 20px; color: #333; }
+    
+    .theme-standard .doc-items { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 30px; }
+    .theme-standard .doc-items th { border-bottom: 2px solid #333; padding: 12px 10px; font-weight: 700; color: #333; text-align: center; }
+    .theme-standard .doc-items td { border-bottom: 1px solid #ddd; padding: 12px 10px; }
+    .theme-standard .doc-items .sec-row { background: #fdf2f2; color: #e84648; font-weight: 800; }
+    .theme-standard .doc-items .desc-col { font-weight: 600; color: #333; }
+    
+    .theme-standard .doc-footer { margin-top: 50px; font-size: 11px; color: #888; text-align: left; }
+
+    /* --- Mobile Responsiveness --- */
+    @media (max-width: 768px) {
+      .preview-pane { padding: 15px; }
+      #preview-doc { padding: 20px; }
+      
+      /* Common table fixes */
+      .doc-items, .doc-info-table, .doc-table { width: 100%; display: block; overflow-x: auto; white-space: nowrap; }
+      
+      .theme-classic .doc-title, .theme-modern .doc-title, .theme-minimal .doc-title, .theme-standard .doc-title { font-size: 22px; letter-spacing: 0; }
+      .theme-standard .doc-subtitle { font-size: 18px; }
+      
+      .theme-modern .doc-info-grid, .theme-minimal .doc-info-grid, .theme-standard .doc-info-grid { flex-direction: column; gap: 15px; }
+      .theme-classic .doc-info-table th { width: 70px; font-size: 11px; }
+      .theme-classic .doc-info-table td { font-size: 11px; }
+      
+      .theme-modern .doc-total .amount, .theme-classic .doc-total, .theme-minimal .doc-total, .theme-standard .total-box .amount { font-size: 18px; }
+      .theme-minimal .doc-total { text-align: left; }
+      .theme-minimal .doc-header { text-align: left; }
+      
+      .doc-items th, .doc-items td, .doc-table th, .doc-table td { padding: 8px 5px !important; font-size: 11px; }
+      .hide-mobile { display: none !important; }
+    }
+</style>
+
 </head>
 <body>
 
@@ -576,6 +623,7 @@
       <div class="theme-selector">
         <label>디자인 테마: </label>
         <select id="theme-select" onchange="selectDesign(this.value)">
+          <option value="standard" selected>몽규 공식 견적서 (Standard)</option>
           <option value="classic">Classic (블루, 기본양식)</option>
           <option value="modern">Modern (네이비, 트렌디)</option>
           <option value="minimal">Minimal (흑백, 심플)</option>
@@ -1551,6 +1599,8 @@ function renderPreview() {
     if(hasChecked) {
       if(theme === 'minimal') {
         rowsHtml += `<tr class="sec-row"><td colspan="6">${sec.name}</td></tr>`;
+      } else if(theme === 'standard') {
+        rowsHtml += `<tr class="sec-row"><td colspan="6">${sec.name}</td></tr>`;
       } else {
         rowsHtml += `<tr class="section-row"><td colspan="7">${sec.name}</td></tr>`;
       }
@@ -1567,6 +1617,17 @@ function renderPreview() {
                 <td data-label="단가 (원)" class="align-right">${fmtNum(item.price)}</td>
                 <td data-label="금액 (원)" class="align-right font-weight-bold">${fmtNum(sum)}</td>
                 <td data-label="비고" style="color:#64748b; font-size:11px;">${item.note||item.desc||''}</td>
+              </tr>
+            `;
+          } else if(theme === 'standard') {
+            rowsHtml += `
+              <tr>
+                <td class="desc-col">${item.name}</td>
+                <td class="align-center">${fmtNum(item.qty)}</td>
+                <td class="align-center">${item.unit}</td>
+                <td class="align-right">${fmtNum(item.price)}</td>
+                <td class="align-right font-weight-bold">${fmtNum(sum)}</td>
+                <td style="color:#888; font-size:11px;">${item.note||item.desc||''}</td>
               </tr>
             `;
           } else {
@@ -1591,7 +1652,64 @@ function renderPreview() {
 
   let html = '';
   
-  if(theme === 'minimal') {
+  if(theme === 'standard') {
+    html = `
+      <div class="doc-header">
+        <div class="top-address">주식회사 몽규. 서울시 마포구 성미산로 103 1~3F</div>
+        <div class="top-contact">T. 02-6404-9204 / E. monq@monq.kr / H. www.monq.kr</div>
+        <div class="doc-title-box">
+          <div class="doc-title">${gv('p_title') || '프로젝트 견적서'}</div>
+          <div class="doc-subtitle">제작물 유형별 단가표</div>
+        </div>
+        <div class="doc-info-grid">
+          <div>
+            <div class="client-box">${gv('c_company')} 귀하</div>
+            <div>Attn: ${gv('c_manager')}</div>
+            <div style="margin-top:10px; color:#666;">Date: ${gv('p_date')} | No: ${gv('p_no')}</div>
+          </div>
+        </div>
+        <div class="total-box">
+          <div class="label">제안가<br><span style="font-size:11px; font-weight:normal;">(부가세별도)</span></div>
+          <div class="amount">₩${fmtNum(net)}</div>
+        </div>
+      </div>
+      <table class="doc-items">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Description</th>
+            <th width="10%">Quantity</th>
+            <th width="10%">Unit</th>
+            <th width="15%" style="text-align:right;">Rate</th>
+            <th width="15%" style="text-align:right;">공급가</th>
+            <th width="15%" style="text-align:left;">비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+        <tfoot style="border-top: 2px solid #333;">
+          <tr>
+            <td colspan="4" class="align-right" style="padding:12px 10px; font-weight:bold;">공급가액</td>
+            <td class="align-right font-weight-bold" style="padding:12px 10px;">${fmtNum(net)}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="align-right" style="padding:12px 10px;">부가가치세 (10%)</td>
+            <td class="align-right" style="padding:12px 10px;">${fmtNum(vat)}</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="align-right" style="padding:15px 10px; color:#e84648; font-weight:800; font-size:14px;">총 청구금액</td>
+            <td class="align-right" style="padding:15px 10px; color:#e84648; font-weight:800; font-size:14px;">${fmtNum(total)}</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="doc-footer">
+        <p>※ 특기사항: ${gv('p_note')||'본 견적서는 제출일로부터 ' + (gv('p_valid')||'30일') + '간 유효합니다.'}</p>
+      </div>
+    `;
+  } else if(theme === 'minimal') {
     html = `
       <div class="doc-header">
         <div class="doc-title">QUOTATION</div>
