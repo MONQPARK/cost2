@@ -582,6 +582,28 @@
   flex: 1;
   position: relative;
 }
+
+.map-sidebar {
+  position: relative;
+}
+.index-nav {
+  position: absolute; right: 5px; top: 110px; bottom: 20px;
+  display: flex; flex-direction: column; justify-content: flex-start; gap: 2px;
+  font-size: 10px; font-weight: 700; color: var(--primary);
+  z-index: 10; cursor: pointer; user-select: none;
+  background: rgba(255,255,255,0.8); backdrop-filter: blur(4px);
+  border-radius: 10px; padding: 5px 2px;
+}
+.index-nav-item {
+  width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; transition: all 0.2s;
+}
+.index-nav-item:hover { background: var(--primary); color: #fff; }
+.index-header {
+  font-size: 14px; font-weight: 800; color: #0f172a; padding: 10px 0 5px 5px;
+  border-bottom: 2px solid #e2e8f0; margin-top: 10px; margin-bottom: 5px;
+}
+
 </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1990,11 +2012,21 @@ async function exportExcel() {
   ws.addRow(['', '', '', '', '', '']);
   
   let net = 0;
-  activeQuote.forEach(sec => {
-    sec.items.forEach(item => {
-      if(item.checked) net += (item.qty * item.price);
+  if(window.quoteStates) {
+    Object.values(window.quoteStates).forEach(catData => {
+      catData.forEach(sec => {
+        sec.items.forEach(item => {
+          if(item.checked) net += (item.qty * item.price);
+        });
+      });
     });
-  });
+  } else {
+    activeQuote.forEach(sec => {
+      sec.items.forEach(item => {
+        if(item.checked) net += (item.qty * item.price);
+      });
+    });
+  }
   const vat = Math.floor(net * 0.1);
   const total = net + vat;
 
@@ -2017,31 +2049,62 @@ async function exportExcel() {
     cell.border = borderThick;
   });
 
-  activeQuote.forEach(sec => {
-    let hasChecked = sec.items.some(i => i.checked);
-    if(hasChecked) {
-      let r = ws.addRow([sec.name, '', '', '', '', '']);
-      ws.mergeCells(`A${r.number}:F${r.number}`);
-      r.font = { bold: true, color: {argb:'FF0F172A'} };
-      r.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF8FAFC'} };
-      r.getCell(1).border = borderAll;
+  if(window.quoteStates) {
+    Object.values(window.quoteStates).forEach(catData => {
+      catData.forEach(sec => {
+        let hasChecked = sec.items.some(i => i.checked);
+        if(hasChecked) {
+          let r = ws.addRow([sec.name, '', '', '', '', '']);
+          ws.mergeCells(`A${r.number}:F${r.number}`);
+          r.font = { bold: true, color: {argb:'FF0F172A'} };
+          r.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF8FAFC'} };
+          r.getCell(1).border = borderAll;
 
-      sec.items.forEach(item => {
-        if(item.checked) {
-          const sum = item.qty * item.price;
-          let row = ws.addRow([
-            item.name, item.qty, item.unit, item.price, sum, item.note||item.desc||''
-          ]);
-          row.getCell(2).alignment = { horizontal: 'center' };
-          row.getCell(3).alignment = { horizontal: 'center' };
-          row.getCell(4).numFmt = '#,##0';
-          row.getCell(5).numFmt = '#,##0';
-          row.getCell(5).font = { bold: true };
-          row.eachCell(c => c.border = borderAll);
+          sec.items.forEach(item => {
+            if(item.checked) {
+              const sum = item.qty * item.price;
+              let row = ws.addRow([
+                item.name, item.qty, item.unit, item.price, sum, item.note||item.desc||''
+              ]);
+              row.getCell(2).alignment = { horizontal: 'center' };
+              row.getCell(3).alignment = { horizontal: 'center' };
+              row.getCell(4).numFmt = '#,##0';
+              row.getCell(5).numFmt = '#,##0';
+              row.getCell(5).font = { bold: true };
+              row.eachCell(c => c.border = borderAll);
+            }
+          });
         }
       });
-    }
-  });
+    });
+  } else {
+    // fallback
+    activeQuote.forEach(sec => {
+      let hasChecked = sec.items.some(i => i.checked);
+      if(hasChecked) {
+        let r = ws.addRow([sec.name, '', '', '', '', '']);
+        ws.mergeCells(`A${r.number}:F${r.number}`);
+        r.font = { bold: true, color: {argb:'FF0F172A'} };
+        r.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF8FAFC'} };
+        r.getCell(1).border = borderAll;
+
+        sec.items.forEach(item => {
+          if(item.checked) {
+            const sum = item.qty * item.price;
+            let row = ws.addRow([
+              item.name, item.qty, item.unit, item.price, sum, item.note||item.desc||''
+            ]);
+            row.getCell(2).alignment = { horizontal: 'center' };
+            row.getCell(3).alignment = { horizontal: 'center' };
+            row.getCell(4).numFmt = '#,##0';
+            row.getCell(5).numFmt = '#,##0';
+            row.getCell(5).font = { bold: true };
+            row.eachCell(c => c.border = borderAll);
+          }
+        });
+      }
+    });
+  }
 
   ws.addRow(['', '', '', '', '', '']);
   const footerRow = ws.addRow(['※ 특기사항: ' + (gv('p_note') || '본 견적서는 발행일로부터 ' + (gv('p_valid')||'30일') + '간 유효합니다.'), '', '', '', '', '']);
@@ -2210,34 +2273,86 @@ function buildMap() {
   renderSidebarList(mapItems);
 }
 
+function getInitialLetter(name) {
+  const str = name.trim();
+  if(!str) return '';
+  const c = str.charCodeAt(0);
+  if(c >= 0xAC00 && c <= 0xD7A3) {
+    const cho = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+    return cho[Math.floor((c - 0xAC00) / 28 / 21)];
+  }
+  const char = str.charAt(0).toUpperCase();
+  if(/[A-Z]/.test(char)) return char;
+  return '기타';
+}
+
 function renderSidebarList(list) {
   const container = document.getElementById('mapCompanyList');
   document.getElementById('mapTotalCount').innerText = list.length;
   container.innerHTML = '';
   
+  const oldNav = document.querySelector('.index-nav');
+  if(oldNav) oldNav.remove();
+
   if (list.length === 0) {
     container.innerHTML = '<div style="color:#64748b; font-size:13px; text-align:center; padding:20px;">검색 결과가 없습니다.</div>';
     return;
   }
 
-  list.forEach(agency => {
-    // find the marker object if it exists
-    const markerObj = allMapMarkers.find(m => m.name === agency.name);
-    
-    const card = document.createElement('div');
-    card.className = 'map-company-card';
-    card.innerHTML = `
-      <h4>${agency.name}</h4>
-      <p>${agency.address}</p>
-    `;
-    card.onclick = () => {
-      if(markerObj) {
-        globalLeafletMap.setView(markerObj.marker.getLatLng(), 15);
-        markerObj.marker.openPopup();
-      }
-    };
-    container.appendChild(card);
+  const sorted = [...list].sort((a,b) => a.name.localeCompare(b.name, 'ko-KR'));
+  const groups = {};
+  sorted.forEach(agency => {
+    let init = getInitialLetter(agency.name);
+    const mapCons = {'ㄲ':'ㄱ', 'ㄸ':'ㄷ', 'ㅃ':'ㅂ', 'ㅆ':'ㅅ', 'ㅉ':'ㅈ'};
+    if(mapCons[init]) init = mapCons[init];
+    if(!groups[init]) groups[init] = [];
+    groups[init].push(agency);
   });
+
+  const sortedKeys = Object.keys(groups).sort((a,b)=>{
+    if(a==='기타') return 1; if(b==='기타') return -1;
+    return a.localeCompare(b, 'ko-KR');
+  });
+
+  sortedKeys.forEach(key => {
+    const header = document.createElement('div');
+    header.className = 'index-header';
+    header.id = 'index-group-' + key;
+    header.innerText = key;
+    container.appendChild(header);
+
+    groups[key].forEach(agency => {
+      const markerObj = allMapMarkers.find(m => m.name === agency.name);
+      const card = document.createElement('div');
+      card.className = 'map-company-card';
+      card.innerHTML = `<h4>${agency.name}</h4><p>${agency.address}</p>`;
+      card.onclick = () => {
+        if(markerObj) {
+          globalLeafletMap.setView(markerObj.marker.getLatLng(), 15);
+          markerObj.marker.openPopup();
+        }
+      };
+      container.appendChild(card);
+    });
+  });
+
+  if(sortedKeys.length > 1) {
+    const nav = document.createElement('div');
+    nav.className = 'index-nav';
+    sortedKeys.forEach(key => {
+      const item = document.createElement('div');
+      item.className = 'index-nav-item';
+      item.innerText = key;
+      item.onclick = () => {
+        const target = document.getElementById('index-group-' + key);
+        if(target) {
+          container.scrollTo({ top: target.offsetTop - container.offsetTop - 10, behavior: 'smooth' });
+        }
+      };
+      nav.appendChild(item);
+    });
+    document.querySelector('.map-sidebar').appendChild(nav);
+  }
 }
 
 function searchAgencyMap() {
