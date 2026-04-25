@@ -1000,66 +1000,132 @@
 <script>
 // --- 1. 데이터 ---
 const QUOTE_DATA = {
-  production: {
-    label: '프로덕션 견적서',
+  video: {
+    label: '영상 제작 (TVC/바이럴)',
     sections: [
       { id: 'pre', name: 'Pre-production (기획/준비)', items: [
-        { id: 'pre_pd', name: '연출료 (감독)', unit: '건', avg: 5000000, desc: '메인 감독 연출비' },
-        { id: 'pre_ad', name: '조감독', unit: '명/일', avg: 500000, desc: '조감독 인건비' },
-        { id: 'pre_plan', name: '기획/구성료', unit: '건', avg: 2000000, desc: '기획안, 스토리보드 제작' },
+        { id: 'v1', name: '기획 및 스토리보드 제작', unit: '건', avg: 3000000, desc: '아이디어 도출, 카피라이팅, 콘티' },
+        { id: 'v2', name: '메인 감독 연출료', unit: '건', avg: 5000000, desc: '메인 감독 1인 (프리~포스트)' },
+        { id: 'v3', name: '조감독 / 연출부', unit: '명/일', avg: 500000, desc: '현장 및 프리 진행' },
+        { id: 'v4', name: '로케이션 헌팅', unit: '식', avg: 1500000, desc: '사전 장소 섭외 및 대관료 별도' }
       ]},
-      { id: 'shoot', name: 'Production (촬영/제작)', items: [
-        { id: 'sh_dop', name: '촬영감독', unit: '명/일', avg: 1500000, desc: '메인 촬영감독' },
-        { id: 'sh_cam', name: '촬영장비대여', unit: '식', avg: 1000000, desc: '카메라 및 렌즈 세트' },
-        { id: 'sh_light', name: '조명팀', unit: '팀/일', avg: 2500000, desc: '조명감독 및 장비 일체' },
-        { id: 'sh_art', name: '미술/세트', unit: '식', avg: 3000000, desc: '스튜디오 세팅, 소품' },
-        { id: 'sh_model', name: '출연료', unit: '명', avg: 2000000, desc: '메인 모델 (A급 제외)' },
+      { id: 'pro', name: 'Production (촬영/현장)', items: [
+        { id: 'v5', name: '촬영감독 및 크루', unit: '식', avg: 2500000, desc: 'DOP 및 촬영팀 인건비' },
+        { id: 'v6', name: '촬영 장비 세트', unit: '식', avg: 1500000, desc: '시네마 카메라 및 특수 렌즈' },
+        { id: 'v7', name: '조명팀 및 장비', unit: '식', avg: 2500000, desc: '조명감독 및 발전차/조명장비' },
+        { id: 'v8', name: '미술 / 세트 제작', unit: '식', avg: 4000000, desc: '스튜디오 세팅, 소품, 프로젝터 등' },
+        { id: 'v9', name: '헤어 / 메이크업 / 의상', unit: '식', avg: 1500000, desc: '실장급 스태프 인건비' },
+        { id: 'v10', name: '현장 진행 및 식대', unit: '식', avg: 1000000, desc: '스태프 식대 및 진행비용' }
+      ]},
+      { id: 'model', name: 'Model (모델/출연)', items: [
+        { id: 'v11', name: '메인 모델 (A/B급 제외)', unit: '명', avg: 3000000, desc: '1년 인터넷 사용 기준' },
+        { id: 'v12', name: '서브 모델 / 보조출연', unit: '명', avg: 500000, desc: '단역 및 보조 인력' },
+        { id: 'v13', name: '에이전시 수수료', unit: '건', avg: 1000000, desc: '모델 섭외 진행 수수료' }
+      ]},
+      { id: 'post', name: 'Post-production (후반작업)', items: [
+        { id: 'v14', name: '가편집 (Offline Edit)', unit: '건', avg: 1500000, desc: '컷 편집' },
+        { id: 'v15', name: '종합편집 (Online Edit)', unit: '건', avg: 2000000, desc: '색보정(DI) 및 2D 자막/모션' },
+        { id: 'v16', name: '3D CG / VFX', unit: '건', avg: 5000000, desc: '특수효과 및 3D 모델링' },
+        { id: 'v17', name: '사운드 믹싱 / BGM', unit: '건', avg: 1500000, desc: '효과음 및 상업 라이브러리 음원' },
+        { id: 'v18', name: '성우 녹음', unit: '건', avg: 1000000, desc: 'A급 성우 1인 및 녹음실 대관' }
       ]}
     ]
   },
-  postproduction: {
-    label: '포스트프로덕션 견적서',
+  social: {
+    label: '유튜브/소셜 콘텐츠',
     sections: [
-      { id: 'post_edit', name: 'Editing (편집)', items: [
-        { id: 'pe_offline', name: '가편집 (Offline)', unit: '건', avg: 1000000, desc: '컷 편집' },
-        { id: 'pe_online', name: '종합편집 (Online)', unit: '건', avg: 1500000, desc: '색보정, 2D 모션' },
-        { id: 'pe_cg', name: '3D/CG', unit: '건', avg: 3000000, desc: '3D 모델링 및 렌더링' },
+      { id: 's_plan', name: '채널/콘텐츠 기획', items: [
+        { id: 's1', name: '월간/주간 기획료', unit: '월', avg: 2000000, desc: '채널 방향성, 대본, 아이템 기획' },
+        { id: 's2', name: '전담 PD/작가 배정', unit: '월', avg: 3000000, desc: '전담 인력 기획비' }
       ]},
-      { id: 'post_sound', name: 'Sound (음향)', items: [
-        { id: 'ps_bgm', name: 'BGM 라이선스', unit: '곡', avg: 500000, desc: '상업용 라이브러리 음원' },
-        { id: 'ps_mix', name: '사운드 믹싱', unit: '건', avg: 1000000, desc: '효과음, 더빙 믹싱' },
-        { id: 'ps_vo', name: '성우 녹음', unit: '건', avg: 800000, desc: 'A급 성우 1인 기준' },
+      { id: 's_pro', name: '제작 및 촬영', items: [
+        { id: 's3', name: '스튜디오 대관', unit: '회', avg: 500000, desc: '호리존 또는 컨셉 스튜디오' },
+        { id: 's4', name: '촬영 스태프 (1인 2캠)', unit: '회', avg: 800000, desc: '촬영감독 1인, 카메라 2대' },
+        { id: 's5', name: '소품 및 진행비', unit: '회', avg: 300000, desc: '촬영에 필요한 간식/소품' }
+      ]},
+      { id: 's_post', name: '후반 편집', items: [
+        { id: 's6', name: '예능형 컷편집/자막', unit: '편', avg: 600000, desc: '10분 내외 분량 기준' },
+        { id: 's7', name: '썸네일/아트웍 디자인', unit: '편', avg: 100000, desc: '클릭률을 높이는 디자인' }
       ]}
     ]
   },
-  media: {
-    label: '미디어 매체 견적서',
+  digital: {
+    label: '디지털/퍼포먼스 마케팅',
     sections: [
-      { id: 'md_digital', name: 'Digital Media (디지털/SNS)', items: [
-        { id: 'md_yt', name: 'YouTube Ads', unit: '월', avg: 10000000, desc: '트루뷰/범퍼애드 매체비' },
-        { id: 'md_meta', name: 'Meta (IG/FB)', unit: '월', avg: 5000000, desc: '스폰서드 광고 매체비' },
+      { id: 'd_plan', name: '캠페인 전략 및 기획', items: [
+        { id: 'd1', name: '마케팅 총괄 전략 수립', unit: '건', avg: 5000000, desc: 'KPI 설정, 미디어 믹스' },
+        { id: 'd2', name: '운영 PM 인건비', unit: '월', avg: 3000000, desc: '전담 어카운트 매니저' }
       ]},
-      { id: 'md_fee', name: 'Agency Fee (대행수수료)', items: [
-        { id: 'md_fee1', name: '매체 대행 수수료', unit: '식', avg: 0, desc: '매체비의 10~15%' },
+      { id: 'd_con', name: '디지털 에셋 제작', items: [
+        { id: 'd3', name: '이벤트/프로모션 페이지', unit: '건', avg: 3500000, desc: 'PC/Mobile 반응형 랜딩페이지' },
+        { id: 'd4', name: 'SNS 콘텐츠 디자인', unit: '건', avg: 500000, desc: '카드뉴스, 배너 (건당)' },
+        { id: 'd5', name: '숏폼 영상 (Reels/Shorts)', unit: '편', avg: 800000, desc: '세로형 숏폼 영상 기획/편집' }
+      ]},
+      { id: 'd_media', name: '매체 집행 (Media)', items: [
+        { id: 'd6', name: 'YouTube / Google Ads', unit: '식', avg: 10000000, desc: 'SA/DA/Video 매체비' },
+        { id: 'd7', name: 'Meta (IG/FB) Ads', unit: '식', avg: 5000000, desc: '스폰서드 광고' },
+        { id: 'd8', name: '매체 대행 수수료', unit: '식', avg: 0, desc: '집행비용의 10~15% (별도 산정)' }
+      ]},
+      { id: 'd_inf', name: '인플루언서 마케팅', items: [
+        { id: 'd9', name: '유튜버 브랜디드 콘텐츠', unit: '건', avg: 15000000, desc: '구독자 30만 이상 A급' },
+        { id: 'd10', name: '매크로 인스타그래머', unit: '명', avg: 2000000, desc: '팔로워 10만 이상' },
+        { id: 'd11', name: '섭외 및 매니지먼트 피', unit: '건', avg: 1500000, desc: '진행비 및 초상권 협의' }
+      ]}
+    ]
+  },
+  meta: {
+    label: '메타버스/버추얼 프로덕션',
+    sections: [
+      { id: 'm_plan', name: '기획 및 설계', items: [
+        { id: 'm1', name: '세계관 및 공간 기획', unit: '건', avg: 5000000, desc: '메타버스 맵 레벨 디자인' },
+        { id: 'm2', name: '시나리오 및 UX 기획', unit: '건', avg: 3000000, desc: '유저 동선, 인터랙션 기획' }
+      ]},
+      { id: 'm_art', name: '3D 에셋 제작', items: [
+        { id: 'm3', name: '환경/공간 3D 모델링', unit: '건', avg: 8000000, desc: '건축물, 지형, 라이팅' },
+        { id: 'm4', name: '오브젝트/소품 모델링', unit: '건', avg: 3000000, desc: '상호작용 가능한 프랍류' },
+        { id: 'm5', name: '캐릭터/아바타 의상', unit: '건', avg: 2000000, desc: '제페토/로블록스 호환 에셋' }
+      ]},
+      { id: 'm_dev', name: '엔진 빌드 및 개발', items: [
+        { id: 'm6', name: '플랫폼 최적화 엔진 빌드', unit: '건', avg: 5000000, desc: 'Unity/Unreal 엔진 개발' },
+        { id: 'm7', name: '인터랙션/이벤트 스크립트', unit: '건', avg: 4000000, desc: '미니게임, 퀘스트 구현' },
+        { id: 'm8', name: '서버/DB 연동', unit: '건', avg: 5000000, desc: '유저 데이터 및 백엔드' }
+      ]}
+    ]
+  },
+  design: {
+    label: '디자인/웹 구축 (컨퍼런스 등)',
+    sections: [
+      { id: 'w_plan', name: '기획 및 UI/UX', items: [
+        { id: 'w1', name: '서비스/웹사이트 기획', unit: '건', avg: 4000000, desc: 'IA 설계, 와이어프레임' },
+        { id: 'w2', name: '키비주얼(KV) 디자인', unit: '건', avg: 3000000, desc: '메인 컨셉 그래픽 도출' }
+      ]},
+      { id: 'w_design', name: '시각/편집 디자인', items: [
+        { id: 'w3', name: '웹 UI 디자인', unit: '건', avg: 5000000, desc: '메인+서브 페이지 디자인' },
+        { id: 'w4', name: '오프라인 굿즈/인쇄물', unit: '건', avg: 2000000, desc: '초청장, 브로셔, 명찰 등' },
+        { id: 'w5', name: '행사 사이니지 디자인', unit: '건', avg: 3000000, desc: 'X배너, 현수막, 백월' }
+      ]},
+      { id: 'w_dev', name: '웹 퍼블리싱/개발', items: [
+        { id: 'w6', name: '프론트엔드 퍼블리싱', unit: '건', avg: 4000000, desc: 'HTML/CSS/JS (반응형)' },
+        { id: 'w7', name: '백엔드/CMS 구축', unit: '건', avg: 6000000, desc: '관리자 페이지, DB 구축' }
       ]}
     ]
   },
   btl: {
-    label: 'BTL/이벤트 견적서',
+    label: '오프라인/행사 기획',
     sections: [
-      { id: 'bt_event', name: '이벤트/프로모션', items: [
-        { id: 'bt_space', name: '공간 대관료', unit: '일', avg: 3000000, desc: '팝업스토어/행사장 대관' },
-        { id: 'bt_staff', name: '운영 인력', unit: '명/일', avg: 150000, desc: '현장 스태프' },
-        { id: 'bt_goods', name: '판촉물 제작', unit: '건', avg: 2000000, desc: '굿즈/경품' },
-      ]}
-    ]
-  },
-  imc: {
-    label: 'IMC 캠페인 견적서',
-    sections: [
-      { id: 'im_plan', name: '캠페인 기획/운영', items: [
-        { id: 'im_fee', name: '캠페인 총괄 기획비', unit: '식', avg: 10000000, desc: '전체 캠페인 전략 수립' },
-        { id: 'im_pm', name: 'PM 운영비', unit: '월', avg: 3000000, desc: '전담 프로젝트 매니저' },
+      { id: 'b_plan', name: '행사 총괄 기획', items: [
+        { id: 'b1', name: '대행 수수료 / 기획료', unit: '식', avg: 8000000, desc: '전체 예산의 10~15%' },
+        { id: 'b2', name: '프로그램 운영 기획', unit: '건', avg: 3000000, desc: '타임테이블 및 큐시트' }
+      ]},
+      { id: 'b_space', name: '공간/시스템 조성', items: [
+        { id: 'b3', name: '목공 및 부스 세팅', unit: '식', avg: 15000000, desc: '전시 부스, 무대 목공' },
+        { id: 'b4', name: '음향/조명/영상 장비', unit: '식', avg: 8000000, desc: 'LED 스크린, 트러스, 스피커' },
+        { id: 'b5', name: '공간 대관료', unit: '일', avg: 5000000, desc: '코엑스, DDP 등 행사장' }
+      ]},
+      { id: 'b_run', name: '현장 운영', items: [
+        { id: 'b6', name: 'MC / 아나운서 섭외', unit: '명', avg: 2000000, desc: '전문 진행자' },
+        { id: 'b7', name: '스태프/진행/경호', unit: '명/일', avg: 150000, desc: '현장 안전 및 안내 요원' },
+        { id: 'b8', name: '다과/케이터링', unit: '식', avg: 3000000, desc: '참가자 F&B 제공' }
       ]}
     ]
   }
@@ -1117,6 +1183,8 @@ function checkInApp() {
 }
 
 // --- 3. 항목 로직 ---
+let activeQuote = []; // currently active template's sections and items
+
 function selectCat(cat) {
   document.querySelectorAll('.cat-btn').forEach(b => {
     b.classList.remove('active');
@@ -1124,116 +1192,119 @@ function selectCat(cat) {
   });
   currentCat = cat;
   
-  if(!itemsState[cat]) initItems(cat);
-  renderItems();
-}
-
-function initItems(cat) {
-  itemsState[cat] = {};
-  QUOTE_DATA[cat].sections.forEach(sec => {
-    sec.items.forEach(item => {
-      itemsState[cat][item.id] = {
-        checked: false, qty: 1, price: item.avg, note: '',
-        name: item.name, unit: item.unit, desc: item.desc,
-        sectionId: sec.id, sectionName: sec.name, isCustom: false
-      };
+  if(!window.quoteStates) window.quoteStates = {};
+  if(!window.quoteStates[cat]) {
+    window.quoteStates[cat] = JSON.parse(JSON.stringify(QUOTE_DATA[cat].sections));
+    window.quoteStates[cat].forEach(sec => {
+      sec.items.forEach(item => {
+        item.checked = false; item.qty = 1; item.price = item.avg || 0; item.isCustom = false;
+      });
     });
-  });
+  }
+  activeQuote = window.quoteStates[cat];
+  renderItems();
 }
 
 function renderItems() {
   const tbody = document.getElementById('items-tbody');
   tbody.innerHTML = '';
-  const state = itemsState[currentCat];
-  let currentSection = '';
   
-  const itemsArray = Object.entries(state).map(([id, obj]) => ({id, ...obj}));
-  const sections = QUOTE_DATA[currentCat].sections.map(s => s.id);
-  itemsArray.sort((a,b) => sections.indexOf(a.sectionId) - sections.indexOf(b.sectionId));
-
-  itemsArray.forEach(item => {
-    if(item.sectionId !== currentSection) {
-      currentSection = item.sectionId;
-      tbody.innerHTML += `<tr class="section-row"><td colspan="8">${item.sectionName}</td></tr>`;
-    }
+  activeQuote.forEach((sec, sIdx) => {
+    const secRow = document.createElement('tr');
+    secRow.className = 'section-row';
+    secRow.innerHTML = `<td colspan="8">
+      <div style="display:flex; justify-content:space-between; align-items:center; width:100%;">
+        <input type="text" class="text-input" value="${sec.name}" style="font-weight:800; font-size:16px; width:100%; max-width:400px; padding:4px; background:transparent; border:1px solid transparent;" onchange="updateSection(${sIdx}, this.value)" onfocus="this.style.border='1px solid #cbd5e1'" onblur="this.style.border='1px solid transparent'">
+      </div>
+    </td>`;
+    tbody.appendChild(secRow);
     
-    const row = document.createElement('tr');
-    row.className = 'item-row' + (item.checked ? '' : ' inactive');
-    
-    let nameHtml = item.isCustom 
-      ? `<input type="text" class="text-input" value="${item.name}" onchange="updateItem('${item.id}', 'name', this.value)">`
-      : `<input type="text" class="text-input" readonly value="${item.name}"><span class="desc-text">${item.desc||''}</span>`;
+    sec.items.forEach((item, iIdx) => {
+      const row = document.createElement('tr');
+      row.className = 'item-row' + (item.checked ? '' : ' inactive');
       
-    let unitHtml = item.isCustom
-      ? `<input type="text" class="text-input" value="${item.unit}" onchange="updateItem('${item.id}', 'unit', this.value)" style="text-align:center;">`
-      : item.unit;
+      let nameHtml = item.isCustom 
+        ? `<input type="text" class="text-input" value="${item.name}" onchange="updateItem(${sIdx}, ${iIdx}, 'name', this.value)">`
+        : `<input type="text" class="text-input" readonly value="${item.name}"><span class="desc-text">${item.desc||''}</span>`;
+        
+      let unitHtml = item.isCustom
+        ? `<input type="text" class="text-input" value="${item.unit}" onchange="updateItem(${sIdx}, ${iIdx}, 'unit', this.value)" style="text-align:center;">`
+        : item.unit;
 
-    let refPriceHtml = '';
-    let avg = 0;
-    if(!item.isCustom) {
-      QUOTE_DATA[currentCat].sections.forEach(s => s.items.forEach(i => { if(i.id === item.id) avg = i.avg; }));
-      refPriceHtml = `<span style="font-size:12px; color:var(--text-light); letter-spacing:-0.5px;">평균 ${fmtNum(avg)}</span>`;
-    }
-
-    row.innerHTML = `
-      <td data-label="선택" class="align-center"><input type="checkbox" style="transform:scale(1.3)" ${item.checked ? 'checked' : ''} onchange="toggleItem('${item.id}', this.checked)"></td>
-      <td data-label="항목명">${nameHtml}</td>
-      <td data-label="단위" class="align-center">${unitHtml}</td>
-      <td data-label="수량"><input type="number" class="num-input" value="${item.qty}" min="1" onchange="updateItem('${item.id}', 'qty', this.value)" ${!item.checked?'disabled':''}></td>
-      <td data-label="참고단가" class="align-right">${refPriceHtml}</td>
-      <td data-label="단가(원)"><input type="number" class="price-input" value="${item.price}" step="1000" onchange="updateItem('${item.id}', 'price', this.value)" ${!item.checked?'disabled':''}></td>
-      <td data-label="금액(원)" class="align-right font-weight-bold" id="row-total-${item.id}" style="color:var(--primary);">${fmtNum(item.qty * item.price)}</td>
-      <td data-label="비고"><input type="text" class="text-input" value="${item.note}" placeholder="비고입력" onchange="updateItem('${item.id}', 'note', this.value)" ${!item.checked?'disabled':''}></td>
-    `;
-    tbody.appendChild(row);
+      let refPriceHtml = '';
+      if(!item.isCustom && item.avg) refPriceHtml = `<span style="font-size:12px; color:var(--text-light); letter-spacing:-0.5px;">평균 ${fmtNum(item.avg)}</span>`;
+      
+      row.innerHTML = `
+        <td data-label="선택" class="align-center"><input type="checkbox" style="transform:scale(1.3)" ${item.checked?'checked':''} onchange="toggleCheck(${sIdx}, ${iIdx}, this.checked)"></td>
+        <td data-label="항목">${nameHtml}</td>
+        <td data-label="단위" class="align-center">${unitHtml}</td>
+        <td data-label="수량"><input type="number" class="num-input" min="1" value="${item.qty}" onchange="updateItem(${sIdx}, ${iIdx}, 'qty', this.value)" ${!item.checked?'disabled':''}></td>
+        <td data-label="참고단가" class="align-right">${refPriceHtml}</td>
+        <td data-label="단가(원)"><input type="number" class="price-input" min="0" step="1000" value="${item.price}" onchange="updateItem(${sIdx}, ${iIdx}, 'price', this.value)" ${!item.checked?'disabled':''}></td>
+        <td data-label="금액(원)" class="align-right font-weight-bold" style="color:var(--primary);">${fmtNum(item.qty * item.price)}</td>
+        <td data-label="비고"><input type="text" class="text-input" value="${item.note||''}" placeholder="비고입력" onchange="updateItem(${sIdx}, ${iIdx}, 'note', this.value)" ${!item.checked?'disabled':''}></td>
+      `;
+      tbody.appendChild(row);
+    });
+    
+    const addRow = document.createElement('tr');
+    addRow.innerHTML = `<td colspan="8" style="text-align:center; padding:10px 0 24px 0; border-bottom:1px dashed #e2e8f0;">
+      <button onclick="addCustomItem(${sIdx})" style="padding:8px 20px; font-size:13px; font-weight:600; border:1px dashed #94a3b8; border-radius:8px; background:#f8fafc; cursor:pointer; color:#475569; transition:all 0.2s;">+ [ ${sec.name.split(' ')[0]} ] 그룹에 세부 항목 추가</button>
+    </td>`;
+    tbody.appendChild(addRow);
   });
   
-  recalcTotals();
+  const addGroupRow = document.createElement('tr');
+  addGroupRow.innerHTML = `<td colspan="8" style="text-align:center; padding:30px 0; border:none;">
+    <button onclick="addCustomSection()" style="padding:12px 30px; font-size:15px; font-weight:800; border:2px dashed #3b82f6; border-radius:10px; background:#eff6ff; cursor:pointer; color:#2563eb; transition:all 0.2s;">+ 새로운 상위 그룹(주제) 추가</button>
+  </td>`;
+  tbody.appendChild(addGroupRow);
+
+  calculateTotal();
 }
 
-function toggleItem(id, checked) {
-  itemsState[currentCat][id].checked = checked;
+function updateSection(sIdx, val) {
+  activeQuote[sIdx].name = val;
   renderItems();
 }
 
-function updateItem(id, field, val) {
-  let value = val;
-  if(field === 'qty' || field === 'price') value = Number(val) || 0;
-  itemsState[currentCat][id][field] = value;
-  if(field === 'qty' || field === 'price') {
-    const item = itemsState[currentCat][id];
-    document.getElementById('row-total-' + id).innerText = fmtNum(item.qty * item.price);
-    recalcTotals();
-  }
-  else renderItems();
+function updateItem(sIdx, iIdx, field, val) {
+  if(field==='qty' || field==='price') val = Number(val) || 0;
+  activeQuote[sIdx].items[iIdx][field] = val;
+  if(field==='qty' || field==='price' || field==='name' || field==='unit') calculateTotal();
+  if(field==='qty' || field==='price') renderItems(); 
 }
 
-let customIdx = 1;
-function addCustomRow() {
-  const catData = QUOTE_DATA[currentCat];
-  const lastSection = catData.sections[catData.sections.length-1];
-  if(!lastSection) return;
-  
-  const id = `custom_${Date.now()}_${customIdx++}`;
-  itemsState[currentCat][id] = {
-    checked: true, qty: 1, price: 0, note: '',
-    name: '직접 입력 항목', unit: '식', desc: '',
-    sectionId: lastSection.id, sectionName: lastSection.name, isCustom: true
-  };
+function toggleCheck(sIdx, iIdx, isChecked) {
+  activeQuote[sIdx].items[iIdx].checked = isChecked;
   renderItems();
 }
 
-function recalcTotals() {
+function addCustomItem(sIdx) {
+  activeQuote[sIdx].items.push({
+    id: 'c_' + Date.now(), name: '직접 입력 항목', unit: '식', avg: 0, desc: '',
+    checked: true, qty: 1, price: 1000000, note: '', isCustom: true
+  });
+  renderItems();
+}
+
+function addCustomSection() {
+  activeQuote.push({
+    id: 'sec_' + Date.now(), name: '새로운 직접 입력 그룹', items: []
+  });
+  renderItems();
+}
+
+function calculateTotal() {
   let net = 0;
-  for(let cat in itemsState) {
-    for(let id in itemsState[cat]) {
-      let it = itemsState[cat][id];
-      if(it.checked) net += (it.qty * it.price);
-    }
-  }
+  activeQuote.forEach(sec => {
+    sec.items.forEach(item => {
+      if(item.checked) net += (item.qty * item.price);
+    });
+  });
+  
   let vat = Math.floor(net * 0.1);
   let total = net + vat;
-  
   document.getElementById('sum-net').innerText = fmtNum(net);
   document.getElementById('sum-vat').innerText = fmtNum(vat);
   document.getElementById('sum-total').innerText = fmtNum(total);
@@ -1273,13 +1344,13 @@ function switchTab(tabId, mode) {
 const SALARY_DATA = {
   stages: ['신입 (0-2년)', '주니어 (3-5년)', '미드 (6-9년)', '시니어 (10년+)', '임원급'],
   industries: [
-    { name: '🎯 AE / 광고기획', vals: [2600, 3400, 4800, 6200, 8000] },
-    { name: '✏️ 카피라이터', vals: [2500, 3200, 4500, 6000, 7800] },
-    { name: '🎨 아트디렉터 (AD)', vals: [2500, 3300, 4700, 6200, 8000] },
-    { name: '📱 디지털/퍼포먼스', vals: [2700, 3600, 5000, 6800, 8800] },
-    { name: '🎬 영상 콘텐츠 PD', vals: [2500, 3300, 4500, 5800, 7500] },
-    { name: '📣 PR / 홍보', vals: [2500, 3200, 4400, 5800, 7500] },
-    { name: '📊 데이터 마케터', vals: [2800, 3800, 5300, 7000, 9000] },
+    { name: '🎯 AE / 광고기획', vals: [2340, 3060, 4320, 5580, 7200] },
+    { name: '✏️ 카피라이터', vals: [2250, 2880, 4050, 5400, 7020] },
+    { name: '🎨 아트디렉터 (AD)', vals: [2250, 2970, 4230, 5580, 7200] },
+    { name: '📱 디지털/퍼포먼스', vals: [2430, 3240, 4500, 6120, 7920] },
+    { name: '🎬 영상 콘텐츠 PD', vals: [2250, 2970, 4050, 5220, 6750] },
+    { name: '📣 PR / 홍보', vals: [2250, 2880, 3960, 5220, 6750] },
+    { name: '📊 데이터 마케터', vals: [2520, 3420, 4770, 6300, 8100] },
   ]
 };
 let salaryStageIdx = 0;
@@ -1468,85 +1539,59 @@ function selectDesign(theme) {
 }
 
 function renderPreview() {
-  const doc = document.getElementById('preview-doc');
   const theme = document.getElementById('theme-select').value;
+  const doc = document.getElementById('preview-doc');
+  doc.className = 'theme-' + theme;
   
-  // 데이터 수집
   let net = 0;
-  const activeItems = [];
-  for(let cat in itemsState) {
-    for(let id in itemsState[cat]) {
-      let it = itemsState[cat][id];
-      if(it.checked) {
-        it.catLabel = QUOTE_DATA[cat].label;
-        activeItems.push(it);
-        net += (it.qty * it.price);
-      }
-    }
-  }
-  let vat = Math.floor(net * 0.1);
-  let total = net + vat;
+  let rowsHtml = '';
   
+  activeQuote.forEach(sec => {
+    let hasChecked = sec.items.some(i => i.checked);
+    if(hasChecked) {
+      if(theme === 'minimal') {
+        rowsHtml += `<tr class="sec-row"><td colspan="6">${sec.name}</td></tr>`;
+      } else {
+        rowsHtml += `<tr class="section-row"><td colspan="7">${sec.name}</td></tr>`;
+      }
+      sec.items.forEach(item => {
+        if(item.checked) {
+          const sum = item.qty * item.price;
+          net += sum;
+          if(theme === 'minimal') {
+            rowsHtml += `
+              <tr>
+                <td data-label="항목명">${item.name}</td>
+                <td data-label="수량" class="align-center">${fmtNum(item.qty)}</td>
+                <td data-label="단위" class="align-center">${item.unit}</td>
+                <td data-label="단가 (원)" class="align-right">${fmtNum(item.price)}</td>
+                <td data-label="금액 (원)" class="align-right font-weight-bold">${fmtNum(sum)}</td>
+                <td data-label="비고" style="color:#64748b; font-size:11px;">${item.note||item.desc||''}</td>
+              </tr>
+            `;
+          } else {
+            rowsHtml += `
+              <tr>
+                <td>${item.name}</td>
+                <td style="text-align:center;">${item.unit}</td>
+                <td style="text-align:right;">${fmtNum(item.qty)}</td>
+                <td style="text-align:right;">${fmtNum(item.price)}</td>
+                <td style="text-align:right;"><strong>${fmtNum(sum)}</strong></td>
+                <td>${item.note||item.desc||''}</td>
+              </tr>
+            `;
+          }
+        }
+      });
+    }
+  });
+
+  const vat = net * 0.1;
+  const total = net + vat;
+
   let html = '';
   
-  if(theme === 'classic') {
-    html = `
-      <div class="doc-header">
-        <div class="doc-title">견 적 서</div>
-      </div>
-      <table class="doc-info-table">
-        <tr>
-          <th rowspan="4">공급자</th>
-          <td>등록번호: ${gv('s_biz_no')}</td>
-          <th rowspan="4">공급<br>받는자</th>
-          <td>상호: ${gv('c_company')}</td>
-        </tr>
-        <tr>
-          <td>상호: ${gv('s_company')} / 대표: ${gv('s_ceo')}</td>
-          <td>담당자: ${gv('c_manager')}</td>
-        </tr>
-        <tr>
-          <td>주소: ${gv('s_address')}</td>
-          <td>연락처: ${gv('c_tel')}</td>
-        </tr>
-        <tr>
-          <td>담당: ${gv('s_manager')} / 연락처: ${gv('s_tel')}</td>
-          <td>프로젝트: ${gv('p_title')}</td>
-        </tr>
-      </table>
-      <div class="doc-total">
-        총 청구금액 (VAT 포함): ${fmt(total)}
-      </div>
-    `;
-  } else if(theme === 'modern') {
-    html = `
-      <div class="doc-header">
-        <div class="doc-title">ESTIMATE</div>
-        <div style="text-align:right">
-          <div style="font-weight:600">No. ${gv('p_no')}</div>
-          <div style="color:var(--text-light)">Date. ${gv('p_date')}</div>
-        </div>
-      </div>
-      <div class="doc-info-grid">
-        <div class="info-box">
-          <strong style="font-size:15px; color:var(--secondary)">TO. ${gv('c_company')}</strong><br><br>
-          담당자: ${gv('c_manager')}<br>
-          연락처: ${gv('c_tel')}<br>
-          프로젝트: ${gv('p_title')}
-        </div>
-        <div class="info-box">
-          <strong style="font-size:15px; color:var(--secondary)">FROM. ${gv('s_company')}</strong><br><br>
-          대표자: ${gv('s_ceo')} | 등록번호: ${gv('s_biz_no')}<br>
-          주소: ${gv('s_address')}<br>
-          담당: ${gv('s_manager')} | ${gv('s_tel')}
-        </div>
-      </div>
-      <div class="doc-total">
-        <span>Grand Total (VAT Included)</span>
-        <span class="amount">${fmt(total)}</span>
-      </div>
-    `;
-  } else if(theme === 'minimal') {
+  if(theme === 'minimal') {
     html = `
       <div class="doc-header">
         <div class="doc-title">QUOTATION</div>
@@ -1568,76 +1613,93 @@ function renderPreview() {
       <div class="doc-total">
         Total: ${fmt(total)} <span style="font-size:12px; font-weight:normal; color:#666">(VAT Inc.)</span>
       </div>
+      <table class="doc-items">
+        <thead>
+          <tr>
+            <th>항목 (Item)</th>
+            <th width="10%" class="align-center">수량</th>
+            <th width="10%" class="align-center">단위</th>
+            <th width="15%" class="align-right">단가 (원)</th>
+            <th width="15%" class="align-right">금액 (원)</th>
+            <th width="15%">비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+        <tfoot style="font-weight:bold; background:#f8fafc; border-top: 2px solid #cbd5e1;">
+          <tr>
+            <td colspan="4" class="hide-mobile align-right" style="padding:12px 10px;">공급가액</td>
+            <td data-label="공급가액" class="align-right" style="padding:12px 10px;">${fmtNum(net)}</td>
+            <td class="hide-mobile"></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="hide-mobile align-right" style="padding:12px 10px;">부가가치세 (10%)</td>
+            <td data-label="부가가치세 (10%)" class="align-right" style="padding:12px 10px;">${fmtNum(vat)}</td>
+            <td class="hide-mobile"></td>
+          </tr>
+          <tr>
+            <td colspan="4" class="hide-mobile align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">총 청구금액</td>
+            <td data-label="총 청구금액" class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">${fmtNum(total)}</td>
+            <td class="hide-mobile"></td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="doc-footer">
+        * 본 견적서는 제출일로부터 ${gv('p_valid') || '30일'}간 유효합니다.<br>
+        * ${gv('p_note')}
+      </div>
+    `;
+  } else {
+    html = `
+      <div class="doc-header">
+        <div class="doc-title">견 적 서</div>
+        <div class="doc-info-grid">
+          <div class="supplier-info">
+            <div class="info-row"><strong>공급자</strong></div>
+            <div class="info-row"><span>상호:</span> <span>${gv('s_company')}</span></div>
+            <div class="info-row"><span>대표:</span> <span>${gv('s_ceo')}</span></div>
+            <div class="info-row"><span>등록번호:</span> <span>${gv('s_biz_no')}</span></div>
+            <div class="info-row"><span>주소:</span> <span>${gv('s_address')}</span></div>
+            <div class="info-row"><span>담당자:</span> <span>${gv('s_manager')} (${gv('s_tel')} / ${gv('s_email')})</span></div>
+          </div>
+          <div class="client-info">
+            <div class="info-row"><strong>공급받는 자</strong></div>
+            <div class="info-row"><span>상호:</span> <span>${gv('c_company')} 귀하</span></div>
+            <div class="info-row"><span>담당자:</span> <span>${gv('c_manager')} (${gv('c_tel')})</span></div>
+            <br>
+            <div class="info-row"><span>견적명:</span> <span><strong>${gv('p_title')}</strong></span></div>
+            <div class="info-row"><span>문서번호:</span> <span>${gv('p_no')}</span></div>
+            <div class="info-row"><span>견적일자:</span> <span>${gv('p_date')}</span></div>
+            <div class="info-row"><span>유효기간:</span> <span>${gv('p_valid')}</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="doc-total-box">
+        <div><strong>총 견적 금액:</strong> <span class="doc-total-num">₩${total.toLocaleString()}</span> (VAT 포함)</div>
+        <div style="font-size:13px; color:#555;">(공급가액: ₩${net.toLocaleString()} / 부가세: ₩${vat.toLocaleString()})</div>
+      </div>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th>항목명</th><th style="width:60px;">단위</th><th style="width:60px;">수량</th>
+            <th style="width:100px;">단가(원)</th><th style="width:120px;">공급가액(원)</th><th>비고</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rowsHtml}
+        </tbody>
+      </table>
+      <div class="doc-footer">
+        <p>※ 특기사항: ${gv('p_note')||'본 견적서는 발행일로부터 ' + (gv('p_valid')||'30일') + '간 유효합니다.'}</p>
+        <p style="text-align:center; font-weight:700; margin-top:40px;">주식회사 몽규 (MONQ Park) 직인생략</p>
+      </div>
     `;
   }
-
-  // Items Table (공통)
-  html += `
-    <table class="doc-items">
-      <thead>
-        <tr>
-          <th>항목 (Item)</th>
-          <th width="10%" class="align-center">수량</th>
-          <th width="10%" class="align-center">단위</th>
-          <th width="15%" class="align-right">단가 (원)</th>
-          <th width="15%" class="align-right">금액 (원)</th>
-          <th width="15%">비고</th>
-        </tr>
-      </thead>
-      <tbody>
-  `;
-  
-  let currentSection = '';
-  let currentCatLabel = '';
-  activeItems.forEach(it => {
-    if(it.sectionId !== currentSection || it.catLabel !== currentCatLabel) {
-      currentSection = it.sectionId;
-      currentCatLabel = it.catLabel;
-      html += `<tr class="sec-row"><td colspan="6">[${it.catLabel}] ${it.sectionName}</td></tr>`;
-    }
-    html += `
-      <tr>
-        <td data-label="항목명">${it.name}</td>
-        <td data-label="수량" class="align-center">${it.qty}</td>
-        <td data-label="단위" class="align-center">${it.unit}</td>
-        <td data-label="단가 (원)" class="align-right">${fmtNum(it.price)}</td>
-        <td data-label="금액 (원)" class="align-right font-weight-bold">${fmtNum(it.qty * it.price)}</td>
-        <td data-label="비고" style="color:#64748b; font-size:11px;">${it.note}</td>
-      </tr>
-    `;
-  });
-  
-  html += `
-      </tbody>
-      <tfoot style="font-weight:bold; background:#f8fafc; border-top: 2px solid #cbd5e1;">
-        <tr>
-          <td colspan="4" class="hide-mobile align-right" style="padding:12px 10px;">공급가액</td>
-          <td data-label="공급가액" class="align-right" style="padding:12px 10px;">${fmtNum(net)}</td>
-          <td class="hide-mobile"></td>
-        </tr>
-        <tr>
-          <td colspan="4" class="hide-mobile align-right" style="padding:12px 10px;">부가가치세 (10%)</td>
-          <td data-label="부가가치세 (10%)" class="align-right" style="padding:12px 10px;">${fmtNum(vat)}</td>
-          <td class="hide-mobile"></td>
-        </tr>
-        <tr>
-          <td colspan="4" class="hide-mobile align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">총 청구금액</td>
-          <td data-label="총 청구금액" class="align-right" style="padding:15px 10px; color:var(--primary); font-size:15px;">${fmtNum(total)}</td>
-          <td class="hide-mobile"></td>
-        </tr>
-      </tfoot>
-    </table>
-    
-    <div class="doc-footer">
-      * 본 견적서는 제출일로부터 ${gv('p_valid') || '30일'}간 유효합니다.<br>
-      * ${gv('p_note')}
-    </div>
-  `;
   
   doc.innerHTML = html;
 }
 
-// --- 5. Export 기능 ---
 function exportPDF() {
   checkInApp();
   renderPreview();
@@ -1656,17 +1718,10 @@ async function exportExcel() {
     pageSetup: { paperSize: 9, orientation: 'portrait' }
   });
 
-  // 컬럼 너비 설정
   ws.columns = [
-    { width: 30 }, // A: 항목명/섹션
-    { width: 10 }, // B: 수량/정보
-    { width: 10 }, // C: 단위/정보
-    { width: 20 }, // D: 단가/정보
-    { width: 25 }, // E: 금액
-    { width: 25 }, // F: 비고
+    { width: 30 }, { width: 10 }, { width: 10 }, { width: 20 }, { width: 25 }, { width: 25 }
   ];
 
-  // 스타일 헬퍼
   const borderAll = {
     top: {style:'thin', color:{argb:'FFCBD5E1'}},
     left: {style:'thin', color:{argb:'FFCBD5E1'}},
@@ -1679,141 +1734,110 @@ async function exportExcel() {
     bottom: {style:'medium', color:{argb:'FF0F172A'}},
     right: {style:'thin', color:{argb:'FFCBD5E1'}}
   };
-  const fillHeader = { type: 'pattern', pattern:'solid', fgColor:{argb:'FF2563EB'} }; // Primary Blue
-  const fillSub = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF8FAFC'} };
-  const fillSec = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFE2E8F0'} };
-  
-  // 1. 타이틀
+
   ws.mergeCells('A1:F2');
-  const title = ws.getCell('A1');
-  title.value = '견 적 서';
-  title.font = { name: 'Malgun Gothic', size: 24, bold: true, color: {argb:'FF0F172A'} };
-  title.alignment = { vertical: 'middle', horizontal: 'center' };
+  const titleCell = ws.getCell('A1');
+  titleCell.value = '견 적 서';
+  titleCell.font = { name:'Malgun Gothic', size: 24, bold: true };
+  titleCell.alignment = { vertical: 'middle', horizontal: 'center' };
 
-  // 2. 기본 정보
-  ws.addRow([]); // 빈줄
+  ws.mergeCells('A4:C4'); ws.getCell('A4').value = '[공급받는 자]'; ws.getCell('A4').font = {bold:true};
+  ws.mergeCells('A5:C5'); ws.getCell('A5').value = '상호: ' + gv('c_company') + ' 귀하';
+  ws.mergeCells('A6:C6'); ws.getCell('A6').value = '담당자: ' + gv('c_manager') + ' (' + gv('c_tel') + ')';
   
-  const infoRow1 = ws.addRow(['공급자', `상호: ${gv('s_company')} / 대표: ${gv('s_ceo')}`, '', '공급받는자', `상호: ${gv('c_company')}`, '']);
-  const infoRow2 = ws.addRow(['', `등록번호: ${gv('s_biz_no')}`, '', '', `담당자: ${gv('c_manager')}`, '']);
-  const infoRow3 = ws.addRow(['', `주소: ${gv('s_address')}`, '', '', `연락처: ${gv('c_tel')}`, '']);
-  const infoRow4 = ws.addRow(['', `담당: ${gv('s_manager')} / ${gv('s_tel')}`, '', '', `프로젝트: ${gv('p_title')}`, '']);
-  const infoRow5 = ws.addRow(['', `이메일: ${gv('s_email')}`, '', '', `견적일자: ${gv('p_date')}`, '']);
-  
-  // 병합 및 스타일링
-  ws.mergeCells('A4:A8');
-  ws.mergeCells('B4:C4'); ws.mergeCells('B5:C5'); ws.mergeCells('B6:C6'); ws.mergeCells('B7:C7'); ws.mergeCells('B8:C8');
-  ws.mergeCells('D4:D8');
-  ws.mergeCells('E4:F4'); ws.mergeCells('E5:F5'); ws.mergeCells('E6:F6'); ws.mergeCells('E7:F7'); ws.mergeCells('E8:F8');
-  
-  ws.getCell('A4').fill = fillSub;
-  ws.getCell('A4').alignment = { vertical: 'middle', horizontal: 'center' };
-  ws.getCell('A4').font = { bold: true };
-  ws.getCell('D4').fill = fillSub;
-  ws.getCell('D4').alignment = { vertical: 'middle', horizontal: 'center' };
-  ws.getCell('D4').font = { bold: true };
+  ws.mergeCells('A8:C8'); ws.getCell('A8').value = '견적명: ' + gv('p_title'); ws.getCell('A8').font = {bold:true};
+  ws.mergeCells('A9:C9'); ws.getCell('A9').value = '문서번호: ' + gv('p_no');
+  ws.mergeCells('A10:C10'); ws.getCell('A10').value = '견적일자: ' + gv('p_date');
+  ws.mergeCells('A11:C11'); ws.getCell('A11').value = '유효기간: ' + gv('p_valid');
 
-  for(let i=4; i<=8; i++) {
-    ws.getRow(i).eachCell({ includeEmpty: true }, cell => {
-      cell.border = borderAll;
-      cell.font = cell.font || { name: 'Malgun Gothic', size: 10 };
-      if(!cell.alignment) cell.alignment = { vertical: 'middle' };
-    });
-  }
+  ws.mergeCells('D4:F4'); ws.getCell('D4').value = '[공급자]'; ws.getCell('D4').font = {bold:true};
+  ws.mergeCells('D5:F5'); ws.getCell('D5').value = '상호: ' + gv('s_company');
+  ws.mergeCells('D6:F6'); ws.getCell('D6').value = '대표: ' + gv('s_ceo');
+  ws.mergeCells('D7:F7'); ws.getCell('D7').value = '등록번호: ' + gv('s_biz_no');
+  ws.mergeCells('D8:F8'); ws.getCell('D8').value = '주소: ' + gv('s_address');
+  ws.mergeCells('D9:F9'); ws.getCell('D9').value = '담당자: ' + gv('s_manager');
+  ws.mergeCells('D10:F10'); ws.getCell('D10').value = '연락처: ' + gv('s_tel');
+  ws.mergeCells('D11:F11'); ws.getCell('D11').value = '이메일: ' + gv('s_email');
 
-  ws.addRow([]); // 빈줄
+  ws.addRow(['', '', '', '', '', '']);
   
-  // 3. 테이블 헤더
-  const th = ws.addRow(['항목 (Item)', '수량', '단위', '단가 (원)', '금액 (원)', '비고']);
-  th.eachCell(c => {
-    c.fill = fillHeader;
-    c.font = { name: 'Malgun Gothic', size: 11, bold: true, color: {argb:'FFFFFFFF'} };
-    c.alignment = { vertical: 'middle', horizontal: 'center' };
-    c.border = borderThick;
-  });
-
-  // 4. 아이템 데이터
   let net = 0;
-  const activeItems = [];
-  for(let cat in itemsState) {
-    for(let id in itemsState[cat]) {
-      if(itemsState[cat][id].checked) {
-        let it = itemsState[cat][id];
-        it.catLabel = QUOTE_DATA[cat].label;
-        activeItems.push(it);
-      }
-    }
-  }
-
-  let currentSection = '';
-  let currentCatLabel = '';
-  activeItems.forEach(it => {
-    if(it.sectionId !== currentSection || it.catLabel !== currentCatLabel) {
-      currentSection = it.sectionId;
-      currentCatLabel = it.catLabel;
-      let secRow = ws.addRow([`[${it.catLabel}] ${it.sectionName}`, '', '', '', '', '']);
-      ws.mergeCells(`A${secRow.number}:F${secRow.number}`);
-      secRow.getCell(1).fill = fillSec;
-      secRow.getCell(1).font = { name: 'Malgun Gothic', bold: true, color: {argb:'FF0F172A'} };
-      secRow.getCell(1).border = borderAll;
-      secRow.getCell(1).alignment = { vertical: 'middle', horizontal: 'left' };
-    }
-    
-    let amt = it.qty * it.price;
-    net += amt;
-    let row = ws.addRow([it.name, it.qty, it.unit, it.price, amt, it.note]);
-    
-    row.eachCell({ includeEmpty: true }, (c, colNum) => {
-      c.border = borderAll;
-      c.font = { name: 'Malgun Gothic', size: 10 };
-      if(colNum === 2 || colNum === 3) c.alignment = { horizontal: 'center' };
-      if(colNum === 4 || colNum === 5) {
-        c.numFmt = '#,##0';
-        c.alignment = { horizontal: 'right' };
-      }
+  activeQuote.forEach(sec => {
+    sec.items.forEach(item => {
+      if(item.checked) net += (item.qty * item.price);
     });
   });
+  const vat = Math.floor(net * 0.1);
+  const total = net + vat;
 
-  // 5. 합계
-  let vat = Math.floor(net * 0.1);
-  let total = net + vat;
+  const totRow = ws.addRow(['총 견적 금액', '', '', '', '₩' + total.toLocaleString(), '(VAT 포함)']);
+  ws.mergeCells(`A${totRow.number}:D${totRow.number}`);
+  totRow.font = { bold: true, size: 14, color: {argb:'FF2563EB'} };
+  ws.getCell(`E${totRow.number}`).font = { bold: true, size: 14, color: {argb:'FF2563EB'} };
+  ws.getCell(`A${totRow.number}`).alignment = { horizontal: 'right' };
   
-  let tRow1 = ws.addRow(['공급가액', '', '', '', net, '']);
-  let tRow2 = ws.addRow(['부가가치세 (10%)', '', '', '', vat, '']);
-  let tRow3 = ws.addRow(['총 청구금액', '', '', '', total, '']);
-  
-  [tRow1, tRow2, tRow3].forEach((r, idx) => {
-    ws.mergeCells(`A${r.number}:D${r.number}`);
-    r.getCell(1).alignment = { horizontal: 'right', vertical: 'middle' };
-    r.getCell(1).font = { name: 'Malgun Gothic', bold: true };
-    r.getCell(5).numFmt = '#,##0';
-    r.getCell(5).font = { name: 'Malgun Gothic', bold: true, size: idx===2 ? 14 : 11 };
-    r.getCell(5).fill = fillSub;
-    if(idx === 2) r.getCell(5).font.color = {argb:'FF2563EB'};
-    r.eachCell({ includeEmpty: false }, c => c.border = borderAll);
+  const subRow = ws.addRow(['', '', '', '', `공급가액: ₩${net.toLocaleString()}`, `부가세: ₩${vat.toLocaleString()}`]);
+  subRow.font = { size: 11, color: {argb:'FF64748B'} };
+
+  ws.addRow(['', '', '', '', '', '']);
+
+  const headerRow = ws.addRow(['항목명', '수량', '단위', '단가(원)', '공급가액(원)', '비고']);
+  headerRow.font = { bold: true };
+  headerRow.alignment = { horizontal: 'center', vertical: 'middle' };
+  headerRow.eachCell(cell => {
+    cell.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF1F5F9'} };
+    cell.border = borderThick;
   });
 
-  // 다운로드 트리거
+  activeQuote.forEach(sec => {
+    let hasChecked = sec.items.some(i => i.checked);
+    if(hasChecked) {
+      let r = ws.addRow([sec.name, '', '', '', '', '']);
+      ws.mergeCells(`A${r.number}:F${r.number}`);
+      r.font = { bold: true, color: {argb:'FF0F172A'} };
+      r.fill = { type: 'pattern', pattern:'solid', fgColor:{argb:'FFF8FAFC'} };
+      r.getCell(1).border = borderAll;
+
+      sec.items.forEach(item => {
+        if(item.checked) {
+          const sum = item.qty * item.price;
+          let row = ws.addRow([
+            item.name, item.qty, item.unit, item.price, sum, item.note||item.desc||''
+          ]);
+          row.getCell(2).alignment = { horizontal: 'center' };
+          row.getCell(3).alignment = { horizontal: 'center' };
+          row.getCell(4).numFmt = '#,##0';
+          row.getCell(5).numFmt = '#,##0';
+          row.getCell(5).font = { bold: true };
+          row.eachCell(c => c.border = borderAll);
+        }
+      });
+    }
+  });
+
+  ws.addRow(['', '', '', '', '', '']);
+  const footerRow = ws.addRow(['※ 특기사항: ' + (gv('p_note') || '본 견적서는 발행일로부터 ' + (gv('p_valid')||'30일') + '간 유효합니다.'), '', '', '', '', '']);
+  ws.mergeCells(`A${footerRow.number}:F${footerRow.number}`);
+  footerRow.font = { color: {argb:'FF475569'} };
+
+  ws.addRow(['', '', '', '', '', '']);
+  const signRow = ws.addRow(['주식회사 몽규 (MONQ Park) 직인생략', '', '', '', '', '']);
+  ws.mergeCells(`A${signRow.number}:F${signRow.number}`);
+  signRow.font = { bold: true, size: 14 };
+  signRow.alignment = { horizontal: 'center' };
+
   const buf = await wb.xlsx.writeBuffer();
-  saveAs(new Blob([buf]), `견적서_${gv('c_company')}_${gv('p_title')||'산출물'}.xlsx`);
+  const blob = new Blob([buf], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `견적서_${gv('p_title')}_${gv('c_company')}.xlsx`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
 }
 
-// 시작
-function initSplash() {
-  // 로고 1.2초 후 선택 화면 페이드인
-  setTimeout(() => {
-    const logo = document.getElementById('splash-logo');
-    const sel  = document.getElementById('splash-select');
-    if (!logo || !sel) return;
-    logo.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    logo.style.opacity = '0';
-    logo.style.transform = 'translateY(-20px)';
-    setTimeout(() => {
-      logo.style.display = 'none';
-      sel.style.display = 'flex';
-    }, 400);
-  }, 1400);
-}
-window.onload = () => { init(); initSplash(); };
 </script>
 
 </body>
