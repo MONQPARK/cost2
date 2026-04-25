@@ -1838,6 +1838,23 @@ async function exportExcel() {
   window.URL.revokeObjectURL(url);
 }
 
+// 시작
+function initSplash() {
+  // 로고 1.2초 후 선택 화면 페이드인
+  setTimeout(() => {
+    const logo = document.getElementById('splash-logo');
+    const sel  = document.getElementById('splash-select');
+    if (!logo || !sel) return;
+    logo.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    logo.style.opacity = '0';
+    logo.style.transform = 'translateY(-20px)';
+    setTimeout(() => {
+      logo.style.display = 'none';
+      sel.style.display = 'flex';
+    }, 400);
+  }, 1400);
+}
+window.onload = () => { init(); initSplash(); };
 </script>
 
 </body>
