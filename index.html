@@ -611,6 +611,105 @@
   border-bottom: 2px solid #e2e8f0; margin-top: 10px; margin-bottom: 5px;
 }
 
+
+    /* === Galaxy S24 Ultra & Mobile UI/UX Optimization === */
+    .responsive-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    
+    .chip-container {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .chip-label {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .chip-label:has(input:checked) {
+      background: var(--bg-gradient);
+      color: var(--primary);
+      border-color: var(--primary);
+      font-weight: bold;
+    }
+    .chip-label input {
+      margin: 0;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      .responsive-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+      }
+      .tabs::-webkit-scrollbar {
+        height: 4px;
+      }
+      .tabs::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .tab-btn {
+        flex: 0 0 auto;
+      }
+      
+      .mode-switch {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+      .mode-btn {
+        flex: 1 1 calc(33.333% - 8px);
+        font-size: 12px;
+        padding: 8px 5px;
+        text-align: center;
+      }
+
+      /* Reduce content grid minimum width for Galaxy S24 Ultra (viewport width ~412px) */
+      #content-grid {
+        grid-template-columns: 1fr !important; /* Force 1 column on mobile to use full width */
+      }
+      
+      .splash-cards {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .splash-card {
+        padding: 20px;
+      }
+      .splash-card h3 {
+        font-size: 18px;
+      }
+      
+      .form-group label {
+        font-size: 13px;
+      }
+      .form-group input[type="text"], .form-group select, .form-group textarea {
+        font-size: 16px; /* Prevents iOS auto-zoom, better readability on Android */
+        padding: 12px 10px;
+      }
+    }
+
 </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -2358,7 +2457,7 @@ function toggleEditMode() {
   <div id="tab-social-input" class="tab-content">
     <div class="card">
       <h2 style="margin-bottom:20px; color:var(--secondary);">광고주 정보 입력</h2>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:20px;">
+      <div class="responsive-grid" style="margin-bottom:20px;">
         <div class="form-group">
           <label for="soc_company">광고주 회사명 <span style="color:var(--primary)">*</span></label>
           <input type="text" id="soc_company" placeholder="예: 유어브랜드">
@@ -2386,14 +2485,14 @@ function toggleEditMode() {
       </div>
       <div class="form-group">
         <label>톤 & 매너 (1~3개 선택)</label>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <label><input type="checkbox" name="soc_tone" value="친근함"> 친근함</label>
-          <label><input type="checkbox" name="soc_tone" value="전문성"> 전문성</label>
-          <label><input type="checkbox" name="soc_tone" value="유머"> 유머</label>
-          <label><input type="checkbox" name="soc_tone" value="감성"> 감성</label>
-          <label><input type="checkbox" name="soc_tone" value="도발적"> 도발적</label>
-          <label><input type="checkbox" name="soc_tone" value="신뢰"> 신뢰</label>
-          <label><input type="checkbox" name="soc_tone" value="트렌디"> 트렌디</label>
+        <div class="chip-container">
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="친근함"> 친근함</label>
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="전문성"> 전문성</label>
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="유머"> 유머</label>
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="감성"> 감성</label>
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="도발적"> 도발적</label>
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="신뢰"> 신뢰</label>
+          <label class="chip-label"><input type="checkbox" name="soc_tone" value="트렌디"> 트렌디</label>
         </div>
       </div>
       <div class="form-group">
@@ -2403,26 +2502,26 @@ function toggleEditMode() {
       <div class="form-group">
         <label>캠페인 목적 <span style="color:var(--primary)">*</span></label>
         <div style="display:flex; gap:15px;">
-          <label><input type="radio" name="soc_goal" value="인지도" checked> 인지도</label>
-          <label><input type="radio" name="soc_goal" value="구매 전환"> 구매 전환</label>
-          <label><input type="radio" name="soc_goal" value="팬덤 형성"> 팬덤 형성</label>
-          <label><input type="radio" name="soc_goal" value="런칭"> 런칭</label>
+          <label class="chip-label"><input type="radio" name="soc_goal" value="인지도" checked> 인지도</label>
+          <label class="chip-label"><input type="radio" name="soc_goal" value="구매 전환"> 구매 전환</label>
+          <label class="chip-label"><input type="radio" name="soc_goal" value="팬덤 형성"> 팬덤 형성</label>
+          <label class="chip-label"><input type="radio" name="soc_goal" value="런칭"> 런칭</label>
         </div>
       </div>
       <div class="form-group">
         <label>주력 채널 (다중선택) <span style="color:var(--primary)">*</span></label>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <label><input type="checkbox" name="soc_channel" value="Instagram" checked> Instagram</label>
-          <label><input type="checkbox" name="soc_channel" value="Reels" checked> Reels</label>
-          <label><input type="checkbox" name="soc_channel" value="TikTok"> TikTok</label>
-          <label><input type="checkbox" name="soc_channel" value="Threads"> Threads</label>
-          <label><input type="checkbox" name="soc_channel" value="YouTube Shorts"> YouTube Shorts</label>
-          <label><input type="checkbox" name="soc_channel" value="X"> X</label>
-          <label><input type="checkbox" name="soc_channel" value="Naver Blog"> Naver Blog</label>
-          <label><input type="checkbox" name="soc_channel" value="LinkedIn"> LinkedIn</label>
+        <div class="chip-container">
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="Instagram" checked> Instagram</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="Reels" checked> Reels</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="TikTok"> TikTok</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="Threads"> Threads</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="YouTube Shorts"> YouTube Shorts</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="X"> X</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="Naver Blog"> Naver Blog</label>
+          <label class="chip-label"><input type="checkbox" name="soc_channel" value="LinkedIn"> LinkedIn</label>
         </div>
       </div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px;">
+      <div class="responsive-grid">
         <div class="form-group">
           <label for="soc_freq">발행 빈도 <span style="color:var(--primary)">*</span></label>
           <select id="soc_freq">

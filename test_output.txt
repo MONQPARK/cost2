@@ -1,0 +1,44 @@
+DOM Error: http://localhost/:239
+});
+ ^
+
+SyntaxError: Unexpected token ')'
+    at new Script (node:vm:117:7)
+    at createScript (node:vm:269:10)
+    at Object.runInContext (node:vm:300:10)
+    at processJavaScript (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/nodes/HTMLScriptElement-impl.js:231:10)
+    at HTMLScriptElementImpl._innerEval (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/nodes/HTMLScriptElement-impl.js:166:5)
+    at /Users/park/cost2/node_modules/jsdom/lib/jsdom/living/nodes/HTMLScriptElement-impl.js:107:12
+    at Object.check (/Users/park/cost2/node_modules/jsdom/lib/jsdom/browser/resources/resource-queue.js:76:23)
+    at /Users/park/cost2/node_modules/jsdom/lib/jsdom/browser/resources/resource-queue.js:83:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+http://localhost/:239
+});
+ ^
+
+SyntaxError: Unexpected token ')'
+    at new Script (node:vm:117:7)
+    at createScript (node:vm:269:10)
+    at Object.runInContext (node:vm:300:10)
+    at processJavaScript (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/nodes/HTMLScriptElement-impl.js:231:10)
+    at HTMLScriptElementImpl._innerEval (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/nodes/HTMLScriptElement-impl.js:166:5)
+    at /Users/park/cost2/node_modules/jsdom/lib/jsdom/living/nodes/HTMLScriptElement-impl.js:107:12
+    at Object.check (/Users/park/cost2/node_modules/jsdom/lib/jsdom/browser/resources/resource-queue.js:76:23)
+    at /Users/park/cost2/node_modules/jsdom/lib/jsdom/browser/resources/resource-queue.js:83:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+Could not load script: "http://localhost/data.js"
+Could not load script: "http://localhost/js/social-prompts.js"
+Could not load script: "http://localhost/js/social-export.js"
+Could not load script: "http://localhost/js/social.js"
+Window loaded. Calling enterMode('quote')...
+Caught error in enterMode: TypeError: dom.window.enterMode is not a function
+    at dom.window.onload (/Users/park/cost2/test.js:19:16)
+    at invokeTheCallbackFunction (/Users/park/cost2/node_modules/jsdom/lib/generated/idl/EventHandlerNonNull.js:14:28)
+    at /Users/park/cost2/node_modules/jsdom/lib/jsdom/living/helpers/create-event-accessor.js:57:32
+    at innerInvokeEventListeners (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at EventTargetImpl._dispatch (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+    at fireAnEvent (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/helpers/events.js:18:36)
+    at Document.<anonymous> (/Users/park/cost2/node_modules/jsdom/lib/jsdom/browser/Window.js:138:9)
+    at Document.callTheUserObjectsOperation (/Users/park/cost2/node_modules/jsdom/lib/generated/idl/EventListener.js:26:30)
+    at innerInvokeEventListeners (/Users/park/cost2/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)

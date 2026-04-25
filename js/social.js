@@ -152,7 +152,7 @@ const SocialApp = {
     ).join('');
 
     container.innerHTML = `
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+      <div class="responsive-grid" style="margin-bottom:20px;">
         <div class="card">
           <h3 style="margin-bottom:10px;">🏷 브랜드 한 줄 정의</h3>
           <p style="font-size:16px; font-weight:bold; color:var(--primary);">"${insight.tagline}"</p>
