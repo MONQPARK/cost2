@@ -1,140 +1,140 @@
 const companyData = [
   {
     "name": "인테그럴애드사이언스(IAS)",
-    "url": "",
+    "url": "https://integralads.com/",
     "address": "1-1-2 Yurakucho Chiyoda-ku, Tokyo, 100-0006, Japan",
     "lat": 35.6736817,
     "lng": 139.7611853
   },
   {
     "name": "얀고애즈",
-    "url": "",
+    "url": "https://yango-ads.com/",
     "address": "UAE, Dubai, Trade Center Second, The Offices 5, Unit No. FLR06-06.04-1 P.O. Box 29095",
     "lat": 24.0002488,
     "lng": 53.9994829
   },
   {
     "name": "제이비컴스컴퍼니",
-    "url": "",
+    "url": "https://jbcoms.com/",
     "address": "경기도 고양시 덕양구 으뜸로8,13층 1305호(덕은동,덕은DMC아이에스BIZ타워센트럴1차지식산업센터동)",
     "lat": null,
     "lng": null
   },
   {
     "name": "스타디엠코퍼레이션",
-    "url": "",
+    "url": "https://stardm-corporation.com/",
     "address": "경기도 부천시 신흥로 234, 3층(중동, 뉴월드 프라자)",
     "lat": 37.5045895,
     "lng": 126.7762156
   },
   {
     "name": "엔에이치엔에이스(NHN ACE)",
-    "url": "",
+    "url": "https://www.nhnace.com/company/about",
     "address": "경기도 성남시 분당구 대왕판교로 645번길 16, 플레이뮤지엄 NHN ACE",
     "lat": null,
     "lng": null
   },
   {
     "name": "판도라TV",
-    "url": "",
+    "url": "https://corp.pandora.tv/",
     "address": "경기도 성남시 분당구 대왕판교로644번길 49, 11층",
     "lat": 37.4009272,
     "lng": 127.1122645
   },
   {
     "name": "엔에이치엔애드(NHN AD)",
-    "url": "",
+    "url": "https://www.nhnad.com/",
     "address": "경기도 성남시 분당구 대왕판교로645번길 16, NHN 플레이뮤지엄 5층",
     "lat": null,
     "lng": null
   },
   {
     "name": "제이브릿지컴퍼니",
-    "url": "",
+    "url": "https://www.jbmc.co.kr/",
     "address": "경기도 성남시 분당구 성남대로331번길 8, 606,607호(정자동,킨스타워)",
     "lat": 37.3658952,
     "lng": 127.1066727
   },
   {
     "name": "네이버",
-    "url": "",
+    "url": "https://www.navercorp.com/",
     "address": "경기도 성남시 분당구 정자일로 95",
     "lat": null,
     "lng": null
   },
   {
     "name": "숲",
-    "url": "",
+    "url": "https://corp.sooplive.com/",
     "address": "경기도 성남시 분당구 판교로228번길 15(삼평동, 판븐벤처밸리1단지 2동 201, 901호)",
     "lat": 37.401817,
     "lng": 127.1016154
   },
   {
     "name": "카카오페이",
-    "url": "",
+    "url": "https://www.kakaopay.com/",
     "address": "경기도 성남시 분당구 판교로역 166, 비동 15층(백현동)",
     "lat": null,
     "lng": null
   },
   {
     "name": "플레이디",
-    "url": "",
+    "url": "https://www.playd.com/",
     "address": "경기도 성남시 분당구 황새울로 359번길 11, 5~6층",
     "lat": null,
     "lng": null
   },
   {
     "name": "와이즈버즈",
-    "url": "",
+    "url": "https://wisebirds.com/",
     "address": "경기도 성남시 수정구 금토로 69, 5층(금토동, 다우디지털스퀘어)",
     "lat": 37.406514,
     "lng": 127.0801059
   },
   {
     "name": "틱톡",
-    "url": "",
+    "url": "https://www.tiktok.com/",
     "address": "서울시특별시 강남구 테헤란로 518 섬유센터, 12층",
     "lat": null,
     "lng": null
   },
   {
     "name": "이노션",
-    "url": "",
+    "url": "https://www.innocean.com/",
     "address": "서울특별시 강남구 강남대로 308 (역삼동)",
     "lat": 37.4904128,
     "lng": 127.0318627
   },
   {
     "name": "PTKOREA",
-    "url": "",
+    "url": "https://pt-korea.com/",
     "address": "서울특별시 강남구 강남대로 372, 12,13,14,16층(역삼동, FINE TOWER)",
     "lat": 37.5030713,
     "lng": 127.0253238
   },
   {
     "name": "차이커뮤니케이션",
-    "url": "",
+    "url": "https://www.artistchai.co.kr/",
     "address": "서울특별시 강남구 논현로 132길 40(논현동, 차이빌딩)",
     "lat": null,
     "lng": null
   },
   {
     "name": "레뷰코퍼레이션",
-    "url": "",
+    "url": "https://corp.revu.net/",
     "address": "서울특별시 강남구 논현로 135길 29(논현동)",
     "lat": null,
     "lng": null
   },
   {
     "name": "엔비티",
-    "url": "",
+    "url": "https://nbt.com/",
     "address": "서울특별시 강남구 논현로 145길 31(논현동)",
     "lat": null,
     "lng": null
   },
   {
     "name": "비에이티",
-    "url": "",
+    "url": "https://batcrew.co.kr/",
     "address": "서울특별시 강남구 논현로 153길 53, 4층(신사동, 피겨앤그라운드)",
     "lat": null,
     "lng": null
@@ -757,7 +757,7 @@ const companyData = [
   },
   {
     "name": "함샤우트글로벌",
-    "url": "",
+    "url": "http://hahmshout-global.com/",
     "address": "서울특별시 마포구 포은로2가길 57, 한울빌딩",
     "lat": 37.5504156,
     "lng": 126.9090599
