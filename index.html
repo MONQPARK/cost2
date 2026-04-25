@@ -2268,9 +2268,9 @@ function buildMap() {
           <h4 style="margin:0 0 8px 0; color:var(--primary); font-size:15px;">${agency.name}</h4>
           <p style="margin:0 0 10px 0; font-size:12px; color:#555;">${agency.address}</p>
       `;
-      if(agency.url) {
-        popupContent += `<a href="${agency.url}" target="_blank" style="display:inline-block; padding:6px 12px; background:var(--primary); color:#fff; text-decoration:none; border-radius:4px; font-size:12px; font-weight:bold;">홈페이지 방문하기</a>`;
-      }
+      const popupLinkUrl = agency.url ? agency.url : `https://search.naver.com/search.naver?query=${encodeURIComponent(agency.name + ' 홈페이지')}`;
+      const popupLinkText = agency.url ? '홈페이지 방문하기' : '홈페이지 검색하기';
+      popupContent += `<a href="${popupLinkUrl}" target="_blank" style="display:inline-block; padding:6px 12px; background:var(--primary); color:#fff; text-decoration:none; border-radius:4px; font-size:12px; font-weight:bold;">${popupLinkText}</a>`;
       popupContent += `</div>`;
 
       const marker = L.marker([agency.lat, agency.lng], { icon: customIcon }).addTo(globalLeafletMap)
@@ -2335,8 +2335,10 @@ function renderSidebarList(list) {
       const markerObj = allMapMarkers.find(m => m.name === agency.name);
       const card = document.createElement('div');
       card.className = 'map-company-card';
+      const cardLinkUrl = agency.url ? agency.url : `https://search.naver.com/search.naver?query=${encodeURIComponent(agency.name + ' 홈페이지')}`;
+      const cardLinkText = agency.url ? '🔗 홈페이지 방문' : '🔍 홈페이지 검색';
       card.innerHTML = `<h4>${agency.name}</h4><p>${agency.address}</p>` + 
-                       (agency.url ? `<a href="${agency.url}" target="_blank" style="font-size:11px; color:var(--primary); text-decoration:none; margin-top:5px; display:inline-block;" onclick="event.stopPropagation()">🔗 홈페이지 방문</a>` : '');
+                       `<a href="${cardLinkUrl}" target="_blank" style="font-size:11px; color:var(--primary); text-decoration:none; margin-top:5px; display:inline-block;" onclick="event.stopPropagation()">${cardLinkText}</a>`;
       card.onclick = () => {
         if(markerObj) {
           globalLeafletMap.setView(markerObj.marker.getLatLng(), 15);
