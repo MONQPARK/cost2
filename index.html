@@ -2032,8 +2032,8 @@ async function exportExcel() {
 
   const totRow = ws.addRow(['총 견적 금액', '', '', '', '₩' + total.toLocaleString(), '(VAT 포함)']);
   ws.mergeCells(`A${totRow.number}:D${totRow.number}`);
-  totRow.font = { bold: true, size: 14, color: {argb:'FF2563EB'} };
-  ws.getCell(`E${totRow.number}`).font = { bold: true, size: 14, color: {argb:'FF2563EB'} };
+  totRow.font = { bold: true, size: 14, color: {argb:'FFE84648'} };
+  ws.getCell(`E${totRow.number}`).font = { bold: true, size: 14, color: {argb:'FFE84648'} };
   ws.getCell(`A${totRow.number}`).alignment = { horizontal: 'right' };
   
   const subRow = ws.addRow(['', '', '', '', `공급가액: ₩${net.toLocaleString()}`, `부가세: ₩${vat.toLocaleString()}`]);
@@ -2066,8 +2066,11 @@ async function exportExcel() {
               let row = ws.addRow([
                 item.name, item.qty, item.unit, item.price, sum, item.note||item.desc||''
               ]);
+              row.getCell(5).value = { formula: `B${row.number}*D${row.number}`, result: sum };
               row.getCell(2).alignment = { horizontal: 'center' };
               row.getCell(3).alignment = { horizontal: 'center' };
+              row.getCell(4).alignment = { horizontal: 'right' };
+              row.getCell(5).alignment = { horizontal: 'right' };
               row.getCell(4).numFmt = '#,##0';
               row.getCell(5).numFmt = '#,##0';
               row.getCell(5).font = { bold: true };
