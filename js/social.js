@@ -134,7 +134,13 @@ const SocialApp = {
   },
 
   async verifyApiKey() {
-    const apiKey = document.getElementById('soc_api_key').value;
+    let apiKey = document.getElementById('soc_api_key').value;
+    if (!apiKey) apiKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
+    if (apiKey) {
+      document.getElementById('soc_api_key').value = apiKey;
+      sessionStorage.setItem('social_api_key', apiKey);
+    }
+
     const statusEl = document.getElementById('soc_key_status');
     if(!apiKey) {
       statusEl.innerHTML = '<span style="color:#ef4444;">키를 입력하세요</span>';
@@ -164,7 +170,7 @@ const SocialApp = {
   },
   
   init() {
-    const savedKey = sessionStorage.getItem('social_api_key');
+    const savedKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
     if (savedKey) document.getElementById('soc_api_key').value = savedKey;
     
     // Auto-load state if available
@@ -254,6 +260,10 @@ const SocialApp = {
     const config = this.collectInput();
     if (!config) return;
 
+    
+    if (!config.apiKey && (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'))) {
+      config.apiKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
+    }
     if (config.provider === "demo" || !config.apiKey) {
       alert("AI 모델 및 키 설정이 필요합니다. (Gemini 2.5 권장)");
       return;
@@ -277,7 +287,7 @@ const SocialApp = {
         { role: 'user', content: SocialPrompts.INSIGHT_USER(config.input) }
       ];
       const insightRes = await SocialAI.call(insightMessages, config);
-      this.state.insight = JSON.parse(insightRes);
+      this.state.insight = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(insightRes);
       
       // Step 2: Content
       progText.innerText = "[●●●●●●●●●○] 콘텐츠 기획 중... (약 15초 소요)";
@@ -294,7 +304,7 @@ const SocialApp = {
       ];
       
       const contentRes = await SocialAI.call(contentMessages, config);
-      const parsedContent = JSON.parse(contentRes);
+      const parsedContent = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(contentRes);
       
       // Assign IDs if missing
       this.state.contents = parsedContent.map((c, i) => ({ ...c, id: 'c_' + Date.now() + '_' + i }));

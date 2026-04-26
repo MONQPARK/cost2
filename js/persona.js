@@ -95,7 +95,7 @@ const PersonaApp = {
         { role: 'user', content: `이름: ${name}, 카테고리: ${cat}, 현재 설정된 성격: ${document.getElementById('psn_personality').value}` }
       ];
       const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
-      const data = JSON.parse(res);
+      const data = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(res);
       
       if(data.backstory) document.getElementById('psn_backstory').value = data.backstory;
       if(data.signature_visual) document.getElementById('psn_visual').value = data.signature_visual;
@@ -131,7 +131,16 @@ const PersonaApp = {
   },
   
   getApiKey() {
-    return sessionStorage.getItem('social_api_key') || '';
+    let k = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
+    if (document.getElementById('soc_api_key') && document.getElementById('soc_api_key').value) k = document.getElementById('soc_api_key').value;
+    if (document.getElementById('psn_api_key_input') && document.getElementById('psn_api_key_input').value) k = document.getElementById('psn_api_key_input').value;
+    
+    if (k) {
+      sessionStorage.setItem('social_api_key', k);
+      return k;
+    }
+    alert("Gemini API 키가 필요합니다. 카테고리 탭이나 소셜콘텐츠 탭에서 입력해주세요.");
+    return null;
   },
   
   renderSheetCard(persona) {
@@ -202,7 +211,7 @@ const PersonaApp = {
         { role: 'user', content: PersonaPrompts.BUILD_USER(this.state) }
       ];
       const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
-      this.state.persona = JSON.parse(res); this.saveState();
+      this.state.persona = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(res); this.saveState();
       
       this.updateSidebar();
       this.renderSheetCard(this.state.persona);
@@ -289,7 +298,7 @@ const PersonaApp = {
         { role: 'user', content: PersonaPrompts.CONTENT_USER(this.state.persona) }
       ];
       const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
-      this.state.contents = JSON.parse(res);
+      this.state.contents = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(res);
       
       const list = document.getElementById('psn_content_list');
       list.innerHTML = this.state.contents.map(c => `
