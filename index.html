@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<script>
+  window.onerror = function(msg, url, line, col, error) {
+    fetch("http://localhost:9999/error?msg=" + encodeURIComponent(msg + " at " + line + ":" + col));
+  };
+</script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MONQ VISION</title>
@@ -1840,9 +1846,7 @@ function switchMode(mode) {
   const personaLayout = document.getElementById('persona-layout');
   if(personaLayout) personaLayout.style.display = mode === 'persona' ? 'flex' : 'none';
   
-  document.querySelectorAll('.tab-content').forEach(c => {
-    c.style.display = mode === 'persona' ? 'none' : '';
-  });
+  
 
   if (mode === 'quote') switchTab('info', 'quote', document.querySelector('#tabs-quote button'));
   else if (mode === 'info') switchTab('stats', 'info', document.querySelector('#tabs-info button'));
