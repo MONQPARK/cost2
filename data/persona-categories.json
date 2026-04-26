@@ -1,0 +1,16 @@
+{
+  "categories": [
+    { "id": "food", "label": "푸드·미식", "icon": "🍳", "subcategories": ["커피·바리스타", "디저트", "홈쿡", "맛집 탐방"] },
+    { "id": "beauty", "label": "뷰티·패션", "icon": "💄", "subcategories": ["메이크업", "스킨케어", "스타일링", "리뷰"] },
+    { "id": "gaming", "label": "게이밍·e스포츠", "icon": "🎮", "subcategories": ["FPS", "RPG", "모바일", "공포"] },
+    { "id": "tech", "label": "테크·IT", "icon": "💻", "subcategories": ["AI", "개발", "가젯 리뷰", "스타트업"] },
+    { "id": "lifestyle", "label": "자기계발·라이프", "icon": "📚", "subcategories": ["독서", "운동", "재테크", "미니멀"] },
+    { "id": "pet", "label": "펫·동물", "icon": "🐶", "subcategories": ["강아지", "고양이", "이색동물", "야생"] },
+    { "id": "music", "label": "음악·아이돌", "icon": "🎵", "subcategories": ["커버", "프로듀싱", "리뷰", "공연"] },
+    { "id": "travel", "label": "여행·로컬", "icon": "✈️", "subcategories": ["국내", "해외", "캠핑", "맛집투어"] },
+    { "id": "comedy", "label": "코미디·밈", "icon": "😂", "subcategories": ["스케치", "패러디", "리액션", "밈"] },
+    { "id": "sports", "label": "스포츠·헬스", "icon": "🏃", "subcategories": ["헬스", "러닝", "구기", "익스트림"] },
+    { "id": "movie", "label": "영화·드라마", "icon": "🎬", "subcategories": ["리뷰", "분석", "OST", "코스프레"] },
+    { "id": "shopping", "label": "쇼핑·리뷰", "icon": "🛍️", "subcategories": ["하울", "딜소식", "언박싱", "비교"] }
+  ]
+}
