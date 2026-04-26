@@ -3063,7 +3063,27 @@ function toggleEditMode() {
   <script src="js/persona-prompts.js"></script>
   <script src="js/persona-image.js"></script>
   <script src="js/persona.js"></script>
+
+<!-- Regenerate Modal -->
+<div id="regenerate-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); z-index:9999; justify-content:center; align-items:center; backdrop-filter:blur(4px);">
+  <div style="background:#fff; width:90%; max-width:500px; border-radius:16px; box-shadow:0 25px 50px -12px rgba(0,0,0,0.25); overflow:hidden;">
+    <div style="padding:20px 24px; border-bottom:1px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+      <h3 style="margin:0; font-size:18px; color:#1e293b;">✨ 콘텐츠 재생성</h3>
+      <button onclick="document.getElementById('regenerate-modal').style.display='none'" style="background:none; border:none; font-size:24px; cursor:pointer; color:#94a3b8;">&times;</button>
+    </div>
+    <div style="padding:24px;">
+      <p style="margin-top:0; color:#64748b; font-size:14px; margin-bottom:16px;">수정하고 싶은 방향을 AI에게 알려주세요.</p>
+      <input type="hidden" id="regen-card-id">
+      <textarea id="regen-feedback" rows="3" style="width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:8px; font-family:inherit; resize:none; font-size:14px;" placeholder="예: 타깃을 Z세대로 바꾸고 좀 더 유머러스하게 써줘"></textarea>
+    </div>
+    <div style="padding:16px 24px; background:#f8fafc; border-top:1px solid #e2e8f0; display:flex; justify-content:flex-end; gap:10px;">
+      <button class="btn" style="background:#e2e8f0; color:#475569;" onclick="document.getElementById('regenerate-modal').style.display='none'">취소</button>
+      <button class="btn" style="background:linear-gradient(135deg, #7C3AED, #EC4899);" onclick="SocialApp.submitRegenerate()">🚀 다시 만들기</button>
+    </div>
+  </div>
+</div>
 </body>
+
 
 
 </html>

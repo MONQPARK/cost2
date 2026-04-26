@@ -72,6 +72,48 @@ const PersonaApp = {
     return sessionStorage.getItem('social_api_key') || '';
   },
   
+  renderSheetCard(persona) {
+    const el = document.getElementById('psn_sheet_render');
+    if (!el) return;
+    
+    // Convert persona object to a nice HTML card
+    el.innerHTML = `
+      <div style="background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px solid #e2e8f0; border-radius: 16px; padding: 30px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); color: #1e293b;">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #7C3AED; padding-bottom: 15px; margin-bottom: 20px;">
+          <div>
+            <h2 style="margin: 0; font-size: 28px; font-weight: 800; color: #0f172a;">${persona.name || '이름 미상'}</h2>
+            <p style="margin: 5px 0 0; font-size: 16px; color: #64748b; font-weight: 500;">${persona.tagline || '태그라인'}</p>
+          </div>
+          <div style="text-align: right;">
+            <span style="display: inline-block; background: #e2e8f0; padding: 4px 10px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #475569;">
+              ${persona.age || '?'}세 · ${persona.job || '직업'}
+            </span>
+          </div>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+          <div style="background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
+            <h4 style="margin: 0 0 10px; color: #7C3AED; font-size: 14px;">🌟 외형 및 시그니처 (Visual)</h4>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6;">${persona.signature_visual || ''}</p>
+          </div>
+          <div style="background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0;">
+            <h4 style="margin: 0 0 10px; color: #EC4899; font-size: 14px;">🧠 성격 및 가치관 (MBTI & Values)</h4>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6;">${persona.mbti ? `[${persona.mbti}] ` : ''}${persona.personality || ''}</p>
+          </div>
+        </div>
+        
+        <div style="background: #fff; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+          <h4 style="margin: 0 0 10px; color: #10b981; font-size: 14px;">📚 세계관 및 배경 (Backstory)</h4>
+          <p style="margin: 0; font-size: 14px; line-height: 1.6;">${persona.backstory || ''}</p>
+        </div>
+        
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          ${(persona.concept_keywords || []).map(k => `<span style="background: #f1f5f9; color: #475569; padding: 4px 12px; border-radius: 6px; font-size: 12px; font-weight: 600;">#${k}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  },
+
   async generateSheet() {
     const pos = document.getElementById('psn_pos').value;
     const diff = document.getElementById('psn_diff').value;
@@ -101,7 +143,7 @@ const PersonaApp = {
       this.state.persona = JSON.parse(res);
       
       this.updateSidebar();
-      document.getElementById('psn_sheet_render').innerText = JSON.stringify(this.state.persona, null, 2);
+      this.renderSheetCard(this.state.persona);
       this.nextStep('sheet');
     } catch(e) {
       alert('오류: ' + e.message);

@@ -225,7 +225,7 @@ const SocialApp = {
       const messages = [{ role: "user", content: prompt }];
       // Use text format for this specific request if possible, but our call() defaults to JSON format.
       // To bypass JSON format requirement temporarily for trend:
-      config.model = "gemini-1.5-flash-latest"; // faster for keywords
+      config.model = "gemini-2.5-flash"; // faster for keywords
       let result = await SocialAI.call(messages, config);
       
       // Since response_format is JSON object in openai/gemini (application/json), it might return JSON.
@@ -360,7 +360,7 @@ const SocialApp = {
             </div>
           </div>
           <div style="display:flex; border-top:1px solid #e2e8f0; background:#f8fafc;">
-            <button style="flex:1; padding:15px; background:none; border:none; border-right:1px solid #e2e8f0; cursor:pointer; color:#475569; font-size:13px; font-weight:700; transition:all 0.2s;" onmouseover="this.style.color='var(--primary)'; this.style.background='#f1f5f9'" onmouseout="this.style.color='#475569'; this.style.background='none'" onclick="SocialApp.regenerateCard('${c.id}')">🔄 AI 내용 수정</button>
+            <button style="flex:1; padding:15px; background:none; border:none; border-right:1px solid #e2e8f0; cursor:pointer; color:#475569; font-size:13px; font-weight:700; transition:all 0.2s;" onmouseover="this.style.color='var(--primary)'; this.style.background='#f1f5f9'" onmouseout="this.style.color='#475569'; this.style.background='none'" onclick="SocialApp.openRegenerateModal('${c.id}')">🔄 AI 내용 수정</button>
             <button style="padding:15px 20px; background:none; border:none; cursor:pointer; color:#ef4444; font-size:13px; transition:all 0.2s;" onmouseover="this.style.background='#fef2f2'" onmouseout="this.style.background='none'" onclick="SocialApp.deleteCard('${c.id}')">🗑</button>
           </div>
         </div>
@@ -378,12 +378,25 @@ const SocialApp = {
     }
   },
 
-  async regenerateCard(cardId) {
-    const feedback = prompt('수정 피드백을 입력해주세요 (예: 더 유머러스하게 바꿔줘)');
-    if(!feedback) return;
+  
+  openRegenerateModal(cardId) {
+    document.getElementById('regen-card-id').value = cardId;
+    document.getElementById('regen-feedback').value = '';
+    document.getElementById('regenerate-modal').style.display = 'flex';
+  },
+
+  async submitRegenerate() {
+    const cardId = document.getElementById('regen-card-id').value;
+    const feedback = document.getElementById('regen-feedback').value.trim();
+    if (!feedback) {
+      alert('수정 방향을 입력해주세요.');
+      return;
+    }
+    
+    document.getElementById('regenerate-modal').style.display = 'none';
     
     const card = this.state.contents.find(c => c.id === cardId);
-    if(!card) return;
+    if (!card) return;
     
     const config = this.collectInput();
     if (!config) return;
@@ -400,6 +413,7 @@ const SocialApp = {
       this.state.contents[idx] = { ...this.state.contents[idx], ...newData, id: cardId, scheduled_at: card.scheduled_at };
       this.saveState();
       this.renderContent(this.state.contents);
+      this.renderSchedule(this.state.contents);
     } catch(e) {
       alert('재생성 실패: ' + e.message);
     }
