@@ -2725,20 +2725,7 @@ function toggleEditMode() {
           </div>
         </div>
         
-        <!-- Group 4: AI 설정 -->
-        <div style="margin-top:10px; padding: 15px; background: #f8fafc; border-radius: 8px; display:flex; flex-direction:column; gap:10px;">
-          <div style="font-size:12px; font-weight:bold; color:#64748b;">🛠 AI 모델 고급 설정 (선택)</div>
-          <div style="display:flex; gap:10px;">
-            <select id="soc_ai_provider" style="width:120px; font-size:13px; padding:8px;">
-              <option value="demo">데모 모드</option>
-              <option value="openai">OpenAI</option>
-              <option value="anthropic">Anthropic</option>
-              <option value="gemini">Gemini</option>
-            </select>
-            <input type="password" id="soc_api_key" placeholder="API Key 입력 (세션 임시 저장)" style="flex:1; font-size:13px; padding:8px;">
-          </div>
-        </div>
-        
+        <!-- Group 4: AI 설정 (Hidden/Auto) -->
         <div style="margin-top: 30px;">
           <button class="pulse-btn" onclick="SocialApp.startInsight()">
             ✨ 광고주 심층 분석 시작하기

@@ -125,9 +125,8 @@ const SocialApp = {
       competitors: document.getElementById('soc_competitors').value
     };
     
-    const apiKey = document.getElementById('soc_api_key').value;
-    const provider = document.getElementById('soc_ai_provider').value;
-    if(apiKey) sessionStorage.setItem('social_api_key', apiKey);
+    const apiKey = "AIzaSyC82QBkaq5XUG4xVdTwjHyfCoFCsAAUedU";
+    const provider = "gemini";
     
     return { input: this.state.input, provider, apiKey };
   },
@@ -137,10 +136,7 @@ const SocialApp = {
     const config = this.collectInput();
     if (!config) return;
     
-    if (config.provider === "demo" || !config.apiKey) {
-      alert("트렌드 키워드를 가져오려면 AI 설정(Gemini 등)과 API 키가 필요합니다.");
-      return;
-    }
+    
     
     const kwInput = document.getElementById("soc_trend_kw");
     kwInput.value = "⏳ 실시간 트렌드 분석 중...";
@@ -164,8 +160,7 @@ const SocialApp = {
         else if (Array.isArray(parsed)) result = parsed.join(", ");
       } catch(e) {}
       
-      kwInput.value = result.replace(/[\[\]"'
-]/g, "").trim();
+      kwInput.value = result.replace(/[\[\]"'\n]/g, "").trim();
     } catch (e) {
       kwInput.value = "";
       alert("키워드 분석 실패: " + e.message);
