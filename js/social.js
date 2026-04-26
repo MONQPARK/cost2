@@ -242,135 +242,79 @@ const SocialApp = {
     }
   },
 
-  async startInsight() {
+  
+  async startFullGeneration() {
     const config = this.collectInput();
     if (!config) return;
-    
-    document.getElementById('tab-social-insight').innerHTML = '<div style="text-align:center; padding:50px;">⏳ 광고주 분석 중입니다... 잠시만 기다려주세요.</div>';
-    switchTab('social-insight', 'social', document.querySelector('#tabs-social button:nth-child(2)'));
+
+    if (config.provider === "demo" || !config.apiKey) {
+      alert("AI 모델 및 키 설정이 필요합니다. (Gemini 2.5 권장)");
+      return;
+    }
+
+    const btn = document.getElementById('soc_generate_btn');
+    const progContainer = document.getElementById('soc_progress_container');
+    const progText = document.getElementById('soc_progress_text');
+    const progBar = document.getElementById('soc_progress_bar');
+
+    btn.disabled = true;
+    progContainer.style.display = "block";
     
     try {
-      const messages = [
+      // Step 1: Insight
+      progText.innerText = "[●●●●●○○○○○] 광고주 분석 중...";
+      progBar.style.width = "30%";
+      
+      const insightMessages = [
         { role: 'system', content: SocialPrompts.INSIGHT_SYSTEM },
         { role: 'user', content: SocialPrompts.INSIGHT_USER(config.input) }
       ];
+      const insightRes = await SocialAI.call(insightMessages, config);
+      this.state.insight = JSON.parse(insightRes);
       
-      const responseText = await SocialAI.call(messages, config);
-      const data = JSON.parse(responseText);
-      this.state.insight = data;
-      this.saveState();
+      // Step 2: Content
+      progText.innerText = "[●●●●●●●●●○] 콘텐츠 기획 중... (약 15초 소요)";
+      progBar.style.width = "70%";
       
-      this.renderInsight(this.state.insight);
-    } catch(e) {
-      document.getElementById('tab-social-insight').innerHTML = `<div style="text-align:center; padding:50px; color:var(--danger);">오류 발생: ${e.message}</div>`;
-    }
-  },
-
-  renderInsight(insight) {
-    const container = document.getElementById('tab-social-insight');
-    if(!insight || !insight.personas) {
-      container.innerHTML = '<div style="text-align:center; padding:50px;">데이터가 올바르지 않습니다.</div>';
-      return;
-    }
-    
-    
-    let personasHtml = insight.personas.map(p => 
-      `<li style="margin-bottom:10px; background:#f8fafc; padding:15px; border-radius:12px; border:1px solid #e2e8f0;">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px;">
-          <span style="font-size:20px;">👤</span>
-          <strong style="color:var(--primary); font-size:16px;">${p.name}</strong> 
-          <span style="font-size:13px; color:#64748b; background:#e2e8f0; padding:2px 8px; border-radius:10px;">${p.age}, ${p.job}</span>
-        </div>
-        <div style="font-size:14px; color:#334155; line-height:1.5; padding-left:28px;">${p.motivation}</div>
-      </li>`
-    ).join("");
-    
-    let channelHtml = Object.entries(insight.channel_mix || {}).map(([k,v]) => 
-      `<div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #f1f5f9;">
-        <span style="font-weight:600; color:#475569; display:flex; align-items:center; gap:8px;"><span style="color:var(--primary); font-size:10px;">●</span> ${k}</span>
-        <strong style="color:var(--secondary); background:#e0e7ff; padding:4px 12px; border-radius:12px; font-size:14px;">${v}%</strong>
-      </div>`
-    ).join("");
-
-    container.innerHTML = `
-      <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; padding: 50px 30px; border-radius: 16px; text-align: center; margin-bottom: 30px; position:relative; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,0.15);">
-        <div style="position:absolute; top:-30px; left:-10px; font-size:160px; font-family:serif; opacity:0.05; line-height:1;">"</div>
-        <div style="font-size:13px; font-weight:800; color:#94a3b8; margin-bottom:15px; text-transform:uppercase; letter-spacing:2px;">Brand Tagline</div>
-        <h2 style="margin:0; font-size:26px; font-weight:800; line-height:1.5; color:#f8fafc; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">${insight.tagline}</h2>
-        <div style="position:absolute; bottom:-70px; right:-10px; font-size:160px; font-family:serif; opacity:0.05; line-height:1;">"</div>
-      </div>
+      // For startDate, just use tomorrow
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const startDate = tomorrow.toISOString().split('T')[0];
       
-      <div class="responsive-grid" style="margin-bottom:30px;">
-        <div class="section-card" style="margin-bottom:0;">
-          <h3 class="section-title">🎯 핵심 페르소나</h3>
-          <ul style="list-style:none; padding:0; margin:0;">${personasHtml}</ul>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:15px;">
-          <div class="section-card" style="margin-bottom:0; flex:1;">
-            <h3 class="section-title">🎨 톤 & 매너 키워드</h3>
-            <div class="chip-container">
-              ${insight.tone_keywords.map(k => `<span style="background:linear-gradient(135deg, #fef08a 0%, #fde047 100%); color:#854d0e; padding:8px 16px; border-radius:20px; font-weight:800; font-size:13px; box-shadow:0 4px 10px rgba(253, 224, 71, 0.3);">#${k}</span>`).join("")}
-            </div>
-          </div>
-          <div class="section-card" style="margin-bottom:0; flex:1;">
-            <h3 class="section-title">📡 추천 플랫폼 믹스</h3>
-            ${channelHtml}
-          </div>
-        </div>
-      </div>
-      <button class="pulse-btn" onclick="SocialApp.startContent()">
-        ✨ 브랜드 맞춤 한 달 치 콘텐츠 생성하기
-      </button>
-    `;
-
-  },
-
-  async startContent() {
-    if (!this.state.insight || !this.state.input) {
-      alert('광고주 분석 결과가 필요합니다. 먼저 [분석 시작]을 진행해주세요.');
-      return;
-    }
-    
-    const config = this.collectInput(); // just to get API key
-    if (!config) return;
-    
-    document.getElementById('content-grid').innerHTML = '<div style="text-align:center; padding:50px; grid-column:1/-1;">⏳ 한 달 치 콘텐츠를 기획 중입니다... (10~20초 소요)</div>';
-    switchTab('social-content', 'social', document.querySelector('#tabs-social button:nth-child(3)'));
-    
-    try {
-      const freqMap = {"주 2회":8, "주 3회":13, "주 5회":22, "매일":30};
-      const freqNum = freqMap[this.state.input.freq] || 13;
-      const today = new Date();
-      const startDate = today.toISOString().split('T')[0];
-      
-      const messages = [
+      const contentMessages = [
         { role: 'system', content: SocialPrompts.CONTENT_SYSTEM },
-        { role: 'user', content: SocialPrompts.CONTENT_USER(this.state.insight, this.state.input, freqNum, 30, startDate) }
+        { role: 'user', content: SocialPrompts.CONTENT_USER(this.state.insight, config.input, config.input.freq, 30, startDate) }
       ];
       
-      const responseText = await SocialAI.call(messages, config);
-      const data = JSON.parse(responseText);
+      const contentRes = await SocialAI.call(contentMessages, config);
+      const parsedContent = JSON.parse(contentRes);
       
-      // If demo mode, data might contain full JSON including contents array.
-      if (data.contents) {
-        this.state.contents = data.contents;
-      } else if (Array.isArray(data)) {
-        this.state.contents = data;
-      } else {
-        this.state.contents = [];
-      }
+      // Assign IDs if missing
+      this.state.contents = parsedContent.map((c, i) => ({ ...c, id: 'c_' + Date.now() + '_' + i }));
       
-      // assign ids
-      this.state.contents.forEach((c, i) => c.id = 'c' + (i+1).toString().padStart(2, '0'));
       this.saveState();
       
-      this.renderContent(this.state.contents);
-      this.renderSchedule(this.state.contents);
+      progText.innerText = `[●●●●●●●●●●] ✅ 완료! ${this.state.contents.length}개 콘텐츠 생성됨.`;
+      progBar.style.width = "100%";
       
-    } catch(e) {
-      document.getElementById('content-grid').innerHTML = `<div style="text-align:center; padding:50px; color:var(--danger); grid-column:1/-1;">오류 발생: ${e.message}</div>`;
+      setTimeout(() => {
+        window.switchMode('social-content');
+        this.renderContent();
+        this.renderSchedule();
+        btn.disabled = false;
+        progContainer.style.display = "none";
+        progBar.style.width = "0%";
+      }, 1000);
+      
+    } catch (e) {
+      console.error(e);
+      alert('생성 중 오류 발생: ' + e.message);
+      btn.disabled = false;
+      progContainer.style.display = "none";
+      progBar.style.width = "0%";
     }
   },
+
 
   renderContent(contents) {
     const grid = document.getElementById('content-grid');
