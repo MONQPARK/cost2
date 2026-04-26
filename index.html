@@ -1767,10 +1767,10 @@ function switchMode(mode) {
   
   
   if (mode === 'persona') {
-    document.querySelector('.content-container').style.display = 'none';
+    document.querySelector('.app-container').style.display = 'none';
     document.getElementById('persona-layout').style.display = 'flex';
   } else {
-    document.querySelector('.content-container').style.display = 'block';
+    document.querySelector('.app-container').style.display = 'block';
     if(document.getElementById('persona-layout')) document.getElementById('persona-layout').style.display = 'none';
   }
 

@@ -298,7 +298,7 @@ const SocialApp = {
       progBar.style.width = "100%";
       
       setTimeout(() => {
-        window.switchMode('social-content');
+        window.switchTab('social-content', 'social');
         this.renderContent();
         this.renderSchedule();
         btn.disabled = false;
