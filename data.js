@@ -239,49 +239,49 @@ const companyData = [
   },
   {
     "name": "이스터씨앤아이",
-    "url": "",
+    "url": "http://www.easter.co.kr/",
     "address": "서울특별시 강남구 삼성로 134길 8(청담동, 이스터빌딩)",
     "lat": null,
     "lng": null
   },
   {
     "name": "그랑몬스터",
-    "url": "",
+    "url": "http://www.gmonster.co.kr/renewal/",
     "address": "서울특별시 강남구 삼성로 511 골든타워 5층",
     "lat": null,
     "lng": null
   },
   {
     "name": "더쏠트",
-    "url": "",
+    "url": "https://www.thesalt-seoul.com/",
     "address": "서울특별시 강남구 삼성로95길 6 삼혜빌딩 5층",
     "lat": null,
     "lng": null
   },
   {
     "name": "크로마엔터테인먼트",
-    "url": "",
+    "url": "https://www.kroma.co.kr/",
     "address": "서울특별시 강남구 선릉로 112길 34(삼성동, HS빌딩)",
     "lat": null,
     "lng": null
   },
   {
     "name": "리머지",
-    "url": "",
+    "url": "https://www.remerge.io/ko",
     "address": "서울특별시 강남구 선릉로 428, 14층 126호(대치동, 위워크선릉 3호점)",
     "lat": 37.4936511,
     "lng": 127.0541449
   },
   {
     "name": "이프로애드",
-    "url": "",
+    "url": "https://www.eproad.com/about",
     "address": "서울특별시 강남구 선릉로 642 (삼성동, 서경빌딩) 3층",
     "lat": 37.5074391,
     "lng": 127.0463889
   },
   {
     "name": "망고스타코리아",
-    "url": "",
+    "url": "https://www.mangostarkorea.com/",
     "address": "서울특별시 강남구 선릉로 91길 14, 선릉빌딩 402호",
     "lat": null,
     "lng": null

@@ -487,6 +487,22 @@
 
     /* --- Mobile Responsiveness --- */
     @media (max-width: 768px) {
+      .map-app-container {
+        flex-direction: column !important;
+        height: 800px !important;
+      }
+      .map-sidebar {
+        width: 100% !important;
+        height: 50% !important;
+        border-right: none !important;
+        border-bottom: 1px solid #cbd5e1 !important;
+      }
+      .map-main-area {
+        height: 50% !important;
+      }
+    }
+
+    @media (max-width: 768px) {
       .preview-pane { padding: 15px; }
       #preview-doc { padding: 20px; }
       
@@ -2441,7 +2457,7 @@ function buildMap() {
           <h4 style="margin:0 0 8px 0; color:var(--primary); font-size:15px;">${agency.name}</h4>
           <p style="margin:0 0 10px 0; font-size:12px; color:#555;">${agency.address}</p>
       `;
-      const popupLinkUrl = agency.url ? agency.url : `https://duckduckgo.com/?q=!ducky+${encodeURIComponent(agency.name + ' 공식 홈페이지')}`;
+      const popupLinkUrl = agency.url ? agency.url : `https://www.google.com/search?q=${encodeURIComponent(agency.name + ' 공식 홈페이지')}`;
       popupContent += `<a href="${popupLinkUrl}" target="_blank" style="display:inline-block; padding:6px 12px; background:var(--primary); color:#fff; text-decoration:none; border-radius:4px; font-size:12px; font-weight:bold;">홈페이지 방문하기</a>`;
       popupContent += `</div>`;
 
@@ -2507,7 +2523,7 @@ function renderSidebarList(list) {
       const markerObj = allMapMarkers.find(m => m.name === agency.name);
       const card = document.createElement('div');
       card.className = 'map-company-card';
-      const cardLinkUrl = agency.url ? agency.url : `https://duckduckgo.com/?q=!ducky+${encodeURIComponent(agency.name + ' 공식 홈페이지')}`;
+      const cardLinkUrl = agency.url ? agency.url : `https://www.google.com/search?q=${encodeURIComponent(agency.name + ' 공식 홈페이지')}`;
       card.innerHTML = `<h4>${agency.name}</h4><p>${agency.address}</p>` + 
                        `<a href="${cardLinkUrl}" target="_blank" style="font-size:11px; color:var(--primary); text-decoration:none; margin-top:5px; display:inline-block;" onclick="event.stopPropagation()">🔗 홈페이지 방문</a>`;
       card.onclick = () => {
@@ -2701,7 +2717,7 @@ function toggleEditMode() {
               </select>
             </div>
             <div class="form-group" style="display:flex; align-items:flex-end;">
-              <button type="button" class="btn" style="width:100%; height:44px;" onclick="alert('기능 준비중입니다.')">📊 트렌드 키워드 가져오기</button>
+              <button type="button" class="btn" style="width:100%; height:44px;" onclick="SocialApp.fetchTrendKeywords()">📊 트렌드 키워드 가져오기</button>
             </div>
           </div>
           <div class="form-group" style="margin-bottom:0;">
