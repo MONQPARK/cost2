@@ -991,8 +991,9 @@
   <!-- 모드 스위처 -->
   <div class="mode-switch">
     <button class="mode-btn active" id="mode-btn-quote" onclick="switchMode('quote')">📝 견적서 작성</button>
-    <button class="mode-btn" id="mode-btn-info" onclick="switchMode('info')">📊 정보 &amp; 트렌드</button>
+    <button class="mode-btn" id="mode-btn-info" onclick="switchMode('info')">📊 광고 트렌드</button>
       <button class="mode-btn" id="mode-btn-social" onclick="switchMode('social')">🚀 소셜 콘텐츠</button>
+      <button class="mode-btn" id="mode-btn-persona" onclick="switchMode('persona')">🎭 AI 페르소나</button>
   </div>
 
   <!-- 견적서 탭 -->
@@ -1011,12 +1012,23 @@
   </div>
 
     <!-- Social Content Tabs -->
+    
     <div class="tabs" id="tabs-social" style="display:none;">
       <button class="tab-btn active" onclick="switchTab('social-input','social',this)">9. 광고주 입력</button>
-      <button class="tab-btn" onclick="switchTab('social-insight','social',this)">10. 분석 결과</button>
-      <button class="tab-btn" onclick="switchTab('social-content','social',this)">11. 콘텐츠</button>
-      <button class="tab-btn" onclick="switchTab('social-schedule','social',this)">12. 스케줄링</button>
+      <button class="tab-btn" onclick="switchTab('social-insight','social',this)" style="display:none;">10. 분석 결과 (Hidden)</button>
+      <button class="tab-btn" onclick="switchTab('social-content','social',this)">10. 콘텐츠 캔버스</button>
+      <button class="tab-btn" onclick="switchTab('social-schedule','social',this)">11. 캘린더</button>
     </div>
+    
+    <!-- Persona Tabs -->
+    <div class="tabs" id="tabs-persona" style="display:none; justify-content:center; gap:5px;">
+      <button class="tab-btn active" onclick="switchTab('persona-cat', 'persona', this)">1. 카테고리</button>
+      <button class="tab-btn" onclick="switchTab('persona-world', 'persona', this)">2. 세계관</button>
+      <button class="tab-btn" onclick="switchTab('persona-sheet', 'persona', this)">3. 캐릭터 시트</button>
+      <button class="tab-btn" onclick="switchTab('persona-visual', 'persona', this)">4. 비주얼</button>
+      <button class="tab-btn" onclick="switchTab('persona-content', 'persona', this)">5. 콘텐츠 예시</button>
+    </div>
+
 
 
   <!-- Tab 1: Info -->
