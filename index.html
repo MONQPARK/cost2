@@ -26,7 +26,61 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
   <style>
+    
     :root {
+      --primary: #e84648;        /* 기본/견적 */
+      --info-accent: #0284c7;    /* 광고 트렌드 */
+      --social-accent: #ec4899;  /* 소셜 콘텐츠 */
+      --persona-accent: #7C3AED; /* AI 페르소나 */
+    }
+    
+    .mode-btn[id="mode-btn-quote"].active   { background: var(--primary); color: white; border-color: var(--primary); }
+    .mode-btn[id="mode-btn-info"].active    { background: var(--info-accent); color: white; border-color: var(--info-accent); }
+    .mode-btn[id="mode-btn-social"].active  { background: var(--social-accent); color: white; border-color: var(--social-accent); }
+    .mode-btn[id="mode-btn-persona"].active { background: var(--persona-accent); color: white; border-color: var(--persona-accent); }
+    
+    body[data-mode="social"] .tab-btn.active { background: var(--social-accent); color: white; border-color: var(--social-accent); }
+    body[data-mode="persona"] .tab-btn.active { background: var(--persona-accent); color: white; border-color: var(--persona-accent); }
+    
+    @media (max-width: 768px) {
+      #persona-layout {
+        flex-direction: column !important;
+        height: auto !important;
+        gap: 15px !important;
+      }
+      #persona-sidebar {
+        width: 100% !important;
+        order: 2;
+        max-height: 280px;
+        overflow-y: auto;
+      }
+      #persona-sidebar > div:first-child { padding: 12px !important; }
+      #psn_summary_card { padding: 14px !important; min-height: 120px !important; }
+      #psn_summary_card div:nth-child(2) { font-size: 18px !important; }
+      
+      #psn_cat_grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+      .cat-card { padding: 14px 8px !important; }
+      .cat-icon { font-size: 28px !important; }
+      
+      #psn_variants_grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+      
+      #psn_content_list > div { flex-direction: column !important; }
+      #psn_content_list > div > div:last-child { width: 100% !important; height: 200px !important; }
+      
+      .pulse-btn { width: 100%; padding: 14px !important; font-size: 15px !important; }
+      
+      .cal-grid { display: block !important; }
+      .cal-header { display: none !important; }
+      .cal-cell { margin-bottom: 10px; border: 1px solid #e2e8f0; border-radius: 8px; }
+    }
+    
+    @media (max-width: 480px) {
+      #psn_cat_grid { grid-template-columns: 1fr !important; }
+      #psn_variants_grid { grid-template-columns: 1fr !important; }
+      .mode-switch { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 5px; justify-content: flex-start; }
+      .mode-btn { flex: 0 0 auto; }
+    }
+
       --primary: #e84648;
       --primary-hover: #c93b3d;
       --secondary: #0f172a;
@@ -1010,16 +1064,16 @@
 
   <!-- 견적서 탭 -->
   <div class="tabs" id="tabs-quote">
-    <button class="tab-btn active" onclick="switchTab('info', 'quote', this)">1. 기본 정보</button>
-    <button class="tab-btn" onclick="switchTab('items', 'quote', this)">2. 견적 항목</button>
-    <button class="tab-btn" onclick="switchTab('preview', 'quote', this)">3. 미리보기 / 출력</button>
-    <button class="tab-btn" onclick="switchTab('wages', 'quote', this)">4. 노임단가표</button>
+    <button class="tab-btn active" role="tab" data-tab="info" onclick="switchTab('info', 'quote', this)">1. 기본 정보</button>
+    <button class="tab-btn" role="tab" data-tab="items" onclick="switchTab('items', 'quote', this)">2. 견적 항목</button>
+    <button class="tab-btn" role="tab" data-tab="preview" onclick="switchTab('preview', 'quote', this)">3. 미리보기 / 출력</button>
+    <button class="tab-btn" role="tab" data-tab="wages" onclick="switchTab('wages', 'quote', this)">4. 노임단가표</button>
   </div>
   <!-- 정보 탭 (초기 숨김) -->
   <div class="tabs" id="tabs-info" style="display:none">
-    <button class="tab-btn active" onclick="switchTab('stats', 'info', this)">5. 광고업계 통계</button>
-    <button class="tab-btn" onclick="switchTab('news', 'info', this)">6. 마케팅 트랜드</button>
-    <button class="tab-btn" onclick="switchTab('map', 'info', this)">8. 대행사 지도</button>
+    <button class="tab-btn active" role="tab" data-tab="stats" onclick="switchTab('stats', 'info', this)">5. 광고업계 통계</button>
+    <button class="tab-btn" role="tab" data-tab="news" onclick="switchTab('news', 'info', this)">6. 마케팅 트랜드</button>
+    <button class="tab-btn" role="tab" data-tab="map" onclick="switchTab('map', 'info', this)">8. 대행사 지도</button>
   </div>
 
     <!-- Social Content Tabs -->
@@ -1033,11 +1087,11 @@
     
     <!-- Persona Tabs -->
     <div class="tabs" id="tabs-persona" style="display:none;">
-      <button class="tab-btn active" onclick="switchTab('persona-cat', 'persona', this)">1. 카테고리</button>
-      <button class="tab-btn" onclick="switchTab('persona-world', 'persona', this)">2. 세계관</button>
-      <button class="tab-btn" onclick="switchTab('persona-sheet', 'persona', this)">3. 캐릭터 시트</button>
-      <button class="tab-btn" onclick="switchTab('persona-visual', 'persona', this)">4. 비주얼</button>
-      <button class="tab-btn" onclick="switchTab('persona-content', 'persona', this)">5. 콘텐츠 예시</button>
+      <button class="tab-btn active" role="tab" data-tab="persona-cat" onclick="switchTab('persona-cat', 'persona', this)">1. 카테고리</button>
+      <button class="tab-btn" role="tab" data-tab="persona-world" onclick="switchTab('persona-world', 'persona', this)">2. 세계관</button>
+      <button class="tab-btn" role="tab" data-tab="persona-sheet" onclick="switchTab('persona-sheet', 'persona', this)">3. 캐릭터 시트</button>
+      <button class="tab-btn" role="tab" data-tab="persona-visual" onclick="switchTab('persona-visual', 'persona', this)">4. 비주얼</button>
+      <button class="tab-btn" role="tab" data-tab="persona-content" onclick="switchTab('persona-content', 'persona', this)">5. 콘텐츠 예시</button>
     </div>
 
 
@@ -1601,7 +1655,8 @@
             <textarea id="psn_backstory" rows="3" placeholder="예: 2087년 도쿄, 기억을 잃은 채 깨어난 안드로이드 바리스타..."></textarea>
           </div>
           <div style="display:flex; gap:10px; margin-top:10px;">
-            <button class="btn" style="flex:1;" onclick="PersonaApp.generateSheet()" id="btn_gen_sheet">🤖 Gemini로 캐릭터 시트 자동 완성 ➔</button>
+            <button class="btn" style="flex:1; background:#f1f5f9; color:#475569;" onclick="PersonaApp.fillWorldGaps()" id="btn_fill_world">🤖 빈 칸 자동 채우기</button>
+            <button class="btn" style="flex:2;" onclick="PersonaApp.generateSheet()" id="btn_gen_sheet">🤖 Gemini로 캐릭터 시트 자동 완성 ➔</button>
           </div>
         </div>
       </div>
@@ -1826,6 +1881,7 @@ function enterMode(mode) {
 }
 
 function switchMode(mode) {
+  document.body.dataset.mode = mode;
   ['quote', 'info', 'social', 'persona'].forEach(m => {
     const btn = document.getElementById('mode-btn-' + m);
     if(btn) btn.classList.remove('active');
@@ -1861,13 +1917,8 @@ function switchTab(tabId, mode, btnEl) {
     btnEl.classList.add('active');
   } else {
     // fallback if called programmatically
-    const btns = document.querySelectorAll('.tabs button');
-    btns.forEach(b => {
-      const onclickAttr = b.getAttribute('onclick');
-      if (onclickAttr && onclickAttr.includes("'" + tabId + "'")) {
-        b.classList.add('active');
-      }
-    });
+    const btn = document.querySelector(`#tabs-${grp} button[data-tab="${tabId}"]`);
+    if(btn) btn.classList.add('active');
   }
   document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
   document.getElementById('tab-' + tabId).classList.add('active');
@@ -3082,7 +3133,12 @@ function toggleEditMode() {
     </div>
   </div>
 </div>
+
+  <button id="dbg_float" onclick="SocialApp.toggleDebug(this.dataset.on !== 'true'); this.dataset.on = this.dataset.on === 'true' ? 'false' : 'true';" 
+          style="position:fixed; bottom:20px; right:20px; width:48px; height:48px; border-radius:50%; background:#1e293b; color:#10b981; border:none; cursor:pointer; z-index:9998; box-shadow:0 4px 12px rgba(0,0,0,0.3); font-size:20px; display:flex; justify-content:center; align-items:center;" 
+          title="디버그 패널 토글">🔧</button>
 </body>
+
 
 
 

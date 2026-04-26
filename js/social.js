@@ -1,4 +1,11 @@
 
+const STORE = {
+  get: (k) => JSON.parse(localStorage.getItem('monq_'+k) || 'null'),
+  set: (k, v) => localStorage.setItem('monq_'+k, JSON.stringify(v)),
+  del: (k) => localStorage.removeItem('monq_'+k)
+};
+
+
 const SocialAI = {
   updateDebug(type, val, raw="") {
     if(!document.getElementById('soc_debug_toggle')?.checked) return;
@@ -316,6 +323,23 @@ const SocialApp = {
   },
 
 
+  
+  editField(cardId, field, el) {
+    const current = el.innerText;
+    el.innerHTML = `<textarea autofocus rows="2" 
+      onblur="SocialApp.saveField('${cardId}', '${field}', this.value)" 
+      style="width:100%; padding:8px; font:inherit; border:1px solid #7C3AED; border-radius:6px;">${current}</textarea>`;
+  },
+
+  saveField(cardId, field, value) {
+    const card = this.state.contents.find(c => c.id === cardId);
+    if(card) {
+      card[field] = value;
+      this.saveState();
+      this.renderContent(this.state.contents);
+    }
+  },
+
   renderContent(contents) {
     const grid = document.getElementById('content-grid');
     if(!contents || contents.length === 0) {
@@ -461,7 +485,7 @@ const SocialApp = {
   },
   
   saveState() {
-    localStorage.setItem('social_state', JSON.stringify(this.state));
+    STORE.set('social_state', this.state);
   }
 };
 

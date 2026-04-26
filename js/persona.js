@@ -1,5 +1,39 @@
 
+const STORE = {
+  get: (k) => JSON.parse(localStorage.getItem('monq_'+k) || 'null'),
+  set: (k, v) => localStorage.setItem('monq_'+k, JSON.stringify(v)),
+  del: (k) => localStorage.removeItem('monq_'+k)
+};
+
+
 const PersonaApp = {
+
+  saveState() {
+    STORE.set('persona_state', this.state);
+  },
+  
+  async init() {
+    const saved = STORE.get('persona_state');
+    if(saved) {
+      this.state = saved;
+      if(this.state.persona) {
+        this.renderSheetCard(this.state.persona);
+        this.nextStep('sheet');
+      }
+      if(this.state.visuals && this.state.visuals.length > 0) {
+        this.renderVariantsGrid();
+        const mainVis = this.state.visuals.find(v => v.variant === 'main');
+        if(mainVis) {
+          document.getElementById('psn_main_img').src = mainVis.image_data_url;
+          document.getElementById('psn_main_img').style.display = 'block';
+        }
+      }
+      if(this.state.contents && this.state.contents.length > 0) {
+        this.renderContents(this.state.contents);
+      }
+    }
+  },
+
   state: {
     category: { main: '', sub: '', positioning: '', differentiator: '', benchmarks: [] },
     world: { type: '3D', concept_keywords: [], signature_visual: '', backstory_draft: '' },
@@ -46,6 +80,34 @@ const PersonaApp = {
     this.updateSidebar();
   },
   
+  
+  async fillWorldGaps() {
+    const name = document.getElementById('psn_name').value;
+    const cat = this.state.category.main;
+    if(!name || !cat) return alert('이름과 카테고리를 먼저 선택해주세요.');
+    
+    const btn = document.getElementById('btn_fill_world');
+    if(btn) { btn.innerText = "채우는 중..."; btn.disabled = true; }
+    
+    try {
+      const messages = [
+        { role: 'system', content: '당신은 AI 페르소나 설정 기획자입니다. 사용자가 입력한 일부 정보를 바탕으로 세계관, 서사, 비주얼 특징을 JSON으로 자동 완성해 주세요. 반환 형식: {"backstory": "...", "signature_visual": "...", "concept_keywords": ["..."]}' },
+        { role: 'user', content: `이름: ${name}, 카테고리: ${cat}, 현재 설정된 성격: ${document.getElementById('psn_personality').value}` }
+      ];
+      const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
+      const data = JSON.parse(res);
+      
+      if(data.backstory) document.getElementById('psn_backstory').value = data.backstory;
+      if(data.signature_visual) document.getElementById('psn_visual').value = data.signature_visual;
+      if(data.concept_keywords) document.getElementById('psn_keywords').value = data.concept_keywords.join(', ');
+      
+      this.updateSidebar();
+    } catch(e) {
+      alert('자동 보강 실패: ' + e.message);
+    }
+    if(btn) { btn.innerText = "🤖 빈 칸 자동 채우기"; btn.disabled = false; }
+  },
+
   updateSidebar() {
     const sCat = document.getElementById('psn_summary_cat');
     const sName = document.getElementById('psn_summary_name');
@@ -140,7 +202,7 @@ const PersonaApp = {
         { role: 'user', content: PersonaPrompts.BUILD_USER(this.state) }
       ];
       const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
-      this.state.persona = JSON.parse(res);
+      this.state.persona = JSON.parse(res); this.saveState();
       
       this.updateSidebar();
       this.renderSheetCard(this.state.persona);
