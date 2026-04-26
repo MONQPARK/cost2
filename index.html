@@ -362,11 +362,11 @@
     @keyframes splashIn { 0%{opacity:0;transform:scale(0.7)} 60%{transform:scale(1.05)} 100%{opacity:1;transform:scale(1)} }
     #splash-logo img { width: 200px; height: auto; margin-bottom: 16px; }
     #splash-logo .splash-brand { font-size: 13px; font-weight: 600; letter-spacing: 4px; color: #999; text-transform: uppercase; }
-    #splash-select { display: none; flex-direction: column; align-items: center; animation: fadeUp 0.5s ease forwards; opacity: 0; width: 100%; padding: 0 20px; max-width: 600px; }
+    #splash-select { display: none; flex-direction: column; align-items: center; animation: fadeUp 0.5s ease forwards; opacity: 0; width: 100%; padding: 0 20px; max-width: 800px; }
     @keyframes fadeUp { 0%{opacity:0;transform:translateY(20px)} 100%{opacity:1;transform:translateY(0)} }
     #splash-select h2 { font-size: 22px; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
     #splash-select p { font-size: 14px; color: #64748b; margin-bottom: 32px; }
-    .splash-cards { display: flex; gap: 16px; width: 100%; }
+    .splash-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; width: 100%; }
     .splash-card {
       flex: 1; border: 2px solid #e2e8f0; border-radius: 20px; padding: 32px 24px;
       cursor: pointer; background: #fff; transition: all 0.25s ease;
@@ -979,6 +979,12 @@
         <h3>소셜 콘텐츠</h3>
         <p>AI 기반 타깃 분석<br>플랫폼별 콘텐츠 자동 생성</p>
       </button>
+
+      <button class="splash-card" type="button" onclick="enterMode('persona')">
+        <div class="splash-card-icon">🎭</div>
+        <h3>AI 페르소나</h3>
+        <p>세계관 빌딩부터 시각화까지<br>입체적 캐릭터 시트 자동 생성</p>
+      </button>
     </div>
   </div>
 </div>
@@ -1021,7 +1027,7 @@
     </div>
     
     <!-- Persona Tabs -->
-    <div class="tabs" id="tabs-persona" style="display:none; justify-content:center; gap:5px;">
+    <div class="tabs" id="tabs-persona" style="display:none;">
       <button class="tab-btn active" onclick="switchTab('persona-cat', 'persona', this)">1. 카테고리</button>
       <button class="tab-btn" onclick="switchTab('persona-world', 'persona', this)">2. 세계관</button>
       <button class="tab-btn" onclick="switchTab('persona-sheet', 'persona', this)">3. 캐릭터 시트</button>
@@ -2934,7 +2940,7 @@ function toggleEditMode() {
 
   
   <!-- ================= PERSONA MODE ================= -->
-  <div id="persona-layout" style="display:none; flex-direction:row; height:calc(100vh - 160px); gap:20px;">
+  <div id="persona-layout" style="display:none; flex-direction:row; height:calc(100vh - 180px); gap:30px; margin-top:20px;">
     <!-- Sidebar -->
     <div id="persona-sidebar" style="width:320px; background:#f8fafc; border-right:1px solid #e2e8f0; padding:20px; overflow-y:auto; border-radius:12px; display:flex; flex-direction:column; gap:20px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
       <h3 style="margin:0; font-size:16px; color:#1e293b; border-bottom:2px solid #7C3AED; padding-bottom:10px; display:inline-block;">🎭 진행 중인 페르소나</h3>
