@@ -1,24 +1,88 @@
+
 const SocialAI = {
+  updateDebug(type, val, raw="") {
+    if(!document.getElementById('soc_debug_toggle')?.checked) return;
+    const el = document.getElementById('dbg_'+type);
+    if(el) el.innerText = val;
+    if(raw && document.getElementById('dbg_raw')) {
+      document.getElementById('dbg_raw').innerText = "\n--- Raw Text ---\n" + raw;
+    }
+  },
+
   async call(messages, { provider, apiKey, model }) {
     if (provider === 'demo' || !apiKey) {
       return this.callDemo();
     }
     
+    const reqStartTime = Date.now();
+    this.updateDebug('provider', `${provider} · ${model || (provider==='gemini'?'gemini-2.5-flash':'default')}`);
+    this.updateDebug('req', `${new Date().toLocaleTimeString()} · Req Start`);
+    this.updateDebug('res', '-');
+    this.updateDebug('parse', '-');
+    this.updateDebug('err', '(없음)');
+    
     try {
-      if (provider === 'openai') {
-        const res = await fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-          body: JSON.stringify({
-            model: model || 'gpt-4o',
-            messages: messages,
-            response_format: { type: "json_object" }
-          })
+      if (provider === 'gemini') {
+        const geminiModel = model || "gemini-2.5-flash";
+        const systemPrompt = messages.find(m => m.role === "system")?.content || "";
+        const userPrompt = messages.find(m => m.role === "user")?.content || "";
+        
+        const reqBody = {
+          systemInstruction: { parts: [{ text: systemPrompt }] },
+          contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature: 0.85,
+            topP: 0.95,
+            maxOutputTokens: 8192
+          },
+          safetySettings: [
+            { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_ONLY_HIGH" },
+            { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_ONLY_HIGH" },
+            { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_ONLY_HIGH" },
+            { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_ONLY_HIGH" }
+          ]
+        };
+        
+        const reqStr = JSON.stringify(reqBody);
+        this.updateDebug('req', `${new Date().toLocaleTimeString()} · ${(reqStr.length/1024).toFixed(1)}KB`);
+        
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`;
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: reqStr
         });
         const data = await res.json();
-        if(!res.ok) throw new Error(data.error?.message || 'OpenAI API Error');
-        return data.choices[0].message.content;
-      } 
+        const duration = Date.now() - reqStartTime;
+        
+        if (!res.ok) {
+          throw new Error(data.error?.message || `Gemini ${res.status}`);
+        }
+        if (!data.candidates || !data.candidates[0]) {
+          throw new Error("Gemini 응답이 비어있음 (safety block 가능성)");
+        }
+        
+        let text = data.candidates[0].content.parts[0].text;
+        
+        this.updateDebug('res', `${res.status} · ${duration}ms · ${(text.length/1024).toFixed(1)}KB`);
+        
+        // 마크다운 코드펜스 제거
+        text = text.replace(/^\`\`(?:json)?\s*/i, "").replace(/\s*\`\`\s*$/i, "").trim();
+        
+        // JSON 파싱 검증용 (내부에서 에러나면 캐치하기 위함)
+        try {
+          JSON.parse(text);
+          this.updateDebug('parse', '✅ ok');
+        } catch(e) {
+          this.updateDebug('parse', '❌ failed', text);
+          // throw e; // Let the caller handle or just return the text
+        }
+        
+        return text;
+      }
+      // ... keep existing openai/anthropic ...
+
       else if (provider === 'anthropic') {
         const res = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
@@ -34,25 +98,7 @@ const SocialAI = {
         if(!res.ok) throw new Error(data.error?.message || 'Anthropic API Error');
         return data.content[0].text;
       }
-      else if (provider === "gemini") {
-        const geminiModel = model || "gemini-1.5-pro-latest";
-        const systemPrompt = messages.find(m => m.role === "system")?.content || "";
-        const userPrompt = messages.find(m => m.role === "user")?.content || "";
-        
-        const reqBody = {
-          contents: [{ parts: [{ text: systemPrompt + "\n\n" + userPrompt }] }],
-          generationConfig: { responseMimeType: "application/json" }
-        };
-        
-        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${geminiModel}:generateContent?key=${apiKey}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(reqBody)
-        });
-        const data = await res.json();
-        if(!res.ok) throw new Error(data.error?.message || "Gemini API Error");
-        return data.candidates[0].content.parts[0].text;
-      }
+      
 
     } catch (e) {
       console.error(e);
@@ -75,6 +121,34 @@ const SocialAI = {
 };
 
 const SocialApp = {
+
+  toggleDebug(isOn) {
+    document.getElementById('soc_debug_panel').style.display = isOn ? 'block' : 'none';
+  },
+
+  async verifyApiKey() {
+    const apiKey = document.getElementById('soc_api_key').value;
+    const statusEl = document.getElementById('soc_key_status');
+    if(!apiKey) {
+      statusEl.innerHTML = '<span style="color:#ef4444;">키를 입력하세요</span>';
+      return;
+    }
+    statusEl.innerHTML = '⏳ 점검 중...';
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+      if (!res.ok) {
+        const err = await res.json();
+        statusEl.innerHTML = `<span style="color:#ef4444;">❌ ${err.error?.message || "Invalid key"}</span>`;
+        return;
+      }
+      const data = await res.json();
+      const has25 = data.models?.some(m => m.name.includes("gemini-2.5-flash"));
+      statusEl.innerHTML = `<span style="color:#10b981;">✅ OK · ${has25 ? "gemini-2.5-flash 사용 가능" : "2.5-flash 미지원"}</span>`;
+    } catch (e) {
+      statusEl.innerHTML = `<span style="color:#ef4444;">❌ ${e.message}</span>`;
+    }
+  },
+
   state: {
     input: null,
     insight: null,
@@ -102,6 +176,7 @@ const SocialApp = {
     }
   },
 
+  
   collectInput() {
     const company = document.getElementById('soc_company').value;
     const industry = document.getElementById('soc_industry').value;
@@ -125,19 +200,19 @@ const SocialApp = {
       competitors: document.getElementById('soc_competitors').value
     };
     
-    const apiKey = "AIzaSyC82QBkaq5XUG4xVdTwjHyfCoFCsAAUedU";
-    const provider = "gemini";
+    const apiKey = document.getElementById('soc_api_key').value;
+    const provider = document.getElementById('soc_ai_provider').value;
+    if(apiKey) sessionStorage.setItem('social_api_key', apiKey);
     
     return { input: this.state.input, provider, apiKey };
   },
+
 
   
   async fetchTrendKeywords() {
     const config = this.collectInput();
     if (!config) return;
-    
-    
-    
+    if (config.provider === 'demo' || !config.apiKey) { alert('API 키가 필요합니다.'); return; }
     const kwInput = document.getElementById("soc_trend_kw");
     kwInput.value = "⏳ 실시간 트렌드 분석 중...";
     
