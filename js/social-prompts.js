@@ -87,7 +87,7 @@ const SocialPrompts = {
 
   CONTENT_USER: (insight, input, freq, days, startDate) => `# 브랜드 컨텍스트
 - 한 줄 정의: ${insight.tagline}
-- 페르소나: ${insight.personas.map(p => \`\${p.name}(\${p.age}, \${p.job}, \${p.motivation})\`).join(' / ')}
+- 페르소나: ${insight.personas.map(p => `${p.name}(${p.age}, ${p.job}, ${p.motivation})`).join(' / ')}
 - 톤 키워드: ${insight.tone_keywords.join(', ')}
 - 채널 분배: ${JSON.stringify(insight.channel_mix)}
 - 캠페인 목적: ${input.goal}

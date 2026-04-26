@@ -998,7 +998,7 @@
   <div class="mode-switch">
     <button class="mode-btn active" id="mode-btn-quote" onclick="switchMode('quote')">📝 견적서 작성</button>
     <button class="mode-btn" id="mode-btn-info" onclick="switchMode('info')">📊 광고 트렌드</button>
-      <button class="mode-btn" id="mode-btn-social" onclick="switchMode('social')">🚀 소셜 콘텐츠</button>
+      <button class="mode-btn" id="mode-btn-social" onclick="switchMode('social')">🚀 소셜 콘텐츠 자동생성</button>
       <button class="mode-btn" id="mode-btn-persona" onclick="switchMode('persona')">🎭 AI 페르소나</button>
   </div>
 
@@ -1013,7 +1013,6 @@
   <div class="tabs" id="tabs-info" style="display:none">
     <button class="tab-btn active" onclick="switchTab('stats', 'info', this)">5. 광고업계 통계</button>
     <button class="tab-btn" onclick="switchTab('news', 'info', this)">6. 마케팅 트랜드</button>
-    <button class="tab-btn" onclick="switchTab('salary', 'info', this)">7. 연봉정보</button>
     <button class="tab-btn" onclick="switchTab('map', 'info', this)">8. 대행사 지도</button>
   </div>
 
@@ -1263,33 +1262,7 @@
   </div>
 
   <!-- Tab 5: 연봉 정보 (신규) -->
-  <div id="tab-salary" class="tab-content">
-    <div class="salary-widget">
-      <div class="salary-widget-header">
-        <h3>💼 광고대행사 직무별 평균 연봉 (2026년 기준)</h3>
-        <p>100인 이하 광고대행사 기준 · 잡코리아·사람인 채용 데이터 분석 | 단위: 만원/년</p>
-      </div>
-      <div class="salary-controls">
-        <div class="salary-stage-btns" id="salary-stage-btns">
-          <button class="salary-stage-btn active" onclick="setSalaryStage(0,this)">신입 (0-2년)</button>
-          <button class="salary-stage-btn" onclick="setSalaryStage(1,this)">주니어 (3-5년)</button>
-          <button class="salary-stage-btn" onclick="setSalaryStage(2,this)">미드 (6-9년)</button>
-          <button class="salary-stage-btn" onclick="setSalaryStage(3,this)">시니어 (10년+)</button>
-          <button class="salary-stage-btn" onclick="setSalaryStage(4,this)">임원급</button>
-        </div>
-        <div class="salary-unit-toggle">
-          <button class="salary-unit-btn active" id="unit-annual" onclick="setSalaryUnit('annual',this)">연봉</button>
-          <button class="salary-unit-btn" id="unit-monthly" onclick="setSalaryUnit('monthly',this)">월급</button>
-        </div>
-      </div>
-      <div class="salary-chart-area">
-        <div class="salary-industry-grid" id="salary-grid"></div>
-        <p class="salary-note">* 100인 이하 중소 광고대행사 기준 중간값(Median)입니다. 대형 계열 대행사(이노션·제일기획·대홍기획 등)는 약 1.5~2배 수준입니다. 개인 성과·스킬에 따라 실제 연봉은 크게 다를 수 있습니다.</p>
-      </div>
-    </div>
-  </div>
-    <!-- 8. 대행사 지도 탭 -->
-    <div id="tab-map" class="tab-content">
+  <div id="tab-map" class="tab-content">
       <div class="section-title" style="font-size:20px; font-weight:800; color:var(--secondary); margin-bottom:5px;">🗺️ 광고대행사 위치 지도</div>
       <p style="color:#64748b; font-size:14px; margin-bottom:15px;">주요 광고대행사의 위치와 웹사이트를 확인하세요.</p>
       
