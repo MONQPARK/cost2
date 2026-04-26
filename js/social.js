@@ -68,7 +68,7 @@ const SocialAI = {
         this.updateDebug('res', `${res.status} · ${duration}ms · ${(text.length/1024).toFixed(1)}KB`);
         
         // 마크다운 코드펜스 제거
-        text = text.replace(/^\`\`(?:json)?\s*/i, "").replace(/\s*\`\`\s*$/i, "").trim();
+        text = text.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/i, "").trim();
         
         // JSON 파싱 검증용 (내부에서 에러나면 캐치하기 위함)
         try {
@@ -298,9 +298,9 @@ const SocialApp = {
       progBar.style.width = "100%";
       
       setTimeout(() => {
-        window.switchTab('social-content', 'social');
-        this.renderContent();
-        this.renderSchedule();
+        window.switchTab('social-content', 'social', document.querySelector('#tabs-social button:nth-child(3)'));
+        this.renderContent(this.state.contents);
+        this.renderSchedule(this.state.contents);
         btn.disabled = false;
         progContainer.style.display = "none";
         progBar.style.width = "0%";

@@ -1546,6 +1546,86 @@
     </div><!-- /stats-grid -->
   </div><!-- /tab-stats -->
 
+<!-- ================= PERSONA MODE ================= -->
+  <div id="persona-layout" style="display:none; flex-direction:row; height:calc(100vh - 180px); gap:30px; margin-top:20px;">
+    <!-- Sidebar -->
+    <div id="persona-sidebar" style="width:320px; background:#f8fafc; border-right:1px solid #e2e8f0; padding:20px; overflow-y:auto; border-radius:12px; display:flex; flex-direction:column; gap:20px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
+      <h3 style="margin:0; font-size:16px; color:#1e293b; border-bottom:2px solid #7C3AED; padding-bottom:10px; display:inline-block;">🎭 진행 중인 페르소나</h3>
+      <div id="psn_summary_card" style="background:linear-gradient(135deg, #7C3AED, #EC4899); border-radius:12px; padding:20px; color:#fff; display:flex; flex-direction:column; gap:10px; min-height:200px; box-shadow:0 10px 15px -3px rgba(124,58,237,0.3);">
+        <div style="font-size:12px; opacity:0.8;" id="psn_summary_cat">[ 카테고리 대기 중... ]</div>
+        <div style="font-size:24px; font-weight:bold;" id="psn_summary_name">이름 미정</div>
+        <div style="font-size:14px; line-height:1.4;" id="psn_summary_desc">세부 포지셔닝을 입력해주세요.</div>
+      </div>
+      <div id="psn_summary_visual" style="border-radius:12px; overflow:hidden; background:#0F172A; min-height:150px; display:none; align-items:center; justify-content:center;">
+        <img id="psn_main_img_preview" style="width:100%; height:auto; display:none;">
+      </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div style="flex:1; overflow-y:auto; padding-right:10px;">
+      <!-- Tab 1: Category -->
+      
+      <!-- 페르소나 탭 진입 시 키 없으면 노출 -->
+      <div id="psn_key_banner" style="display:none; background:#fef2f2; border-left:4px solid #ef4444; padding:12px 20px; margin-bottom:20px; border-radius:8px;">
+        <strong>⚠️ Gemini API 키가 필요합니다.</strong>
+        <input type="password" id="psn_api_key_input" placeholder="AIza..." style="margin-left:10px; padding:6px 10px; width:300px;">
+        <button class="btn" onclick="PersonaApp.saveApiKey()">저장</button>
+        <span style="font-size:12px; color:#64748b; margin-left:10px;">키는 브라우저 세션에만 저장됩니다.</span>
+      </div>
+<div id="tab-persona-cat" class="tab-content">
+        <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">1. 카테고리 선택</h2>
+        <div id="psn_cat_grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:15px; margin-bottom:30px;">
+          <!-- Categories loaded from JS -->
+        </div>
+        
+        <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:15px;">
+          <div class="form-group">
+            <label>세부 포지셔닝 <span style="color:#ef4444">*</span></label>
+            <input type="text" id="psn_pos" placeholder="예: 여성 게이머 시점에서 솔직 후기" oninput="PersonaApp.updateSidebar()">
+          </div>
+          <div class="form-group">
+            <label>벤치마크 인플루언서</label>
+            <input type="text" id="psn_bench" placeholder="예: 한국/해외 누구처럼 되고 싶은지">
+          </div>
+          <div class="form-group">
+            <label>차별화 한 줄 <span style="color:#ef4444">*</span></label>
+            <input type="text" id="psn_diff" placeholder="예: 무표정으로 팩트폭력하는 리뷰어">
+          </div>
+          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9; margin-top:10px;" onclick="PersonaApp.nextStep('world')">다음 단계: 세계관 빌딩 ➔</button>
+        </div>
+      </div>
+      
+      <!-- Tab 2: World -->
+      <div id="tab-persona-world" class="tab-content">
+        <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">2. 세계관 빌딩</h2>
+        <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:15px;">
+          <div class="form-group">
+            <label>인플루언서 타입 <span style="color:#ef4444">*</span></label>
+            <select id="psn_type">
+              <option value="실사 인간">실사 인간 (Real Human)</option>
+              <option value="3D" selected>3D 모델 (사이버펑크, 픽사 등)</option>
+              <option value="일러스트 캐릭터">일러스트 캐릭터 (Webtoon, Anime)</option>
+              <option value="픽셀">픽셀아트 캐릭터</option>
+              <option value="미니어처">미니어처 (Diorama)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>컨셉 키워드 (쉼표 구분) <span style="color:#ef4444">*</span></label>
+            <input type="text" id="psn_keywords" placeholder="예: 기억상실, 사이버펑크, 바리스타">
+          </div>
+          <div class="form-group">
+            <label>시그니처 비주얼</label>
+            <input type="text" id="psn_visual_sig" placeholder="예: 네온 핑크 바이저, 스팀펑크 손목시계">
+          </div>
+          <div class="form-group">
+            <label>백스토리 초안</label>
+            <textarea id="psn_backstory" rows="3" placeholder="예: 2087년 도쿄, 기억을 잃은 채 깨어난 안드로이드 바리스타..."></textarea>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:10px;">
+            <button class="btn" style="flex:1;" onclick="PersonaApp.generateSheet()" id="btn_gen_sheet">🤖 Gemini로 캐릭터 시트 자동 완성 ➔</button>
+          </div>
+        </div>
+      </div>
 </div><!-- /app-container -->
 
 <script>
@@ -1784,13 +1864,12 @@ function switchMode(mode) {
   if(actTabs) actTabs.style.display = 'flex';
   
   
-  if (mode === 'persona') {
-    document.querySelector('.app-container').style.display = 'none';
-    document.getElementById('persona-layout').style.display = 'flex';
-  } else {
-    document.querySelector('.app-container').style.display = 'block';
-    if(document.getElementById('persona-layout')) document.getElementById('persona-layout').style.display = 'none';
-  }
+  const personaLayout = document.getElementById('persona-layout');
+  if(personaLayout) personaLayout.style.display = mode === 'persona' ? 'flex' : 'none';
+  
+  document.querySelectorAll('.tab-content').forEach(c => {
+    c.style.display = mode === 'persona' ? 'none' : '';
+  });
 
   if (mode === 'quote') switchTab('info', 'quote', document.querySelector('#tabs-quote button'));
   else if (mode === 'info') switchTab('stats', 'info', document.querySelector('#tabs-info button'));
@@ -2939,78 +3018,7 @@ function toggleEditMode() {
   <script src="./js/social.js"></script>
 
   
-  <!-- ================= PERSONA MODE ================= -->
-  <div id="persona-layout" style="display:none; flex-direction:row; height:calc(100vh - 180px); gap:30px; margin-top:20px;">
-    <!-- Sidebar -->
-    <div id="persona-sidebar" style="width:320px; background:#f8fafc; border-right:1px solid #e2e8f0; padding:20px; overflow-y:auto; border-radius:12px; display:flex; flex-direction:column; gap:20px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);">
-      <h3 style="margin:0; font-size:16px; color:#1e293b; border-bottom:2px solid #7C3AED; padding-bottom:10px; display:inline-block;">🎭 진행 중인 페르소나</h3>
-      <div id="psn_summary_card" style="background:linear-gradient(135deg, #7C3AED, #EC4899); border-radius:12px; padding:20px; color:#fff; display:flex; flex-direction:column; gap:10px; min-height:200px; box-shadow:0 10px 15px -3px rgba(124,58,237,0.3);">
-        <div style="font-size:12px; opacity:0.8;" id="psn_summary_cat">[ 카테고리 대기 중... ]</div>
-        <div style="font-size:24px; font-weight:bold;" id="psn_summary_name">이름 미정</div>
-        <div style="font-size:14px; line-height:1.4;" id="psn_summary_desc">세부 포지셔닝을 입력해주세요.</div>
-      </div>
-      <div id="psn_summary_visual" style="border-radius:12px; overflow:hidden; background:#0F172A; min-height:150px; display:none; align-items:center; justify-content:center;">
-        <img id="psn_main_img_preview" style="width:100%; height:auto; display:none;">
-      </div>
-    </div>
-    
-    <!-- Main Content -->
-    <div style="flex:1; overflow-y:auto; padding-right:10px;">
-      <!-- Tab 1: Category -->
-      <div id="tab-persona-cat" class="tab-content">
-        <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">1. 카테고리 선택</h2>
-        <div id="psn_cat_grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:15px; margin-bottom:30px;">
-          <!-- Categories loaded from JS -->
-        </div>
-        
-        <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:15px;">
-          <div class="form-group">
-            <label>세부 포지셔닝 <span style="color:#ef4444">*</span></label>
-            <input type="text" id="psn_pos" placeholder="예: 여성 게이머 시점에서 솔직 후기" oninput="PersonaApp.updateSidebar()">
-          </div>
-          <div class="form-group">
-            <label>벤치마크 인플루언서</label>
-            <input type="text" id="psn_bench" placeholder="예: 한국/해외 누구처럼 되고 싶은지">
-          </div>
-          <div class="form-group">
-            <label>차별화 한 줄 <span style="color:#ef4444">*</span></label>
-            <input type="text" id="psn_diff" placeholder="예: 무표정으로 팩트폭력하는 리뷰어">
-          </div>
-          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9; margin-top:10px;" onclick="PersonaApp.nextStep('world')">다음 단계: 세계관 빌딩 ➔</button>
-        </div>
-      </div>
-      
-      <!-- Tab 2: World -->
-      <div id="tab-persona-world" class="tab-content">
-        <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">2. 세계관 빌딩</h2>
-        <div style="background:#fff; padding:20px; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); display:flex; flex-direction:column; gap:15px;">
-          <div class="form-group">
-            <label>인플루언서 타입 <span style="color:#ef4444">*</span></label>
-            <select id="psn_type">
-              <option value="실사 인간">실사 인간 (Real Human)</option>
-              <option value="3D" selected>3D 모델 (사이버펑크, 픽사 등)</option>
-              <option value="일러스트 캐릭터">일러스트 캐릭터 (Webtoon, Anime)</option>
-              <option value="픽셀">픽셀아트 캐릭터</option>
-              <option value="미니어처">미니어처 (Diorama)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>컨셉 키워드 (쉼표 구분) <span style="color:#ef4444">*</span></label>
-            <input type="text" id="psn_keywords" placeholder="예: 기억상실, 사이버펑크, 바리스타">
-          </div>
-          <div class="form-group">
-            <label>시그니처 비주얼</label>
-            <input type="text" id="psn_visual_sig" placeholder="예: 네온 핑크 바이저, 스팀펑크 손목시계">
-          </div>
-          <div class="form-group">
-            <label>백스토리 초안</label>
-            <textarea id="psn_backstory" rows="3" placeholder="예: 2087년 도쿄, 기억을 잃은 채 깨어난 안드로이드 바리스타..."></textarea>
-          </div>
-          <div style="display:flex; gap:10px; margin-top:10px;">
-            <button class="btn" style="flex:1;" onclick="PersonaApp.generateSheet()" id="btn_gen_sheet">🤖 Gemini로 캐릭터 시트 자동 완성 ➔</button>
-          </div>
-        </div>
-      </div>
+  
       
       <!-- Tab 3: Sheet -->
       <div id="tab-persona-sheet" class="tab-content">

@@ -8,7 +8,18 @@ const PersonaApp = {
     contents: []
   },
   
+  saveApiKey() {
+    const k = document.getElementById('psn_api_key_input').value.trim();
+    if (!k) return;
+    sessionStorage.setItem('social_api_key', k);
+    document.getElementById('psn_key_banner').style.display = 'none';
+  },
+
   async init() {
+    if (!this.getApiKey()) {
+      const banner = document.getElementById('psn_key_banner');
+      if(banner) banner.style.display = 'block';
+    }
     try {
       const res = await fetch('data/persona-categories.json');
       const data = await res.json();
@@ -58,7 +69,7 @@ const PersonaApp = {
   },
   
   getApiKey() {
-    return sessionStorage.getItem('social_api_key') || 'AIzaSyC82QBkaq5XUG4xVdTwjHyfCoFCsAAUedU';
+    return sessionStorage.getItem('social_api_key') || '';
   },
   
   async generateSheet() {
