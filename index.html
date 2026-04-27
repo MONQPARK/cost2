@@ -1052,8 +1052,9 @@
 </div>
 
 <div class="app-container">
-  <div class="header">
+  <div class="header" style="display:flex; justify-content:space-between; align-items:center;">
     <h1><span>MONQ</span> VISION</h1>
+    <button class="btn" style="font-size:11px; opacity:0.6; padding:4px 8px; border-radius:4px;" onclick="if(confirm('저장된 페르소나·소셜 진행 상태를 모두 지웁니다. 계속하시겠습니까?')) { localStorage.removeItem('monq_persona_state'); localStorage.removeItem('social_state'); location.reload(); }">진행 상태 초기화</button>
   </div>
 
   <!-- 모드 스위처 -->

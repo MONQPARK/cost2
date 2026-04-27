@@ -170,22 +170,32 @@ const SocialApp = {
   },
   
   init() {
+    // API 키 복원
     const savedKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
-    if (savedKey) document.getElementById('soc_api_key').value = savedKey;
+    const keyEl = document.getElementById('soc_api_key');
+    if (savedKey && keyEl) keyEl.value = savedKey;
     
-    // Auto-load state if available
-    const savedState = localStorage.getItem('social_state');
-    if (savedState) {
-      try {
-        this.state = JSON.parse(savedState);
-        if (this.state.insight) {
-          this.renderInsight(this.state.insight);
+    // 저장 상태 복원 — 안전하게
+    try {
+      const savedState = localStorage.getItem('social_state');
+      if (savedState) {
+        const parsed = JSON.parse(savedState);
+        // insight는 UI에 안 노출하므로 state에만 보관
+        if (parsed && typeof parsed === 'object') {
+          this.state = parsed;
         }
+        // 콘텐츠와 캘린더는 함수가 있을 때만 렌더
         if (this.state.contents && this.state.contents.length > 0) {
-          this.renderContent(this.state.contents);
-          this.renderSchedule(this.state.contents);
+          if (typeof this.renderContent === 'function') {
+            this.renderContent(this.state.contents);
+          }
+          if (typeof this.renderSchedule === 'function') {
+            this.renderSchedule(this.state.contents);
+          }
         }
-      } catch(e) { console.error('Failed to parse saved state', e); }
+      }
+    } catch(e) {
+      console.warn('[SocialApp] saved state restore failed', e);
     }
   },
 

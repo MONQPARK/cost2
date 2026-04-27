@@ -13,40 +13,47 @@ const PersonaApp = {
   },
   
   async init() {
-    if (!this.getApiKey()) {
-      const banner = document.getElementById('psn_key_banner');
-      if(banner) banner.style.display = 'block';
-    }
-    
-    const saved = STORE.get('persona_state');
-    if(saved) {
-      this.state = saved;
-      if(this.state.persona) {
-        this.renderSheetCard(this.state.persona);
-        this.nextStep('sheet');
-      }
-      if(this.state.visuals && this.state.visuals.length > 0) {
-        this.renderVariantsGrid();
-        const mainVis = this.state.visuals.find(v => v.variant === 'main');
-        if(mainVis) {
-          const imgEl = document.getElementById('psn_main_img');
-          if(imgEl) {
-            imgEl.src = mainVis.image_data_url;
-            imgEl.style.display = 'block';
-          }
-        }
-      }
-      if(this.state.contents && this.state.contents.length > 0) {
-        this.renderContents(this.state.contents);
-      }
-    }
-
+    // 1) 카테고리는 무조건 먼저 로드한다 (이게 1단계의 시작점이라 절대 막히면 안 됨)
     try {
       const res = await fetch('data/persona-categories.json');
       const data = await res.json();
       this.renderCategories(data.categories);
     } catch(e) {
-      console.error(e);
+      console.error('[PersonaApp] failed to load categories', e);
+    }
+  
+    // 2) API 키 배너
+    if (!this.getApiKey()) {
+      const banner = document.getElementById('psn_key_banner');
+      if(banner) banner.style.display = 'block';
+    }
+  
+    // 3) 저장된 상태 복원 — 이 안 어떤 단계든 실패해도 카테고리 로드는 이미 끝났으므로 안전하다
+    try {
+      const saved = STORE.get('persona_state');
+      if(saved) {
+        this.state = saved;
+        
+        if(this.state.persona && typeof this.renderSheetCard === 'function') {
+          this.renderSheetCard(this.state.persona);
+          this.nextStep('sheet');
+        }
+        
+        if(this.state.visuals && this.state.visuals.length > 0) {
+          const mainVis = this.state.visuals.find(v => v.variant === 'main');
+          if(mainVis) {
+            const imgEl = document.getElementById('psn_main_img');
+            if(imgEl) {
+              imgEl.src = mainVis.image_data_url;
+              imgEl.style.display = 'block';
+            }
+          }
+        }
+        // renderVariantsGrid와 renderContents는 미정의 → 호출 자체 제거
+        // 콘텐츠 그리드는 사용자가 5단계에서 다시 "일괄 생성" 누르면 그때 그려진다
+      }
+    } catch(e) {
+      console.warn('[PersonaApp] saved state restore failed', e);
     }
   },
 
@@ -131,7 +138,10 @@ const PersonaApp = {
   },
   
   nextStep(step) {
-    document.querySelector(`#tabs-persona button[onclick*="'${step}'"]`)?.click();
+    const fullTab = step.startsWith('persona-') ? step : 'persona-' + step;
+    const btn = document.querySelector(`#tabs-persona button[data-tab="${fullTab}"]`);
+    if (btn) btn.click();
+    else console.warn('[PersonaApp] nextStep: button not found for', fullTab);
   },
   
   getApiKey() {
