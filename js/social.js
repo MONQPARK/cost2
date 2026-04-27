@@ -493,6 +493,24 @@ const SocialApp = {
     grid.style.display = 'grid';
     
     const now = new Date();
+    
+    // If we haven't manually changed month and current month is empty, try to jump to earliest content
+    if (this.currentMonthOffset === 0 && contents.length > 0) {
+      const currentHasContents = contents.some(c => {
+        if(!c.scheduled_at) return false;
+        const cd = new Date(c.scheduled_at);
+        return !isNaN(cd) && cd.getFullYear() === now.getFullYear() && cd.getMonth() === now.getMonth();
+      });
+      if (!currentHasContents) {
+        const validDates = contents.map(c => new Date(c.scheduled_at)).filter(d => !isNaN(d));
+        if (validDates.length > 0) {
+          validDates.sort((a,b) => a - b);
+          const earliest = validDates[0];
+          this.currentMonthOffset = (earliest.getFullYear() - now.getFullYear()) * 12 + (earliest.getMonth() - now.getMonth());
+        }
+      }
+    }
+
     const targetDate = new Date(now.getFullYear(), now.getMonth() + this.currentMonthOffset, 1);
     const year = targetDate.getFullYear();
     const month = targetDate.getMonth();
