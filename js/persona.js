@@ -199,11 +199,11 @@ const PersonaApp = {
   },
 
   async generateSheet() {
-    const pos = document.getElementById('psn_pos').value;
-    const diff = document.getElementById('psn_diff').value;
-    if(!this.state.category.main || !pos || !diff) {
-      alert('카테고리, 세부 포지셔닝, 차별화 한 줄을 모두 입력해주세요.');
-      return;
+    const pos = document.getElementById('psn_pos').value || '기본 포지셔닝';
+    const diff = document.getElementById('psn_diff').value || '독특한 개성';
+    if(!this.state.category.main) {
+      this.state.category.main = '기타';
+      this.state.category.sub = '크리에이터';
     }
     
     this.state.category.positioning = pos;
@@ -257,16 +257,24 @@ const PersonaApp = {
       
       this.state.visuals.push({ variant: 'main', image_data_url: imgData });
       
-      const imgEl = document.getElementById('psn_main_img');
-      imgEl.src = imgData;
-      imgEl.style.display = 'block';
-      document.getElementById('psn_main_loading').style.display = 'none';
       
-      // Update Sidebar preview
-      document.getElementById('psn_summary_visual').style.display = 'flex';
-      const previewEl = document.getElementById('psn_main_img_preview');
-      previewEl.src = imgData;
-      previewEl.style.display = 'block';
+      const imgEl = document.getElementById('psn_main_img');
+      imgEl.onload = () => {
+        imgEl.style.display = 'block';
+        document.getElementById('psn_main_loading').style.display = 'none';
+        
+        // Update Sidebar preview
+        document.getElementById('psn_summary_visual').style.display = 'flex';
+        const previewEl = document.getElementById('psn_main_img_preview');
+        previewEl.src = imgData;
+        previewEl.style.display = 'block';
+      };
+      imgEl.onerror = () => {
+        alert('이미지를 불러오는데 실패했습니다. (Adblock을 꺼주시거나 새로고침 해주세요)');
+        document.getElementById('psn_main_loading').style.display = 'none';
+      };
+      imgEl.src = imgData;
+
       
     } catch(e) {
       alert('이미지 생성 실패: ' + e.message);

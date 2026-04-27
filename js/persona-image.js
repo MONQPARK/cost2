@@ -26,7 +26,7 @@ const PersonaImage = {
   
   // 스타일 프리셋
   buildPrompt(persona, variant = "main") {
-    const base = `${persona.tagline}, ${persona.signature_visual}, ${persona.concept_keywords.join(", ")}`;
+    const base = `${persona.tagline}, ${persona.signature_visual}, ${(persona.concept_keywords || []).join(", ")}`;
     const styleMap = {
       "3D": "Pixar-style 3D character render, soft cinematic lighting, octane render",
       "실사 인간": "Photorealistic portrait, 85mm f/1.4, soft window light, editorial fashion photography",

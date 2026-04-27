@@ -471,47 +471,89 @@ const SocialApp = {
     }
   },
 
+  
+  currentMonthOffset: 0,
+  
+  changeMonth(delta) {
+    this.currentMonthOffset += delta;
+    this.renderSchedule(this.state.contents);
+  },
+
   renderSchedule(contents) {
-    const cal = document.getElementById('schedule-calendar');
+    const grid = document.getElementById('soc_calendar_grid');
+    const title = document.getElementById('cal_month_title');
+    if(!grid) return;
+    
     if(!contents || contents.length === 0) {
-      cal.innerHTML = '<div style="text-align:center; padding:50px;">데이터가 없습니다.</div>';
+      grid.style.display = 'block';
+      grid.innerHTML = '<div style="text-align:center; padding:50px; background:#fff;">데이터가 없습니다.</div>';
       return;
     }
     
-    // Simple chronological list view for schedule (A true calendar view would require complex CSS grid)
+    grid.style.display = 'grid';
     
-    const sorted = [...contents].sort((a,b) => new Date(a.scheduled_at) - new Date(b.scheduled_at));
+    const now = new Date();
+    const targetDate = new Date(now.getFullYear(), now.getMonth() + this.currentMonthOffset, 1);
+    const year = targetDate.getFullYear();
+    const month = targetDate.getMonth();
     
-    cal.innerHTML = '<div class="timeline">' + sorted.map(c => {
-      const d = new Date(c.scheduled_at);
-      const dateStr = d.toLocaleDateString("ko-KR", {month:"short", day:"numeric", weekday:"short"});
-      const timeStr = d.toLocaleTimeString("ko-KR", {hour:"2-digit", minute:"2-digit", hour12:false});
+    if(title) title.innerText = `${year}년 ${month + 1}월`;
+    
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    
+    let html = '';
+    
+    // Empty cells for previous month
+    for(let i=0; i<firstDay; i++) {
+      html += `<div style="background:#f8fafc; min-height:100px; padding:10px;"></div>`;
+    }
+    
+    const colors = {
+      "Instagram": "#E1306C", "Reels": "#E1306C", "TikTok": "#000000", 
+      "Threads": "#000000", "X": "#1DA1F2", "YouTube Shorts": "#FF0000", 
+      "Naver Blog": "#03C75A", "LinkedIn": "#0A66C2"
+    };
+    
+    // Days
+    for(let d=1; d<=daysInMonth; d++) {
+      const currentDate = new Date(year, month, d);
+      const isWeekend = currentDate.getDay() === 0 || currentDate.getDay() === 6;
+      const dayColor = currentDate.getDay() === 0 ? '#ef4444' : (currentDate.getDay() === 6 ? '#3b82f6' : '#1e293b');
       
-      const colors = {
-        "Instagram": "#E1306C", "Reels": "#E1306C", "TikTok": "#000000", 
-        "Threads": "#000000", "X": "#1DA1F2", "YouTube Shorts": "#FF0000", 
-        "Naver Blog": "#03C75A", "LinkedIn": "#0A66C2"
-      };
-      const color = colors[c.channel] || "var(--primary)";
+      let dayHtml = `<div style="background:#fff; min-height:120px; padding:10px; display:flex; flex-direction:column; gap:4px;">
+        <div style="font-weight:bold; font-size:14px; color:${dayColor}; margin-bottom:5px;">${d}</div>`;
+        
+      // Find contents for this day
+      const dayContents = contents.filter(c => {
+        if(!c.scheduled_at) return false;
+        const cd = new Date(c.scheduled_at);
+        return cd.getFullYear() === year && cd.getMonth() === month && cd.getDate() === d;
+      });
       
-      return `
-        <div class="timeline-item">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
-            <div style="flex:1; min-width:200px;">
-              <div style="font-weight:800; font-size:16px; color:#1e293b; margin-bottom:6px;">${dateStr} <span style="color:#64748b; font-weight:500; margin-left:5px;">${timeStr}</span></div>
-              <div style="font-size:15px; color:#334155; line-height:1.5;">${c.core_message}</div>
-            </div>
-            <div style="display:flex; flex-direction:column; align-items:flex-end;">
-              <span style="background:${color}; color:white; font-size:12px; font-weight:800; padding:4px 12px; border-radius:12px; margin-bottom:6px; box-shadow:0 2px 6px rgba(0,0,0,0.2);">${c.channel}</span>
-              <span style="font-size:12px; color:#64748b; font-weight:700; text-transform:uppercase; background:#f1f5f9; padding:2px 8px; border-radius:6px;">${c.format}</span>
-            </div>
-          </div>
-        </div>
-      `;
-    }).join("") + '</div>';
-
+      dayContents.forEach(c => {
+        const timeStr = new Date(c.scheduled_at).toLocaleTimeString("ko-KR", {hour:"2-digit", minute:"2-digit", hour12:false});
+        const bgColor = colors[c.channel] || '#7C3AED';
+        dayHtml += `<div style="background:${bgColor}15; border-left:3px solid ${bgColor}; padding:4px 6px; border-radius:4px; font-size:11px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="${c.core_message}">
+          <span style="color:${bgColor}; font-weight:bold; margin-right:4px;">${timeStr}</span> 
+          <span style="color:#334155;">${c.channel}</span>
+        </div>`;
+      });
+      
+      dayHtml += `</div>`;
+      html += dayHtml;
+    }
+    
+    // Fill remaining cells
+    const totalCells = firstDay + daysInMonth;
+    const remaining = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
+    for(let i=0; i<remaining; i++) {
+      html += `<div style="background:#f8fafc; min-height:100px; padding:10px;"></div>`;
+    }
+    
+    grid.innerHTML = html;
   },
-  
+
   saveState() {
     STORE.set('social_state', this.state);
   }
