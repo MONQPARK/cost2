@@ -153,8 +153,7 @@ const PersonaApp = {
       sessionStorage.setItem('social_api_key', k);
       return k;
     }
-    alert("Gemini API 키가 필요합니다. 카테고리 탭이나 소셜콘텐츠 탭에서 입력해주세요.");
-    return null;
+    return "AIzaSyC82QBkaq5XUG4xVdTwjHyfCoFCsAAUedU";
   },
   
   renderSheetCard(persona) {

@@ -170,10 +170,16 @@ const SocialApp = {
   },
   
   init() {
-    // API 키 복원
-    const savedKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
+    // API 키 복원 또는 하드코딩된 키 사용
+    let savedKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
+    if (!savedKey || savedKey.trim() === "") {
+      savedKey = "AIzaSyC82QBkaq5XUG4xVdTwjHyfCoFCsAAUedU";
+      sessionStorage.setItem('social_api_key', savedKey);
+    }
     const keyEl = document.getElementById('soc_api_key');
-    if (savedKey && keyEl) keyEl.value = savedKey;
+    if (keyEl) keyEl.value = savedKey;
+    const psnKeyEl = document.getElementById('psn_api_key_input');
+    if (psnKeyEl) psnKeyEl.value = savedKey;
     
     // 저장 상태 복원 — 안전하게
     try {
@@ -270,13 +276,13 @@ const SocialApp = {
     const config = this.collectInput();
     if (!config) return;
 
-    
-    if (!config.apiKey && (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'))) {
-      config.apiKey = (sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key'));
+    if (!config.apiKey) {
+      config.apiKey = sessionStorage.getItem('social_api_key') || localStorage.getItem('monq_api_key') || 'AIzaSyC82QBkaq5XUG4xVdTwjHyfCoFCsAAUedU';
     }
-    if (config.provider === "demo" || !config.apiKey) {
-      alert("AI 모델 및 키 설정이 필요합니다. (Gemini 2.5 권장)");
-      return;
+    
+    if (config.provider === "demo") {
+      alert("데모 모드는 지원되지 않습니다. Gemini를 사용합니다.");
+      config.provider = 'gemini';
     }
 
     const btn = document.getElementById('soc_generate_btn');
