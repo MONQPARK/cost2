@@ -302,7 +302,8 @@ const PersonaApp = {
         { role: 'user', content: PersonaPrompts.CONTENT_USER(this.state.persona) }
       ];
       const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
-      this.state.contents = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(res);
+      let parsed = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(res);
+      this.state.contents = Array.isArray(parsed) ? parsed : (parsed.contents || []);
       
       const list = document.getElementById('psn_content_list');
       list.innerHTML = this.state.contents.map(c => `

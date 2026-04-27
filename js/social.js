@@ -304,10 +304,11 @@ const SocialApp = {
       ];
       
       const contentRes = await SocialAI.call(contentMessages, config);
-      const parsedContent = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(contentRes);
+      let parsedContents = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(contentRes);
+      this.state.contents = Array.isArray(parsedContents) ? parsedContents : (parsedContents.contents || []);
       
       // Assign IDs if missing
-      this.state.contents = parsedContent.map((c, i) => ({ ...c, id: 'c_' + Date.now() + '_' + i }));
+      this.state.contents.forEach((c, i) => { if(!c.id) c.id = 'content_' + i + '_' + Date.now(); });
       
       this.saveState();
       
@@ -359,7 +360,7 @@ const SocialApp = {
     
     
     grid.innerHTML = contents.map(c => {
-      const dateStr = new Date(c.scheduled_at).toLocaleString("ko-KR", { month:"short", day:"numeric", weekday:"short", hour:"2-digit", minute:"2-digit" });
+      const dateStr = c.scheduled_at ? new Date(c.scheduled_at).toLocaleString("ko-KR", { month:"short", day:"numeric", weekday:"short", hour:"2-digit", minute:"2-digit" }) : '미정';
       const avatarColors = {
         "Instagram": "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
         "Reels": "linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888)",
@@ -370,27 +371,28 @@ const SocialApp = {
         "Naver Blog": "linear-gradient(135deg, #03C75A, #029b46)",
         "LinkedIn": "linear-gradient(135deg, #0A66C2, #084e96)"
       };
-      const bg = avatarColors[c.channel] || "linear-gradient(135deg, #64748b, #475569)";
-      const shortCh = c.channel.substring(0,2).toUpperCase();
+      const channelName = c.channel || 'SNS';
+      const bg = avatarColors[channelName] || "linear-gradient(135deg, #64748b, #475569)";
+      const shortCh = channelName.substring(0,2).toUpperCase();
       
       return `
         <div class="post-card">
           <div class="post-header">
             <div class="post-avatar" style="background:${bg}; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">${shortCh}</div>
             <div class="post-channel-info">
-              <span class="post-channel-name">${c.channel}</span>
-              <span class="post-format">${c.format} · ${dateStr}</span>
+               <span class="post-channel-name">${channelName}</span>
+               <span class="post-format">${c.format || '포스트'} · ${dateStr}</span>
             </div>
           </div>
           <div style="padding:20px; flex-grow:1; display:flex; flex-direction:column;">
-            <h4 style="margin:0 0 15px 0; font-size:16px; color:#0f172a; line-height:1.5;">${c.core_message}</h4>
-            <div style="background:#f8fafc; padding:15px; border-radius:10px; font-size:13px; line-height:1.6; color:#334155; white-space:pre-wrap; margin-bottom:15px; flex-grow:1; border:1px solid #e2e8f0;">${c.copy}</div>
+            <h4 style="margin:0 0 15px 0; font-size:16px; color:#0f172a; line-height:1.5;">${c.core_message || ''}</h4>
+            <div style="background:#f8fafc; padding:15px; border-radius:10px; font-size:13px; line-height:1.6; color:#334155; white-space:pre-wrap; margin-bottom:15px; flex-grow:1; border:1px solid #e2e8f0;">${c.copy || ''}</div>
             <div style="margin-bottom:15px; display:flex; flex-wrap:wrap; gap:6px;">
               ${(c.hashtags||[]).map(h => `<span style="color:#0284c7; font-size:13px; font-weight:600; background:#e0f2fe; padding:2px 8px; border-radius:10px;">${h}</span>`).join("")}
             </div>
             <div style="font-size:13px; background:#f0fdf4; padding:12px; border-radius:8px; color:#166534; display:flex; gap:10px; align-items:flex-start; border: 1px solid #dcfce7;">
               <span style="font-size:18px;">📸</span>
-              <span style="line-height:1.5; font-weight:500;">${c.image_prompt}</span>
+              <span style="line-height:1.5; font-weight:500;">${c.image_prompt || ''}</span>
             </div>
           </div>
           <div style="display:flex; border-top:1px solid #e2e8f0; background:#f8fafc;">
