@@ -1663,7 +1663,59 @@
           </div>
         </div>
       </div>
-</div><!-- /app-container -->
+      <!-- Tab 3: Sheet -->
+      <div id="tab-persona-sheet" class="tab-content">
+        <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">3. 완성된 캐릭터 시트</h2>
+        <div id="psn_sheet_render" style="background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); white-space:pre-wrap; font-size:14px; line-height:1.6; color:#334155; border:1px solid #e2e8f0; min-height:300px;">
+          (캐릭터 시트가 여기에 생성됩니다)
+        </div>
+        <div style="margin-top:20px; text-align:right;">
+          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9;" onclick="PersonaApp.nextStep('visual')">비주얼 생성으로 이동 ➔</button>
+        </div>
+      </div>
+      
+      <!-- Tab 4: Visual -->
+      <div id="tab-persona-visual" class="tab-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+          <h2 style="font-size:20px; color:#1e293b; margin:0;">4. 비주얼 에셋 생성</h2>
+          <div style="display:flex; gap:10px;">
+            <button class="btn" onclick="PersonaApp.generateMainVisual()" id="btn_gen_main">🎨 메인 비주얼 생성</button>
+            <button class="btn" onclick="PersonaApp.generateVariants()" id="btn_gen_variants">🎭 8장 일괄 생성</button>
+          </div>
+        </div>
+        
+        <div style="background:#0F172A; padding:30px; border-radius:12px; margin-bottom:20px; display:flex; justify-content:center; align-items:center; min-height:400px; position:relative;">
+          <div id="psn_main_loading" style="display:none; color:#f8fafc; font-size:16px;">이미지 생성 중... (약 10~20초 소요)</div>
+          <img id="psn_main_img" style="max-width:100%; max-height:500px; border-radius:8px; display:none; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+          <div style="position:absolute; bottom:15px; right:15px; color:#94a3b8; font-size:12px;">Gemini 2.5 Flash Image</div>
+        </div>
+        
+        <div id="psn_variants_grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:15px;">
+          <!-- Generated from JS -->
+        </div>
+        
+        <div style="margin-top:30px; text-align:right;">
+          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9;" onclick="PersonaApp.nextStep('content')">콘텐츠 예시 만들기 ➔</button>
+        </div>
+      </div>
+      
+      <!-- Tab 5: Content -->
+      <div id="tab-persona-content" class="tab-content">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+          <h2 style="font-size:20px; color:#1e293b; margin:0;">5. 플랫폼별 첫 주 콘텐츠</h2>
+          <button class="btn" onclick="PersonaApp.generateContents()" id="btn_gen_content">📝 첫 주 콘텐츠 일괄 생성</button>
+        </div>
+        <div id="psn_content_list" style="display:flex; flex-direction:column; gap:20px;">
+          <div style="color:#64748b; padding:20px; background:#fff; border-radius:12px; text-align:center;">'첫 주 콘텐츠 일괄 생성' 버튼을 눌러주세요.</div>
+        </div>
+        <div style="margin-top:30px; display:flex; justify-content:space-between;">
+           <button class="btn" style="color:#ef4444; border-color:#ef4444;" onclick="PersonaApp.exportPersona()">📥 데이터 다운로드</button>
+           <button class="pulse-btn" style="background:#10b981; border-color:#059669;" onclick="PersonaApp.sendToSocial()">🚀 이 페르소나로 소셜 캘린더 짜기</button>
+        </div>
+      </div>
+
+    </div><!-- /persona-main-content -->
+  </div><!-- /persona-layout -->
 
 <script>
 // --- 1. 데이터 ---
@@ -3051,59 +3103,8 @@ function toggleEditMode() {
   
   
       
-      <!-- Tab 3: Sheet -->
-      <div id="tab-persona-sheet" class="tab-content">
-        <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">3. 완성된 캐릭터 시트</h2>
-        <div id="psn_sheet_render" style="background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 6px -1px rgba(0,0,0,0.05); white-space:pre-wrap; font-size:14px; line-height:1.6; color:#334155; border:1px solid #e2e8f0; min-height:300px;">
-          (캐릭터 시트가 여기에 생성됩니다)
-        </div>
-        <div style="margin-top:20px; text-align:right;">
-          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9;" onclick="PersonaApp.nextStep('visual')">비주얼 생성으로 이동 ➔</button>
-        </div>
-      </div>
-      
-      <!-- Tab 4: Visual -->
-      <div id="tab-persona-visual" class="tab-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-          <h2 style="font-size:20px; color:#1e293b; margin:0;">4. 비주얼 에셋 생성</h2>
-          <div style="display:flex; gap:10px;">
-            <button class="btn" onclick="PersonaApp.generateMainVisual()" id="btn_gen_main">🎨 메인 비주얼 생성</button>
-            <button class="btn" onclick="PersonaApp.generateVariants()" id="btn_gen_variants">🎭 8장 일괄 생성</button>
-          </div>
-        </div>
-        
-        <div style="background:#0F172A; padding:30px; border-radius:12px; margin-bottom:20px; display:flex; justify-content:center; align-items:center; min-height:400px; position:relative;">
-          <div id="psn_main_loading" style="display:none; color:#f8fafc; font-size:16px;">이미지 생성 중... (약 10~20초 소요)</div>
-          <img id="psn_main_img" style="max-width:100%; max-height:500px; border-radius:8px; display:none; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
-          <div style="position:absolute; bottom:15px; right:15px; color:#94a3b8; font-size:12px;">Gemini 2.5 Flash Image</div>
-        </div>
-        
-        <div id="psn_variants_grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:15px;">
-          <!-- Generated from JS -->
-        </div>
-        
-        <div style="margin-top:30px; text-align:right;">
-          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9;" onclick="PersonaApp.nextStep('content')">콘텐츠 예시 만들기 ➔</button>
-        </div>
-      </div>
-      
-      <!-- Tab 5: Content -->
-      <div id="tab-persona-content" class="tab-content">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-          <h2 style="font-size:20px; color:#1e293b; margin:0;">5. 플랫폼별 첫 주 콘텐츠</h2>
-          <button class="btn" onclick="PersonaApp.generateContents()" id="btn_gen_content">📝 첫 주 콘텐츠 일괄 생성</button>
-        </div>
-        <div id="psn_content_list" style="display:flex; flex-direction:column; gap:20px;">
-          <div style="color:#64748b; padding:20px; background:#fff; border-radius:12px; text-align:center;">'첫 주 콘텐츠 일괄 생성' 버튼을 눌러주세요.</div>
-        </div>
-        <div style="margin-top:30px; display:flex; justify-content:space-between;">
-           <button class="btn" style="color:#ef4444; border-color:#ef4444;" onclick="PersonaApp.exportPersona()">📥 데이터 다운로드</button>
-           <button class="pulse-btn" style="background:#10b981; border-color:#059669;" onclick="PersonaApp.sendToSocial()">🚀 이 페르소나로 소셜 캘린더 짜기</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
+
+</div><!-- /app-container -->
 
   <div id="soc_debug_panel" style="display:none; position:fixed; bottom:0; left:0; width:100%; height:200px; background:#1e293b; color:#10b981; font-family:monospace; font-size:12px; padding:15px; overflow-y:auto; z-index:9999; border-top:2px solid #0f172a; opacity:0.95;">
     <div style="color:#f8fafc; font-weight:bold; margin-bottom:5px;">[Provider] <span id="dbg_provider">-</span></div>
