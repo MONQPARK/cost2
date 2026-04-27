@@ -1,5 +1,5 @@
 
-const STORE = {
+var STORE = {
   get: (k) => JSON.parse(localStorage.getItem('monq_'+k) || 'null'),
   set: (k, v) => localStorage.setItem('monq_'+k, JSON.stringify(v)),
   del: (k) => localStorage.removeItem('monq_'+k)

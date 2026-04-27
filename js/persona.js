@@ -1,5 +1,5 @@
 
-const STORE = {
+var STORE = {
   get: (k) => JSON.parse(localStorage.getItem('monq_'+k) || 'null'),
   set: (k, v) => localStorage.setItem('monq_'+k, JSON.stringify(v)),
   del: (k) => localStorage.removeItem('monq_'+k)
@@ -13,6 +13,11 @@ const PersonaApp = {
   },
   
   async init() {
+    if (!this.getApiKey()) {
+      const banner = document.getElementById('psn_key_banner');
+      if(banner) banner.style.display = 'block';
+    }
+    
     const saved = STORE.get('persona_state');
     if(saved) {
       this.state = saved;
@@ -24,13 +29,24 @@ const PersonaApp = {
         this.renderVariantsGrid();
         const mainVis = this.state.visuals.find(v => v.variant === 'main');
         if(mainVis) {
-          document.getElementById('psn_main_img').src = mainVis.image_data_url;
-          document.getElementById('psn_main_img').style.display = 'block';
+          const imgEl = document.getElementById('psn_main_img');
+          if(imgEl) {
+            imgEl.src = mainVis.image_data_url;
+            imgEl.style.display = 'block';
+          }
         }
       }
       if(this.state.contents && this.state.contents.length > 0) {
         this.renderContents(this.state.contents);
       }
+    }
+
+    try {
+      const res = await fetch('data/persona-categories.json');
+      const data = await res.json();
+      this.renderCategories(data.categories);
+    } catch(e) {
+      console.error(e);
     }
   },
 
@@ -47,18 +63,6 @@ const PersonaApp = {
     if (!k) return;
     sessionStorage.setItem('social_api_key', k);
     document.getElementById('psn_key_banner').style.display = 'none';
-  },
-
-  async init() {
-    if (!this.getApiKey()) {
-      const banner = document.getElementById('psn_key_banner');
-      if(banner) banner.style.display = 'block';
-    }
-    try {
-      const res = await fetch('data/persona-categories.json');
-      const data = await res.json();
-      this.renderCategories(data.categories);
-    } catch(e) { console.error('Failed to load categories', e); }
   },
   
   renderCategories(cats) {
