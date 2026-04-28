@@ -137,6 +137,36 @@
     .form-group input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); }
     .save-btn { width: 100%; padding: 14px; background: var(--secondary); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; transition: var(--transition); }
     .save-btn:hover { background: #1e293b; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2); transform: translateY(-2px); }
+
+    /* --- Modern Button Styles --- */
+    .btn {
+      padding: 12px 24px; border: none; 
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: white; border-radius: 10px; cursor: pointer; font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(232, 70, 72, 0.25);
+      letter-spacing: -0.3px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-size: 14px;
+    }
+    .btn:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 20px rgba(232, 70, 72, 0.35); 
+      filter: brightness(1.05);
+    }
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(232, 70, 72, 0.2);
+    }
+    
+    .btn-outline {
+      background: rgba(255,255,255,0.8); color: var(--text-main); border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 12px 24px; border-radius: 10px;
+      cursor: pointer; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;
+    }
+    .btn-outline:hover { background: white; border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
+    .btn-outline:active { transform: translateY(1px); }
+
     
     /* Items Tab */
     .cat-selector { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: thin; }
@@ -835,30 +865,18 @@
     }
     
     .pulse-btn {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: white;
-      border: none;
-      border-radius: 12px;
-      padding: 18px;
-      font-size: 18px;
-      font-weight: 800;
-      width: 100%;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .pulse-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, var(--primary), #ff5e62);
+      color: white; padding: 16px 32px; font-size: 17px; font-weight: 800;
+      border: none; border-radius: 14px; cursor: pointer;
+      box-shadow: 0 8px 20px rgba(232, 70, 72, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%; letter-spacing: -0.5px;
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .pulse-btn::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; width: 50%; height: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-      transform: skewX(-25deg);
+      content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
       animation: shine 3s infinite;
     }
     @keyframes shine {
@@ -866,6 +884,11 @@
       20% { left: 200%; }
       100% { left: 200%; }
     }
+    .pulse-btn:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 12px 25px rgba(232, 70, 72, 0.4);
+    }
+    .pulse-btn:active { transform: translateY(1px) scale(0.99); }
     
     /* Post Preview Card */
     .post-card {
@@ -1008,6 +1031,34 @@
 
 
 
+    /* --- Modern Button Styles --- */
+    .btn {
+      padding: 12px 24px; border: none; 
+      background: linear-gradient(135deg, var(--primary), #ff6b6b);
+      color: white; border-radius: 10px; cursor: pointer; font-weight: 700;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(232, 70, 72, 0.25);
+      letter-spacing: -0.3px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-size: 14px;
+    }
+    .btn:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 8px 20px rgba(232, 70, 72, 0.35); 
+      filter: brightness(1.05);
+    }
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(232, 70, 72, 0.2);
+    }
+    
+    .btn-outline {
+      background: rgba(255,255,255,0.8); color: var(--text-main); border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05); padding: 12px 24px; border-radius: 10px;
+      cursor: pointer; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px;
+    }
+    .btn-outline:hover { background: white; border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.08); }
+    .btn-outline:active { transform: translateY(1px); }
 </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1670,7 +1721,7 @@
           (캐릭터 시트가 여기에 생성됩니다)
         </div>
         <div style="margin-top:20px; text-align:right;">
-          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9;" onclick="PersonaApp.nextStep('visual')">비주얼 생성으로 이동 ➔</button>
+          <button class="pulse-btn" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9); box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);" class="pulse-btn" onclick="PersonaApp.nextStep('visual')">비주얼 생성으로 이동 ➔</button>
         </div>
       </div>
       
@@ -1695,7 +1746,7 @@
         </div>
         
         <div style="margin-top:30px; text-align:right;">
-          <button class="pulse-btn" style="background:#7C3AED; border-color:#6D28D9;" onclick="PersonaApp.nextStep('content')">콘텐츠 예시 만들기 ➔</button>
+          <button class="pulse-btn" style="background: linear-gradient(135deg, #8B5CF6, #6D28D9); box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);" class="pulse-btn" onclick="PersonaApp.nextStep('content')">콘텐츠 예시 만들기 ➔</button>
         </div>
       </div>
       
@@ -1709,8 +1760,8 @@
           <div style="color:#64748b; padding:20px; background:#fff; border-radius:12px; text-align:center;">'첫 주 콘텐츠 일괄 생성' 버튼을 눌러주세요.</div>
         </div>
         <div style="margin-top:30px; display:flex; justify-content:space-between;">
-           <button class="btn" style="color:#ef4444; border-color:#ef4444;" onclick="PersonaApp.exportPersona()">📥 데이터 다운로드</button>
-           <button class="pulse-btn" style="background:#10b981; border-color:#059669;" onclick="PersonaApp.sendToSocial()">🚀 이 페르소나로 소셜 캘린더 짜기</button>
+           <button class="btn" class="btn btn-outline" style="color: #ef4444; border-color: #ef4444;" onclick="PersonaApp.exportPersona()">📥 데이터 다운로드</button>
+           <button class="pulse-btn" style="background: linear-gradient(135deg, #34D399, #059669); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);" class="pulse-btn" onclick="PersonaApp.sendToSocial()">🚀 이 페르소나로 소셜 캘린더 짜기</button>
         </div>
       </div>
 
@@ -3077,7 +3128,7 @@ function toggleEditMode() {
         <div style="color:#ef4444;">일</div><div>월</div><div>화</div><div>수</div><div>목</div><div>금</div><div style="color:#3b82f6;">토</div>
       </div>
       
-      <div id="soc_calendar_grid" style="display:grid; grid-template-columns:repeat(7, 1fr); gap:1px; background:#e2e8f0; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden;">
+      <div id="soc_calendar_grid" style="display:grid !important; grid-template-columns:repeat(7, 1fr) !important; gap:1px; background:#e2e8f0; border:1px solid #e2e8f0; border-radius:8px; overflow:hidden; min-height: 400px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
         <!-- Calendar Days will be injected here -->
       </div>
     </div>
@@ -3085,9 +3136,9 @@ function toggleEditMode() {
 
       
       <div style="display:flex; gap:10px; margin-top:20px;">
-        <button class="save-btn" style="flex:1;" onclick="SocialExport.exportJson()">📦 한 파일로 내보내기 (.json)</button>
-        <button class="btn" style="flex:1;" onclick="SocialExport.exportXlsx()">📊 엑셀로 (.xlsx)</button>
-        <button class="btn" style="flex:1;" onclick="SocialExport.sendToQuote()">📝 견적서로 보내기</button>
+        <button class="save-btn" style="flex:1;" onclick="SocialExport.exportJson()" class="btn btn-outline">📦 데이터 백업 (.json)</button>
+        <button class="btn" style="flex:1;" onclick="SocialExport.exportXlsx()" class="btn btn-outline">📊 엑셀 다운로드</button>
+        <button class="btn" style="flex:1;" onclick="SocialExport.sendToQuote()" class="btn">📝 견적서로 보내기</button>
       </div>
       <div style="margin-top:15px;">
         <p style="font-size:12px; color:var(--text-light);">이전 파일 불러오기:</p>
@@ -3133,7 +3184,7 @@ function toggleEditMode() {
     </div>
     <div style="padding:16px 24px; background:#f8fafc; border-top:1px solid #e2e8f0; display:flex; justify-content:flex-end; gap:10px;">
       <button class="btn" style="background:#e2e8f0; color:#475569;" onclick="document.getElementById('regenerate-modal').style.display='none'">취소</button>
-      <button class="btn" style="background:linear-gradient(135deg, #7C3AED, #EC4899);" onclick="SocialApp.submitRegenerate()">🚀 다시 만들기</button>
+      <button class="btn" style="background: linear-gradient(135deg, #8B5CF6, #EC4899); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);" onclick="SocialApp.submitRegenerate()">🚀 다시 만들기</button>
     </div>
   </div>
 </div>
