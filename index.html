@@ -2115,8 +2115,8 @@ function categorizeArticle(title) {
 async function loadNews() {
   const grid = document.getElementById('news-grid');
   try {
-    // GitHub Pages / Vercel 환경 모두 호환
-    const res = await fetch('./data/news.json');
+    // GitHub Pages / Vercel 환경 모두 호환 (캐시 방지 추가)
+    const res = await fetch('./data/news.json?v=' + new Date().getTime());
     if (!res.ok) throw new Error('news.json 로드 실패: ' + res.status);
     const raw = await res.json();
     // 썸네일 있는 기사 먼저, 그 다음 날짜 내림차순

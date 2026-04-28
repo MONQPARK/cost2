@@ -1,5 +1,669 @@
 [
   {
+    "title": "[속보] 권성동 통일교 1억 수수, 항소심도 징역 2년 “죄질 중해”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334078",
+    "date": "2026-04-28T02:33:59.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "김건희 금품 준 윤영호 항소심 징역 1년6개월 형량 늘어…김건희에 직격탄?",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334074",
+    "date": "2026-04-28T01:59:33.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "李 대통령 “산재 사망률 1위 오명 앞에 경제대국 성취 자랑스러울 수 없다”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334073",
+    "date": "2026-04-28T01:20:08.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "AI가 절대 흉내 낼 수 없는 것, 김애란 작가가 말하는 ‘망설임’의 가치",
+    "link": "https://www.mobiinside.co.kr/2026/04/28/kim-aeran-hesitation-ai-human-value/",
+    "date": "2026-04-28T00:47:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/27114343/news-p.v1.20260420.b2afe61e57a14c2c9861c107a02563f8_P1.png"
+  },
+  {
+    "title": "대홍기획 ‘시리즈L’, 2026 시즌 첫 라인업 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27529",
+    "date": "2026-04-27T23:10:43.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "벤츠 vs 아우디의 신차 마케팅 전쟁, 크리에이티비티 역량이 가른 그날의 분위기",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=9822",
+    "date": "2026-04-27T23:00:00.000Z",
+    "source": "BrandBrief",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "‘부산 북갑 출마’ 하정우 사의 표명에 조선일보 “국민 속이는 것”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334067",
+    "date": "2026-04-27T22:33:56.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "김용 공천 논란에 조선일보 “법치 우습게 보는 것” 한국일보 “몰염치”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334054",
+    "date": "2026-04-27T21:35:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "“모든 미디어를 하나로 비교한다”… 코카콜라, ‘단일 지표’로 광고 효과 측정 판 바꾼다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27528",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "media",
+    "thumbnail": null
+  },
+  {
+    "title": "소통하지 않는 도시 그리고 무너진 신뢰... 삼풍백화점 붕괴와 광고가 남긴 어반 커뮤니케이션의 교훈",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27516",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "IAS, 틱톡 광고 전 영역으로 측정 확대… 검색 광고까지 커버",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27509",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "[인포그래픽] AI 두뇌 경쟁 ‘초접전’… GPT-5.4·그록 공동 1위",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27508",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “난독증을 검색하면 무엇이 보이나”…클레멘저 BBDO, 구글 검색 결과를 바꾸다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27502",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] BJP 피지 x 일레븐컴 x 피어먼 미디어, ‘Find Your Feel-Good’로 모든 소녀를 춤으로 초대하다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27496",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 크리넥스, ‘학교 화장실’ 금기 깨기 나선 ‘Get Comfortable’ 캠페인 론칭",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27495",
+    "date": "2026-04-27T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "이진숙 주호영 비교한 대구언론 “주호영 옹졸하고 앙금 남아”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334047",
+    "date": "2026-04-27T13:53:13.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "“내란 피고인 추경호” MBC 클로징멘트에 국힘 ‘선거개입’ 반발",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334064",
+    "date": "2026-04-27T10:29:21.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “스타워즈를 먹는다” 버거킹, 팬덤 입힌 체험형 캠페인",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27527",
+    "date": "2026-04-27T10:04:10.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "박성재 ‘검사파견 수용시설 검토’ 징역 20년 구형 “윤석열과 한배 타”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334063",
+    "date": "2026-04-27T09:59:27.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "조승래 “하정우, 대통령에 사의 표명…곧 수리될 것”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334061",
+    "date": "2026-04-27T09:57:11.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "JTBC 배성재·박지성, KBS 전현무·이영표, 월드컵 중계진 확정",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334057",
+    "date": "2026-04-27T09:20:30.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "추경호 대구시장 국힘후보에 MBC 앵커 “윤어게인 부활” 조갑제 “윤석열 지령”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334050",
+    "date": "2026-04-27T09:11:38.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "법원 “EBS, ‘용감한 소방차 레이’ 제작사에 미지급금 지급해야”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334056",
+    "date": "2026-04-27T09:11:29.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[속보] 민주, 경기 하남갑 이광재·평택을 김용남·안산갑 김남국",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334059",
+    "date": "2026-04-27T09:11:22.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "연합뉴스TV ‘노사동수 사추위’ 합의…“새로운 시대 열렸다”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334049",
+    "date": "2026-04-27T08:37:38.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[오늘의 소마코 콕] 맛집 앱 지우고 ‘거지맵’ 본다…100만 명이 열광한 ‘결핍의 마케팅’",
+    "link": "https://www.mobiinside.co.kr/2026/04/27/beggar-map/",
+    "date": "2026-04-27T08:35:35.000Z",
+    "source": "MobiInside",
+    "category": "trend",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/27170130/260427_%EA%B1%B0%EC%A7%80%EB%A7%B5_01.jpg"
+  },
+  {
+    "title": "전한길 5·18 음모론, 영상 삭제로 방미심위 ‘각하’ 예정",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334052",
+    "date": "2026-04-27T08:25:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[속보] 컷오프서 ‘생환’…국민의힘 충북지사 후보에 김영환 현 지사",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334053",
+    "date": "2026-04-27T08:17:41.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "80년 해직 언론인들 “헌법전문 ‘5·18 민주화운동’ 대신 ‘5·18광주민주항쟁’ 써야”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334051",
+    "date": "2026-04-27T08:09:58.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "대학생연합광고동아리 애드컬리지, 일회용품 없는 피크닉 '용기원정대' 캠페인 진행",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=9824",
+    "date": "2026-04-27T07:56:18.000Z",
+    "source": "BrandBrief",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[트렌드로 읽는 소비문화] 1인가구 시대의 다음은?",
+    "link": "https://www.mobiinside.co.kr/2026/04/27/living-apart-together/",
+    "date": "2026-04-27T07:53:53.000Z",
+    "source": "MobiInside",
+    "category": "trend",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/27164331/260427_1.5%EA%B0%80%EA%B5%AC_01.jpg"
+  },
+  {
+    "title": "“내란 절연 못한 국힘 제외” 언론노조, 지역언론·TBS 등 의제 담은 정책협약 추진",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334048",
+    "date": "2026-04-27T07:42:26.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "정청래 “尹 무인기 침투, 사형 마땅”…장동혁, 김용 저격",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334046",
+    "date": "2026-04-27T07:15:43.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "위시미디어, 아마존 DSP 서비스 론칭… \"구글 GMP에 아마존까지, 해외 마케팅 원스톱 시대 연다\"",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27524",
+    "date": "2026-04-27T06:51:27.000Z",
+    "source": "MadTimes",
+    "category": "media",
+    "thumbnail": null
+  },
+  {
+    "title": "국힘 지지율 바닥? 여론조사 보니 부산 울산 ‘일부 오차범위 내’",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334044",
+    "date": "2026-04-27T06:07:07.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "우원식 “개헌 싫어할 세력, 윤어게인...누가 국힘 반성했다 생각하겠나”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334045",
+    "date": "2026-04-27T05:46:32.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[패션 마케팅 딥다이브] 자동화 시대, 패션 마케터가 통제권을 잃지 않고 머신러닝 효율을 극대화할 수 있는 데이터 피딩(Feeding) 및 비딩 전략",
+    "link": "https://www.mobiinside.co.kr/2026/04/27/fashion-marketer/",
+    "date": "2026-04-27T04:42:03.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/27133110/260427_%ED%8C%A8%EC%85%98-%EB%A7%88%EC%BC%80%ED%8C%85-%EC%9E%90%EB%8F%99%ED%99%94_01.png"
+  },
+  {
+    "title": "[기묘한 커머스 이야기] 다이소, 5천 원짜리 팔아 5조 법니다",
+    "link": "https://www.mobiinside.co.kr/2026/04/27/daiso-retail-strategy/",
+    "date": "2026-04-27T04:16:07.000Z",
+    "source": "MobiInside",
+    "category": "trend",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2023/02/21102601/%EC%A0%80%EC%9E%91%EA%B6%8C-%EC%9D%B4%EB%AF%B8%EC%A7%80-4-1.png"
+  },
+  {
+    "title": "[Brand Insight] 케어원, ‘공간의 질’을 케어하다... 기능을 넘어 기준을 세우는 리브랜딩",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27523",
+    "date": "2026-04-27T03:20:00.000Z",
+    "source": "MadTimes",
+    "category": "brand",
+    "thumbnail": null
+  },
+  {
+    "title": "애드컬리지, 다회용기 피크닉 캠페인 ‘용기원정대’ 진행…일회용품 줄이기 실천 제안",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27521",
+    "date": "2026-04-27T02:42:59.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "“검찰입니다” 보이스피싱, AI가 가족한테 알려준다",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334041",
+    "date": "2026-04-27T02:26:58.000Z",
+    "source": "미디어오늘",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "함샤우트 글로벌, AI 기반 브랜드 진단 서비스 'AIBA™' 출시",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27520",
+    "date": "2026-04-27T02:11:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "네이버 ‘댓글창 자동 폐쇄’, 선한 보호일까 교묘한 통제일까?",
+    "link": "https://www.mobiinside.co.kr/2026/04/27/naver-news-ai-comment-block-issue/",
+    "date": "2026-04-27T01:54:31.000Z",
+    "source": "MobiInside",
+    "category": "media",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/27102859/55539_43675_297.png"
+  },
+  {
+    "title": "코바코, 에드워드 리와 대한민국의 따뜻한 배려 조명… 글로벌로 방송",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=9823",
+    "date": "2026-04-27T01:37:29.000Z",
+    "source": "BrandBrief",
+    "category": "media",
+    "thumbnail": null
+  },
+  {
+    "title": "[MOBIINSIDE AWARD 2026] 오픈마켓 부문 수상 브랜드 인터뷰 – SSG닷컴",
+    "link": "https://www.mobiinside.co.kr/2026/04/27/mobiinside-awawrd-2026-ssg/",
+    "date": "2026-04-27T01:00:00.000Z",
+    "source": "MobiInside",
+    "category": "brand",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/23104417/20260428_SSG%EB%8B%B7%EC%BB%B4_02_jpg-1024x817.jpg"
+  },
+  {
+    "title": "\"소비자 쇼핑 여정 더 늘린 AI, 승부처는 커머스 데이터\"…  디어뮤드 길 크리테오 CTO",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=9820",
+    "date": "2026-04-26T23:00:00.000Z",
+    "source": "BrandBrief",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "2026 칸라이언즈, 티타늄·크리에이티브 브랜드 라이언즈 심사위원단 발표",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=9819",
+    "date": "2026-04-26T22:55:00.000Z",
+    "source": "BrandBrief",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "동아일보 “장동혁 교체로 해결될 수 없을 만큼 사태 꼬여”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334038",
+    "date": "2026-04-26T22:31:40.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “숏폼 연애 리얼리티로 제품을 녹였다” 바세린, 리얼리티 연애 콘텐츠로 Z세대 공략",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27507",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 바세린, TCS 런던 마라톤서 ‘The Nipple Sponsorship’ 전개…러너 피부 보호 ‘후원’",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27505",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "“광고는 맥락 속에서 완성된다” CTV, 브랜드 인식 4배 끌어올린다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27504",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "brand",
+    "thumbnail": null
+  },
+  {
+    "title": "불안한 소비 심리, ‘작은 위안’으로 이동…WARC, 2026 글로벌 소비자 트렌드 발표",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27500",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 스무디킹, 넘쳐나는 영양 정보 속 ‘정답’을 말하다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27497",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 맥도날드 x 레오 UK, ‘익숙함을 배신하라’ 맥크리스피로 유혹한다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27494",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 타임스 라디오 x 모자이크, 정치적 신뢰 위기 속 ‘듣기’ 강조",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27493",
+    "date": "2026-04-26T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "李 대통령, 백악관 총격 사태에 “모든 폭력과 극단주의 반대”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334037",
+    "date": "2026-04-26T10:23:18.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "총격 사고에도 ‘자화자찬’ 나선 트럼프, 언론에 ‘이례적’ 칭찬",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334036",
+    "date": "2026-04-26T10:12:56.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "“AI도 검증한다”… AAM, ‘윤리적 AI 인증’ 전 회원사로 확대",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27514",
+    "date": "2026-04-26T09:47:50.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "‘저작권 범우주적 포기’ 요구까지?...K콘텐츠 생태계, 왜 위기일까",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334035",
+    "date": "2026-04-26T08:18:37.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "‘기자 캐리커처’ 1인당 300만 원 배상해야…판결 이유는",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334034",
+    "date": "2026-04-26T07:30:18.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "‘통일교 1억 수수’ 재판 중인 권성동, 뉴스타파 기자 폭행 ‘유죄’ 확정",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334033",
+    "date": "2026-04-26T07:11:16.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "15세 미만 청소년 SNS·온라인 게임 규제 나선 튀르키예",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334032",
+    "date": "2026-04-26T06:35:34.000Z",
+    "source": "미디어오늘",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "대변인도 사과했는데 장동혁 ‘언론 때리기’… 민주 “현실 직시하라”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334031",
+    "date": "2026-04-26T05:21:22.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "버티는 장동혁에 조선일보 고문 “땅에 떨어져 썩어서 거름 돼라”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334030",
+    "date": "2026-04-26T05:16:06.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[속보] 추경호, 이진숙 중도 포기한 대구시장 국민의힘 최종후보로",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334029",
+    "date": "2026-04-26T02:57:23.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "美 백악관 기자단 만찬서 총격…트럼프 대피, 용의자 체포",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334027",
+    "date": "2026-04-26T02:28:34.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "회원정보 해킹당한 듀오, 부동산·원천징수내역까지 털렸다",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334026",
+    "date": "2026-04-26T02:09:46.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "타불라, 에이전틱 AI ‘Realize+’ 공개…퍼포먼스 마케팅 자동화 확장",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27501",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “당신의 장보기 IQ는?”…알디, 소비자 참여형 ‘알디 IQ’ 캠페인 전개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27484",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “별표 대신 랩으로 읽어드립니다”…포코, 약관 읽어주는 캠페인으로 업계 꼬집다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27483",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “이 정도면 ‘대박 절약’”…아고다, 인도서 ‘What a Save!’ 캠페인 전개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27482",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “짝퉁에서 키운 실력, 진짜에서 보상”… 클래시 로얄, 카피캣을 유입 전략으로 바꾸다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27481",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "“고객경험, 더 이상 나눠서 관리하지 않는다” 통합 CX가 바꾸는 브랜드 경쟁력",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27480",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "brand",
+    "thumbnail": null
+  },
+  {
+    "title": "AI는 이미 쓰고 있다… 문제는 신뢰다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27476",
+    "date": "2026-04-25T15:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "백 명의 조상에게서 온 자손들을 한 곳에 묻었다… ‘내 이름은’",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333907",
+    "date": "2026-04-25T09:55:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "LG유플러스 유심 식별번호에 내 전화번호가? 서울YMCA “보안 위협 현실화”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333931",
+    "date": "2026-04-25T08:25:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "보수 유튜브 대신 보수 언론 보면 부정선거 음모론 덜 믿는다",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333985",
+    "date": "2026-04-25T07:00:00.000Z",
+    "source": "미디어오늘",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "태양과 바람은 호르무즈 해협에 갇히지 않는다",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334014",
+    "date": "2026-04-25T05:35:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "LIA, 엔터테인먼트 & 콘텐츠 및 컬처럴 카탈리스트 심사위원단 공개... 남우리 스튜디오좋 대표, 심사위원 선임",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27506",
+    "date": "2026-04-25T04:33:00.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "‘모자무싸’가 넘어야 할 두 가지 변수, 구교환 그리고 제목",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334009",
+    "date": "2026-04-25T04:25:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "트럼프 대통령 무차별 언론탄압, 법원이 막았다",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333918",
+    "date": "2026-04-25T02:55:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "이진숙 전 방통위원장, 대구시장 불출마 ",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=334021",
+    "date": "2026-04-25T02:33:57.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "AI는 누구의 몸으로 배우는가",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333877",
+    "date": "2026-04-25T02:05:00.000Z",
+    "source": "미디어오늘",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
     "title": "대통령이 본 영화 ‘내 이름은’, ‘4·3’의 이름을 찾을 수 있을까",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333924",
     "date": "2026-04-24T22:30:00.000Z",
