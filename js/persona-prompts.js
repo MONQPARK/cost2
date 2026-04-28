@@ -28,6 +28,7 @@ const PersonaPrompts = {
   "base_world": "캐릭터의 배경이 되는 세계 (예: 네오 도쿄 2087)",
   "concept_keywords": ["${input.world.concept_keywords.join('", "')}"],
   "signature_visual": "${input.world.signature_visual}",
+  "english_visual_prompt": "English description of the character's visual appearance for an image generator (max 200 chars)",
   "backstory": "5문장 정도의 흥미로운 캐릭터 과거 스토리",
   "strengths": ["강점 1", "강점 2"],
   "weaknesses": ["약점 1", "약점 2"],

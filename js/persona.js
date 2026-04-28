@@ -93,9 +93,9 @@ const PersonaApp = {
   
   
   async fillWorldGaps() {
-    const name = document.getElementById('psn_name').value;
     const cat = this.state.category.main;
-    if(!name || !cat) return alert('이름과 카테고리를 먼저 선택해주세요.');
+    const pos = document.getElementById('psn_pos')?.value || '무난함';
+    if(!cat) return alert('먼저 1단계에서 카테고리를 선택해주세요.');
     
     const btn = document.getElementById('btn_fill_world');
     if(btn) { btn.innerText = "채우는 중..."; btn.disabled = true; }
@@ -103,13 +103,13 @@ const PersonaApp = {
     try {
       const messages = [
         { role: 'system', content: '당신은 AI 페르소나 설정 기획자입니다. 사용자가 입력한 일부 정보를 바탕으로 세계관, 서사, 비주얼 특징을 JSON으로 자동 완성해 주세요. 반환 형식: {"backstory": "...", "signature_visual": "...", "concept_keywords": ["..."]}' },
-        { role: 'user', content: `이름: ${name}, 카테고리: ${cat}, 현재 설정된 성격: ${document.getElementById('psn_personality').value}` }
+        { role: 'user', content: `카테고리: ${cat}, 포지셔닝: ${pos}, 희망 타입: ${document.getElementById('psn_type').value}` }
       ];
       const res = await SocialAI.call(messages, { provider: 'gemini', apiKey: this.getApiKey() });
       const data = (function(str){ try{ return JSON.parse(str); } catch(e){ const m=str.match(/\{.*\}|\[.*\]/s); if(m) return JSON.parse(m[0]); throw e; } })(res);
       
       if(data.backstory) document.getElementById('psn_backstory').value = data.backstory;
-      if(data.signature_visual) document.getElementById('psn_visual').value = data.signature_visual;
+      if(data.signature_visual) document.getElementById('psn_visual_sig').value = data.signature_visual;
       if(data.concept_keywords) document.getElementById('psn_keywords').value = data.concept_keywords.join(', ');
       
       this.updateSidebar();
