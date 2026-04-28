@@ -1653,11 +1653,19 @@
       <!-- Tab 1: Category -->
       
       <!-- 페르소나 탭 진입 시 키 없으면 노출 -->
-      <div id="psn_key_banner" style="display:block; background:#fef2f2; border-left:4px solid #ef4444; padding:12px 20px; margin-bottom:20px; border-radius:8px;">
-        <strong>⚠️ Gemini API 키가 필요합니다.</strong>
-        <input type="password" id="psn_api_key_input" placeholder="AIza..." style="margin-left:10px; padding:6px 10px; width:300px;">
-        <button class="btn" onclick="PersonaApp.saveApiKey()">저장</button>
-        <span style="font-size:12px; color:#64748b; margin-left:10px;">키는 브라우저 세션에만 저장됩니다.</span>
+      <div id="psn_key_banner" style="display:block; background:#fef2f2; border-left:4px solid #ef4444; padding:15px 20px; margin-bottom:20px; border-radius:8px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px; flex-wrap: wrap;">
+          <strong style="color: #b91c1c;">⚠️ Gemini API 키가 필요합니다.</strong>
+          <input type="password" id="psn_api_key_input" placeholder="여기에 'AIza...' 로 시작하는 키 입력" style="padding:8px 12px; width:280px; border: 1px solid #fca5a5; border-radius: 6px; outline: none;">
+          <button class="btn" style="padding: 8px 16px; font-size: 13px;" onclick="PersonaApp.saveApiKey()">저장하기</button>
+          <span style="font-size:12px; color:#ef4444;">(키는 브라우저를 닫으면 사라집니다)</span>
+        </div>
+        <div style="font-size: 12px; color: #7f1d1d; background: white; padding: 10px; border-radius: 6px; border: 1px dashed #fca5a5;">
+          <strong style="color: #991b1b;">🔑 무료 API Key 발급 방법 (1분 소요)</strong><br>
+          1. <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #2563eb; text-decoration: underline; font-weight:bold;">Google AI Studio (여기를 클릭)</a>에 구글 계정으로 로그인합니다.<br>
+          2. 좌측 상단 메뉴에서 <b>[Get API key]</b>를 클릭합니다.<br>
+          3. 파란색 <b>[Create API key]</b> 버튼을 눌러 발급된 영문+숫자 키를 복사해서 위 빈칸에 붙여넣어주세요.
+        </div>
       </div>
 <div id="tab-persona-cat" class="tab-content">
         <h2 style="font-size:20px; color:#1e293b; margin-bottom:20px;">1. 카테고리 선택</h2>
@@ -3049,14 +3057,21 @@ function toggleEditMode() {
             <span id="soc_key_status"></span>
           </div>
           <div style="display:flex; gap:10px;">
-            <select id="soc_ai_provider" style="width:120px; font-size:13px; padding:8px;">
-              <option value="gemini" selected>Gemini 2.5</option>
+            <select id="soc_ai_provider" style="width:120px; font-size:13px; padding:8px 12px; border-radius:6px; border:1px solid var(--border-color); outline:none;">
+              <option value="gemini" selected>Gemini 2.5 (권장)</option>
               <option value="demo">데모 모드</option>
               <option value="openai">OpenAI</option>
               <option value="anthropic">Anthropic</option>
             </select>
-            <input type="password" id="soc_api_key" placeholder="API Key 입력 (테스트: AIzaSyC8...)" style="flex:1; font-size:13px; padding:8px;">
+            <input type="password" id="soc_api_key" placeholder="여기에 API Key 입력 (AIza...)" style="flex:1; font-size:13px; padding:8px 12px; border:1px solid var(--border-color); border-radius:6px; outline:none;">
             <button class="btn" style="padding: 0 15px; font-size: 13px;" onclick="SocialApp.verifyApiKey()">🔍 점검</button>
+          </div>
+          
+          <div style="margin-top: 12px; font-size: 12px; color: #64748b; background: #f8fafc; padding: 12px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+            <strong style="color: #1e293b;">🔑 무료 API Key 발급 방법 (1분 소요)</strong><br>
+            1. <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: #3b82f6; text-decoration: underline; font-weight:bold;">Google AI Studio (여기를 클릭)</a>에 구글 계정으로 로그인합니다.<br>
+            2. 화면 좌측 상단의 <b>[Get API key]</b> 메뉴를 클릭합니다.<br>
+            3. 파란색 <b>[Create API key]</b> 버튼을 눌러 생성된 영문+숫자 혼합 키를 복사한 뒤, 위 빈칸에 붙여넣어주세요.
           </div>
         </div>
 
