@@ -485,8 +485,8 @@ const SocialApp = {
     if(!grid) return;
     
     if(!contents || contents.length === 0) {
-      grid.style.display = 'block';
-      grid.innerHTML = '<div style="text-align:center; padding:50px; background:#fff;">데이터가 없습니다.</div>';
+      grid.style.display = ''; // Let css handle it
+      grid.innerHTML = '<div style="grid-column: 1 / -1; display:flex; align-items:center; justify-content:center; min-height:400px; background:#fff; font-size:16px; color:#64748b;">아직 생성된 일정이 없습니다.</div>';
       return;
     }
     
