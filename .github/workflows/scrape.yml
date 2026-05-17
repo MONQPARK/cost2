@@ -2,12 +2,14 @@ name: Scrape Marketing Trends
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # Runs every 12 hours
+    - cron: '0 * * * *' # Runs every hour
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
