@@ -1128,6 +1128,7 @@
     <button class="tab-btn active" role="tab" data-tab="stats" onclick="switchTab('stats', 'info', this)">5. 광고업계 통계</button>
     <button class="tab-btn" role="tab" data-tab="news" onclick="switchTab('news', 'info', this)">6. 마케팅 트랜드</button>
     <button class="tab-btn" role="tab" data-tab="map" onclick="switchTab('map', 'info', this)">8. 대행사 지도</button>
+    <button class="tab-btn" role="tab" data-tab="monq" onclick="switchTab('monq', 'info', this)">9. 몽규 트렌드</button>
   </div>
 
     <!-- Social Content Tabs -->
@@ -1396,6 +1397,21 @@
         </div>
       </div>
     </div>
+
+  <!-- Tab 9: MONQ Trend -->
+  <div id="tab-monq" class="tab-content">
+    <div class="news-header">
+      <h2>👑 <span>몽규</span> 트렌드 뉴스</h2>
+    </div>
+    <div class="news-update-banner" style="background:#f3e8ff; border-left-color:#7C3AED; color:#6b21a8;">
+      <div class="pulse" style="background:#7C3AED; box-shadow:0 0 0 0 rgba(124, 58, 237, 0.7);"></div>
+      <span>Google News 기반 몽규(MONQ) 관련 최신 기사를 <strong>매시간 자동 업데이트</strong>합니다.</span>
+    </div>
+    <div class="news-grid" id="monq-grid">
+      <div class="news-empty"><div class="empty-icon">📡</div><p>뉴스를 불러오는 중...</p></div>
+    </div>
+  </div>
+
   <!-- Tab 5: Marketing News -->
   <div id="tab-news" class="tab-content">
     <div class="news-header">
@@ -2038,6 +2054,7 @@ function switchTab(tabId, mode, btnEl) {
   document.getElementById('tab-' + tabId).classList.add('active');
   if (tabId === 'preview') renderPreview();
   if (tabId === 'news' && !newsLoaded) loadNews();
+  if (tabId === 'monq' && !monqLoaded) loadMonqNews();
   if (tabId === 'salary') renderSalaryGrid();
   if (tabId === 'map' && !window.mapInitialized) initAgencyMap();
 }
@@ -2222,6 +2239,58 @@ function renderNewsGrid(reset) {
   } else {
     loadMoreBtn.style.display = 'none';
   }
+}
+
+async function loadMonqNews() {
+  const grid = document.getElementById('monq-grid');
+  try {
+    const res = await fetch('./data/monq.json?v=' + new Date().getTime());
+    if (!res.ok) throw new Error('monq.json 로드 실패: ' + res.status);
+    const raw = await res.json();
+    allMonq = raw;
+    monqLoaded = true;
+    renderMonqNews();
+  } catch(e) {
+    grid.innerHTML = `<div class="news-empty"><div class="empty-icon">😢</div><p>뉴스를 불러올 수 없습니다.<br><small>${e.message}</small></p></div>`;
+    console.error('MONQ 뉴스 로드 오류:', e);
+  }
+}
+
+function renderMonqNews() {
+  const grid = document.getElementById('monq-grid');
+  grid.innerHTML = '';
+  
+  if (allMonq.length === 0) {
+    grid.innerHTML = `<div class="news-empty"><div class="empty-icon">🔍</div><p>몽규 관련 최신 기사가 없습니다.</p></div>`;
+    return;
+  }
+  
+  allMonq.forEach(article => {
+    const card = document.createElement('div');
+    card.className = 'news-card';
+    
+    const date = article.date ? new Date(article.date).toLocaleDateString('ko-KR', {month:'long', day:'numeric'}) : '';
+    
+    const thumbHtml = article.thumbnail
+      ? `<div class="news-card-thumb"><img src="${article.thumbnail}" alt="썸네일" loading="lazy" onerror="this.parentNode.style.background='linear-gradient(135deg,#f3e8ff,#d8b4fe)';this.parentNode.innerHTML='<span style=\\'font-size:32px\\'>👑</span>';"></div>`
+      : `<div class="news-card-thumb no-img" style="background:linear-gradient(135deg,#f3e8ff,#d8b4fe)"><span style="font-size:32px">👑</span></div>`;
+    
+    card.innerHTML = `
+      ${thumbHtml}
+      <div class="news-card-body">
+        <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:4px;">
+          <span class="cat-badge" style="background:#f3e8ff; color:#6b21a8;">몽규 (MONQ)</span>
+          <span class="news-card-source source-default">${article.source || 'Google News'}</span>
+        </div>
+        <div class="news-card-title">${article.title}</div>
+        <div class="news-card-footer">
+          <span class="news-card-date">📅 ${date}</span>
+          <a href="${article.link}" target="_blank" rel="noopener" class="news-card-link" style="color:#7C3AED; background:#f3e8ff; padding:4px 8px; border-radius:4px;">읽기 →</a>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
 }
 
 function selectDesign(theme) {

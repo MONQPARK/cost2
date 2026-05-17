@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DATA_FILE = path.join(__dirname, '../data/news.json');
+const MONQ_FILE = path.join(__dirname, '../data/monq.json');
 const MAX_AGE_DAYS = 90;
 
 function extractImage(item) {
@@ -142,6 +143,39 @@ async function main() {
 
   fs.writeFileSync(DATA_FILE, JSON.stringify(filteredArticles, null, 2));
   console.log(`Successfully saved ${filteredArticles.length} articles to data/news.json.`);
+
+  // --- Scrape MONQ Specific News ---
+  console.log('Starting MONQ news scrape...');
+  const q = encodeURIComponent('"몽규" OR "MONQ" OR "MONQ VN" -정몽규 -축구 -회장 -동주 -송몽규 -윤동주 -시인 -영화 -백상 -요절 -HDC');
+  const monqUrl = `https://news.google.com/rss/search?q=${q}&hl=ko&gl=KR&ceid=KR:ko`;
+  
+  const monqArticles = await fetchRSS(monqUrl, 'Google News');
+  console.log(`Fetched ${monqArticles.length} MONQ articles from Google News`);
+  
+  let existingMonq = [];
+  if (fs.existsSync(MONQ_FILE)) {
+    try {
+      existingMonq = JSON.parse(fs.readFileSync(MONQ_FILE, 'utf-8'));
+    } catch (e) {
+      console.error('Failed to parse existing monq.json. Starting fresh.');
+    }
+  }
+
+  const allMonq = [...existingMonq, ...monqArticles];
+  const uniqueMonq = [];
+  const monqLinks = new Set();
+  
+  for (const article of allMonq) {
+    if (!monqLinks.has(article.link)) {
+      monqLinks.add(article.link);
+      uniqueMonq.push(article);
+    }
+  }
+  
+  uniqueMonq.sort((a, b) => new Date(b.date) - new Date(a.date));
+  
+  fs.writeFileSync(MONQ_FILE, JSON.stringify(uniqueMonq, null, 2));
+  console.log(`Successfully saved ${uniqueMonq.length} articles to data/monq.json.`);
 }
 
 main();
