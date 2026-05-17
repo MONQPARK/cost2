@@ -3,6 +3,59 @@ const xml2js = require('xml2js');
 const fs = require('fs');
 const path = require('path');
 
+const cheerio = require('cheerio');
+
+async function getOgImage(url) {
+  try {
+    const res = await axios.get(url, { 
+      timeout: 5000, 
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' } 
+    });
+    const $ = cheerio.load(res.data);
+    let ogImage = $('meta[property="og:image"]').attr('content');
+    if (!ogImage) ogImage = $('meta[name="twitter:image"]').attr('content');
+    if (ogImage && ogImage.startsWith('//')) ogImage = 'https:' + ogImage;
+    if (ogImage && ogImage.startsWith('/')) {
+      const urlObj = new URL(url);
+      ogImage = urlObj.origin + ogImage;
+    }
+    return ogImage || null;
+  } catch(e) {
+    return null;
+  }
+}
+
+async function searchDDG(query) {
+  let results = [];
+  const q = encodeURIComponent(query);
+  const url = `https://html.duckduckgo.com/html/?q=${q}`;
+  
+  try {
+    const res = await axios.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+    const $ = cheerio.load(res.data);
+    
+    $('.result').each((i, el) => {
+      const title = $(el).find('.result__title a').text();
+      const link = $(el).find('.result__title a').attr('href');
+      const snippet = $(el).find('.result__snippet').text();
+      
+      let realLink = link;
+      if (link && link.includes('uddg=')) {
+        const urlParams = new URLSearchParams(link.split('?')[1]);
+        realLink = decodeURIComponent(urlParams.get('uddg'));
+      }
+      
+      if (title && realLink && realLink.startsWith('http')) {
+        results.push({ title, link: realLink, snippet, date: new Date().toISOString(), source: 'Web/Blog', category: 'ad' });
+      }
+    });
+  } catch(e) {
+    console.error('DDG Search failed:', e.message);
+  }
+  return results;
+}
+
+
 const DATA_FILE = path.join(__dirname, '../data/news.json');
 const MONQ_FILE = path.join(__dirname, '../data/monq.json');
 const MAX_AGE_DAYS = 90;
@@ -144,13 +197,19 @@ async function main() {
   fs.writeFileSync(DATA_FILE, JSON.stringify(filteredArticles, null, 2));
   console.log(`Successfully saved ${filteredArticles.length} articles to data/news.json.`);
 
-  // --- Scrape MONQ Specific News ---
-  console.log('Starting MONQ news scrape...');
+  // --- Scrape MONQ Specific News & Blogs ---
+  console.log('Starting MONQ news & blog scrape...');
+  
   const q = encodeURIComponent('"몽규" OR "MONQ" OR "MONQ VN" -정몽규 -축구 -회장 -동주 -송몽규 -윤동주 -시인 -영화 -백상 -요절 -HDC');
   const monqUrl = `https://news.google.com/rss/search?q=${q}&hl=ko&gl=KR&ceid=KR:ko`;
-  
   const monqArticles = await fetchRSS(monqUrl, 'Google News');
-  console.log(`Fetched ${monqArticles.length} MONQ articles from Google News`);
+  
+  const ddg1 = await searchDDG('"몽규" "박성호" -"정몽규" -"축구"');
+  const ddg2 = await searchDDG('"몽규" "MONQ" 광고 -"정몽규"');
+  const ddg3 = await searchDDG('블로그 "몽규" "MONQ" -"정몽규"');
+  const allNewMonq = [...monqArticles, ...ddg1, ...ddg2, ...ddg3];
+  
+  console.log(`Fetched ${allNewMonq.length} MONQ items from Google News & DDG Web`);
   
   let existingMonq = [];
   if (fs.existsSync(MONQ_FILE)) {
@@ -161,13 +220,25 @@ async function main() {
     }
   }
 
-  const allMonq = [...existingMonq, ...monqArticles];
+  const allMonq = [...existingMonq, ...allNewMonq];
   const uniqueMonq = [];
   const monqLinks = new Set();
   
   for (const article of allMonq) {
     if (!monqLinks.has(article.link)) {
+      if (/정몽규|축구|동주|송몽규|HDC/.test(article.title)) continue; // Extra safety
       monqLinks.add(article.link);
+      
+      // Fetch thumbnail if missing
+      if (article.thumbnail === undefined) {
+         const thumb = await getOgImage(article.link);
+         article.thumbnail = thumb;
+      }
+      // Remove generic Google News thumbs
+      if (article.thumbnail && article.thumbnail.includes('lh3.googleusercontent.com')) {
+         article.thumbnail = null;
+      }
+      
       uniqueMonq.push(article);
     }
   }
