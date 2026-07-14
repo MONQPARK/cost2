@@ -1,5 +1,45 @@
 [
   {
+    "title": "JTBC 앵커 “尹 무상여론조사 유죄, 김건희 무죄와 엇갈려 더욱 주목”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335779",
+    "date": "2026-07-14T18:48:15.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "피그마 \"AI 시대일수록 디자인의 가치 커진다\"… '지능형 캔버스'로 협업 방식 바꾼다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28335",
+    "date": "2026-07-14T18:25:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "배재고 야구부 징계 철회될까?… ‘6개월 출전정지’ 재심 결정",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335777",
+    "date": "2026-07-14T18:14:05.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "인천유나이티드 ‘보도 건수 따라 광고비 차등’ 방침, 지역언론 비판에 철회",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335776",
+    "date": "2026-07-14T18:11:25.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "KT 해킹 보상으로 티빙 이용권 얻었는데 또 해킹 당해",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335771",
+    "date": "2026-07-14T17:16:59.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
     "title": "서울시의회 더불어민주당 “TBS 사태, 오세훈 시장의 행정폭력”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335774",
     "date": "2026-07-14T16:29:35.000Z",
@@ -11750,29 +11790,5 @@
     "source": "BrandBrief",
     "category": "ad",
     "thumbnail": null
-  },
-  {
-    "title": "[AI 시대의 콘텐츠 마케팅] 당신은 쓸데없이 비싼 요금제를 쓰고 있다? 챗GPT 요금제 완전분석: 무료부터 30만원까지",
-    "link": "https://www.mobiinside.co.kr/2026/04/15/chatgpt-plans-comparison-free-to-pro/",
-    "date": "2026-04-15T09:50:02.000Z",
-    "source": "MobiInside",
-    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/15183828/AI-%EB%A7%A4%ED%84%B0%EC%8A%A4-%EA%B8%B0%EC%82%AC-%EC%8D%B8%EB%84%A4%EC%9D%BC-%EC%B1%97gpt-%EC%9A%94%EA%B8%88%EC%A0%9C-%EB%B6%84%EC%84%9D.jpg",
-    "category": "ai"
-  },
-  {
-    "title": "[AI로보틱스 트렌드 바로읽기] 기계 구매가 아닌 ‘공정 설계’가 핵심. 실패 없는 스마트 자동화 구축 가이드",
-    "link": "https://www.mobiinside.co.kr/2026/04/15/smartautomation-guide/",
-    "date": "2026-04-15T09:30:00.000Z",
-    "source": "MobiInside",
-    "thumbnail": "https://s.w.org/images/core/emoji/14.0.0/72x72/26a0.png",
-    "category": "ai"
-  },
-  {
-    "title": "[페이먼츠 인사이트] 글로벌 결제 수수료 4%를 1%로 낮추는 법 (feat. 스테이블코인 결제)",
-    "link": "https://www.mobiinside.co.kr/2026/04/15/stablecoin-payment/",
-    "date": "2026-04-15T09:00:00.000Z",
-    "source": "MobiInside",
-    "thumbnail": "https://s.w.org/images/core/emoji/14.0.0/72x72/26a1.png",
-    "category": "trend"
   }
 ]
