@@ -1,5 +1,21 @@
 [
   {
+    "title": "TDC72, 첫 '타입-하이' 수상작 발표…오픈AI·어도비·뉴욕타임스 골드 영예",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28396",
+    "date": "2026-07-20T11:11:10.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "\"AI는 어떤 출처를 신뢰하고 인용하는가\" 함샤우트 글로벌 AI 연구소,  'AIBA AI 인용 지수 인사이트 리포트' 창간호 발표",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28395",
+    "date": "2026-07-20T09:22:18.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
     "title": "\"광고는 끝났다? NO! 새로운 영역과 장르로 진화 중\"… 김정아 이노션 대표",
     "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10024",
     "date": "2026-07-20T08:01:00.000Z",
@@ -22,6 +38,14 @@
     "source": "미디어오늘",
     "category": "trend",
     "thumbnail": null
+  },
+  {
+    "title": "[AI 5분 인사이트] 일본의 반격? Sakana AI의 Fugu",
+    "link": "https://www.mobiinside.co.kr/2026/07/20/sakana-ai-fugu-ai-orchestration-model/",
+    "date": "2026-07-20T01:45:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/07/14140331/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-25-1024x576.png"
   },
   {
     "title": "[해외 크리에이티브] 도버 절벽이 거대한 캔버스로…대영박물관, '바이외 태피스트리' 프로젝션으로 귀환 알렸다",
@@ -12790,29 +12814,5 @@
     "source": "BrandBrief",
     "category": "media",
     "thumbnail": null
-  },
-  {
-    "title": "하트시그널5에 신협 카드가? 금융 마케팅의 판을 바꾸는 ‘심리스’ 전략",
-    "link": "https://www.mobiinside.co.kr/2026/04/21/cu-2026-seamless-marketing-strategy/",
-    "date": "2026-04-21T01:33:00.000Z",
-    "source": "MobiInside",
-    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/16150721/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-12.jpg",
-    "category": "trend"
-  },
-  {
-    "title": "인터넷신문 신뢰도 3년 연속 상승했지만 여전히 낮아… 선정성·편향성은 개선",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27458",
-    "date": "2026-04-21T01:32:05.000Z",
-    "source": "MadTimes",
-    "thumbnail": null,
-    "category": "media"
-  },
-  {
-    "title": "산돌 AI,웹3.0 플랫폼 신사업 본격화… CEO, CTO 공개 채용",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=27457",
-    "date": "2026-04-21T00:08:00.000Z",
-    "source": "MadTimes",
-    "thumbnail": null,
-    "category": "ai"
   }
 ]
