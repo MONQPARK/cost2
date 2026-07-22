@@ -1,5 +1,69 @@
 [
   {
+    "title": "오세훈 ‘당선 무효’형에 국힘 “‘여당무죄·야당유죄”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335957",
+    "date": "2026-07-22T17:16:08.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "작가노조 필증 지연 넉달…“K-노동회의소? 노조할 권리부터 보장하라”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335956",
+    "date": "2026-07-22T16:54:23.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "베를린 한국정원 개원 20주년…자연과 전통이 잇는 한·독 문화교류의 장",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28427",
+    "date": "2026-07-22T16:34:37.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "오세훈 여론조사 대납 혐의 유죄 파문 …벌금 1000만 원 시장직 상실형",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335955",
+    "date": "2026-07-22T15:41:10.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "김어준 유튜브 삭제가 ‘가짜뉴스법 1호’ 조치라고?",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335952",
+    "date": "2026-07-22T15:39:25.000Z",
+    "source": "미디어오늘",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "프랑스 ‘15세 미만 SNS 금지’ 법안 통과, 9월부터 계정 못 만든다",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335953",
+    "date": "2026-07-22T15:20:24.000Z",
+    "source": "미디어오늘",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "챗GPT 스스로 외부 플랫폼 해킹, 오픈AI “전례 없는 사이버 공격”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335951",
+    "date": "2026-07-22T14:58:34.000Z",
+    "source": "미디어오늘",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "李대통령 “정보공개 개선” 지시에 “청와대부터 돌아봐야”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335950",
+    "date": "2026-07-22T14:57:25.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
     "title": "유시민 “뉴이재명 수장은 이 대통령…권력 내버려 두면 썩은내”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335948",
     "date": "2026-07-22T14:11:57.000Z",
@@ -126,6 +190,14 @@
     "source": "미디어오늘",
     "category": "media",
     "thumbnail": null
+  },
+  {
+    "title": "[여가 브리핑] 에어비앤비가 말하는 ‘완벽하지 않은 여행’이란?",
+    "link": "https://www.mobiinside.co.kr/2026/07/22/airbnb-perfectly-imperfect-travel-campaign-analysis/",
+    "date": "2026-07-22T06:00:00.000Z",
+    "source": "MobiInside",
+    "category": "trend",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/07/21112724/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-23-820x1024.jpg"
   },
   {
     "title": "[수트와후드의 스타트업 경영] 1인 기업 생존 전략: 샘 알트만이 말하는 10~20% 응답률의 비밀",
@@ -12830,21 +12902,5 @@
     "source": "미디어오늘",
     "category": "trend",
     "thumbnail": null
-  },
-  {
-    "title": "결혼하려고 결정사 가입했는데… 사생활 다 유출됐다",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=333981",
-    "date": "2026-04-23T07:00:38.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "텍스트 안 읽는 시대? 우리는 지금 ‘경험’을 읽습니다",
-    "link": "https://www.mobiinside.co.kr/2026/04/23/text-hip-2/",
-    "date": "2026-04-23T06:39:05.000Z",
-    "source": "MobiInside",
-    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/04/23144617/260423_%ED%85%8D%EC%8A%A4%ED%8A%B8%ED%9E%99_02.jpg",
-    "category": "trend"
   }
 ]
