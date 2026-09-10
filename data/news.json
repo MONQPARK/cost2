@@ -1,5 +1,45 @@
 [
   {
+    "title": "오늘을 버티게 한 노래, 그리고 ‘109’",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28906",
+    "date": "2026-09-10T09:13:30.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "애피어, AI가 ‘한계’를 알고 과업에 맞는 언어로 추론하는 연구 결과 발표",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28905",
+    "date": "2026-09-10T09:04:32.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “25년이 흘렀어도 여전히 아물지 못한 상처들” 이노션, 미 전역에서 테러 희생자 추모와 유족 치유 나선다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28904",
+    "date": "2026-09-10T09:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "전 세계 젊은 크리에이터 130명, 라스베이거스로… LIA 크리에이티브 리에종 2026, 9월 27일부터",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10281",
+    "date": "2026-09-10T08:00:00.000Z",
+    "source": "BrandBrief",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "칸라이언즈 CMO 액셀러레이터, 글로벌 5개 도시로 확대… 아시아는 싱가포르서",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10278",
+    "date": "2026-09-10T08:00:00.000Z",
+    "source": "BrandBrief",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
     "title": "與, 김승원 청문회 증인 44명 전부 거부… 조선일보 “방어할 자신 전혀 없다는 고백”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336999",
     "date": "2026-09-10T07:42:08.000Z",
@@ -54,6 +94,14 @@
     "source": "MadTimes",
     "category": "ai",
     "thumbnail": null
+  },
+  {
+    "title": "[스타트업 미국진출 가이드] 업무 중 작성한 AI 프롬프트는 누구의 것일까?",
+    "link": "https://www.mobiinside.co.kr/2026/09/10/ai-prompt-ownership-at-work/",
+    "date": "2026-09-10T00:00:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2019/08/05162356/88x317.png"
   },
   {
     "title": "용혜인 김승원에 조선일보 “청년 분노 커져” 한국일보 “인사시스템 기능부전”",
@@ -21614,13 +21662,5 @@
     "source": "MobiInside",
     "category": "ai",
     "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/06/11132558/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.webp"
-  },
-  {
-    "title": "[슬기로운 PM생활] 의사결정의 분석, 설득, 실행 역량 향상 방안",
-    "link": "https://www.mobiinside.co.kr/2026/06/12/pm-decision-making-skills-project-management/",
-    "date": "2026-06-12T00:28:00.000Z",
-    "source": "MobiInside",
-    "category": "trend",
-    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/06/11134205/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-4.png"
   }
 ]
