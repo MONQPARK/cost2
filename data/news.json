@@ -1,5 +1,21 @@
 [
   {
+    "title": "\"고정형 UI 넘어 '라이브 인터페이스'로, CRM 추론 모델 '코아'로 에이전트 지능까지 강화\" 세일즈포스, ‘드림포스 2026’서 ‘AI포스’ 및 ‘코아’ 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28964",
+    "date": "2026-09-16T08:40:02.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "YTN 구성원들 “이동관 매각 부당개입, 지상파는 리포트 YTN은 단신만”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=337136",
+    "date": "2026-09-16T07:49:41.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
     "title": "경향신문 “李대통령, 김승원 국민 눈높이서 판단해야”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=337137",
     "date": "2026-09-16T07:15:46.000Z",
@@ -54,6 +70,14 @@
     "source": "MadTimes",
     "category": "ad",
     "thumbnail": null
+  },
+  {
+    "title": "[IT 트렌드 바로읽기] AI 에이전트, My 창작물 마케팅 가능?",
+    "link": "https://www.mobiinside.co.kr/2026/09/16/artist-supervised-ai-marketing-agent/",
+    "date": "2026-09-16T00:00:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/09/15101638/%ED%99%94%EB%A9%B4-%EC%BA%A1%EC%B2%98-2026-09-15-101330.png"
   },
   {
     "title": "JTBC노조 “홍정도 일가, 80명 구조조정 전 1000억 땅에 200평 주택 지어”",
@@ -22110,45 +22134,5 @@
     "source": "MobiInside",
     "category": "trend",
     "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/06/17102146/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7-2026-06-17-102032.png"
-  },
-  {
-    "title": "AI 활용 확산에도 신뢰가 관건… PR·미디어 업계 59% \"허위정보 우려\"",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28042",
-    "date": "2026-06-18T00:00:00.000Z",
-    "source": "MadTimes",
-    "category": "ai",
-    "thumbnail": null
-  },
-  {
-    "title": "AI가 브랜드를 추천하지 않는 이유… 중요한 건 무엇을 말하느냐가 아니라 누구와 함께 언급되느냐다",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28037",
-    "date": "2026-06-18T00:00:00.000Z",
-    "source": "MadTimes",
-    "category": "ai",
-    "thumbnail": null
-  },
-  {
-    "title": "[해외 크리에이티브] \"프레첼 운동화는 안 돼, 프레첼 버거는 된다\"… 브리오슈 파스키에의 유쾌한 혁신론",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28034",
-    "date": "2026-06-18T00:00:00.000Z",
-    "source": "MadTimes",
-    "category": "ad",
-    "thumbnail": null
-  },
-  {
-    "title": "[해외 크리에이티브] \"외식, 똑똑하게 즐기세요\" 이트클럽, 첫 대규모 브랜드 캠페인 공개",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28031",
-    "date": "2026-06-18T00:00:00.000Z",
-    "source": "MadTimes",
-    "category": "ad",
-    "thumbnail": null
-  },
-  {
-    "title": "[해외 크리에이티브] \"침묵도 대화의 일부입니다\"… 스태마, 말더듬 인식 개선 캠페인 전개",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28029",
-    "date": "2026-06-18T00:00:00.000Z",
-    "source": "MadTimes",
-    "category": "ad",
-    "thumbnail": null
   }
 ]
