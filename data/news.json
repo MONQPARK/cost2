@@ -248,6 +248,14 @@
     "thumbnail": null
   },
   {
+    "title": "[평범한 스타트업 일상] AI로 개인과 팀의 생산성을 바꾸기",
+    "link": "https://www.mobiinside.co.kr/2026/09/21/ai-work-automation-for-repetitive-tasks/",
+    "date": "2026-09-21T06:00:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2019/08/05162356/88x317.png"
+  },
+  {
     "title": "[함께 성장하는 시간] 넥스트팬지아, 5년 만에 누적매출 100억을 넘다",
     "link": "https://www.mobiinside.co.kr/2026/09/21/global-cosmetics-supply-chain-system/",
     "date": "2026-09-21T04:00:00.000Z",
@@ -22533,54 +22541,6 @@
     "date": "2026-06-23T23:11:08.000Z",
     "source": "미디어오늘",
     "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "중앙일보 “자금 경색 일시적 현상” 법정관리 중인 다른 계열사들과 선 그었다",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335350",
-    "date": "2026-06-23T20:02:51.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "김건희 매관매직 선고 생중계, 26일 2시 … 특검 최종의견 보니",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335349",
-    "date": "2026-06-23T19:43:13.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "“용지 축소인쇄 사무처 전결, 어이없지 않나” 지적에 노태악 답변은",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335346",
-    "date": "2026-06-23T19:43:05.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "“MBC 선거 보도, ‘내로남불’ 떳떳한가” 내부 비판 나왔다",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335342",
-    "date": "2026-06-23T18:05:05.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "플래티어, 에이전틱 쇼핑 앱 '젤라또'로 일본 이커머스 시장 본격 공략",
-    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10015",
-    "date": "2026-06-23T17:58:00.000Z",
-    "source": "BrandBrief",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "크리테오, 韓 광고주 챗GPT 인벤토리에 광고 집행 지원",
-    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10014",
-    "date": "2026-06-23T17:52:38.000Z",
-    "source": "BrandBrief",
-    "category": "ai",
     "thumbnail": null
   }
 ]
