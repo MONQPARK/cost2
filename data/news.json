@@ -1,5 +1,69 @@
 [
   {
+    "title": "[브랜딥 인사이트] ‘프로틴’엔 식품 대기업, ‘단백질보충제’엔 헬스 전문… AI가 가른 두 개의 시장",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29103",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "[인터뷰] “좋아 보이는 아이디어와 좋은 아이디어는 다르다는 것을 배웠습니다” 김도윤",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29090",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “내 머릿속 목소리가 말을 건다” 서브웨이, ‘SUB의식’ 담은 새 광고 론칭",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29080",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “맥도날드가 ‘블루 록’ 세계로” 맥도날드 x BBDO 파리, 한정 메뉴·미니 만화 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29078",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “신을 수 없는 신발로 드러낸 빈자리” 키즈캔·드로가5 ANZ, 아동 빈곤 조명",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29075",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "“마케터 64%는 AI 검색 맞춰 전략 바꿨다” GEO ‘매우 잘 안다’는 9%",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29064",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "“광고주 91%, 소셜 광고는 메타만 쓴다” 틱톡은 클릭·리드 비용 낮아",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29059",
+    "date": "2026-09-30T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "digital",
+    "thumbnail": null
+  },
+  {
+    "title": "강신철 지뢰폭발 “지연 은폐 아니지만… 언론대응 부족 있었다” 시인",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=337424",
+    "date": "2026-09-29T22:40:11.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
     "title": "‘암살자들’ 감독까지 고발… “20년 전 시사 다큐가 계속 다룬 의혹인데”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=337418",
     "date": "2026-09-29T18:50:00.000Z",
@@ -198,6 +262,22 @@
     "source": "미디어오늘",
     "category": "trend",
     "thumbnail": null
+  },
+  {
+    "title": "[여가 브리핑] 바다를 보여주려던 도시와, 바다가 불쑥 찾아온 도시",
+    "link": "https://www.mobiinside.co.kr/2026/09/29/busan-bukhang-yeosu-island-expo-city-experience/",
+    "date": "2026-09-29T06:00:00.000Z",
+    "source": "MobiInside",
+    "category": "trend",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/09/28104011/%ED%99%94%EB%A9%B4-%EC%BA%A1%EC%B2%98-2026-09-28-103555.png"
+  },
+  {
+    "title": "[스타트업 리더노트] 요즘 나는 AI를 이렇게 쓴다[스타트업 리더노트]",
+    "link": "https://www.mobiinside.co.kr/2026/09/29/%ec%8a%a4%ed%83%80%ed%8a%b8%ec%97%85-%eb%a6%ac%eb%8d%94%eb%85%b8%ed%8a%b8-%ec%9a%94%ec%a6%98-%eb%82%98%eb%8a%94-ai%eb%a5%bc-%ec%9d%b4%eb%a0%87%ea%b2%8c-%ec%93%b4%eb%8b%a4%ec%8a%a4%ed%83%80%ed%8a%b8/",
+    "date": "2026-09-29T05:20:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/09/28102058/%ED%99%94%EB%A9%B4-%EC%BA%A1%EC%B2%98-2026-09-28-101654.png"
   },
   {
     "title": "[AX 실전노트] AI가 코딩은 다 해주는데, 개발자는 왜 여전히 바쁠까?",
@@ -22203,102 +22283,6 @@
     "title": "“탱크데이” 혐오 발언한 배재고 야구부, 6개월 동안 경기출전 못한다",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335513",
     "date": "2026-07-01T17:50:59.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "오세훈 서울시장 취임에 “무급 노동 TBS 고통 방치 말라”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335512",
-    "date": "2026-07-01T16:59:02.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "李 호남투자 ‘조족지혈’에 TV조선 앵커 “정치적 고려” 진중권 “국힘 긴장해야”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335511",
-    "date": "2026-07-01T16:58:32.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "홍정도 오너일가 경영권 잃나… 중앙일보 “대주주 지분 매각 추진”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335510",
-    "date": "2026-07-01T15:50:00.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "D&AD 뉴 블러드 어워즈 2026, ‘블러드 스톡스’ 블랙 펜슬과 화이트 펜슬 동시 수상… 올해 유일한 2관왕",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28182",
-    "date": "2026-07-01T15:30:00.000Z",
-    "source": "MadTimes",
-    "category": "ad",
-    "thumbnail": null
-  },
-  {
-    "title": "KBS, 편성위원회 이어 노사협의회까지 파행 ",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335509",
-    "date": "2026-07-01T15:18:25.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "‘언론 징벌손배’ 정통망법 시행에 외신기자클럽 “언론활동 영향 우려”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335507",
-    "date": "2026-07-01T15:09:12.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "배재고 ‘탱크데이’ 혐오발언에 불꽃야구2 방송 ‘취소’",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335506",
-    "date": "2026-07-01T15:08:58.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "[속보] 李 “내부단합 외연확장 두가지 조화롭게 해야” 文 “당내 단합 출발점”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335508",
-    "date": "2026-07-01T15:08:29.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "엘리펀트컴퍼니, 'GEO 로드맵 2026' 열고 AI 검색 성과 측정 기준 논의한다 ",
-    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10069",
-    "date": "2026-07-01T11:39:02.000Z",
-    "source": "BrandBrief",
-    "category": "ai",
-    "thumbnail": null
-  },
-  {
-    "title": "MBC ‘조승원의 뉴스하이킥’ 6일 첫방송… “유쾌한 성격 유지할 것”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335505",
-    "date": "2026-07-01T11:22:50.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "‘성적 수치심’ 아닌 ‘성적 불쾌감’, 용어 일괄정비 법안 발의",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335500",
-    "date": "2026-07-01T11:06:16.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "22대 국회 후반기 과방위원장에 송기헌…국힘은 전원 사임계",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335503",
-    "date": "2026-07-01T11:04:55.000Z",
     "source": "미디어오늘",
     "category": "trend",
     "thumbnail": null
