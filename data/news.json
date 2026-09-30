@@ -1,5 +1,53 @@
 [
   {
+    "title": "\"Advertising Is Just One of the Tools We Can Use\" Masaya Asai, CCO of Droga5 Tokyo",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29120",
+    "date": "2026-10-01T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "[인터뷰] “무엇을 만들지가 아니라, 무엇을 바꾸고 싶은지부터 생각합니다” 마사야 아사이 드로가5 도쿄 CCO",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29119",
+    "date": "2026-10-01T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “이번엔 성공할까?” 스티브 부세미, 더 강해진 ‘우주 악당’으로 텔스트라 광고에 돌아왔다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29091",
+    "date": "2026-10-01T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] “AI로 얼굴 만들 필요 있나, 진짜 사람을 찍으면 되는데” 알레 부르세트, ‘AI 프리’ 사진 프로젝트 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29077",
+    "date": "2026-10-01T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "“이메일은 이제 발송만 하는 도구가 아니다”…AI·고객 데이터 관리까지 역할 넓어져",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29071",
+    "date": "2026-10-01T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "“마케터 대신 AI가 도구 골라 쓴다” AI 에이전트가 마테크 시장을 바꾼다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29049",
+    "date": "2026-10-01T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
     "title": "[단독] 중앙일보 인수 추진 삼프로TV “총자산 1000억 넘어, 충분한 투자 규모도 확보”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=337446",
     "date": "2026-09-30T22:22:18.000Z",
@@ -22429,70 +22477,6 @@
     "date": "2026-07-02T20:38:03.000Z",
     "source": "미디어오늘",
     "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "코앞 다가온 ‘허위조작정보 근절법’으로 전한길 잡는다?",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335534",
-    "date": "2026-07-02T19:35:26.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "70대 독거노인에 3000만원 어치 판매… 한겨레만 보도했다",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335544",
-    "date": "2026-07-02T19:31:28.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "KBS, 독자적 AI 업무 플랫폼 ‘카이로스’ 내놨다 ",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335539",
-    "date": "2026-07-02T18:54:00.000Z",
-    "source": "미디어오늘",
-    "category": "ai",
-    "thumbnail": null
-  },
-  {
-    "title": "배재고 징계에 국힘 “표현자유, 이재명탓”? … SBS “제재 없어 조롱 난무”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335536",
-    "date": "2026-07-02T17:24:09.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "윤석열 정부 때 등록취소된 방송 돌아온다… 방미통위 상고 포기",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335535",
-    "date": "2026-07-02T17:07:05.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "박장범 KBS 사장의 ‘묻지마 임기 연장’",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335525",
-    "date": "2026-07-02T16:46:20.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "미국 400개 지역언론, 오픈 AI·MS 상대 ‘기사 무단 수집’ 소송 제기",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335530",
-    "date": "2026-07-02T15:28:42.000Z",
-    "source": "미디어오늘",
-    "category": "ai",
-    "thumbnail": null
-  },
-  {
-    "title": "공영방송 사장 교체 ‘카운트다운’",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335533",
-    "date": "2026-07-02T15:24:00.000Z",
-    "source": "미디어오늘",
-    "category": "media",
     "thumbnail": null
   }
 ]
