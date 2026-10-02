@@ -80,6 +80,14 @@
     "thumbnail": null
   },
   {
+    "title": "제일기획·이노션·아이디엇, 2026 런던국제광고제서 각각 골드·실버·브론즈 수상",
+    "link": "http://www.brandbrief.co.kr/news/articleView.html?idxno=10380",
+    "date": "2026-10-02T16:30:00.000Z",
+    "source": "BrandBrief",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
     "title": "MBC 감사 후보로 김성환·김판영·도인태 선정",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=337498",
     "date": "2026-10-02T16:14:06.000Z",
@@ -192,6 +200,30 @@
     "thumbnail": null
   },
   {
+    "title": "[직장생존을 위한 비즈니스] 플랫폼이라면, 누구부터 당겨야 할지 놓쳐서는 안 됩니다",
+    "link": "https://www.mobiinside.co.kr/2026/10/02/chef-ip-platform-relationship-growth-strategy/",
+    "date": "2026-10-02T06:00:00.000Z",
+    "source": "MobiInside",
+    "category": "media",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/10/01104018/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-23.png"
+  },
+  {
+    "title": "[스타트업 주니어로 살아남기] 선의로 팀 생산성을 악화시키는 리드",
+    "link": "https://www.mobiinside.co.kr/2026/10/02/team-leadership-management-practice/",
+    "date": "2026-10-02T04:00:00.000Z",
+    "source": "MobiInside",
+    "category": "trend",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/10/01101132/%ED%99%94%EB%A9%B4-%EC%BA%A1%EC%B2%98-2026-10-01-101131-1024x241.png"
+  },
+  {
+    "title": "[인공지능 시대의 디자인] OpenAI DevDay 2026 한눈에 정리",
+    "link": "https://www.mobiinside.co.kr/2026/10/02/human-ai-agent-collaboration-platform/",
+    "date": "2026-10-02T02:00:00.000Z",
+    "source": "MobiInside",
+    "category": "ai",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/10/01094356/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-1.png"
+  },
+  {
     "title": "온라인 예매 어려운 어르신과 시민 연결하는 ‘디지털 노약자석’ 등장",
     "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29147",
     "date": "2026-10-02T00:00:00.000Z",
@@ -238,6 +270,14 @@
     "source": "MadTimes",
     "category": "ai",
     "thumbnail": null
+  },
+  {
+    "title": "[브루스의 영감노트] IMC 캠페인은 인플루언서가 전부 아닌가요",
+    "link": "https://www.mobiinside.co.kr/2026/10/02/influencer-fit-conversion-strategy/",
+    "date": "2026-10-02T00:00:00.000Z",
+    "source": "MobiInside",
+    "category": "digital",
+    "thumbnail": "https://mobiinsidecontent.s3.ap-northeast-2.amazonaws.com/kr/wp-content/uploads/2026/10/01093614/%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C-1024x576.png"
   },
   {
     "title": "지난해 방송 시청점유율 1위 KBS… ‘새로운 산정 방식 필요’ 지적도",
@@ -22661,30 +22701,6 @@
     "date": "2026-07-04T22:18:08.000Z",
     "source": "미디어오늘",
     "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "한겨레 조선일보 “배재고 학생들 사리분별 가능한 나이”… 징계엔 입장 엇갈려",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335572",
-    "date": "2026-07-04T19:58:34.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "올림픽공원 시위 한 달… 동아일보 “무법엔 단호해야” 경향신문 “일상 복귀하길”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335549",
-    "date": "2026-07-04T17:28:54.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "‘5·18 성역인가’ 주장 이병태에 청와대 엄중 경고",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=335574",
-    "date": "2026-07-04T17:16:50.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
     "thumbnail": null
   }
 ]
