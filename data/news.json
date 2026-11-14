@@ -1,5 +1,101 @@
 [
   {
+    "title": "[인터뷰] “‘벌벌벌’ 떨리는 첫 순간을 응원하다” CHAI 대학생 AI 광고 공모전 동상 수상팀 연세대 고윤서·이민지·이예은",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29677",
+    "date": "2026-11-15T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 버지니아주 차량관리국, 운전 중 휴대전화 사용 위험 알리는 ‘눈을 뜨세요’ 캠페인 론칭",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29662",
+    "date": "2026-11-15T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 부츠, WPP와 크리스마스 캠페인 공개… 선물에 푹 빠진 사람들의 일상 유쾌하게 그려",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29661",
+    "date": "2026-11-15T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 알디, 크리스마스 광고에 ‘케빈 더 캐럿’ 다시 등장… 사라진 반려견 찾아 나선 가족의 모험을 그리다",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29660",
+    "date": "2026-11-15T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "소비자는 마케팅 전략을 읽는데 기업의 대응은 더디다… 이터러블, 2026 고객 참여 보고서 발표",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29647",
+    "date": "2026-11-15T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "원트러스트, AI 시대 데이터 활용의 핵심으로 ‘실시간 동의 관리’ 강조",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29638",
+    "date": "2026-11-15T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "이 대통령 “등 뒤에서 날아오는 화살”, 최민희 겨냥?",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338460",
+    "date": "2026-11-14T22:25:18.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "“넷플릭스와 손 잡은 지상파, 최고의 선택이면서 최악의 선택”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338417",
+    "date": "2026-11-14T22:10:00.000Z",
+    "source": "미디어오늘",
+    "category": "media",
+    "thumbnail": null
+  },
+  {
+    "title": "TV조선 점수조작 사건, 윤석열 정부 검찰·감사원은 왜 한상혁을 노렸나",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338459",
+    "date": "2026-11-14T21:16:22.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "오늘 첫 방영 KBS ‘문무’ 전투 장면에 AI 기술 얼마나 썼을까?",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338458",
+    "date": "2026-11-14T20:39:30.000Z",
+    "source": "미디어오늘",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "이준석 “내가 노무현 추천서 받았다고?” 전한길 형사고소 예고",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338456",
+    "date": "2026-11-14T19:55:04.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "조폐공사 “모바일 지역사랑상품권 플랫폼, 개인정보 유출”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338455",
+    "date": "2026-11-14T19:38:07.000Z",
+    "source": "미디어오늘",
+    "category": "media",
+    "thumbnail": null
+  },
+  {
     "title": "[속보] 가입자 192만 ‘노란우산’도 개인정보 유출 가능성",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338452",
     "date": "2026-11-14T16:49:48.000Z",
@@ -23547,62 +23643,6 @@
     "title": "美 공화당 법사위 “망법 개정으로 미국 차별”에 李정부 서한 보낸다",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336498",
     "date": "2026-08-16T15:48:42.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "KBS 편성위원회 열렸지만…노사 입장 차만 확인 ",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336497",
-    "date": "2026-08-16T14:55:33.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "방미통위, 이동관·이진숙 방통위 과오 인정 “빠띠에 사과”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336494",
-    "date": "2026-08-16T13:54:35.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "하영의 증조부 친일만큼, 조선·동아의 친일도 조명하자 ",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336496",
-    "date": "2026-08-16T13:53:59.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "하영 증조부 친일 논란에 MBC “행적 확인은 최소한의 책임”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336493",
-    "date": "2026-08-16T12:35:44.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "이진숙 ‘5·18 폄훼’ 포럼에 한국일보 “재조명 빙자한 왜곡…단호히 징계해야”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336490",
-    "date": "2026-08-16T11:18:51.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "[해외 크리에이티브] 갭 x 말콤 토드·인데 나바레트, ‘나만의 데님’을 말하다…‘Denim On Your Own’ 캠페인 론칭",
-    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=28687",
-    "date": "2026-08-16T11:10:47.000Z",
-    "source": "MadTimes",
-    "category": "ad",
-    "thumbnail": null
-  },
-  {
-    "title": "민주당, 박시영TV ‘이재명-이희자 사진’에 “조작정보”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336489",
-    "date": "2026-08-16T10:26:15.000Z",
     "source": "미디어오늘",
     "category": "trend",
     "thumbnail": null
