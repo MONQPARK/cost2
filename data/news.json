@@ -1,5 +1,101 @@
 [
   {
+    "title": "[해외 크리에이티브] “함께 달리던 때가 그리웠어” 삼성전자, 두 형제의 크리스마스 이야기 담은 광고 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29729",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 멜버른시, 여름 크리스마스의 매력 알린다… 타운 스퀘어와 새 캠페인 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29718",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 메르세데스-벤츠 인도, BBDO와 함께 조카의 첫 귀갓길을 위한 특별한 시승 캠페인 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29717",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 휴스턴 그룹, 스토어로컬 브랜드 전면 개편… ‘비하인드 더 블루 도어’ 캠페인 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29716",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 무지 싱가포르, 여행용품을 일상에서도… ANAK과 ‘트래블 에브리 데이’ 캠페인 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29711",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "“마케터 97%, AI 활용 계획” 광고 업무별 실제 도입률은 30~40% 수준",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29709",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "“제품 정보 부족하면 구매 포기” 소비자 절반 이상, AI 제품 상담 이용 의향",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29708",
+    "date": "2026-11-20T00:00:00.000Z",
+    "source": "MadTimes",
+    "category": "ai",
+    "thumbnail": null
+  },
+  {
+    "title": "김민석, 한덕수 파기환송에 “내란가담자들의 기회주의적 변명”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338579",
+    "date": "2026-11-19T20:08:00.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "점수 조작인가, 조작 기소인가  ",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338566",
+    "date": "2026-11-19T20:06:39.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "김건희, 헌정사상 최초 ‘실형 확정 영부인’ ",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338577",
+    "date": "2026-11-19T20:06:04.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
+    "title": "[해외 크리에이티브] 맥컬리 컬킨, 36년 만에 '나 홀로 집에' 케빈으로 귀환… 와이든+케네디, 맥도날드 크리스마스 캠페인 공개",
+    "link": "https://www.madtimes.co.kr/news/articleView.html?idxno=29759",
+    "date": "2026-11-19T19:35:56.000Z",
+    "source": "MadTimes",
+    "category": "ad",
+    "thumbnail": null
+  },
+  {
+    "title": "반대의견 대법관 3인 “한덕수, 국무회의를 내란 도구로 전락시켜”",
+    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338575",
+    "date": "2026-11-19T19:28:33.000Z",
+    "source": "미디어오늘",
+    "category": "trend",
+    "thumbnail": null
+  },
+  {
     "title": "[속보] 조희대 대법원, 한덕수 내란혐의 파기환송 “국헌문란 목적 엄격 증명돼야”",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=338565",
     "date": "2026-11-19T17:19:07.000Z",
@@ -23451,126 +23547,6 @@
     "title": "하영 증조부 ‘2700평 대지주’…박은정 “친일재산 3대 떵떵 안돼” 환수 촉구",
     "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336626",
     "date": "2026-08-21T19:30:00.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "[2026 미디어의 미래 컨퍼런스] AX 시대 미디어 생존법",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336622",
-    "date": "2026-08-21T18:15:56.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "이성윤 “이진숙 배임·공직선거법 혐의, 왜 검찰만 가면 감감무소식인가”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336623",
-    "date": "2026-08-21T18:14:44.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "“이진숙의 행태는 도저히 용납할 수 없는 도발” 민주당 징계안 제출",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336618",
-    "date": "2026-08-21T17:36:17.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "정동영 장관이 만난 순창청소년기자단은 어떤 곳일까?",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336621",
-    "date": "2026-08-21T16:59:10.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "[단독] G1방송 뉴스 나온 ‘설악산 완주 청소년’, 알고보니 대주주 외손자였다",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336612",
-    "date": "2026-08-21T16:44:25.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "[속보] 이 대통령 “대한민국 청렴도 31위, 부끄러운 일” ",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336619",
-    "date": "2026-08-21T16:14:49.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "[단독] JTBC, 기업회생절차 돌입… 매각 등 경영정상화 방안 찾아 나선다",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336617",
-    "date": "2026-08-21T15:22:56.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "얼마 전까지 칼럼·사설 쓰던 한겨레 논설위원, 춘추관장 임명… “유감”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336616",
-    "date": "2026-08-21T14:22:18.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "KBS 편성위원회, 정상 가동한다 ",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336615",
-    "date": "2026-08-21T13:46:41.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "민주당 서미화·한민수, 5·18 역사왜곡 비판하며 “이진숙씨”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336614",
-    "date": "2026-08-21T12:24:10.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "유진그룹 청문 결국 의결보류… 김종철 회피, 국힘 추천 위원들 퇴장",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336611",
-    "date": "2026-08-21T12:12:30.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "이 대통령 ‘잘한다’ 45%, ‘잘못한다’ 45%",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336610",
-    "date": "2026-08-21T11:51:27.000Z",
-    "source": "미디어오늘",
-    "category": "trend",
-    "thumbnail": null
-  },
-  {
-    "title": "한국농아인협회 “한국수어통역방송 실무지침 발간 환영”",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336607",
-    "date": "2026-08-21T11:05:00.000Z",
-    "source": "미디어오늘",
-    "category": "media",
-    "thumbnail": null
-  },
-  {
-    "title": "“AI 전문 카카오AI 법인 신설” 카카오, 카카오AI와 카카오X로 인적분할",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336608",
-    "date": "2026-08-21T10:39:47.000Z",
-    "source": "미디어오늘",
-    "category": "ai",
-    "thumbnail": null
-  },
-  {
-    "title": "MBC, LCK 결승전 3년 연속 중계… 내년까지 계약 연장",
-    "link": "https://www.mediatoday.co.kr/news/articleView.html?idxno=336606",
-    "date": "2026-08-21T10:26:47.000Z",
     "source": "미디어오늘",
     "category": "trend",
     "thumbnail": null
